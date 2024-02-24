@@ -23,7 +23,7 @@ const Home = () => {
         ))}
       </div>
       <Faq className={cn(containerStyle, "mt-32")} />
-      <CTABanner className={cn(containerStyle, "max-w-5xl mt-24 mb-40")} />
+      <CTABanner className={cn(containerStyle, "max-w-5xl mt-32 mb-40")} />
     </main>
   );
 };

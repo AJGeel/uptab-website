@@ -41,7 +41,11 @@ const Header = () => {
         </a>
         <div className="flex gap-3 items-center">
           <Link href={url} label={label} iconName="plus" />
-          <Link href={externalUrls.github} label="View Github" />
+          <Link
+            className="hidden md:flex"
+            href={externalUrls.github}
+            label="View Github"
+          />
         </div>
       </div>
     </div>

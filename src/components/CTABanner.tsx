@@ -31,7 +31,7 @@ const CTABanner = ({ className }: CTABannerProps) => {
             <Link label={label} href={url} iconName="plus" />
             <button
               onClick={() => setIsModalOpen(true)}
-              className="text-sm font-semibold leading-6 text-slate-900 px-4 py-2 rounded-full hover:bg-slate-900/5 duration-150"
+              className="text-sm font-semibold leading-6 text-slate-900 px-4 py-2 rounded-full hover:bg-slate-900/5 duration-150 active:scale-90 active:opacity-75"
             >
               Convince me 🤨
             </button>
