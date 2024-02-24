@@ -1,6 +1,7 @@
+import { CodeBracketIcon, PlusIcon } from "@heroicons/react/16/solid";
+
 import { cn } from "@/utils/cn";
 import { externalUrlOpts } from "@/utils/externalUrlOpts";
-import { CodeBracketIcon, PlusIcon } from "@heroicons/react/16/solid";
 
 type LinkProps = {
   label: string;

@@ -1,10 +1,11 @@
+import CTABanner from "@/components/CTABanner";
+import Faq from "@/components/Faq/Faq";
 import { slideConfig } from "@/config";
+import { cn } from "@/utils/cn";
+
 import Header from "../components/Header/Header";
 import Hero from "../components/Hero";
 import Slide from "../components/Slide";
-import Faq from "@/components/Faq/Faq";
-import { cn } from "@/utils/cn";
-import CTABanner from "@/components/CTABanner";
 
 const Home = () => {
   const containerStyle = "px-4 md:px-6 mx-auto max-w-2xl w-full";

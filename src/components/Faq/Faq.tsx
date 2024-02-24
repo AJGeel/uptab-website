@@ -12,21 +12,19 @@ export type FaqItemProps = {
 
 const FaqItem = ({ question, answer }: FaqItemProps) => (
   <div className="space-y-2">
-    <h3 className="md:text-lg font-semibold text-balance">{question}</h3>
-    <p className="text-sm md:text-base text-slate-600 leading-relaxed">
+    <h3 className="text-balance font-semibold md:text-lg">{question}</h3>
+    <p className="text-sm leading-relaxed text-slate-600 md:text-base">
       {answer}
     </p>
   </div>
 );
 
-const Faq = ({ className }: FaqProps) => {
-  return (
+const Faq = ({ className }: FaqProps) => (
     <div className={cn("space-y-8", className)}>
       {faqConfig.map((item) => (
         <FaqItem key={item.question} {...item} />
       ))}
     </div>
   );
-};
 
 export default Faq;

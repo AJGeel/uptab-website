@@ -1,7 +1,8 @@
 import Image from "next/image";
 
-import { cn } from "../utils/cn";
 import { externalUrls } from "@/config";
+
+import { cn } from "../utils/cn";
 import { externalUrlOpts } from "../utils/externalUrlOpts";
 
 type StoreButtonProps = {
@@ -34,11 +35,11 @@ const Hero = ({ className }: { className?: string }) => (
       className="drop-shadow-xl"
       priority
     />
-    <h1 className="mt-6 text-balance text-center text-2xl md:text-3xl font-bold leading-normal md:leading-normal">
+    <h1 className="mt-6 text-balance text-center text-2xl font-bold leading-normal md:text-3xl md:leading-normal">
       <span className="text-sky-500">Super-charge your new tabs</span> with
       weather forecasts, bookmarks and Dutch landscapes.
     </h1>
-    <div className="mt-12 flex items-center flex-wrap justify-center gap-6">
+    <div className="mt-12 flex flex-wrap items-center justify-center gap-6">
       <StoreButton
         label="Google Chrome"
         url={externalUrls.chrome}

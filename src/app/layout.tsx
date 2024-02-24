@@ -24,7 +24,7 @@ type Props = {
 const RootLayout = ({ children }: Props) => (
   <html
     lang="en"
-    className="min-h-screen bg-gradient-to-b from-white via-slate-200 to-slate-200 bg-slate-200"
+    className="min-h-screen bg-slate-200 bg-gradient-to-b from-white via-slate-200 to-slate-200"
   >
     <body className={dmSans.className}>{children}</body>
   </html>

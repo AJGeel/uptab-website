@@ -1,14 +1,17 @@
 "use client";
 
-import { cn } from "@/utils/cn";
 import { XMarkIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import { useState } from "react";
 
+import { cn } from "@/utils/cn";
+
 const UpdatesBanner = () => {
-  const [version, setVersion] = useState(-1);
+  /*
+   * TODO: Implement Github API, check releases. If new release, increment `version`.
+   * const [version, setVersion] = useState(-1);
+   */
   const [isVisible, setIsVisible] = useState(false);
-  // TODO: Implement Github API, check releases. If new release, increment `version`.
 
   return (
     <div
@@ -18,7 +21,7 @@ const UpdatesBanner = () => {
       )}
     >
       <Link
-        className="text-sm text-center w-full leading-6 text-white"
+        className="w-full text-center text-sm leading-6 text-white"
         href="/"
       >
         A new version of UpTab has been released!&nbsp;
@@ -26,11 +29,11 @@ const UpdatesBanner = () => {
       </Link>
       <button
         type="button"
-        className="-m-3 flex-none p-3 focus-visible:outline-offset-[-4px] bg-slate-800 hover:brightness-150 duration-150 active:scale-90 active:opacity-75"
+        className="-m-3 flex-none bg-slate-800 p-3 duration-150 hover:brightness-150 focus-visible:outline-offset-[-4px] active:scale-90 active:opacity-75"
         onClick={() => setIsVisible(false)}
       >
         <span className="sr-only">Dismiss</span>
-        <XMarkIcon className="h-5 w-5 text-white" aria-hidden="true" />
+        <XMarkIcon className="size-5 text-white" aria-hidden="true" />
       </button>
     </div>
   );

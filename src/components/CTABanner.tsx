@@ -1,10 +1,12 @@
 "use client";
 
+import { useState } from "react";
+
 import { useStoreAttributes } from "@/hooks/useStoreAttributes";
 import { cn } from "@/utils/cn";
-import { Link } from "./Header/partials/Link";
+
 import Dialog from "./CTABanner/Dialog";
-import { useState } from "react";
+import { Link } from "./Header/partials/Link";
 
 type CTABannerProps = {
   className?: string;
@@ -18,20 +20,20 @@ const CTABanner = ({ className }: CTABannerProps) => {
     <>
       <Dialog isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
       <div className={cn(className, "relative")}>
-        <div className="absolute inset-0 w-full h-full opacity-60">
-          <div className="bg-sky-500 size-80 absolute left-6 -top-10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute inset-0 size-full opacity-60">
+          <div className="absolute -top-10 left-6 size-80 animate-pulse rounded-full bg-sky-500 blur-3xl" />
         </div>
-        <div className="px-8 md:px-16 py-10 bg-gradient-to-r from-white/70 to-sky-200/70 backdrop-blur-xl rounded-lg space-y-6 flex flex-col outline outline-black/10 shadow-lg">
-          <h2 className="text-xl md:text-3xl font-bold tracking-tight text-slate-900">
+        <div className="flex flex-col space-y-6 rounded-lg bg-gradient-to-r from-white/70 to-sky-200/70 px-8 py-10 shadow-lg outline outline-black/10 backdrop-blur-xl md:px-16">
+          <h2 className="text-xl font-bold tracking-tight text-slate-900 md:text-3xl">
             Convinced?
             <br />
-            Start using UpTab today. It's free!
+            Start using UpTab today. It&apos;s free!
           </h2>
           <div className="flex items-center gap-3">
             <Link label={label} href={url} iconName="plus" />
             <button
               onClick={() => setIsModalOpen(true)}
-              className="text-sm font-semibold leading-6 text-slate-900 px-4 py-2 rounded-full hover:bg-slate-900/5 duration-150 active:scale-90 active:opacity-75"
+              className="rounded-full px-4 py-2 text-sm font-semibold leading-6 text-slate-900 duration-150 hover:bg-slate-900/5 active:scale-90 active:opacity-75"
             >
               Convince me 🤨
             </button>

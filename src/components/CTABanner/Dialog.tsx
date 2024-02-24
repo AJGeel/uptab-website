@@ -1,7 +1,9 @@
-import { useStoreAttributes } from "@/hooks/useStoreAttributes";
 import { Dialog as HDialog } from "@headlessui/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+
+import { useStoreAttributes } from "@/hooks/useStoreAttributes";
+
 import { Link } from "../Header/partials/Link";
 
 type DialogProps = {
@@ -23,14 +25,14 @@ const Dialog = ({ isOpen, setIsOpen }: DialogProps) => {
       onClose={() => setIsOpen(false)}
       className="relative z-50"
     >
-      <div className="fixed inset-0 flex w-screen items-center justify-center p-4 bg-slate-900/80">
-        <HDialog.Panel className="rounded bg-white overflow-hidden outline outline-black/10 shadow-lg">
+      <div className="fixed inset-0 flex w-screen items-center justify-center bg-slate-900/80 p-4">
+        <HDialog.Panel className="overflow-hidden rounded bg-white shadow-lg outline outline-black/10">
           {hasClicked ? (
             <div
-              className="p-8 flex flex-col items-center justify-center gap-10"
+              className="flex flex-col items-center justify-center gap-10 p-8"
               style={{ width: 330, height: 338 }}
             >
-              <div className="flex flex-col gap-2 items-center">
+              <div className="flex flex-col items-center gap-2">
                 <p>How about now?</p>
                 <Link
                   label={label}
@@ -51,7 +53,7 @@ const Dialog = ({ isOpen, setIsOpen }: DialogProps) => {
               width="330"
               height="338"
               alt="Pretty please?"
-              className="cursor-pointer border-4 hover:border-sky-500 duration-150 rounded-sm"
+              className="cursor-pointer rounded-sm border-4 duration-150 hover:border-sky-500"
               onClick={() => setHasClicked(true)}
             />
           )}

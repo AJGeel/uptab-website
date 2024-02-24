@@ -1,5 +1,6 @@
-import { externalUrls } from "@/config";
 import { useEffect, useState } from "react";
+
+import { externalUrls } from "@/config";
 
 type StoreAttributes = {
   url: string;

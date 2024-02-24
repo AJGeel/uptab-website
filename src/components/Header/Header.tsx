@@ -2,11 +2,13 @@
 
 import { useWindowScroll } from "@uidotdev/usehooks";
 import Image from "next/image";
-import { cn } from "../../utils/cn";
+
 import { externalUrls } from "@/config";
+import { useStoreAttributes } from "@/hooks/useStoreAttributes";
+
 import { Link } from "./partials/Link";
 import UpdatesBanner from "./partials/UpdatesBanner";
-import { useStoreAttributes } from "@/hooks/useStoreAttributes";
+import { cn } from "../../utils/cn";
 
 const Header = () => {
   const [{ y }] = useWindowScroll();
@@ -24,23 +26,23 @@ const Header = () => {
       )}
     >
       <UpdatesBanner />
-      <div className="px-5 py-3 flex justify-between bg-white/90 xl:bg-transparent border-b shadow-sm xl:shadow-none xl:border-transparent backdrop-blur-sm xl:backdrop-blur-none">
+      <div className="flex justify-between border-b bg-white/90 px-5 py-3 shadow-sm backdrop-blur-sm xl:border-transparent xl:bg-transparent xl:shadow-none xl:backdrop-blur-none">
         <a
           href={url}
-          className="flex items-center gap-2 hover:text-sky-500 duration-150 active:scale-90 active:opacity-75 group"
+          className="group flex items-center gap-2 duration-150 hover:text-sky-500 active:scale-90 active:opacity-75"
         >
           <Image
             src="/images/icon.svg"
             width="24"
             height="24"
             alt="UpTab Logo"
-            className="group-hover:brightness-110 duration-150"
+            className="duration-150 group-hover:brightness-110"
             priority
             style={{ transform: `rotateZ(${(y ?? 0) / 3}deg)` }}
           />
           <span className="font-medium">UpTab</span>
         </a>
-        <div className="flex gap-3 items-center">
+        <div className="flex items-center gap-3">
           <Link href={url} label={label} iconName="plus" />
           <Link
             className="hidden md:flex"
