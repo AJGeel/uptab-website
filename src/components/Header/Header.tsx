@@ -35,6 +35,7 @@ const Header = () => {
             height="24"
             alt="UpTab Logo"
             className="group-hover:brightness-110 duration-150"
+            priority
             style={{ transform: `rotateZ(${(y ?? 0) / 3}deg)` }}
           />
           <span className="font-medium">UpTab</span>

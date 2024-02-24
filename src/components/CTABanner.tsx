@@ -21,8 +21,8 @@ const CTABanner = ({ className }: CTABannerProps) => {
         <div className="absolute inset-0 w-full h-full opacity-60">
           <div className="bg-sky-500 size-80 absolute left-6 -top-10 rounded-full blur-3xl animate-pulse" />
         </div>
-        <div className="px-16 py-10 bg-gradient-to-r from-white/70 to-sky-200/70 backdrop-blur-xl rounded-lg space-y-6 flex flex-col outline outline-black/10 shadow-lg">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900">
+        <div className="px-8 md:px-16 py-10 bg-gradient-to-r from-white/70 to-sky-200/70 backdrop-blur-xl rounded-lg space-y-6 flex flex-col outline outline-black/10 shadow-lg">
+          <h2 className="text-xl md:text-3xl font-bold tracking-tight text-slate-900">
             Convinced?
             <br />
             Start using UpTab today. It's free!

@@ -16,7 +16,7 @@ const StoreButton = ({ label, url, iconUrl }: StoreButtonProps) => (
     {...externalUrlOpts}
     className="flex items-center gap-4 rounded-lg bg-white px-4 py-3 shadow-md outline outline-black/10 ring-sky-500 ring-offset-1 duration-150 hover:ring-2 focus:ring-2 active:scale-90 active:opacity-75"
   >
-    <Image src={iconUrl} width="34" height="34" alt={label} />
+    <Image src={iconUrl} width="34" height="34" alt={label} priority />
     <div className="">
       <p className="text-sm font-medium text-slate-500">Get it for</p>
       <p className="font-bold text-slate-900">{label}</p>
@@ -32,12 +32,13 @@ const Hero = ({ className }: { className?: string }) => (
       height="80"
       alt="UpTab Logo"
       className="drop-shadow-xl"
+      priority
     />
-    <h1 className="mt-6 text-balance text-center text-3xl font-bold leading-normal">
+    <h1 className="mt-6 text-balance text-center text-2xl md:text-3xl font-bold leading-normal md:leading-normal">
       <span className="text-sky-500">Super-charge your new tabs</span> with
       weather forecasts, bookmarks and Dutch landscapes.
     </h1>
-    <div className="mt-12 flex items-center gap-6">
+    <div className="mt-12 flex items-center flex-wrap justify-center gap-6">
       <StoreButton
         label="Google Chrome"
         url={externalUrls.chrome}

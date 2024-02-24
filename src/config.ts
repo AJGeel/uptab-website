@@ -1,4 +1,4 @@
-import { FaqItemProps } from "./components/Faq/partials/FaqItem";
+import { FaqItemProps } from "./components/Faq/Faq";
 import { SlideProps } from "./components/Slide";
 
 export const slideConfig: SlideProps[] = [
