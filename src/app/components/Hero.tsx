@@ -1,5 +1,8 @@
 import Image from "next/image";
 
+import { cn } from "../utils/cn";
+import { externalUrls } from "@/config";
+
 type StoreButtonProps = {
   label: string;
   url: string;
@@ -21,8 +24,8 @@ const StoreButton = ({ label, url, iconUrl }: StoreButtonProps) => (
   </a>
 );
 
-const Hero = () => (
-  <div className="mx-auto flex flex-col items-center pt-14">
+const Hero = ({ className }: { className?: string }) => (
+  <div className={cn("flex-col items-center", className)}>
     <Image
       src="/images/icon.svg"
       width="80"
@@ -37,12 +40,12 @@ const Hero = () => (
     <div className="mt-12 flex items-center gap-6">
       <StoreButton
         label="Google Chrome"
-        url="https://chromewebstore.google.com/detail/uptab/dapdeiobfagcbhcpeijbhhlggopmjnlf"
+        url={externalUrls.chrome}
         iconUrl="/images/chrome-icon.svg"
       />
       <StoreButton
         label="Mozilla Firefox"
-        url="https://addons.mozilla.org/en-US/firefox/addon/uptab/"
+        url={externalUrls.firefox}
         iconUrl="/images/firefox-icon.svg"
       />
     </div>

@@ -6,7 +6,7 @@ import "./globals.css";
 const dmSans = DM_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "UpTab Browser Extension",
+  title: "UpTab — Browser Extension",
   description:
     "Enhance your browsing experience with UpTab - A customizable new tab extension.",
   authors: [{ name: "Arthur Geel", url: "https://github.com/ajgeel" }],
@@ -24,7 +24,7 @@ type Props = {
 const RootLayout = ({ children }: Props) => (
   <html
     lang="en"
-    className="min-h-screen bg-gradient-to-b from-white via-slate-200 to-slate-200"
+    className="min-h-screen bg-gradient-to-b from-white via-slate-200 to-slate-200 bg-slate-200"
   >
     <body className={dmSans.className}>{children}</body>
   </html>
