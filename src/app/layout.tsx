@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import { ReactNode } from "react";
@@ -27,6 +28,7 @@ const RootLayout = ({ children }: Props) => (
     className="min-h-screen bg-slate-200 bg-gradient-to-b from-white via-slate-200 to-slate-200"
   >
     <body className={dmSans.className}>{children}</body>
+    <Analytics />
   </html>
 );
 
