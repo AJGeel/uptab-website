@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 import { ReactNode } from "react";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
+const dmSans = DM_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,8 +16,11 @@ type Props = {
 };
 
 const RootLayout = ({ children }: Props) => (
-  <html lang="en">
-    <body className={inter.className}>{children}</body>
+  <html
+    lang="en"
+    className="min-h-screen bg-gradient-to-b from-white via-slate-200 to-slate-200"
+  >
+    <body className={dmSans.className}>{children}</body>
   </html>
 );
 

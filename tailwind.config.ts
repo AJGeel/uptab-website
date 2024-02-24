@@ -11,6 +11,7 @@ const config: Config = {
       colors: {
         sky: {
           400: "#25B1FF",
+          500: "#138CD0",
           800: "#085884",
         },
         black: "#020E2C",
