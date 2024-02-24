@@ -1,4 +1,5 @@
-import { SlideProps } from "./app/components/Slide";
+import { FaqItemProps } from "./components/Faq/partials/FaqItem";
+import { SlideProps } from "./components/Slide";
 
 export const slideConfig: SlideProps[] = [
   {
@@ -15,6 +16,34 @@ export const slideConfig: SlideProps[] = [
     title: "Upgrade",
     text: "Regular updates, new features, and your feedback shape the future. Join us on the journey where innovation meets simplicity.",
     imageUrl: "/images/slide-advance.jpg",
+  },
+];
+
+export const faqConfig: FaqItemProps[] = [
+  {
+    question: "Is UpTab compatible with my bookmarks?",
+    answer:
+      "Yes, UpTab uses the existing bookmarks in your browser. No syncs needed.",
+  },
+  {
+    question: "Does UpTab store any personal information or browsing history?",
+    answer:
+      "Nope. UpTab prioritizes user privacy. It does not store any personal information or track your browsing history. Any data is locally stored on your device.",
+  },
+  {
+    question: "Is UpTab free to use?",
+    answer:
+      "Yup, UpTab is completely free to use. I also don't sell your data.",
+  },
+  {
+    question: "Wen new features??!",
+    answer:
+      "We aim to enhance your browsing experience by adding new features and fixing bugs. Updates are rolled out periodically, so watch those notifications.",
+  },
+  {
+    question: "What do I do if I encounter issues or bugs with UpTab?",
+    answer:
+      "If you come across any issues or bugs, please report them to me. You can create an issue on the GitHub repository, and I'll try to fix it 🤓",
   },
 ];
 

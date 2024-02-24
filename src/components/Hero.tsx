@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import { cn } from "../utils/cn";
 import { externalUrls } from "@/config";
+import { externalUrlOpts } from "../utils/externalUrlOpts";
 
 type StoreButtonProps = {
   label: string;
@@ -12,8 +13,7 @@ type StoreButtonProps = {
 const StoreButton = ({ label, url, iconUrl }: StoreButtonProps) => (
   <a
     href={url}
-    target="_blank"
-    rel="noopener noreferrer"
+    {...externalUrlOpts}
     className="flex items-center gap-4 rounded-lg bg-white px-4 py-3 shadow-md outline outline-black/10 ring-sky-500 ring-offset-1 duration-150 hover:ring-2 focus:ring-2 active:scale-90 active:opacity-75"
   >
     <Image src={iconUrl} width="34" height="34" alt={label} />
