@@ -33,7 +33,7 @@ const Dialog = ({ isOpen, setIsOpen }: DialogProps) => {
       className="relative z-50"
     >
       <div className="fixed inset-0 flex w-screen items-center justify-center bg-slate-900/80 p-4">
-        <HDialog.Panel className="overflow-hidden rounded bg-white shadow-lg outline outline-black/10">
+        <HDialog.Panel className="overflow-hidden rounded bg-white shadow-lg outline outline-black/10 relative">
           {hasClicked ? (
             <div
               className="flex flex-col items-center justify-center gap-10 p-8"
@@ -56,7 +56,14 @@ const Dialog = ({ isOpen, setIsOpen }: DialogProps) => {
             </div>
           ) : (
             <>
-              <div className="">Loading...</div>
+              <div
+                className={cn(
+                  "duration-150 text-xs w-full h-full absolute inset-0 flex items-center justify-center text-slate-500 pointer-events-none",
+                  isImageLoaded ? "opacity-0" : "opacity-100"
+                )}
+              >
+                Loading...
+              </div>
               <Image
                 {...imageSizes}
                 src="/images/pretty-please.gif"
