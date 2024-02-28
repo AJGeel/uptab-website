@@ -1,7 +1,7 @@
-import { octokit } from "@/services/octokit/init";
+import { Octokit } from "@/services/octokit/init";
 
 export const getLatestRelease = async () => {
-  const result = await octokit.request("GET /repos/{owner}/{repo}/releases", {
+  const result = await Octokit.request("GET /repos/{owner}/{repo}/releases", {
     owner: "ajgeel",
     repo: "uptab",
   });
