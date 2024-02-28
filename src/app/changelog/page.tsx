@@ -50,6 +50,11 @@ const Page = async () => {
               ul: ({ ...props }) => (
                 <ul className="list-disc pl-8">{props.children}</ul>
               ),
+              code: ({ ...props }) => (
+                <code className="px-1.5 py-1 bg-white rounded-md border border-black/20 shadow-[0px_2px_rgba(0,0,0,.1)]">
+                  {props.children}
+                </code>
+              ),
             }}
           >
             {contents}
