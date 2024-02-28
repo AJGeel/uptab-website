@@ -17,7 +17,7 @@ const Page = async () => {
               h1: (props) => (
                 <h1 className="text-2xl font-bold lg:text-3xl">
                   <ArrowPathIcon className="-mt-1 mr-2 inline size-6 text-sky-500" />
-                  <span>{props.children}</span>
+                  <span>UpTab {props.children}</span>
                 </h1>
               ),
               h2: ({ ...props }) => (
