@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Fragment } from "react";
 
 import { externalUrls } from "@/config";
 import { useStoreAttributes } from "@/hooks/useStoreAttributes";
@@ -38,16 +39,15 @@ const Footer = ({ homeUrl }: FooterProps) => {
       <HeaderLogo url={url} homeUrl={homeUrl} rotation={0} />
       <div className="flex items-center justify-center gap-4">
         {urls.map((item, index) => (
-          <>
+          <Fragment key={item.href}>
             {index >= 1 && <div className="size-1 rounded-full bg-black/10" />}
             <Link
               className="text-sm duration-150 hover:text-sky-500"
-              key={item.href}
               href={item.href}
             >
               {item.label}
             </Link>
-          </>
+          </Fragment>
         ))}
       </div>
     </div>

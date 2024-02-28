@@ -1,5 +1,5 @@
-import type { Config } from "tailwindcss";
 import typographyPlugin from "@tailwindcss/typography";
+import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
@@ -16,6 +16,15 @@ const config: Config = {
           800: "#085884",
         },
         black: "#020E2C",
+      },
+      keyframes: {
+        graciousEntry: {
+          "0%": { opacity: "0", filter: "blur(.2rem)" },
+          "100%": { opacity: "1" },
+        },
+      },
+      animation: {
+        graciousEntry: "graciousEntry 1.5s ease-in-out",
       },
     },
   },

@@ -2,7 +2,9 @@ import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import { ReactNode } from "react";
+
 import "./globals.css";
+import { cn } from "@/utils/cn";
 
 const dmSans = DM_Sans({ subsets: ["latin"] });
 
@@ -27,7 +29,9 @@ const RootLayout = ({ children }: Props) => (
     lang="en"
     className="min-h-screen bg-slate-200 bg-gradient-to-b from-white via-slate-200 to-slate-200"
   >
-    <body className={dmSans.className}>{children}</body>
+    <body className={cn(dmSans.className, "animate-graciousEntry")}>
+      {children}
+    </body>
     <Analytics />
   </html>
 );
