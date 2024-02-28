@@ -1,20 +1,28 @@
 "use client";
 
 import { useWindowScroll } from "@uidotdev/usehooks";
-import Image from "next/image";
 
 import { externalUrls } from "@/config";
 import { useStoreAttributes } from "@/hooks/useStoreAttributes";
+import { useUpdatesBanner } from "@/hooks/useUpdatesBanner";
 
+import HeaderLogo from "./partials/HeaderLogo";
 import { Link } from "./partials/Link";
 import UpdatesBanner from "./partials/UpdatesBanner";
 import { cn } from "../../utils/cn";
 
-const Header = () => {
-  const [{ y }] = useWindowScroll();
-  const isHeaderVisible = y && y > 500;
+type Props = {
+  homeUrl?: string;
+  alwaysVisible?: boolean;
+};
+
+const Header = ({ homeUrl, alwaysVisible }: Props) => {
+  const { isVisible, onClickBanner } = useUpdatesBanner();
 
   const { url, label } = useStoreAttributes();
+  const [{ y }] = useWindowScroll();
+
+  const isHeaderVisible = alwaysVisible || (!!y && y > 500);
 
   return (
     <div
@@ -25,23 +33,9 @@ const Header = () => {
           : "opacity-0 pointer-events-none -translate-y-4"
       )}
     >
-      <UpdatesBanner />
+      <UpdatesBanner isVisible={isVisible} onClick={onClickBanner} url={url} />
       <div className="flex justify-between border-b bg-white/90 px-5 py-3 shadow-sm backdrop-blur-sm xl:border-transparent xl:bg-transparent xl:shadow-none xl:backdrop-blur-none">
-        <a
-          href={url}
-          className="group flex items-center gap-2 duration-150 hover:text-sky-500 active:scale-90 active:opacity-75"
-        >
-          <Image
-            src="/images/icon.svg"
-            width="24"
-            height="24"
-            alt="UpTab Logo"
-            className="duration-150 group-hover:brightness-110"
-            priority
-            style={{ transform: `rotateZ(${(y ?? 0) / 3}deg)` }}
-          />
-          <span className="font-medium">UpTab</span>
-        </a>
+        <HeaderLogo url={url} homeUrl={homeUrl} rotation={y} />
         <div className="flex items-center gap-3">
           <Link href={url} label={label} iconName="plus" />
           <Link

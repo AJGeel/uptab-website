@@ -1,5 +1,6 @@
 import CTABanner from "@/components/CTABanner";
 import Faq from "@/components/Faq/Faq";
+import Footer from "@/components/Footer";
 import { slideConfig } from "@/config";
 import { cn } from "@/utils/cn";
 
@@ -29,7 +30,8 @@ const Home = () => {
         ))}
       </div>
       <Faq className={cn(containerStyle, "mt-12 md:mt-32")} />
-      <CTABanner className={cn(containerStyle, "max-w-5xl mt-32 mb-40")} />
+      <CTABanner className={cn(containerStyle, "max-w-5xl mt-32 mb-20")} />
+      <Footer />
     </main>
   );
 };
