@@ -4,17 +4,10 @@ import Link from "next/link";
 import { Fragment } from "react";
 
 import { externalUrls } from "@/config";
-import { useStoreAttributes } from "@/hooks/useStoreAttributes";
 
 import HeaderLogo from "./Header/partials/HeaderLogo";
 
-type FooterProps = {
-  homeUrl?: string;
-};
-
-const Footer = ({ homeUrl }: FooterProps) => {
-  const { url } = useStoreAttributes();
-
+const Footer = () => {
   const urls = [
     {
       href: "/changelog",
@@ -36,7 +29,7 @@ const Footer = ({ homeUrl }: FooterProps) => {
 
   return (
     <div className="flex flex-wrap items-center justify-center gap-6 p-16 sm:gap-12">
-      <HeaderLogo url={url} homeUrl={homeUrl} rotation={0} />
+      <HeaderLogo rotation={0} />
       <div className="flex items-center justify-center gap-4">
         {urls.map((item, index) => (
           <Fragment key={item.href}>

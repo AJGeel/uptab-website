@@ -11,18 +11,13 @@ import { Link } from "./partials/Link";
 import UpdatesBanner from "./partials/UpdatesBanner";
 import { cn } from "../../utils/cn";
 
-type Props = {
-  homeUrl?: string;
-  alwaysVisible?: boolean;
-};
-
-const Header = ({ homeUrl, alwaysVisible }: Props) => {
+const Header = () => {
   const { isVisible, onClickBanner } = useUpdatesBanner();
 
   const { url, label } = useStoreAttributes();
   const [{ y }] = useWindowScroll();
 
-  const isHeaderVisible = alwaysVisible || (!!y && y > 500);
+  const isHeaderVisible = !!y && y > 500;
 
   return (
     <div
@@ -35,7 +30,7 @@ const Header = ({ homeUrl, alwaysVisible }: Props) => {
     >
       <UpdatesBanner isVisible={isVisible} onClick={onClickBanner} url={url} />
       <div className="flex justify-between border-b bg-white/90 px-5 py-3 shadow-sm backdrop-blur-sm xl:border-transparent xl:bg-transparent xl:shadow-none xl:backdrop-blur-none">
-        <HeaderLogo url={url} homeUrl={homeUrl} rotation={y} />
+        <HeaderLogo rotation={y} />
         <div className="flex items-center gap-3">
           <Link href={url} label={label} iconName="plus" />
           <Link

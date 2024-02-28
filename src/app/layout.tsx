@@ -4,6 +4,8 @@ import { DM_Sans } from "next/font/google";
 import { ReactNode } from "react";
 
 import "./globals.css";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 import { cn } from "@/utils/cn";
 
 const dmSans = DM_Sans({ subsets: ["latin"] });
@@ -30,7 +32,9 @@ const RootLayout = ({ children }: Props) => (
     className="min-h-screen bg-slate-200 bg-gradient-to-b from-white via-slate-200 to-slate-200"
   >
     <body className={cn(dmSans.className, "animate-graciousEntry")}>
+      <Header />
       {children}
+      <Footer />
     </body>
     <Analytics />
   </html>

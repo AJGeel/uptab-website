@@ -2,14 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 type Props = {
-  homeUrl?: string;
-  url: string;
   rotation: number | null;
 };
 
-const HeaderLogo = ({ homeUrl, url, rotation }: Props) => (
+const HeaderLogo = ({ rotation }: Props) => (
   <Link
-    href={homeUrl ?? url}
+    href="/"
     className="group flex items-center gap-2 duration-150 hover:text-sky-500 active:scale-90 active:opacity-75"
   >
     <Image
