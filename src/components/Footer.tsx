@@ -26,11 +26,11 @@ const Footer = ({ homeUrl }: FooterProps) => {
     },
     {
       href: externalUrls.chrome,
-      label: "On Chrome",
+      label: "UpTab Chrome",
     },
     {
       href: externalUrls.firefox,
-      label: "On Firefox",
+      label: "UpTab Firefox",
     },
   ];
 
