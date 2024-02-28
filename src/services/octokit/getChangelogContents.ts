@@ -9,7 +9,7 @@ export const getChangelogContents = async () => {
     });
 
     if (Array.isArray(response.data)) {
-      throw new Error("Error: expected file, but got a directory.");
+      console.error("Error: expected file, but got a directory.");
     }
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -18,7 +18,7 @@ export const getChangelogContents = async () => {
 
     return content;
   } catch (error) {
-    throw new Error(
+    console.error(
       `Something went wrong trying to get the changelog contents: ${error}`
     );
   }

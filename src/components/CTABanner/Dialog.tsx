@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useStoreAttributes } from "@/hooks/useStoreAttributes";
 
 import { Link } from "../Header/partials/Link";
+import { cn } from "@/utils/cn";
 
 type DialogProps = {
   isOpen: boolean;
@@ -14,6 +15,12 @@ type DialogProps = {
 const Dialog = ({ isOpen, setIsOpen }: DialogProps) => {
   const [hasClicked, setHasClicked] = useState(false);
   const { url, label } = useStoreAttributes();
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+
+  const imageSizes = {
+    width: 330,
+    height: 338,
+  };
 
   useEffect(() => {
     setHasClicked(false);
@@ -30,7 +37,7 @@ const Dialog = ({ isOpen, setIsOpen }: DialogProps) => {
           {hasClicked ? (
             <div
               className="flex flex-col items-center justify-center gap-10 p-8"
-              style={{ width: 330, height: 338 }}
+              style={imageSizes}
             >
               <div className="flex flex-col items-center gap-2">
                 <p>How about now?</p>
@@ -48,14 +55,20 @@ const Dialog = ({ isOpen, setIsOpen }: DialogProps) => {
               </button>
             </div>
           ) : (
-            <Image
-              src="/images/pretty-please.gif"
-              width="330"
-              height="338"
-              alt="Pretty please?"
-              className="cursor-pointer rounded-sm border-4 duration-150 hover:border-sky-500"
-              onClick={() => setHasClicked(true)}
-            />
+            <>
+              <div className="">Loading...</div>
+              <Image
+                {...imageSizes}
+                src="/images/pretty-please.gif"
+                alt="Pretty please?"
+                onLoad={() => setIsImageLoaded(true)}
+                className={cn(
+                  "cursor-pointer rounded-sm border-4 duration-150 hover:border-sky-500",
+                  !isImageLoaded && "opacity-0"
+                )}
+                onClick={() => setHasClicked(true)}
+              />
+            </>
           )}
         </HDialog.Panel>
       </div>
