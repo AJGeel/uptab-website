@@ -12,7 +12,7 @@ const Page = async () => {
       <div className="mx-auto my-32 w-full max-w-3xl px-4 md:px-6">
         {!!contents ? (
           <ReactMarkdown
-            className="prose-sm"
+            className="prose-sm text-slate-700"
             components={{
               h1: (props) => (
                 <h1 className="text-2xl font-bold lg:text-3xl">
