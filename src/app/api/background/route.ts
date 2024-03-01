@@ -1,11 +1,13 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 import { findTheme, getBackgroundImage } from "@/services/background";
 
 export const GET = async () => {
   try {
-    // Todo: Add catch-all route for themes.
-    const theme = findTheme("abstract");
+    const url = new URL(request.url);
+    const urlParams = url.searchParams.get("theme") ?? undefined;
+
+    const theme = findTheme(urlParams);
     const backgroundImage = await getBackgroundImage(theme);
 
     return new NextResponse(backgroundImage, { status: 200, statusText: "OK" });
