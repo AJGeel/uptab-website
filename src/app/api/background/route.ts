@@ -2,7 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { findTheme, getBackgroundImage } from "@/services/background";
 
-export const GET = async () => {
+export const GET = async (request: NextRequest) => {
+  if (request.headers.get("UPTAB_API_KEY") !== process.env.UPTAB_API_KEY) {
+    return new NextResponse("Unauthorized", { status: 401 });
+  }
+
   try {
     const url = new URL(request.url);
     const urlParams = url.searchParams.get("theme") ?? undefined;
