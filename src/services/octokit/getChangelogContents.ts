@@ -8,17 +8,15 @@ export const getChangelogContents = async () => {
       path: "CHANGELOG.md",
     });
 
-    if (Array.isArray(response.data)) {
-      console.error("Error: expected file, but got a directory.");
+    if (!("content" in response.data)) {
+      throw new Error("Error: unable to find the changelog file.");
     }
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     const content = Buffer.from(response.data.content, "base64").toString();
 
     return content;
   } catch (error) {
-    console.error(
+    throw new Error(
       `Something went wrong trying to get the changelog contents: ${error}`
     );
   }

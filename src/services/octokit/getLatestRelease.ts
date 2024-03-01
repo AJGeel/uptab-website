@@ -12,6 +12,6 @@ export const getLatestRelease = async () => {
       date: result.data[0].published_at,
     };
   } catch (error) {
-    console.error(`Unable to get the latest release from Github: ${error}`);
+    throw new Error(`Unable to get the latest release from Github: ${error}`);
   }
 };

@@ -3,9 +3,9 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 import { useStoreAttributes } from "@/hooks/useStoreAttributes";
+import { cn } from "@/utils/cn";
 
 import { Link } from "../Header/partials/Link";
-import { cn } from "@/utils/cn";
 
 type DialogProps = {
   isOpen: boolean;
@@ -33,7 +33,7 @@ const Dialog = ({ isOpen, setIsOpen }: DialogProps) => {
       className="relative z-50"
     >
       <div className="fixed inset-0 flex w-screen items-center justify-center bg-slate-900/80 p-4">
-        <HDialog.Panel className="overflow-hidden rounded bg-white shadow-lg outline outline-black/10 relative">
+        <HDialog.Panel className="relative overflow-hidden rounded bg-white shadow-lg outline outline-black/10">
           {hasClicked ? (
             <div
               className="flex flex-col items-center justify-center gap-10 p-8"

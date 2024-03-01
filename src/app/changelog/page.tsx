@@ -10,7 +10,7 @@ const Page = async () => {
   return (
     <>
       <div className="mx-auto my-32 w-full max-w-3xl px-4 md:px-6">
-        {!!contents ? (
+        {contents ? (
           <ReactMarkdown
             className="prose-sm text-slate-700"
             components={{
@@ -33,7 +33,7 @@ const Page = async () => {
                 </h2>
               ),
               h3: ({ ...props }) => (
-                <h3 className="font-semibold bg-clip-text text-transparent bg-black">
+                <h3 className="bg-black bg-clip-text font-semibold text-transparent">
                   {props.children}
                 </h3>
               ),
@@ -51,7 +51,7 @@ const Page = async () => {
                 <ul className="list-disc pl-8">{props.children}</ul>
               ),
               code: ({ ...props }) => (
-                <code className="px-1.5 py-1 bg-white rounded-md border border-black/20 shadow-[0px_2px_rgba(0,0,0,.1)]">
+                <code className="rounded-md border border-black/20 bg-white px-1.5 py-1 shadow-[0px_2px_rgba(0,0,0,.1)]">
                   {props.children}
                 </code>
               ),
