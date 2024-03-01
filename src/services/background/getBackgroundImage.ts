@@ -11,7 +11,7 @@ export const getBackgroundImage = async (theme: BgTheme): Promise<Blob> => {
     path.join(process.cwd(), `/public/backgrounds/${theme}`)
   );
 
-  const seed = dailyRandomNumber();
+  const seed = dailyRandomNumber(1);
   const randomNumber = randomToRange(seed, numBgs.length - 1);
 
   const file = await fs.readFile(
