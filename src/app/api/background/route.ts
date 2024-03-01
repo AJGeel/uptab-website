@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { checkAuth } from "@/services/api/checkAuth";
 import { findTheme, getBackgroundImage } from "@/services/background";
 
 export const GET = async (request: NextRequest) => {
-  if (request.headers.get("UPTAB_API_KEY") !== process.env.UPTAB_API_KEY) {
+  const isAuthenticated = checkAuth(request);
+
+  if (!isAuthenticated) {
     return new NextResponse("Unauthorized", { status: 401 });
   }
 
