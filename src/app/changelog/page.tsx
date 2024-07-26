@@ -3,6 +3,7 @@ import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 
 import { getChangelogContents } from "@/services/octokit/getChangelogContents";
+import { targetBlank } from "@/utils/targetBlank";
 
 const Page = async () => {
   const contents = await getChangelogContents();
@@ -40,8 +41,7 @@ const Page = async () => {
               a: ({ ...props }) => (
                 <a
                   className="font-bold text-sky-500 no-underline duration-150 hover:text-black"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  {...targetBlank}
                   href={props.href}
                 >
                   {props.children}

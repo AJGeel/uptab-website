@@ -3,6 +3,7 @@
 import { XMarkIcon } from "@heroicons/react/20/solid";
 
 import { cn } from "@/utils/cn";
+import { targetBlank } from "@/utils/targetBlank";
 
 type UpdatesBannerProps = {
   isVisible: boolean;
@@ -20,8 +21,7 @@ const UpdatesBanner = ({ isVisible, onClick, url }: UpdatesBannerProps) => (
   >
     <a
       className="w-full text-center text-sm leading-6 text-white"
-      target="_blank"
-      rel="noopener noreferrer"
+      {...targetBlank}
       href={url}
     >
       A new version of UpTab has been released!&nbsp;

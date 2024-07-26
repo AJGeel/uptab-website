@@ -1,5 +1,5 @@
-import { findTheme } from "./findTheme";
-import { getBackgroundImage } from "./getBackgroundImage";
-import * as types from "./types";
+export { getBackgroundImage } from "./getBackgroundImage";
+export { findTheme } from "./findTheme";
+export { getAllBackgrounds } from "./getAllBackgrounds";
 
-export { findTheme, getBackgroundImage, types };
+export * from "./types";

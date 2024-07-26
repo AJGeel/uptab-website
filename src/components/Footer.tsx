@@ -14,6 +14,10 @@ const Footer = () => {
       label: "Changelog",
     },
     {
+      href: "/backgrounds",
+      label: "Backgrounds",
+    },
+    {
       href: externalUrls.github,
       label: "Github",
     },
