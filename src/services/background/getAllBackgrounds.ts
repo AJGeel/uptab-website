@@ -8,7 +8,12 @@ export const getAllBackgrounds = async () => {
     allThemes.map(async (theme) => {
       const prefix = path.join(process.cwd(), `/public/backgrounds/${theme}`);
 
-      const imageFiles = await fs.readdir(prefix);
+      const allFiles = await fs.readdir(prefix);
+
+      // Filter out non-image files
+      const imageFiles = allFiles.filter(
+        (file) => /\.(jpe?g|png|gif)$/i.test(file) && file !== ".ds_store"
+      );
 
       const sortedImageFiles = imageFiles.sort((a, b) =>
         a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" })
