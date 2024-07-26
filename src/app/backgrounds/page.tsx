@@ -55,16 +55,16 @@ const Page = async () => {
               <Link
                 key={imageSrc}
                 href={imageSrc}
-                className="group flex size-full items-center justify-center overflow-hidden rounded-sm duration-300 active:scale-90 sm:even:-mt-16"
+                className="group flex size-full items-center justify-center overflow-hidden rounded-sm bg-black/10 duration-300 active:scale-90 sm:even:-mt-16"
                 {...targetBlank}
               >
                 <EyeIcon className="absolute z-10 size-8 text-black opacity-0 duration-500 ease-in-out group-hover:scale-105 group-hover:opacity-100" />
                 <Image
                   src={imageSrc}
-                  width={400}
-                  height={400}
+                  width={640}
+                  height={360}
                   alt=""
-                  className="size-full duration-500 ease-in-out group-hover:scale-105 group-hover:opacity-60"
+                  className="aspect-[16/9] size-full duration-500 ease-in-out group-hover:scale-105 group-hover:opacity-60"
                 />
               </Link>
             ))}
