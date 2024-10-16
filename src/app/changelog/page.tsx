@@ -1,12 +1,17 @@
 import { ArrowPathIcon } from "@heroicons/react/16/solid";
 import Image from "next/image";
+import { cache } from "react";
 import ReactMarkdown from "react-markdown";
 
 import { getChangelogContents } from "@/services/octokit/getChangelogContents";
 import { targetBlank } from "@/utils/targetBlank";
 
+export const revalidate = 3600; // Revalidate at most every hour
+
+const getCachedData = cache(async () => await getChangelogContents());
+
 const Page = async () => {
-  const contents = await getChangelogContents();
+  const contents = await getCachedData();
 
   return (
     <>
