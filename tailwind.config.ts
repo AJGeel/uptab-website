@@ -28,6 +28,7 @@ const config: Config = {
       },
     },
   },
+  safelist: ["underline"],
   plugins: [typographyPlugin],
 };
 export default config;

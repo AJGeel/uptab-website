@@ -42,8 +42,20 @@ export const faqConfig: FaqItemProps[] = [
   },
   {
     question: "What do I do if I encounter issues or bugs with UpTab?",
-    answer:
-      "If you come across any issues or bugs, please report them to me. You can create an issue on the GitHub repository, and I'll try to fix it 🤓",
+    answer: (
+      <span>
+        If you come across any issues or bugs, please report them to me. You can{" "}
+        <a
+          href="https://github.com/AJGeel/uptab/issues"
+          className="underline"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          create an issue on the GitHub repository
+        </a>
+        , and I&apos;ll try to fix it 🤓
+      </span>
+    ),
   },
 ];
 

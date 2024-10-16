@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 import { faqConfig } from "@/config";
 import { cn } from "@/utils/cn";
 
@@ -7,7 +9,7 @@ type FaqProps = {
 
 export type FaqItemProps = {
   question: string;
-  answer: string;
+  answer: string | ReactNode;
 };
 
 const FaqItem = ({ question, answer }: FaqItemProps) => (
@@ -20,11 +22,11 @@ const FaqItem = ({ question, answer }: FaqItemProps) => (
 );
 
 const Faq = ({ className }: FaqProps) => (
-    <div className={cn("space-y-8", className)}>
-      {faqConfig.map((item) => (
-        <FaqItem key={item.question} {...item} />
-      ))}
-    </div>
-  );
+  <div className={cn("space-y-8", className)}>
+    {faqConfig.map((item) => (
+      <FaqItem key={item.question} {...item} />
+    ))}
+  </div>
+);
 
 export default Faq;
