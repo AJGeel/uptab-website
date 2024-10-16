@@ -23,7 +23,7 @@ const CTABanner = ({ className }: CTABannerProps) => {
         <div className="absolute inset-0 size-full opacity-60">
           <div className="absolute -top-10 left-6 size-80 animate-pulse rounded-full bg-sky-500 blur-3xl" />
         </div>
-        <div className="flex flex-col space-y-6 rounded-lg bg-gradient-to-r from-white/70 to-sky-200/70 px-8 py-10 shadow-lg outline outline-black/10 backdrop-blur-xl md:px-16">
+        <div className="crispy-outline flex flex-col space-y-6 rounded-lg bg-gradient-to-r from-white/70 to-sky-200/70 px-8 py-10 shadow-lg backdrop-blur-xl md:px-16">
           <h2 className="text-pretty text-xl font-bold tracking-tight text-slate-900 md:text-3xl">
             Convinced?
             <br />

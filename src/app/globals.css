@@ -5,3 +5,9 @@
 ::selection {
   background-color: rgba(19, 140, 208, 0.15);
 }
+
+@layer utils {
+  .crispy-outline {
+    @apply outline outline-1 outline-black/10;
+  }
+}

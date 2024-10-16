@@ -15,7 +15,7 @@ const StoreButton = ({ label, url, iconUrl }: StoreButtonProps) => (
   <a
     href={url}
     {...externalUrlOpts}
-    className="flex items-center gap-4 rounded-lg bg-white px-4 py-3 shadow-md outline outline-black/10 ring-sky-500 ring-offset-1 duration-150 hover:ring-2 focus:ring-2 active:scale-90 active:opacity-75"
+    className="crispy-outline flex items-center gap-4 rounded-lg bg-white px-4 py-3 shadow-md ring-sky-500 ring-offset-1 duration-150 hover:ring-2 focus:ring-2 active:scale-90 active:opacity-75"
   >
     <Image src={iconUrl} width="34" height="34" alt={label} priority />
     <div className="">

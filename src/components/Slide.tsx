@@ -15,7 +15,7 @@ export type SlideProps = {
 const Slide = ({ title, text, imageUrl, alignment = "left" }: SlideProps) => (
   <div
     className={cn(
-      "flex flex-col md:h-96 items-center md:rounded-lg md:bg-white md:outline outline-black/10 overflow-hidden md:shadow-lg",
+      "flex flex-col md:h-96 items-center md:rounded-lg md:bg-white md:outline outline-1 outline-black/10 overflow-hidden md:shadow-lg",
       alignment === "left" ? "md:flex-row" : "md:flex-row-reverse",
       "-translate-y-8 md:translate-y-0"
     )}
