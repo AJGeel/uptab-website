@@ -6,8 +6,6 @@ import ReactMarkdown from "react-markdown";
 import { getChangelogContents } from "@/services/octokit/getChangelogContents";
 import { targetBlank } from "@/utils/targetBlank";
 
-export const revalidate = 3600; // Revalidate at most every hour
-
 const getCachedData = cache(async () => await getChangelogContents());
 
 const Page = async () => {
