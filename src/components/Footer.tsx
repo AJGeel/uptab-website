@@ -33,7 +33,15 @@ const Footer = () => {
 
   return (
     <div className="flex flex-wrap items-center justify-center gap-6 p-16 sm:gap-12">
-      <HeaderLogo rotation={0} />
+      <div className="flex flex-col">
+        <HeaderLogo rotation={0} />
+        <a
+          className="ml-8 text-[11px] font-medium text-black/50 hover:text-sky-500"
+          href="linkedin.com/in/ajgeel"
+        >
+          by Arthur Geel
+        </a>
+      </div>
       <div className="flex items-center justify-center gap-4">
         {urls.map((item, index) => (
           <Fragment key={item.href}>

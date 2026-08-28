@@ -8,9 +8,9 @@ import { targetBlank } from "@/utils/targetBlank";
 
 const Hero = () => {
   const paragraphs = [
-    "Our upcoming ✨ Themes ✨ feature will let you explore diverse visual worlds with every new tab. We're working hard to bring you this experience.",
+    "Our upcoming™ ✨ Themes ✨ feature will let you explore diverse visual worlds with every new tab. We're working hard to bring you this experience.",
     "In the meantime, your unique perspective matters. Have a captivating image to share? We welcome your contributions to our growing collection.",
-    "Stay tuned for updates on this exciting feature!",
+    "Let's hope I have the time to finish this cool feature... 🤞",
   ];
 
   return (

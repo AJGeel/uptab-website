@@ -1,6 +1,7 @@
 "use client";
 
 import { useWindowScroll } from "@uidotdev/usehooks";
+import { useState } from "react";
 
 import { externalUrls } from "@/config";
 import { useStoreAttributes } from "@/hooks/useStoreAttributes";
@@ -13,6 +14,7 @@ import { cn } from "../../utils/cn";
 
 const Header = () => {
   const { isVisible, onClickBanner } = useUpdatesBanner();
+  const [isHovering, setIsHovering] = useState(false);
 
   const { url, label } = useStoreAttributes();
   const [{ y }] = useWindowScroll();
@@ -21,11 +23,13 @@ const Header = () => {
 
   return (
     <div
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
       className={cn(
         "w-full fixed top-0 z-10 duration-500",
-        isHeaderVisible
+        isHeaderVisible || isHovering
           ? "opacity-100"
-          : "opacity-0 pointer-events-none -translate-y-4"
+          : "opacity-0 -translate-y-4",
       )}
     >
       <UpdatesBanner isVisible={isVisible} onClick={onClickBanner} url={url} />

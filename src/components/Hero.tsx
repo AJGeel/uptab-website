@@ -41,14 +41,14 @@ const Hero = ({ className }: { className?: string }) => (
     </h1>
     <div className="mt-12 flex flex-wrap items-center justify-center gap-6">
       <StoreButton
-        label="Google Chrome"
-        url={externalUrls.chrome}
-        iconUrl="/images/chrome-icon.svg"
-      />
-      <StoreButton
         label="Mozilla Firefox"
         url={externalUrls.firefox}
         iconUrl="/images/firefox-icon.svg"
+      />
+      <StoreButton
+        label="Google Chrome"
+        url={externalUrls.chrome}
+        iconUrl="/images/chrome-icon.svg"
       />
     </div>
   </div>
