@@ -1,9 +1,9 @@
 "use client";
 
-import { useWindowScroll } from "@uidotdev/usehooks";
 import { useState } from "react";
 
 import { externalUrls } from "@/config";
+import { useScrollY } from "@/hooks/useScrollY";
 import { useStoreAttributes } from "@/hooks/useStoreAttributes";
 import { useUpdatesBanner } from "@/hooks/useUpdatesBanner";
 
@@ -17,19 +17,19 @@ const Header = () => {
   const [isHovering, setIsHovering] = useState(false);
 
   const { url, label } = useStoreAttributes();
-  const [{ y }] = useWindowScroll();
+  const y = useScrollY();
 
-  const isHeaderVisible = !!y && y > 500;
+  const isHeaderVisible = y > 500;
 
   return (
     <div
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
       className={cn(
-        "w-full fixed top-0 z-10 duration-500",
+        "fixed top-0 z-10 w-full duration-500",
         isHeaderVisible || isHovering
           ? "opacity-100"
-          : "opacity-0 -translate-y-4",
+          : "-translate-y-4 opacity-0",
       )}
     >
       <UpdatesBanner isVisible={isVisible} onClick={onClickBanner} url={url} />

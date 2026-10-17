@@ -15,7 +15,7 @@ const StoreButton = ({ label, url, iconUrl }: StoreButtonProps) => (
   <a
     href={url}
     {...externalUrlOpts}
-    className="crispy-outline flex items-center gap-4 rounded-lg bg-white px-4 py-3 shadow-md ring-sky-500 ring-offset-1 duration-150 hover:ring-2 focus:ring-2 active:scale-90 active:opacity-75"
+    className="flex items-center gap-4 rounded-lg bg-white px-4 py-3 shadow-md ring-sky-500 ring-offset-1 crispy-outline duration-150 hover:ring-2 focus:ring-2 active:scale-90 active:opacity-75"
   >
     <Image src={iconUrl} width="34" height="34" alt={label} priority />
     <div className="">
@@ -35,7 +35,7 @@ const Hero = ({ className }: { className?: string }) => (
       className="drop-shadow-xl"
       priority
     />
-    <h1 className="mt-6 text-balance text-center text-2xl font-bold leading-normal md:text-3xl md:leading-normal">
+    <h1 className="mt-6 text-center text-2xl leading-normal font-bold text-balance md:text-3xl md:leading-normal">
       <span className="text-sky-500">Super-charge your new tabs</span> with
       weather forecasts, bookmarks and Dutch landscapes.
     </h1>

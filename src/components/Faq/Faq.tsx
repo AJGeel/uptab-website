@@ -14,7 +14,7 @@ export type FaqItemProps = {
 
 const FaqItem = ({ question, answer }: FaqItemProps) => (
   <div className="space-y-2">
-    <h3 className="text-balance font-semibold md:text-lg">{question}</h3>
+    <h3 className="font-semibold text-balance md:text-lg">{question}</h3>
     <p className="text-sm leading-relaxed text-slate-600 md:text-base">
       {answer}
     </p>

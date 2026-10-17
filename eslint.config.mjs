@@ -1,10 +1,10 @@
 import js from "@eslint/js";
+import { defineConfig, globalIgnores } from "eslint/config";
 import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
 import nextTypescript from "eslint-config-next/typescript";
 import prettier from "eslint-config-prettier/flat";
 import importPlugin from "eslint-plugin-import";
 import tailwindcss from "eslint-plugin-tailwindcss";
-import { defineConfig, globalIgnores } from "eslint/config";
 
 export default defineConfig([
   globalIgnores(["watch.js", "dist/**"]),

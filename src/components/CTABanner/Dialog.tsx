@@ -1,6 +1,6 @@
 import { Dialog as HDialog, DialogPanel } from "@headlessui/react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { useStoreAttributes } from "@/hooks/useStoreAttributes";
 import { cn } from "@/utils/cn";
@@ -22,18 +22,19 @@ const Dialog = ({ isOpen, setIsOpen }: DialogProps) => {
     height: 338,
   };
 
-  useEffect(() => {
+  const onClose = () => {
+    setIsOpen(false);
     setHasClicked(false);
-  }, [isOpen]);
+  };
 
   return (
     <HDialog
       open={isOpen}
-      onClose={() => setIsOpen(false)}
+      onClose={onClose}
       className="relative z-50"
     >
       <div className="fixed inset-0 flex w-screen items-center justify-center bg-slate-900/80 p-4">
-        <DialogPanel className="crispy-outline relative overflow-hidden rounded-sm bg-white shadow-lg">
+        <DialogPanel className="relative overflow-hidden rounded-sm bg-white shadow-lg crispy-outline">
           {hasClicked ? (
             <div
               className="flex flex-col items-center justify-center gap-10 p-8"
@@ -58,7 +59,7 @@ const Dialog = ({ isOpen, setIsOpen }: DialogProps) => {
             <>
               <div
                 className={cn(
-                  "duration-150 text-xs w-full h-full absolute inset-0 flex items-center justify-center text-slate-500 pointer-events-none",
+                  "pointer-events-none absolute inset-0 flex size-full items-center justify-center text-xs text-slate-500 duration-150",
                   isImageLoaded ? "opacity-0" : "opacity-100"
                 )}
               >

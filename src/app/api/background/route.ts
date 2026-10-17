@@ -19,7 +19,7 @@ export const GET = async (request: NextRequest) => {
       status: 200,
       statusText: "OK",
     });
-  } catch (error) {
+  } catch {
     return new NextResponse("Internal server error", {
       status: 500,
     });

@@ -19,7 +19,7 @@ const Hero = () => {
       {paragraphs.map((text, index) => (
         <p
           key={index}
-          className="my-1.5 text-pretty leading-relaxed text-black/90"
+          className="my-1.5 leading-relaxed text-pretty text-black/90"
         >
           {text}
         </p>

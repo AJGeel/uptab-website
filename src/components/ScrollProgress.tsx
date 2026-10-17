@@ -1,20 +1,24 @@
 "use client";
 
-import { useWindowScroll, useWindowSize } from "@uidotdev/usehooks";
+import { useScrollY } from "@/hooks/useScrollY";
 
-const safeCalculatePercentage = (part: number | null, total: number | null) => {
-  if (!part || !total) {
+const safeCalculatePercentage = (part: number, total: number) => {
+  if (!part || total <= 0) {
     return 0;
   }
 
-  return (part / total) * 100;
+  return Math.min((part / total) * 100, 100);
 };
 
-const ScrollProgress = () => {
-  const { height } = useWindowSize();
-  const [{ y }] = useWindowScroll();
+const getScrollableHeight = () =>
+  typeof document === "undefined"
+    ? 0
+    : document.documentElement.scrollHeight - window.innerHeight;
 
-  const progress = safeCalculatePercentage(y, height);
+const ScrollProgress = () => {
+  const y = useScrollY();
+
+  const progress = safeCalculatePercentage(y, getScrollableHeight());
 
   return (
     <div className="fixed top-0 z-10 flex h-[2px] w-full">
