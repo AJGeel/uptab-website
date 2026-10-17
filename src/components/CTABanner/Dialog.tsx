@@ -1,4 +1,4 @@
-import { Dialog as HDialog } from "@headlessui/react";
+import { Dialog as HDialog, DialogPanel } from "@headlessui/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -33,7 +33,7 @@ const Dialog = ({ isOpen, setIsOpen }: DialogProps) => {
       className="relative z-50"
     >
       <div className="fixed inset-0 flex w-screen items-center justify-center bg-slate-900/80 p-4">
-        <HDialog.Panel className="crispy-outline relative overflow-hidden rounded bg-white shadow-lg">
+        <DialogPanel className="crispy-outline relative overflow-hidden rounded-sm bg-white shadow-lg">
           {hasClicked ? (
             <div
               className="flex flex-col items-center justify-center gap-10 p-8"
@@ -70,14 +70,14 @@ const Dialog = ({ isOpen, setIsOpen }: DialogProps) => {
                 alt="Pretty please?"
                 onLoad={() => setIsImageLoaded(true)}
                 className={cn(
-                  "cursor-pointer rounded-sm border-4 duration-150 hover:border-sky-500",
+                  "cursor-pointer rounded-xs border-4 duration-150 hover:border-sky-500",
                   !isImageLoaded && "opacity-0"
                 )}
                 onClick={() => setHasClicked(true)}
               />
             </>
           )}
-        </HDialog.Panel>
+        </DialogPanel>
       </div>
     </HDialog>
   );

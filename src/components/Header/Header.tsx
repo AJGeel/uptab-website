@@ -33,7 +33,7 @@ const Header = () => {
       )}
     >
       <UpdatesBanner isVisible={isVisible} onClick={onClickBanner} url={url} />
-      <div className="flex justify-between border-b bg-white/90 px-5 py-3 shadow-sm backdrop-blur-sm xl:border-transparent xl:bg-transparent xl:shadow-none xl:backdrop-blur-none">
+      <div className="flex justify-between border-b bg-white/90 px-5 py-3 shadow-xs backdrop-blur-xs xl:border-transparent xl:bg-transparent xl:shadow-none xl:backdrop-blur-none">
         <HeaderLogo rotation={y} />
         <div className="flex items-center gap-3">
           <Link href={url} label={label} iconName="plus" />

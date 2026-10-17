@@ -10,7 +10,7 @@ const corsOptions = {
   "Access-Control-Allow-Headers": "Content-Type, Authorization, Uptab-Api-Key",
 };
 
-export const middleware = (request: NextRequest) => {
+export const proxy = (request: NextRequest) => {
   // Check the origin from the request
   const origin = request.headers.get("origin") ?? "";
   const isAllowedOrigin = allowedOrigins.includes(origin);

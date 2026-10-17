@@ -29,7 +29,7 @@ const UpdatesBanner = ({ isVisible, onClick, url }: UpdatesBannerProps) => (
     </a>
     <button
       type="button"
-      className="-m-3 flex-none bg-slate-800 p-3 duration-150 hover:brightness-150 focus-visible:outline-offset-[-4px] active:scale-90 active:opacity-75"
+      className="-m-3 flex-none bg-slate-800 p-3 duration-150 hover:brightness-150 focus-visible:-outline-offset-4 active:scale-90 active:opacity-75"
     >
       <span className="sr-only">Dismiss</span>
       <XMarkIcon className="size-5 text-white" aria-hidden="true" />
