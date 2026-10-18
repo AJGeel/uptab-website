@@ -15,6 +15,14 @@
     {
       "id": "abstract",
       "name": "Abstract"
+    },
+    {
+      "id": "mountains",
+      "name": "Mountains"
+    },
+    {
+      "id": "flower-power",
+      "name": "Flower power"
     }
   ],
   "images": [
@@ -318,6 +326,76 @@
       "file": "abstract/white-and-blue-wavy.jpg",
       "author": "Debora Pilati",
       "link": "https://unsplash.com/photos/wavy-blue-and-white-abstract-architecture-dOG0z4-gqp0"
+    },
+    {
+      "id": "andrew-small-efhcuc-fjru-unsplash",
+      "theme": "flower-power",
+      "file": "flower-power/andrew-small-efhcuc-fjru-unsplash.jpg",
+      "author": "Andrew Small",
+      "link": "https://unsplash.com/photos/selective-focus-photography-of-pink-petaled-flower-EfhCUc_fjrU"
+    },
+    {
+      "id": "jei-lee-yrxuxvy4sq4-unsplash",
+      "theme": "flower-power",
+      "file": "flower-power/jei-lee-yrxuxvy4sq4-unsplash.jpg",
+      "author": "Jei Lee",
+      "link": "https://unsplash.com/photos/white-cherry-blossom-in-close-up-photography-yRXuXvy4sQ4"
+    },
+    {
+      "id": "olia-gozha-9a-pegrsbzc-unsplash",
+      "theme": "flower-power",
+      "file": "flower-power/olia-gozha-9a-pegrsbzc-unsplash.jpg",
+      "author": "Olia Gozha",
+      "link": "https://unsplash.com/photos/photo-of-pink-petaled-flowers-9A_peGrSbZc"
+    },
+    {
+      "id": "tomoko-uji-kxvn1ogptte-unsplash",
+      "theme": "flower-power",
+      "file": "flower-power/tomoko-uji-kxvn1ogptte-unsplash.jpg",
+      "author": "Tomoko Uji",
+      "link": "https://unsplash.com/photos/pink-and-white-flowers-under-white-sky-during-daytime-kxvn1ogpTtE"
+    },
+    {
+      "id": "sergey-shmidt-koy6flccy5s-unsplash",
+      "theme": "flower-power",
+      "file": "flower-power/sergey-shmidt-koy6flccy5s-unsplash.jpg",
+      "author": "Sergey Schmidt",
+      "link": "https://unsplash.com/photos/orange-petaled-flowers-koy6FlCCy5s"
+    },
+    {
+      "id": "kwang-mathurosemontri-fy1ecb1rcd0-unsplash",
+      "theme": "flower-power",
+      "file": "flower-power/kwang-mathurosemontri-fy1ecb1rcd0-unsplash.jpg",
+      "author": "Kwang Mathurosemontri",
+      "link": "https://unsplash.com/photos/shallow-focus-photography-of-white-and-pink-petaled-flowers-fY1ECB1RCd0"
+    },
+    {
+      "id": "julien-chatelain-fs2ivwuibgw-unsplash",
+      "theme": "flower-power",
+      "file": "flower-power/julien-chatelain-fs2ivwuibgw-unsplash.jpg",
+      "author": "Julien Chatelain",
+      "link": "https://unsplash.com/photos/red-yellow-and-white-flower-petals-fS2iVWUiBgw"
+    },
+    {
+      "id": "nature-uninterrupted-photography-v-3nq3pmwky-unsplash",
+      "theme": "flower-power",
+      "file": "flower-power/nature-uninterrupted-photography-v-3nq3pmwky-unsplash.jpg",
+      "author": "Nature Interrupted",
+      "link": "https://unsplash.com/photos/red-pink-and-yellow-flowering-plants-v-3NQ3pmWkY"
+    },
+    {
+      "id": "micheile-henderson-t1ihz0a1n-k-unsplash",
+      "theme": "flower-power",
+      "file": "flower-power/micheile-henderson-t1ihz0a1n-k-unsplash.jpg",
+      "author": "Micheile Henderson",
+      "link": "https://unsplash.com/photos/a-group-of-pink-and-white-flowers-against-a-blue-sky-t1IHZ0a1n_k"
+    },
+    {
+      "id": "david-brooke-martin-0dlky4ipoc8-unsplash",
+      "theme": "flower-power",
+      "file": "flower-power/david-brooke-martin-0dlky4ipoc8-unsplash.jpg",
+      "author": "David Brooke Martin",
+      "link": "https://unsplash.com/photos/blue-and-orange-flower-0DLKy4IPoc8"
     }
   ]
 }
