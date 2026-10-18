@@ -9,8 +9,11 @@ import {
   useTransition,
 } from "react";
 
+import { cn } from "@/utils/cn";
+
 import { useActionToast } from "./Toaster";
 import type { ActionState } from "./types";
+import { buttonClass } from "./ui";
 
 type Field = HTMLInputElement | HTMLSelectElement;
 
@@ -47,12 +50,15 @@ const readChanges = (form: HTMLFormElement) => {
 /**
  * One form for everything on a page, with a floating bar to save or discard.
  * Save only works when something changed. Once saved, the server's new values
- * become the fields' defaults, which marks them as unchanged again.
+ * become the fields' defaults, which marks them as unchanged again. Fields
+ * elsewhere on the page can join it with `form={id}`.
  */
 export const EditForm = ({
+  id,
   action,
   children,
 }: {
+  id: string;
   action: (form: FormData) => Promise<ActionState>;
   children: ReactNode;
 }) => {
@@ -63,7 +69,11 @@ export const EditForm = ({
 
   const recount = () => setChanges(formRef.current ? readChanges(formRef.current).count : 0);
 
-  // Fields change without input events too: saved defaults, removed rows
+  /*
+   * Watch the whole page, because fields joined with `form={id}` live
+   * outside the form, and their events don't bubble up to it. Values also
+   * change without input events: saved defaults, removed rows.
+   */
   useEffect(() => {
     const form = formRef.current;
 
@@ -71,11 +81,27 @@ export const EditForm = ({
       return undefined;
     }
 
+    const onEdit = (event: Event) => {
+      if ((event.target as Field | null)?.form === form) {
+        recount();
+      }
+    };
     const observer = new MutationObserver(recount);
 
-    observer.observe(form, { subtree: true, childList: true, attributes: true });
+    document.addEventListener("input", onEdit);
+    document.addEventListener("change", onEdit);
+    observer.observe(document.body, {
+      subtree: true,
+      childList: true,
+      attributes: true,
+      attributeFilter: ["value", "selected"],
+    });
 
-    return () => observer.disconnect();
+    return () => {
+      document.removeEventListener("input", onEdit);
+      document.removeEventListener("change", onEdit);
+      observer.disconnect();
+    };
   }, []);
 
   // Warn before leaving the page with unsaved changes
@@ -109,9 +135,9 @@ export const EditForm = ({
   const hasChanges = changes > 0;
 
   return (
-    <form ref={formRef} onSubmit={onSubmit} onInput={recount} onChange={recount}>
+    <form id={id} ref={formRef} onSubmit={onSubmit}>
       {children}
-      <div className="fixed inset-x-0 bottom-6 z-40 mx-auto flex w-fit items-center gap-3 rounded-full bg-slate-900 py-2 pr-2 pl-5 text-sm text-white shadow-xl">
+      <div className="fixed inset-x-0 bottom-6 z-40 mx-auto flex w-fit items-center gap-2 rounded-full bg-slate-900 py-1.5 pr-1.5 pl-5 text-sm text-white shadow-xl">
         <span className={hasChanges ? "" : "text-slate-400"}>
           {hasChanges
             ? `${changes} unsaved ${changes === 1 ? "change" : "changes"}`
@@ -121,14 +147,14 @@ export const EditForm = ({
           type="button"
           onClick={discard}
           disabled={!hasChanges || isPending}
-          className="rounded-full px-3 py-1 duration-150 hover:bg-white/10 disabled:opacity-40"
+          className={cn(buttonClass("ghost"), "text-white hover:bg-white/10")}
         >
           Discard
         </button>
         <button
           type="submit"
           disabled={!hasChanges || isPending}
-          className="rounded-full bg-sky-500 px-4 py-1 font-medium duration-150 hover:bg-sky-400 disabled:bg-slate-700 disabled:text-slate-400"
+          className={buttonClass("primary")}
         >
           {isPending ? "Saving…" : "Save"}
         </button>

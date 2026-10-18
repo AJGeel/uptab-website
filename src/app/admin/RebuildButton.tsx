@@ -56,7 +56,7 @@ export const RebuildButton = () => {
         type="button"
         onClick={rebuild}
         disabled={isPending}
-        className={`${buttonClass} text-slate-900`}
+        className={buttonClass("dark")}
       >
         {isPending ? "Rebuilding…" : "Rebuild catalogue"}
       </button>

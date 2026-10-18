@@ -29,7 +29,7 @@ export const RemovePhotoButton = ({ id, file }: { id: string; file: string }) =>
       type="button"
       onClick={remove}
       disabled={isPending}
-      className={`${buttonClass} text-red-600`}
+      className={buttonClass("danger")}
     >
       Remove
     </button>

@@ -10,6 +10,8 @@ import { EditForm } from "../../EditForm";
 import { PhotoRow } from "../../PhotoRow";
 import { cardClass, inputClass, ProgressBar } from "../../ui";
 
+const EDIT_FORM = "theme-edit";
+
 const ThemePage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
   const { metadata } = await loadAdmin();
@@ -36,24 +38,28 @@ const ThemePage = async ({ params }: { params: Promise<{ id: string }> }) => {
         ← All themes
       </Link>
 
-      <EditForm action={saveThemeAction}>
-        <div className="mb-8 flex flex-col gap-3">
-          <input type="hidden" name="theme:id" value={theme.id} />
-          <div className="flex flex-wrap items-center gap-3">
-            <input
-              name="theme:name"
-              defaultValue={theme.name}
-              required
-              aria-label="Theme name"
-              className={`${inputClass} max-w-xs text-2xl! font-bold`}
-            />
-            <span className="text-sm text-slate-400">ID: {theme.id} (fixed)</span>
-          </div>
-          <div className="max-w-sm">
-            <ProgressBar published={entries.length - pending} pending={pending} />
-          </div>
+      {/* Joins the edit form below through form=, so the upload can sit in between */}
+      <div className="flex flex-col gap-3">
+        <input type="hidden" name="theme:id" value={theme.id} form={EDIT_FORM} />
+        <div className="flex flex-wrap items-center gap-3">
+          <input
+            name="theme:name"
+            defaultValue={theme.name}
+            required
+            aria-label="Theme name"
+            form={EDIT_FORM}
+            className={`${inputClass} max-w-xs text-2xl! font-bold`}
+          />
+          <span className="text-sm text-slate-400">ID: {theme.id} (fixed)</span>
         </div>
+        <div className="max-w-sm">
+          <ProgressBar published={entries.length - pending} pending={pending} />
+        </div>
+      </div>
 
+      <AddPhotoForm theme={theme.id} />
+
+      <EditForm id={EDIT_FORM} action={saveThemeAction}>
         <section className={cardClass}>
           {entries.length > 0 ? (
             entries.map((entry) => (
@@ -69,8 +75,6 @@ const ThemePage = async ({ params }: { params: Promise<{ id: string }> }) => {
           )}
         </section>
       </EditForm>
-
-      <AddPhotoForm themes={metadata.themes} theme={theme.id} />
 
       {/* Room to scroll past the floating save bar */}
       <div className="h-12" />

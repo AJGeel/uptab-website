@@ -67,6 +67,36 @@ export const countPending = (entries: SourceEntry[]) =>
 export const thumbnailUrl = (file: string) =>
   `/admin/photos/${file.split("/").map(encodeURIComponent).join("/")}`;
 
+export type ThemeSummary = {
+  id: string;
+  name: string;
+  published: number;
+  pending: number;
+  /** Up to `count` thumbnails, published photos first. */
+  thumbnails: string[];
+};
+
+/** A theme at a glance, for the theme cards and the theme picker. */
+export const summarizeTheme = (
+  metadata: SourceMetadata,
+  theme: SourceMetadata["themes"][number],
+  count = 4
+): ThemeSummary => {
+  const entries = imagesOf(metadata, theme.id);
+  const pending = countPending(entries);
+
+  return {
+    id: theme.id,
+    name: theme.name,
+    published: entries.length - pending,
+    pending,
+    thumbnails: [...entries]
+      .sort((a, b) => Number(Boolean(a.creditPending)) - Number(Boolean(b.creditPending)))
+      .slice(0, count)
+      .map((entry) => thumbnailUrl(entry.file)),
+  };
+};
+
 /** The full-size source photo, downloaded rather than shown. */
 export const originalUrl = (file: string) => `${thumbnailUrl(file)}?original`;
 

@@ -9,6 +9,8 @@ type ActionFormProps = {
   action: (form: FormData) => Promise<ActionState>;
   /** Clears the fields after a successful submit, e.g. for uploads. */
   resetOnSuccess?: boolean;
+  /** Runs after a successful submit, with the data that was sent. */
+  onSuccess?: (data: FormData) => void;
   className?: string;
   children: ReactNode;
 };
@@ -20,6 +22,7 @@ type ActionFormProps = {
 export const ActionForm = ({
   action,
   resetOnSuccess = false,
+  onSuccess,
   className,
   children,
 }: ActionFormProps) => {
@@ -28,6 +31,8 @@ export const ActionForm = ({
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    // A form in a dialog is portaled out of, but still nested in, other forms
+    event.stopPropagation();
 
     const form = event.currentTarget;
     const { submitter } = event.nativeEvent as SubmitEvent;
@@ -38,9 +43,15 @@ export const ActionForm = ({
 
       notify(result);
 
-      if (!result.error && resetOnSuccess) {
+      if (result.error) {
+        return;
+      }
+
+      if (resetOnSuccess) {
         form.reset();
       }
+
+      onSuccess?.(data);
     });
   };
 
