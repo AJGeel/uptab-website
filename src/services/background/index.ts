@@ -1,5 +1,3 @@
-export { getBackgroundImage } from "./getBackgroundImage";
-export { findTheme } from "./findTheme";
-export { getAllBackgrounds } from "./getAllBackgrounds";
+export { getCatalogue } from "./getCatalogue";
 
 export * from "./types";
