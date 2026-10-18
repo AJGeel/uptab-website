@@ -4,13 +4,17 @@ import { Toast } from "@base-ui/react/toast";
 import { XMarkIcon } from "@heroicons/react/16/solid";
 import { type FormEvent, useState } from "react";
 
-import { addPhotoAction } from "@/features/backgrounds/api/actions";
-import type { ThemeSummary } from "@/features/backgrounds/api/admin-data";
+import { Button } from "@/components/ui/Button";
+import { Field } from "@/components/ui/Field";
+import { Input } from "@/components/ui/Input";
+import { addPhotoAction } from "@/features/backgrounds/api/add-photo";
 import { idProblem, suggestId } from "@/features/backgrounds/utils/batch";
+import type { ThemeSummary } from "@/features/backgrounds/utils/theme-summary";
+import { cn } from "@/utils/cn";
+import { plural } from "@/utils/plural";
 
 import { PhotoDrop } from "./PhotoDrop";
 import { ThemeSelect } from "./ThemeSelect";
-import { buttonClass, Field, inputClass } from "./ui";
 
 type Staged = {
   key: string;
@@ -21,9 +25,6 @@ type Staged = {
   link: string;
   error: string | null;
 };
-
-const plural = (count: number, noun: string) =>
-  `${count} ${noun}${count === 1 ? "" : "s"}`;
 
 /**
  * Stages any number of photos, each with its own ID, author and link, then
@@ -170,13 +171,12 @@ export const BatchUpload = ({
   };
 
   const field = (item: Staged, name: "id" | "author" | "link", placeholder: string) => (
-    <input
+    <Input
       value={item[name]}
       onChange={(event) => edit(item.key, { [name]: event.target.value })}
       placeholder={placeholder}
       aria-label={`${name} for ${item.file.name}`}
       type={name === "link" ? "url" : "text"}
-      className={inputClass}
     />
   );
 
@@ -190,7 +190,11 @@ export const BatchUpload = ({
       </div>
 
       <div
-        className={`grid gap-4 ${theme ? "" : "md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]"} ${staged.length > 0 ? "items-end" : ""}`}
+        className={cn(
+          "grid gap-4",
+          !theme && "md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]",
+          staged.length > 0 && "items-end"
+        )}
       >
         <PhotoDrop onAdd={addFiles} compact={staged.length > 0} />
         {!theme && (
@@ -206,30 +210,28 @@ export const BatchUpload = ({
         <fieldset disabled={isUploading} className="contents">
           <div className="flex flex-wrap items-end gap-3 rounded-lg bg-slate-50 p-3">
             <Field label="Author for all">
-              <input
+              <Input
                 value={shared.author}
                 onChange={(event) => setShared({ ...shared, author: event.target.value })}
                 placeholder="e.g. Unsplash photographer"
-                className={inputClass}
               />
             </Field>
             <Field label="Link for all">
-              <input
+              <Input
                 type="url"
                 value={shared.link}
                 onChange={(event) => setShared({ ...shared, link: event.target.value })}
                 placeholder="https://"
-                className={inputClass}
               />
             </Field>
-            <button
+            <Button
               type="button"
               onClick={applyToAll}
               disabled={!shared.author.trim() && !shared.link.trim()}
-              className={buttonClass("dark")}
+              variant="dark"
             >
               Apply to all
-            </button>
+            </Button>
           </div>
 
           <div className="hidden gap-3 px-0 text-xs font-medium text-slate-500 sm:grid sm:grid-cols-[96px_1fr_1fr_1fr_auto]">
@@ -252,15 +254,15 @@ export const BatchUpload = ({
                   {field(item, "id", "ID")}
                   {field(item, "author", "Author: required to publish")}
                   {field(item, "link", "Link (optional)")}
-                  <button
+                  <Button
                     type="button"
                     onClick={() => remove(item.key)}
                     disabled={isUploading}
                     aria-label={`Remove ${item.file.name} from this batch`}
-                    className={buttonClass("ghost")}
+                    variant="ghost"
                   >
                     <XMarkIcon className="size-4" />
-                  </button>
+                  </Button>
                 </div>
                 {(problems[index] ?? item.error) && (
                   <p className="text-xs text-red-600 sm:pl-27">{problems[index] ?? item.error}</p>
@@ -270,12 +272,12 @@ export const BatchUpload = ({
           </ul>
 
           <div className="flex flex-wrap items-center gap-3">
-            <button
+            <Button
               disabled={isUploading || invalid > 0}
-              className={buttonClass("primary")}
+              variant="primary"
             >
               {isUploading ? "Uploading…" : `Upload ${plural(staged.length, "photo")}`}
-            </button>
+            </Button>
             {invalid > 0 && (
               <span className="text-sm text-red-600">
                 Fix {plural(invalid, "ID")} first

@@ -1,23 +1,27 @@
 /**
- * File access for assets/backgrounds/, shared by the build script and the
- * local photo manager. Paths are based on the working directory, which is
- * the project root for both `bun run` and `next dev`.
+ * File access for backgrounds, shared by the build script and the local
+ * admin: the sources in assets/backgrounds/ and the generated catalogue.
+ * Paths are based on the working directory, which is the project root for
+ * both `bun run` and `next dev`.
  */
 import { readdir, readFile, rename, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 
+import { isImageFile } from "@/features/backgrounds/utils/image-formats";
 import type { SourceMetadata } from "@/features/backgrounds/utils/metadata";
+import { CATALOGUE_DIR } from "@/features/backgrounds/utils/paths";
 
 export const SOURCE_DIR = path.join(process.cwd(), "assets/backgrounds");
 export const METADATA_FILE = path.join(SOURCE_DIR, "backgrounds.json");
-export const IMAGE_EXTENSIONS = /\.(jpe?g|png|webp|avif|tiff?)$/i;
+export const OUTPUT_DIR = path.join(process.cwd(), "public", CATALOGUE_DIR);
+export const CATALOGUE_FILE = path.join(OUTPUT_DIR, "catalogue.json");
 
 /** Image files relative to SOURCE_DIR, e.g. "holland/koppelpoort.jpg". */
 export const listSourceFiles = async () => {
   const entries = await readdir(SOURCE_DIR, { recursive: true });
 
   return entries
-    .filter((entry) => IMAGE_EXTENSIONS.test(entry))
+    .filter((entry) => isImageFile(entry))
     .map((entry) => entry.split(path.sep).join("/"))
     .sort();
 };

@@ -3,7 +3,8 @@
 import { PhotoIcon } from "@heroicons/react/24/outline";
 import type { ChangeEvent } from "react";
 
-const ACCEPT = "image/jpeg,image/png,image/webp,image/tiff";
+import { ACCEPTED_TYPES, FORMAT_NAMES } from "@/features/backgrounds/utils/image-formats";
+import { cn } from "@/utils/cn";
 
 /**
  * A drop area for one or more photos. Clicking opens the file picker;
@@ -25,7 +26,10 @@ export const PhotoDrop = ({
 
   return (
     <div
-      className={`relative flex w-full items-center justify-center rounded-lg border-2 border-dashed border-slate-300 bg-slate-50 duration-150 hover:border-sky-500 has-focus-visible:border-sky-500 ${compact ? "py-3" : "h-40"}`}
+      className={cn(
+        "relative flex w-full items-center justify-center rounded-lg border-2 border-dashed border-slate-300 bg-slate-50 duration-150 hover:border-sky-500 has-focus-visible:border-sky-500",
+        compact ? "py-3" : "h-40"
+      )}
     >
       {compact ? (
         <span className="flex items-center gap-2 text-sm font-medium text-slate-600">
@@ -36,13 +40,13 @@ export const PhotoDrop = ({
         <span className="flex flex-col items-center gap-1 text-sm text-slate-500">
           <PhotoIcon className="size-8 text-slate-400" />
           <span className="font-medium text-slate-700">Choose or drop photos</span>
-          JPEG, PNG, WebP or TIFF · as many as you like
+          {FORMAT_NAMES} · as many as you like
         </span>
       )}
       <input
         type="file"
         multiple
-        accept={ACCEPT}
+        accept={ACCEPTED_TYPES}
         onChange={onChange}
         aria-label="Photos"
         className="absolute inset-0 cursor-pointer opacity-0"

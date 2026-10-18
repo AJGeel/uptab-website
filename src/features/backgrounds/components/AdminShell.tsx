@@ -1,11 +1,11 @@
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 
-import { loadAdmin } from "@/features/backgrounds/api/admin-data";
+import { Toaster } from "@/components/ui/Toaster";
 import { isLocalRequest } from "@/features/backgrounds/api/is-local-request";
+import { loadAdmin } from "@/features/backgrounds/api/load-admin";
 
 import { StatusBanner } from "./StatusBanner";
-import { Toaster } from "./Toaster";
 
 /**
  * Frame for every admin page: the localhost check, the status banner and

@@ -9,22 +9,27 @@ import path from "node:path";
 
 import sharp from "sharp";
 
-import { listSourceFiles, readMetadataJson, SOURCE_DIR } from "@/features/backgrounds/api/source-files";
+import {
+  CATALOGUE_FILE,
+  listSourceFiles,
+  OUTPUT_DIR,
+  readMetadataJson,
+  SOURCE_DIR,
+} from "@/features/backgrounds/api/source-files";
 import type { BackgroundImage } from "@/features/backgrounds/types/catalogue";
+import { getBaseUrl } from "@/features/backgrounds/utils/base-url";
 import {
   buildCatalogue,
-  getBaseUrl,
-  parseMetadata,
   pickWidths,
-  type SourceEntry,
   toHexColor,
   WIDTHS,
-} from "@/features/backgrounds/utils/metadata";
+} from "@/features/backgrounds/utils/catalogue";
+import { parseMetadata, type SourceEntry } from "@/features/backgrounds/utils/metadata";
+import { CATALOGUE_DIR, CATALOGUE_PATH } from "@/features/backgrounds/utils/paths";
+import { plural } from "@/utils/plural";
 
 import { header, p, pc, runCli, step } from "./cli";
 
-const OUTPUT_PATH = "backgrounds/v1";
-const OUTPUT_DIR = path.join(process.cwd(), "public", OUTPUT_PATH);
 
 type BuildResult = {
   image: BackgroundImage;
@@ -60,7 +65,7 @@ const buildImage = async (
 
       return {
         width: renditionWidth,
-        url: `${baseUrl}/${OUTPUT_PATH}/${entry.theme}/${fileName}`,
+        url: `${baseUrl}/${CATALOGUE_DIR}/${entry.theme}/${fileName}`,
         bytes: output.length,
       };
     })
@@ -99,9 +104,6 @@ const formatSizeTable = (results: BuildResult[]) => {
 
   return [pc.dim(head), ...rows].join("\n");
 };
-
-const plural = (count: number, noun: string) =>
-  `${count} ${noun}${count === 1 ? "" : "s"}`;
 
 const formatSeconds = (startedAt: number) =>
   `${((performance.now() - startedAt) / 1000).toFixed(1)}s`;
@@ -157,7 +159,7 @@ const main = async () => {
   const catalogue = buildCatalogue(metadata.themes, images);
 
   await writeFile(
-    path.join(OUTPUT_DIR, "catalogue.json"),
+    CATALOGUE_FILE,
     `${JSON.stringify(catalogue, null, 2)}\n`
   );
 
@@ -168,7 +170,7 @@ const main = async () => {
   }
 
   p.outro(
-    `${pc.green(`Wrote ${OUTPUT_PATH}/catalogue.json`)} ${pc.dim(`· ${plural(catalogue.themes.length, "theme")}, ${plural(images.length, "image")}`)}`
+    `${pc.green(`Wrote ${CATALOGUE_PATH.slice(1)}`)} ${pc.dim(`· ${plural(catalogue.themes.length, "theme")}, ${plural(images.length, "image")}`)}`
   );
 };
 

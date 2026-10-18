@@ -1,14 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import type { ThemeSummary } from "@/features/backgrounds/api/admin-data";
+import { cardClass } from "@/components/ui/card";
+import { ProgressBar } from "@/features/backgrounds/components/ProgressBar";
+import type { ThemeSummary } from "@/features/backgrounds/utils/theme-summary";
+import { cn } from "@/utils/cn";
 
-import { cardClass, ProgressBar } from "./ui";
 
 export const ThemeCard = ({ theme }: { theme: ThemeSummary }) => (
   <Link
     href={`/admin/themes/${theme.id}`}
-    className={`${cardClass} group flex flex-col gap-3 duration-150 hover:shadow-md`}
+    className={cn(cardClass, "group flex flex-col gap-3 duration-150 hover:shadow-md")}
   >
     <div className="grid aspect-video grid-cols-2 grid-rows-2 gap-1 overflow-hidden rounded-sm bg-slate-100">
       {theme.thumbnails.map((src) => (

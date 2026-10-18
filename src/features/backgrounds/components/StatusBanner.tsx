@@ -1,8 +1,11 @@
 import Link from "next/link";
 
-import type { CatalogueStatus } from "@/features/backgrounds/api/admin-data";
+import type { CatalogueStatus } from "@/features/backgrounds/api/load-admin";
+import { CATALOGUE_PATH } from "@/features/backgrounds/utils/paths";
+import { cn } from "@/utils/cn";
 
 import { RebuildButton } from "./RebuildButton";
+
 
 const STYLES = {
   error: "bg-red-50 text-red-800 crispy-outline",
@@ -48,7 +51,7 @@ export const StatusBanner = ({
   const { tone, message } = describe(problems, catalogue);
 
   return (
-    <div className={`flex flex-col gap-3 rounded-lg px-4 py-3 ${STYLES[tone]}`}>
+    <div className={cn("flex flex-col gap-3 rounded-lg px-4 py-3", STYLES[tone])}>
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
         <p className="grow text-sm font-medium">{message}</p>
         <p className="text-sm">
@@ -56,7 +59,7 @@ export const StatusBanner = ({
             Gallery
           </Link>{" "}
           ·{" "}
-          <Link href="/backgrounds/v1/catalogue.json" className={linkClass}>
+          <Link href={CATALOGUE_PATH} className={linkClass}>
             catalogue.json
           </Link>
         </p>

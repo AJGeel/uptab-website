@@ -1,7 +1,8 @@
-import type { ThemeSummary } from "@/features/backgrounds/api/admin-data";
+import { cardClass } from "@/components/ui/card";
+import type { ThemeSummary } from "@/features/backgrounds/utils/theme-summary";
+import { cn } from "@/utils/cn";
 
 import { BatchUpload } from "./BatchUpload";
-import { cardClass } from "./ui";
 
 /**
  * Uploads one or more photos. With `theme`, they go into that theme;
@@ -17,7 +18,7 @@ export const AddPhotoForm = ({
   /** Every photo ID in use, so clashes show before uploading. */
   existingIds: string[];
 }) => (
-  <section className={`${cardClass} p-5`}>
+  <section className={cn(cardClass, "p-5")}>
     <BatchUpload themes={themes} theme={theme} existingIds={existingIds} />
   </section>
 );

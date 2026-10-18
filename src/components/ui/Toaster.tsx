@@ -1,9 +1,7 @@
 "use client";
 
 import { Toast } from "@base-ui/react/toast";
-import { type ReactNode, useEffect, useState } from "react";
-
-import type { ActionState } from "@/features/backgrounds/types/action-state";
+import type { ReactNode } from "react";
 
 const Spinner = () => (
   <span
@@ -37,8 +35,9 @@ const ToastList = () => {
 };
 
 /**
- * Toasts for every admin page, in the bottom right corner with the newest
- * nearest to it. On narrow screens they sit above the theme page's save bar.
+ * Base UI toasts in the bottom right corner, newest nearest to it. Toasts of
+ * type "loading" get a spinner. On narrow screens they're lifted, clear of a
+ * floating bottom bar.
  */
 export const Toaster = ({ children }: { children: ReactNode }) => (
   <Toast.Provider limit={4}>
@@ -50,35 +49,3 @@ export const Toaster = ({ children }: { children: ReactNode }) => (
     </Toast.Portal>
   </Toast.Provider>
 );
-
-/** Seconds since it first rendered, so a long task visibly makes progress. */
-export const ElapsedTime = ({ label }: { label: string }) => {
-  const [seconds, setSeconds] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => setSeconds((value) => value + 1), 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  return `${label} · ${seconds}s`;
-};
-
-/** Shows an action's outcome as a toast. Errors stay until they're closed. */
-export const useActionToast = () => {
-  const { add } = Toast.useToastManager();
-
-  return ({ error, message, details }: ActionState) => {
-    if (error) {
-      add({
-        title: "That didn't work",
-        description: error,
-        type: "error",
-        priority: "high",
-        timeout: 0,
-      });
-    } else if (message) {
-      add({ title: message, description: details, type: "success" });
-    }
-  };
-};

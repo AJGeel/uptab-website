@@ -2,11 +2,13 @@
 
 import { Dialog } from "@base-ui/react/dialog";
 
-import { createThemeAction } from "@/features/backgrounds/api/actions";
+import { Button, buttonClass } from "@/components/ui/Button";
+import { Field } from "@/components/ui/Field";
+import { Input } from "@/components/ui/Input";
+import { createThemeAction } from "@/features/backgrounds/api/create-theme";
 import { toSlug } from "@/features/backgrounds/utils/edits";
 
 import { ActionForm } from "./ActionForm";
-import { buttonClass, Field, inputClass } from "./ui";
 
 
 /**
@@ -45,22 +47,21 @@ export const NewThemeDialog = ({
             className="mt-5 flex flex-col gap-3"
           >
             <Field label="Name">
-              <input
+              <Input
                 name="name"
                 required
                 autoFocus
                 placeholder="e.g. Mountains"
-                className={inputClass}
               />
             </Field>
             <Field label="ID (optional)">
-              <input name="id" placeholder="From the name" className={inputClass} />
+              <Input name="id" placeholder="From the name" />
             </Field>
             <div className="mt-2 flex justify-end gap-2">
               <Dialog.Close type="button" className={buttonClass("ghost")}>
                 Cancel
               </Dialog.Close>
-              <button className={buttonClass("primary")}>Create theme</button>
+              <Button variant="primary">Create theme</Button>
             </div>
           </ActionForm>
         </Dialog.Popup>

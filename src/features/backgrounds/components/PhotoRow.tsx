@@ -1,11 +1,13 @@
 import Image from "next/image";
 
-import { originalUrl, thumbnailUrl } from "@/features/backgrounds/api/admin-data";
+import { Field } from "@/components/ui/Field";
+import { Input, inputClass } from "@/components/ui/Input";
 import { isPublished } from "@/features/backgrounds/utils/edits";
 import type { SourceEntry, SourceMetadata } from "@/features/backgrounds/utils/metadata";
+import { originalUrl, thumbnailUrl } from "@/features/backgrounds/utils/paths";
+import { cn } from "@/utils/cn";
 
 import { RemovePhotoButton } from "./RemovePhotoButton";
-import { Field, inputClass } from "./ui";
 
 
 const badgeClass = "rounded-full px-2 py-0.5 text-xs font-medium";
@@ -79,17 +81,16 @@ export const PhotoRow = ({
       />
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <Field label="ID">
-          <input
+          <Input
             name={name("id")}
             defaultValue={entry.id}
             readOnly={published}
             title={published ? "Published IDs are fixed" : undefined}
-            className={inputClass}
           />
         </Field>
         <Field label="Theme">
           {published ? (
-            <input name={name("theme")} value={entry.theme} readOnly className={inputClass} />
+            <Input name={name("theme")} value={entry.theme} readOnly />
           ) : (
             <select name={name("theme")} defaultValue={entry.theme} className={inputClass}>
               {themes.map(({ id, name: themeName }) => (
@@ -101,27 +102,25 @@ export const PhotoRow = ({
           )}
         </Field>
         <Field label="Author">
-          <input
+          <Input
             name={name("author")}
             defaultValue={entry.author ?? ""}
             placeholder="Required to publish"
-            className={inputClass}
           />
         </Field>
         <Field label="Link">
-          <input
+          <Input
             name={name("link")}
             type="url"
             defaultValue={entry.link ?? ""}
             placeholder="https://"
-            className={inputClass}
           />
         </Field>
         <div className="flex flex-wrap items-center gap-3 sm:col-span-2 lg:col-span-4">
           {published ? (
-            <span className={`${badgeClass} bg-green-100 text-green-800`}>Published</span>
+            <span className={cn(badgeClass, "bg-green-100 text-green-800")}>Published</span>
           ) : (
-            <span className={`${badgeClass} bg-amber-100 text-amber-800`}>Pending</span>
+            <span className={cn(badgeClass, "bg-amber-100 text-amber-800")}>Pending</span>
           )}
           <span className="text-xs text-slate-500">
             {published

@@ -3,6 +3,8 @@
  * new metadata and the file changes it needs, without touching the disk, so
  * the rules can be tested and validated before anything is written.
  */
+import { extensionOf } from "@/features/backgrounds/utils/image-formats";
+
 import {
   listProblems,
   type SourceEntry,
@@ -35,8 +37,6 @@ export const toSlug = (name: string) =>
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
-
-const extensionOf = (file: string) => file.slice(file.lastIndexOf(".")).toLowerCase();
 
 export const isPublished = (entry: SourceEntry) => entry.creditPending !== true;
 

@@ -1,7 +1,6 @@
-import type { SavedEdits, ThemeEdits } from "./edits";
+import { plural } from "@/utils/plural";
 
-const plural = (count: number, noun: string) =>
-  `${count} ${noun}${count === 1 ? "" : "s"}`;
+import type { SavedEdits, ThemeEdits } from "./edits";
 
 /** "a, b, c and 7 more", so a big save still fits in a toast. */
 const shortList = (ids: string[], shown = 3) =>

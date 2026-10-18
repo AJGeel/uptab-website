@@ -3,11 +3,11 @@
 import { Toast } from "@base-ui/react/toast";
 import { useState, useTransition } from "react";
 
-import { rebuildAction } from "@/features/backgrounds/api/actions";
+import { Button } from "@/components/ui/Button";
+import { ElapsedTime } from "@/components/ui/ElapsedTime";
+import { rebuildAction } from "@/features/backgrounds/api/rebuild-catalogue";
 import type { ActionState } from "@/features/backgrounds/types/action-state";
 
-import { ElapsedTime } from "./Toaster";
-import { buttonClass } from "./ui";
 
 /**
  * Runs the build script with a progress toast, which turns into the outcome
@@ -53,14 +53,14 @@ export const RebuildButton = () => {
 
   return (
     <>
-      <button
+      <Button
         type="button"
         onClick={rebuild}
         disabled={isPending}
-        className={buttonClass("dark")}
+        variant="dark"
       >
         {isPending ? "Rebuilding…" : "Rebuild catalogue"}
-      </button>
+      </Button>
       {log && (
         <details open={log.failed} className="basis-full text-sm">
           <summary className="cursor-pointer">Show log</summary>

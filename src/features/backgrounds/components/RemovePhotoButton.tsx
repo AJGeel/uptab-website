@@ -2,10 +2,10 @@
 
 import { useTransition } from "react";
 
-import { removePhotoAction } from "@/features/backgrounds/api/actions";
+import { Button } from "@/components/ui/Button";
+import { removePhotoAction } from "@/features/backgrounds/api/remove-photo";
+import { useActionToast } from "@/features/backgrounds/hooks/use-action-toast";
 
-import { useActionToast } from "./Toaster";
-import { buttonClass } from "./ui";
 
 /**
  * Removes a photo straight away, after confirming. A plain button, so it
@@ -26,13 +26,13 @@ export const RemovePhotoButton = ({ id, file }: { id: string; file: string }) =>
   };
 
   return (
-    <button
+    <Button
       type="button"
       onClick={remove}
       disabled={isPending}
-      className={buttonClass("danger")}
+      variant="danger"
     >
       Remove
-    </button>
+    </Button>
   );
 };

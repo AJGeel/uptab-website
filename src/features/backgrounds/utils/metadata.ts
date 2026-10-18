@@ -1,17 +1,9 @@
 /**
- * Pure logic for scripts/build-backgrounds.ts: metadata validation, base URL
- * resolution, rendition widths and catalogue assembly. No file system or
- * image processing, so it can be tested directly.
+ * The schema and checks for assets/backgrounds/backgrounds.json, the
+ * hand-edited source the catalogue is built from. Pure, so it's tested
+ * directly.
  */
 import { z } from "zod";
-
-import type {
-  BackgroundImage,
-  Catalogue,
-  Theme,
-} from "@/features/backgrounds/types/catalogue";
-
-export const WIDTHS = [1920, 2560, 3840];
 
 /** IDs end up in URLs, file names and users' settings, so keep them simple. */
 export const SLUG_PATTERN = /^[a-z0-9]+(-[a-z0-9]+)*$/;
@@ -153,76 +145,3 @@ export const parseMetadata = (
 
   return metadata;
 };
-
-type Env = Record<string, string | undefined>;
-
-/**
- * Explicit env var first. Otherwise Vercel's stable production URL in
- * production and the deployment's own URL in previews, since a preview's
- * new hashes don't exist on the production domain.
- */
-export const getBaseUrl = (env: Env = process.env) => {
-  const {
-    NEXT_PUBLIC_SITE_URL,
-    VERCEL_ENV,
-    VERCEL_PROJECT_PRODUCTION_URL,
-    VERCEL_URL,
-  } = env;
-
-  if (NEXT_PUBLIC_SITE_URL) {
-    if (!URL.canParse(NEXT_PUBLIC_SITE_URL)) {
-      throw new Error(`NEXT_PUBLIC_SITE_URL is not a URL: ${NEXT_PUBLIC_SITE_URL}`);
-    }
-
-    const { protocol, origin } = new URL(NEXT_PUBLIC_SITE_URL);
-
-    if (protocol !== "https:" && protocol !== "http:") {
-      throw new Error(`NEXT_PUBLIC_SITE_URL must use http(s): ${NEXT_PUBLIC_SITE_URL}`);
-    }
-
-    return origin;
-  }
-
-  if (VERCEL_ENV === "production") {
-    if (!VERCEL_PROJECT_PRODUCTION_URL) {
-      // The deployment URL changes every deploy, so never publish it in production
-      throw new Error(
-        "Production build without VERCEL_PROJECT_PRODUCTION_URL. Set NEXT_PUBLIC_SITE_URL instead."
-      );
-    }
-
-    return `https://${VERCEL_PROJECT_PRODUCTION_URL}`;
-  }
-
-  if (VERCEL_URL) {
-    return `https://${VERCEL_URL}`;
-  }
-
-  if (VERCEL_ENV) {
-    throw new Error("Running on Vercel, but no base URL could be determined.");
-  }
-
-  return "http://localhost:3000";
-};
-
-/** Never upscale, and always produce at least one rendition. */
-export const pickWidths = (sourceWidth: number) => {
-  const widths = WIDTHS.filter((width) => width <= sourceWidth);
-
-  return widths.length > 0 ? widths : [sourceWidth];
-};
-
-export const toHexColor = ({ r, g, b }: { r: number; g: number; b: number }) =>
-  `#${[r, g, b].map((value) => value.toString(16).padStart(2, "0")).join("")}`;
-
-export const buildCatalogue = (
-  themes: Theme[],
-  images: BackgroundImage[],
-  generatedAt = new Date()
-): Catalogue => ({
-  version: 1,
-  generatedAt: generatedAt.toISOString(),
-  // Leave out empty themes, so the extension never offers one
-  themes: themes.filter(({ id }) => images.some((image) => image.theme === id)),
-  images,
-});

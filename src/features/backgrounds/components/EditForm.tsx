@@ -9,11 +9,10 @@ import {
   useTransition,
 } from "react";
 
+import { Button } from "@/components/ui/Button";
+import { useActionToast } from "@/features/backgrounds/hooks/use-action-toast";
 import type { ActionState } from "@/features/backgrounds/types/action-state";
-import { cn } from "@/utils/cn";
 
-import { useActionToast } from "./Toaster";
-import { buttonClass } from "./ui";
 
 type Field = HTMLInputElement | HTMLSelectElement;
 
@@ -143,21 +142,21 @@ export const EditForm = ({
             ? `${changes} unsaved ${changes === 1 ? "change" : "changes"}`
             : "No unsaved changes"}
         </span>
-        <button
+        <Button
           type="button"
           onClick={discard}
           disabled={!hasChanges || isPending}
-          className={cn(buttonClass("ghost"), "text-white hover:bg-white/10")}
+          variant="ghost" className="text-white hover:bg-white/10"
         >
           Discard
-        </button>
-        <button
+        </Button>
+        <Button
           type="submit"
           disabled={!hasChanges || isPending}
-          className={buttonClass("primary")}
+          variant="primary"
         >
           {isPending ? "Saving…" : "Save"}
-        </button>
+        </Button>
       </div>
     </form>
   );

@@ -4,7 +4,7 @@ import { Select } from "@base-ui/react/select";
 import Image from "next/image";
 import { useState } from "react";
 
-import type { ThemeSummary } from "@/features/backgrounds/api/admin-data";
+import type { ThemeSummary } from "@/features/backgrounds/utils/theme-summary";
 
 import { NewThemeDialog } from "./NewThemeDialog";
 

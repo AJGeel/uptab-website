@@ -67,6 +67,29 @@ export default defineConfig([
       // React rules
       "react/react-in-jsx-scope": "off",
       // Import rules
+      /* One direction, as in bulletproof-react: shared code -> features -> routes */
+      "import/no-restricted-paths": [
+        "error",
+        {
+          zones: [
+            {
+              target: ["./src/components", "./src/hooks", "./src/utils"],
+              from: ["./src/features", "./src/app"],
+              message: "Shared code can't import from features or routes.",
+            },
+            {
+              target: "./src/features",
+              from: "./src/app",
+              message: "Features can't import from routes; routes compose features.",
+            },
+            {
+              target: "./src",
+              from: "./scripts",
+              message: "src/ can't import from scripts/; scripts import from src/.",
+            },
+          ],
+        },
+      ],
       "import/order": [
         "warn",
         {
