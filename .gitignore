@@ -38,3 +38,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Left behind only if a metadata write is interrupted
+/assets/backgrounds/backgrounds.json.temp

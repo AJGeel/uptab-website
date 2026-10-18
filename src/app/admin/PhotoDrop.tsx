@@ -25,7 +25,7 @@ export const PhotoDrop = ({
 
   return (
     <div
-      className={`relative flex w-full items-center justify-center rounded-lg border-2 border-dashed border-slate-300 bg-slate-50 duration-150 hover:border-sky-500 has-focus-visible:border-sky-500 ${compact ? "py-3" : "aspect-video"}`}
+      className={`relative flex w-full items-center justify-center rounded-lg border-2 border-dashed border-slate-300 bg-slate-50 duration-150 hover:border-sky-500 has-focus-visible:border-sky-500 ${compact ? "py-3" : "h-40"}`}
     >
       {compact ? (
         <span className="flex items-center gap-2 text-sm font-medium text-slate-600">

@@ -3,7 +3,7 @@
  * local photo manager. Paths are based on the working directory, which is
  * the project root for both `bun run` and `next dev`.
  */
-import { readdir, readFile, writeFile } from "node:fs/promises";
+import { readdir, readFile, rename, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import type { SourceMetadata } from "./backgrounds";
@@ -24,9 +24,27 @@ export const listSourceFiles = async () => {
 
 export const readMetadataJson = () => readFile(METADATA_FILE, "utf8");
 
+/**
+ * Writes to "<file>.temp" first, then renames it over the file. A rename
+ * replaces the file in one step, so a failed or interrupted write never
+ * leaves it half-written.
+ */
+export const writeFileAtomically = async (file: string, content: string) => {
+  const temp = `${file}.temp`;
+
+  try {
+    await writeFile(temp, content);
+    await rename(temp, file);
+  } catch (error) {
+    // Clean up, but report the original error rather than a cleanup one
+    await rm(temp, { force: true }).catch(() => undefined);
+    throw error;
+  }
+};
+
 /** Same formatting as the hand-written file, so diffs stay small. */
 export const writeMetadata = (metadata: SourceMetadata) =>
-  writeFile(METADATA_FILE, `${JSON.stringify(metadata, null, 2)}\n`);
+  writeFileAtomically(METADATA_FILE, `${JSON.stringify(metadata, null, 2)}\n`);
 
 /**
  * Resolves a path relative to SOURCE_DIR, refusing anything that would end
