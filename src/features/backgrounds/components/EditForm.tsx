@@ -9,10 +9,10 @@ import {
   useTransition,
 } from "react";
 
+import type { ActionState } from "@/features/backgrounds/types/action-state";
 import { cn } from "@/utils/cn";
 
 import { useActionToast } from "./Toaster";
-import type { ActionState } from "./types";
 import { buttonClass } from "./ui";
 
 type Field = HTMLInputElement | HTMLSelectElement;

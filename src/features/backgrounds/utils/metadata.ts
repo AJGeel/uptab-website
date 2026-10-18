@@ -9,7 +9,7 @@ import type {
   BackgroundImage,
   Catalogue,
   Theme,
-} from "../src/services/background/types";
+} from "@/features/backgrounds/types/catalogue";
 
 export const WIDTHS = [1920, 2560, 3840];
 

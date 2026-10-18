@@ -1,5 +1,6 @@
+import type { ThemeSummary } from "@/features/backgrounds/api/admin-data";
+
 import { BatchUpload } from "./BatchUpload";
-import type { ThemeSummary } from "./data";
 import { cardClass } from "./ui";
 
 /**

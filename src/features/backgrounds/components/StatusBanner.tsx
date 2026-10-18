@@ -1,6 +1,7 @@
 import Link from "next/link";
 
-import type { CatalogueStatus } from "./data";
+import type { CatalogueStatus } from "@/features/backgrounds/api/admin-data";
+
 import { RebuildButton } from "./RebuildButton";
 
 const STYLES = {

@@ -8,16 +8,8 @@ import { promisify, stripVTControlCharacters } from "node:util";
 import { revalidatePath } from "next/cache";
 import sharp from "sharp";
 
-import { describeSave } from "./describeSave";
-import { isLocalRequest } from "./isLocalRequest";
-import type { ActionState } from "./types";
-import {
-  listSourceFiles,
-  readMetadataJson,
-  resolveSourcePath,
-  writeMetadata,
-} from "../../../scripts/assets";
-import { readMetadata, type SourceMetadata } from "../../../scripts/backgrounds";
+import type { ActionState } from "@/features/backgrounds/types/action-state";
+import { describeSave } from "@/features/backgrounds/utils/describe-save";
 import {
   addPhoto,
   assertValidChange,
@@ -28,7 +20,17 @@ import {
   saveEdits,
   type ThemeEdits,
   toSlug,
-} from "../../../scripts/edits";
+} from "@/features/backgrounds/utils/edits";
+import { readMetadata, type SourceMetadata } from "@/features/backgrounds/utils/metadata";
+
+import { isLocalRequest } from "./is-local-request";
+import {
+  listSourceFiles,
+  readMetadataJson,
+  resolveSourcePath,
+  writeMetadata,
+} from "./source-files";
+
 
 const execFileAsync = promisify(execFile);
 

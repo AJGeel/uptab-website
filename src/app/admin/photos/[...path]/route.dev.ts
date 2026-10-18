@@ -2,8 +2,8 @@ import { readFile } from "node:fs/promises";
 
 import sharp from "sharp";
 
-import { resolveSourcePath } from "../../../../../scripts/assets";
-import { isLocalRequest } from "../../isLocalRequest";
+import { isLocalRequest } from "@/features/backgrounds/api/is-local-request";
+import { resolveSourcePath } from "@/features/backgrounds/api/source-files";
 
 const CONTENT_TYPES: Record<string, string> = {
   jpg: "image/jpeg",

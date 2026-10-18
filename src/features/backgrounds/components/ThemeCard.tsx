@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import type { ThemeSummary } from "./data";
+import type { ThemeSummary } from "@/features/backgrounds/api/admin-data";
+
 import { cardClass, ProgressBar } from "./ui";
 
 export const ThemeCard = ({ theme }: { theme: ThemeSummary }) => (

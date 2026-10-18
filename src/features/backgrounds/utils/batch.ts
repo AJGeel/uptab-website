@@ -1,5 +1,5 @@
-import { SLUG_HINT, SLUG_PATTERN } from "../../../scripts/backgrounds";
-import { toSlug } from "../../../scripts/edits";
+import { toSlug } from "./edits";
+import { SLUG_HINT, SLUG_PATTERN } from "./metadata";
 
 /**
  * An ID for a new photo from its file name, unique among `taken`:

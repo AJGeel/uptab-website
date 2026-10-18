@@ -1,4 +1,4 @@
-import type { SavedEdits, ThemeEdits } from "../../../scripts/edits";
+import type { SavedEdits, ThemeEdits } from "./edits";
 
 const plural = (count: number, noun: string) =>
   `${count} ${noun}${count === 1 ? "" : "s"}`;

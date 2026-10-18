@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { isPublished } from "../../../../../scripts/edits";
-import { saveThemeAction } from "../../actions";
-import { AddPhotoForm } from "../../AddPhotoForm";
-import { AdminShell } from "../../AdminShell";
-import { countPending, findPublicUrl, imagesOf, loadAdmin } from "../../data";
-import { EditForm } from "../../EditForm";
-import { PhotoRow } from "../../PhotoRow";
-import { cardClass, inputClass, ProgressBar } from "../../ui";
+import { saveThemeAction } from "@/features/backgrounds/api/actions";
+import { countPending, findPublicUrl, imagesOf, loadAdmin } from "@/features/backgrounds/api/admin-data";
+import { AddPhotoForm } from "@/features/backgrounds/components/AddPhotoForm";
+import { AdminShell } from "@/features/backgrounds/components/AdminShell";
+import { EditForm } from "@/features/backgrounds/components/EditForm";
+import { PhotoRow } from "@/features/backgrounds/components/PhotoRow";
+import { cardClass, inputClass, ProgressBar } from "@/features/backgrounds/components/ui";
+import { isPublished } from "@/features/backgrounds/utils/edits";
 
 const EDIT_FORM = "theme-edit";
 

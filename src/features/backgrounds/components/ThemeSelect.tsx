@@ -4,7 +4,8 @@ import { Select } from "@base-ui/react/select";
 import Image from "next/image";
 import { useState } from "react";
 
-import type { ThemeSummary } from "./data";
+import type { ThemeSummary } from "@/features/backgrounds/api/admin-data";
+
 import { NewThemeDialog } from "./NewThemeDialog";
 
 /** Not a valid slug, so it can never clash with a real theme ID. */

@@ -1,10 +1,12 @@
 import Image from "next/image";
 
-import { originalUrl, thumbnailUrl } from "./data";
+import { originalUrl, thumbnailUrl } from "@/features/backgrounds/api/admin-data";
+import { isPublished } from "@/features/backgrounds/utils/edits";
+import type { SourceEntry, SourceMetadata } from "@/features/backgrounds/utils/metadata";
+
 import { RemovePhotoButton } from "./RemovePhotoButton";
 import { Field, inputClass } from "./ui";
-import type { SourceEntry, SourceMetadata } from "../../../scripts/backgrounds";
-import { isPublished } from "../../../scripts/edits";
+
 
 const badgeClass = "rounded-full px-2 py-0.5 text-xs font-medium";
 const linkClass = "text-sky-500 hover:text-black";

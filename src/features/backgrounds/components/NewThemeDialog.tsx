@@ -2,10 +2,12 @@
 
 import { Dialog } from "@base-ui/react/dialog";
 
+import { createThemeAction } from "@/features/backgrounds/api/actions";
+import { toSlug } from "@/features/backgrounds/utils/edits";
+
 import { ActionForm } from "./ActionForm";
-import { createThemeAction } from "./actions";
 import { buttonClass, Field, inputClass } from "./ui";
-import { toSlug } from "../../../scripts/edits";
+
 
 /**
  * Creates a theme in a modal, opened from the theme picker. Reports the new

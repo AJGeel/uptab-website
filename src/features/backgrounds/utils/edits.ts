@@ -7,7 +7,7 @@ import {
   listProblems,
   type SourceEntry,
   type SourceMetadata,
-} from "./backgrounds";
+} from "./metadata";
 
 export type FileChange =
   | { kind: "add"; to: string }

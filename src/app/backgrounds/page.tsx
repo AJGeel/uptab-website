@@ -2,7 +2,8 @@ import { EyeIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";
 
-import { type BackgroundImage, getCatalogue } from "@/services/background";
+import { getCatalogue } from "@/features/backgrounds/api/get-catalogue";
+import type { BackgroundImage } from "@/features/backgrounds/types/catalogue";
 import { targetBlank } from "@/utils/targetBlank";
 
 const Hero = () => {

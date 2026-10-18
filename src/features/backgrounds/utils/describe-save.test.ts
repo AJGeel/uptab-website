@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import { describeSave } from "./describeSave";
-import type { SavedEdits, ThemeEdits } from "../../../scripts/edits";
+import { describeSave } from "./describe-save";
+import type { SavedEdits, ThemeEdits } from "./edits";
 
 const photo = (id: string) => ({
   originalId: id,

@@ -4,7 +4,7 @@ import path from "node:path";
 
 import { describe, expect, it } from "vitest";
 
-import { writeFileAtomically } from "./assets";
+import { writeFileAtomically } from "./source-files";
 
 const tempDir = () => mkdtemp(path.join(tmpdir(), "uptab-assets-"));
 

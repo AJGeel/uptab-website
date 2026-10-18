@@ -9,7 +9,8 @@ import path from "node:path";
 
 import sharp from "sharp";
 
-import { listSourceFiles, readMetadataJson, SOURCE_DIR } from "./assets";
+import { listSourceFiles, readMetadataJson, SOURCE_DIR } from "@/features/backgrounds/api/source-files";
+import type { BackgroundImage } from "@/features/backgrounds/types/catalogue";
 import {
   buildCatalogue,
   getBaseUrl,
@@ -18,9 +19,9 @@ import {
   type SourceEntry,
   toHexColor,
   WIDTHS,
-} from "./backgrounds";
-import { header, p, pc, runCli, step } from "./ui";
-import type { BackgroundImage } from "../src/services/background/types";
+} from "@/features/backgrounds/utils/metadata";
+
+import { header, p, pc, runCli, step } from "./cli";
 
 const OUTPUT_PATH = "backgrounds/v1";
 const OUTPUT_DIR = path.join(process.cwd(), "public", OUTPUT_PATH);

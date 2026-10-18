@@ -1,13 +1,14 @@
 import { describe, expect, it } from "vitest";
 
+import type { BackgroundImage } from "@/features/backgrounds/types/catalogue";
+
 import {
   buildCatalogue,
   getBaseUrl,
   parseMetadata,
   pickWidths,
   toHexColor,
-} from "./backgrounds";
-import type { BackgroundImage } from "../src/services/background/types";
+} from "./metadata";
 
 const themes = [
   { id: "holland", name: "Holland" },

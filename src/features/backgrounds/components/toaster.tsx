@@ -3,7 +3,7 @@
 import { Toast } from "@base-ui/react/toast";
 import { type ReactNode, useEffect, useState } from "react";
 
-import type { ActionState } from "./types";
+import type { ActionState } from "@/features/backgrounds/types/action-state";
 
 const Spinner = () => (
   <span

@@ -3,9 +3,10 @@
 import { Toast } from "@base-ui/react/toast";
 import { useState, useTransition } from "react";
 
-import { rebuildAction } from "./actions";
+import { rebuildAction } from "@/features/backgrounds/api/actions";
+import type { ActionState } from "@/features/backgrounds/types/action-state";
+
 import { ElapsedTime } from "./Toaster";
-import type { ActionState } from "./types";
 import { buttonClass } from "./ui";
 
 /**

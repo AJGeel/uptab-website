@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 
-import type { Catalogue } from "./types";
+import type { Catalogue } from "@/features/backgrounds/types/catalogue";
 
 export const getCatalogue = async (): Promise<Catalogue> => {
   const file = path.join(process.cwd(), "public/backgrounds/v1/catalogue.json");

@@ -2,8 +2,9 @@
 
 import { type FormEvent, type ReactNode, useTransition } from "react";
 
+import type { ActionState } from "@/features/backgrounds/types/action-state";
+
 import { useActionToast } from "./Toaster";
-import type { ActionState } from "./types";
 
 type ActionFormProps = {
   action: (form: FormData) => Promise<ActionState>;

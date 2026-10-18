@@ -4,9 +4,10 @@ import { Toast } from "@base-ui/react/toast";
 import { XMarkIcon } from "@heroicons/react/16/solid";
 import { type FormEvent, useState } from "react";
 
-import { addPhotoAction } from "./actions";
-import { idProblem, suggestId } from "./batch";
-import type { ThemeSummary } from "./data";
+import { addPhotoAction } from "@/features/backgrounds/api/actions";
+import type { ThemeSummary } from "@/features/backgrounds/api/admin-data";
+import { idProblem, suggestId } from "@/features/backgrounds/utils/batch";
+
 import { PhotoDrop } from "./PhotoDrop";
 import { ThemeSelect } from "./ThemeSelect";
 import { buttonClass, Field, inputClass } from "./ui";

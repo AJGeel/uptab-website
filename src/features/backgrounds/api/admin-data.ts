@@ -4,16 +4,17 @@ import path from "node:path";
 import { cache } from "react";
 
 import {
-  listSourceFiles,
-  METADATA_FILE,
-  readMetadataJson,
-} from "../../../scripts/assets";
-import {
   listProblems,
   readMetadata,
   type SourceEntry,
   type SourceMetadata,
-} from "../../../scripts/backgrounds";
+} from "@/features/backgrounds/utils/metadata";
+
+import {
+  listSourceFiles,
+  METADATA_FILE,
+  readMetadataJson,
+} from "./source-files";
 
 const CATALOGUE_FILE = path.join(process.cwd(), "public/backgrounds/v1/catalogue.json");
 

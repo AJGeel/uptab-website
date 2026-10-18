@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
 
-import type { SourceMetadata } from "./backgrounds";
 import {
   addPhoto,
   assertValidChange,
@@ -12,6 +11,7 @@ import {
   savePhoto,
   toSlug,
 } from "./edits";
+import type { SourceMetadata } from "./metadata";
 
 const metadata: SourceMetadata = {
   themes: [

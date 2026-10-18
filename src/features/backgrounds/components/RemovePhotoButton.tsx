@@ -2,7 +2,8 @@
 
 import { useTransition } from "react";
 
-import { removePhotoAction } from "./actions";
+import { removePhotoAction } from "@/features/backgrounds/api/actions";
+
 import { useActionToast } from "./Toaster";
 import { buttonClass } from "./ui";
 

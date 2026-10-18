@@ -1,7 +1,7 @@
-import { AddPhotoForm } from "./AddPhotoForm";
-import { AdminShell } from "./AdminShell";
-import { loadAdmin, summarizeTheme } from "./data";
-import { ThemeCard } from "./ThemeCards";
+import { loadAdmin, summarizeTheme } from "@/features/backgrounds/api/admin-data";
+import { AddPhotoForm } from "@/features/backgrounds/components/AddPhotoForm";
+import { AdminShell } from "@/features/backgrounds/components/AdminShell";
+import { ThemeCard } from "@/features/backgrounds/components/ThemeCard";
 
 const AdminPage = async () => {
   const { metadata } = await loadAdmin();

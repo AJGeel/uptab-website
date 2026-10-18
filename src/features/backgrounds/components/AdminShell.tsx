@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 
-import { loadAdmin } from "./data";
-import { isLocalRequest } from "./isLocalRequest";
+import { loadAdmin } from "@/features/backgrounds/api/admin-data";
+import { isLocalRequest } from "@/features/backgrounds/api/is-local-request";
+
 import { StatusBanner } from "./StatusBanner";
 import { Toaster } from "./Toaster";
 

@@ -6,7 +6,7 @@
 import { readdir, readFile, rename, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-import type { SourceMetadata } from "./backgrounds";
+import type { SourceMetadata } from "@/features/backgrounds/utils/metadata";
 
 export const SOURCE_DIR = path.join(process.cwd(), "assets/backgrounds");
 export const METADATA_FILE = path.join(SOURCE_DIR, "backgrounds.json");
