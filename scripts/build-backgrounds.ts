@@ -3,12 +3,12 @@
  * public/backgrounds/v1/ from the photos and metadata in assets/backgrounds/.
  * Runs as `prebuild`, or on its own with `bun run backgrounds`.
  */
-import { createHash } from "node:crypto";
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import sharp from "sharp";
 
+import { createRenditionCache, sha256 } from "@/features/backgrounds/api/rendition-cache";
 import {
   CATALOGUE_FILE,
   listSourceFiles,
@@ -31,20 +31,38 @@ import { plural } from "@/utils/plural";
 import { header, p, pc, runCli, step } from "./cli";
 
 
+const ENCODING = { quality: 80, effort: 6 };
+const CACHE_VERSION = `sharp ${sharp.versions.sharp}, vips ${sharp.versions.vips}, webp ${JSON.stringify(ENCODING)}`;
+
+type Cache = Awaited<ReturnType<typeof createRenditionCache>>;
+
 type BuildResult = {
   image: BackgroundImage;
-  sizes: { width: number; bytes: number }[];
+  sizes: { width: number; bytes: number; cached: boolean }[];
 };
 
-const buildImage = async (
-  entry: SourceEntry,
-  baseUrl: string
-): Promise<BuildResult> => {
-  const input = await readFile(path.join(SOURCE_DIR, entry.file));
+type SourceInfo = { width: number; height: number; dominant: { r: number; g: number; b: number } };
+
+const readSourceInfo = async (input: Buffer): Promise<SourceInfo> => {
   const source = sharp(input);
   // Dimensions after applying EXIF orientation, matching the renditions
   const { width, height } = (await source.metadata()).autoOrient;
   const { dominant } = await source.stats();
+
+  return { width, height, dominant };
+};
+
+const buildImage = async (
+  entry: SourceEntry,
+  baseUrl: string,
+  cache: Cache
+): Promise<BuildResult> => {
+  const input = await readFile(path.join(SOURCE_DIR, entry.file));
+  const sourceHash = sha256(input);
+  const info = await cache.remember(["info", sourceHash], async () =>
+    Buffer.from(JSON.stringify(await readSourceInfo(input)))
+  );
+  const { width, height, dominant }: SourceInfo = JSON.parse(info.data.toString());
 
   const widths = pickWidths(width);
   const themeDir = path.join(OUTPUT_DIR, entry.theme);
@@ -52,13 +70,15 @@ const buildImage = async (
 
   const sources = await Promise.all(
     widths.map(async (renditionWidth) => {
-      const output = await sharp(input)
-        .autoOrient()
-        .resize({ width: renditionWidth, withoutEnlargement: true })
-        .webp({ quality: 80, effort: 6 })
-        .toBuffer();
+      const { data: output, hit } = await cache.remember(["webp", sourceHash, renditionWidth], () =>
+        sharp(input)
+          .autoOrient()
+          .resize({ width: renditionWidth, withoutEnlargement: true })
+          .webp(ENCODING)
+          .toBuffer()
+      );
 
-      const hash = createHash("sha256").update(output).digest("hex").slice(0, 6);
+      const hash = sha256(output).slice(0, 6);
       const fileName = `${entry.id}-${renditionWidth}-${hash}.webp`;
 
       await writeFile(path.join(themeDir, fileName), output);
@@ -67,6 +87,7 @@ const buildImage = async (
         width: renditionWidth,
         url: `${baseUrl}/${CATALOGUE_DIR}/${entry.theme}/${fileName}`,
         bytes: output.length,
+        cached: hit,
       };
     })
   );
@@ -81,7 +102,7 @@ const buildImage = async (
       aspectRatio: Math.round((width / height) * 1000) / 1000,
       sources: sources.map(({ width, url }) => ({ width, url })),
     },
-    sizes: sources.map(({ width, bytes }) => ({ width, bytes })),
+    sizes: sources.map(({ width, bytes, cached }) => ({ width, bytes, cached })),
   };
 };
 
@@ -131,17 +152,20 @@ const main = async () => {
       // Start clean, so renditions from earlier runs don't linger
       await rm(OUTPUT_DIR, { recursive: true, force: true });
 
+      const cache = await createRenditionCache(CACHE_VERSION);
       const built: BuildResult[] = [];
 
       // One image at a time: sharp already uses every core per image
       for (const [index, entry] of published.entries()) {
         update(`Encoding ${entry.id} (${index + 1}/${published.length})`);
         try {
-          built.push(await buildImage(entry, baseUrl));
+          built.push(await buildImage(entry, baseUrl, cache));
         } catch (error) {
           throw new Error(`Couldn't encode ${entry.id} (${entry.file}): ${error}`);
         }
       }
+
+      await cache.prune();
 
       return built;
     },
@@ -149,7 +173,9 @@ const main = async () => {
       const files = built.flatMap(({ sizes }) => sizes);
       const totalMb = files.reduce((sum, { bytes }) => sum + bytes, 0) / 1024 ** 2;
 
-      return `Encoded ${built.length} backgrounds · ${files.length} files, ${totalMb.toFixed(1)} MB in ${formatSeconds(startedAt)}`;
+      const encoded = files.filter(({ cached }) => !cached).length;
+
+      return `Built ${built.length} backgrounds · ${files.length} files, ${totalMb.toFixed(1)} MB in ${formatSeconds(startedAt)} · ${encoded} encoded, ${files.length - encoded} from cache`;
     }
   );
 
