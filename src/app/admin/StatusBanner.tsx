@@ -1,9 +1,7 @@
 import Link from "next/link";
 
-import { ActionForm } from "./ActionForm";
-import { rebuildAction } from "./actions";
 import type { CatalogueStatus } from "./data";
-import { buttonClass } from "./ui";
+import { RebuildButton } from "./RebuildButton";
 
 const STYLES = {
   error: "bg-red-50 text-red-800 crispy-outline",
@@ -61,9 +59,7 @@ export const StatusBanner = ({
             catalogue.json
           </Link>
         </p>
-        <ActionForm action={rebuildAction} className="contents">
-          <button className={`${buttonClass} text-slate-900`}>Rebuild catalogue</button>
-        </ActionForm>
+        <RebuildButton />
       </div>
       {problems.length > 0 && (
         <ul className="list-inside list-disc text-sm">

@@ -8,6 +8,7 @@ import { promisify, stripVTControlCharacters } from "node:util";
 import { revalidatePath } from "next/cache";
 import sharp from "sharp";
 
+import { describeSave } from "./describeSave";
 import { isLocalRequest } from "./isLocalRequest";
 import type { ActionState } from "./types";
 import {
@@ -46,18 +47,22 @@ const NOT_LOCAL: ActionState = {
 /** Refreshes every admin page, including their status banners. */
 const refresh = () => revalidatePath("/admin", "layout");
 
+type Outcome = string | { message: string; details: string | null };
+
 /** Runs a task and reports its outcome, refreshing the admin on success. */
-const run = async (task: () => Promise<string>): Promise<ActionState> => {
+const run = async (task: () => Promise<Outcome>): Promise<ActionState> => {
   if (!(await isLocalRequest())) {
     return NOT_LOCAL;
   }
 
   try {
-    const message = await task();
+    const outcome = await task();
 
     refresh();
 
-    return { error: null, message };
+    return typeof outcome === "string"
+      ? { error: null, message: outcome }
+      : { error: null, ...outcome };
   } catch (error) {
     return {
       error: error instanceof Error ? error.message : String(error),
@@ -174,15 +179,12 @@ export const createThemeAction = async (form: FormData) =>
 export const saveThemeAction = async (form: FormData) =>
   await run(async () => {
     const state = await loadState();
-    const saved = saveEdits(state.metadata, readEdits(form));
+    const edits = readEdits(form);
+    const saved = saveEdits(state.metadata, edits);
 
     await commit(state, saved);
 
-    return [
-      "Saved",
-      ...saved.published.map((id) => `published ${id}`),
-      ...saved.unpublished.map((id) => `unpublished ${id}`),
-    ].join(" · ");
+    return describeSave(edits, saved);
   });
 
 export const addPhotoAction = async (form: FormData) =>

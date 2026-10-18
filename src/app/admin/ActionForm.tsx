@@ -1,6 +1,6 @@
 "use client";
 
-import { type FormEvent, type ReactNode, useState, useTransition } from "react";
+import { type FormEvent, type ReactNode, useTransition } from "react";
 
 import { useActionToast } from "./Toaster";
 import type { ActionState } from "./types";
@@ -23,7 +23,6 @@ export const ActionForm = ({
   className,
   children,
 }: ActionFormProps) => {
-  const [log, setLog] = useState<{ text: string; failed: boolean } | null>(null);
   const [isPending, startTransition] = useTransition();
   const notify = useActionToast();
 
@@ -38,9 +37,6 @@ export const ActionForm = ({
       const result = await action(data);
 
       notify(result);
-      startTransition(() =>
-        setLog(result.log ? { text: result.log, failed: Boolean(result.error) } : null)
-      );
 
       if (!result.error && resetOnSuccess) {
         form.reset();
@@ -53,14 +49,6 @@ export const ActionForm = ({
       <fieldset disabled={isPending} className="contents">
         {children}
       </fieldset>
-      {log && (
-        <details open={log.failed} className="basis-full text-sm">
-          <summary className="cursor-pointer">Show log</summary>
-          <pre className="mt-2 max-h-96 overflow-auto rounded-sm bg-slate-900 p-3 text-xs whitespace-pre-wrap text-slate-100">
-            {log.text}
-          </pre>
-        </details>
-      )}
     </form>
   );
 };
