@@ -19,7 +19,7 @@ const Hero = () => {
       {paragraphs.map((text, index) => (
         <p
           key={index}
-          className="my-1.5 text-pretty leading-relaxed text-black/90"
+          className="my-1.5 leading-relaxed text-pretty text-black/90"
         >
           {text}
         </p>
@@ -55,7 +55,7 @@ const Page = async () => {
               <Link
                 key={imageSrc}
                 href={imageSrc}
-                className="group flex size-full items-center justify-center overflow-hidden rounded-sm bg-black/10 duration-300 active:scale-90 sm:even:-mt-16"
+                className="group flex size-full items-center justify-center overflow-hidden rounded-xs bg-black/10 duration-300 active:scale-90 sm:even:-mt-16"
                 {...targetBlank}
               >
                 <EyeIcon className="absolute z-10 size-8 text-black opacity-0 duration-500 ease-in-out group-hover:scale-105 group-hover:opacity-100" />
@@ -64,7 +64,7 @@ const Page = async () => {
                   width={640}
                   height={360}
                   alt=""
-                  className="aspect-[16/9] size-full duration-500 ease-in-out group-hover:scale-105 group-hover:opacity-60"
+                  className="aspect-video size-full duration-500 ease-in-out group-hover:scale-105 group-hover:opacity-60"
                 />
               </Link>
             ))}

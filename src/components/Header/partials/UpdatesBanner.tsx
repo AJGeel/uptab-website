@@ -14,8 +14,8 @@ type UpdatesBannerProps = {
 const UpdatesBanner = ({ isVisible, onClick, url }: UpdatesBannerProps) => (
   <div
     className={cn(
-      "flex items-center justify-between gap-x-6 bg-slate-800 px-6 sm:pr-3.5 lg:pl-8 duration-500 overflow-hidden",
-      isVisible ? "h-11" : "h-0 pointer-events-none"
+      "flex items-center justify-between gap-x-6 overflow-hidden bg-slate-800 px-6 duration-500 sm:pr-3.5 lg:pl-8",
+      isVisible ? "h-11" : "pointer-events-none h-0"
     )}
     onClick={onClick}
   >
@@ -29,7 +29,7 @@ const UpdatesBanner = ({ isVisible, onClick, url }: UpdatesBannerProps) => (
     </a>
     <button
       type="button"
-      className="-m-3 flex-none bg-slate-800 p-3 duration-150 hover:brightness-150 focus-visible:outline-offset-[-4px] active:scale-90 active:opacity-75"
+      className="-m-3 flex-none bg-slate-800 p-3 duration-150 hover:brightness-150 focus-visible:-outline-offset-4 active:scale-90 active:opacity-75"
     >
       <span className="sr-only">Dismiss</span>
       <XMarkIcon className="size-5 text-white" aria-hidden="true" />

@@ -13,7 +13,7 @@ export const GET = async (request: NextRequest) => {
   try {
     const backgrounds = await getAllBackgrounds();
     return NextResponse.json(backgrounds);
-  } catch (error) {
+  } catch {
     return new NextResponse("Internal server error", { status: 500 });
   }
 };

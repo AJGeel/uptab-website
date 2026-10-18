@@ -13,7 +13,7 @@ type LinkProps = {
 export const Link = ({ label, href, className, iconName }: LinkProps) => (
   <a
     className={cn(
-      "flex items-center gap-1.5 duration-150 active:opacity-75 active:scale-90 text-white rounded-full px-4 py-2 hover:brightness-110",
+      "flex items-center gap-1.5 rounded-full px-4 py-2 text-white duration-150 hover:brightness-110 active:scale-90 active:opacity-75",
       iconName === "plus" ? "bg-sky-500" : "bg-slate-800 hover:brightness-150",
       className
     )}

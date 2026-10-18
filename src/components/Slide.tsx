@@ -15,7 +15,7 @@ export type SlideProps = {
 const Slide = ({ title, text, imageUrl, alignment = "left" }: SlideProps) => (
   <div
     className={cn(
-      "flex flex-col md:h-96 items-center md:rounded-lg md:bg-white md:outline outline-1 outline-black/10 overflow-hidden md:shadow-lg",
+      "flex flex-col items-center overflow-hidden outline-black/10 md:h-96 md:rounded-lg md:bg-white md:shadow-lg md:outline-1",
       alignment === "left" ? "md:flex-row" : "md:flex-row-reverse",
       "-translate-y-8 md:translate-y-0"
     )}
@@ -34,7 +34,7 @@ const Slide = ({ title, text, imageUrl, alignment = "left" }: SlideProps) => (
         <h2 className="text-xl font-semibold md:text-2xl">{title}</h2>
         <SparklesIcon className="size-6 text-sky-500" />
       </div>
-      <p className="text-balance leading-relaxed text-slate-500 md:text-lg">
+      <p className="leading-relaxed text-balance text-slate-500 md:text-lg">
         {text}
       </p>
     </div>

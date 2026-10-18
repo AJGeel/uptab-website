@@ -1,9 +1,9 @@
 "use client";
 
-import { useWindowScroll } from "@uidotdev/usehooks";
 import { useState } from "react";
 
 import { externalUrls } from "@/config";
+import { useScrollY } from "@/hooks/useScrollY";
 import { useStoreAttributes } from "@/hooks/useStoreAttributes";
 import { useUpdatesBanner } from "@/hooks/useUpdatesBanner";
 
@@ -17,23 +17,23 @@ const Header = () => {
   const [isHovering, setIsHovering] = useState(false);
 
   const { url, label } = useStoreAttributes();
-  const [{ y }] = useWindowScroll();
+  const y = useScrollY();
 
-  const isHeaderVisible = !!y && y > 500;
+  const isHeaderVisible = y > 500;
 
   return (
     <div
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
       className={cn(
-        "w-full fixed top-0 z-10 duration-500",
+        "fixed top-0 z-10 w-full duration-500",
         isHeaderVisible || isHovering
           ? "opacity-100"
-          : "opacity-0 -translate-y-4",
+          : "-translate-y-4 opacity-0",
       )}
     >
       <UpdatesBanner isVisible={isVisible} onClick={onClickBanner} url={url} />
-      <div className="flex justify-between border-b bg-white/90 px-5 py-3 shadow-sm backdrop-blur-sm xl:border-transparent xl:bg-transparent xl:shadow-none xl:backdrop-blur-none">
+      <div className="flex justify-between border-b bg-white/90 px-5 py-3 shadow-xs backdrop-blur-xs xl:border-transparent xl:bg-transparent xl:shadow-none xl:backdrop-blur-none">
         <HeaderLogo rotation={y} />
         <div className="flex items-center gap-3">
           <Link href={url} label={label} iconName="plus" />

@@ -15,7 +15,7 @@ const Home = () => {
       <div
         className={cn(
           containerStyle,
-          "my-24 max-w-5xl space-y-16 md:space-y-10 bg-white border-t md:border-t-0 border-black/10 md:bg-transparent py-10 pt-0 md:py-0"
+          "my-24 max-w-5xl space-y-16 border-t border-black/10 bg-white py-10 pt-0 md:space-y-10 md:border-t-0 md:bg-transparent md:py-0"
         )}
       >
         {slideConfig.map((item, index) => (
@@ -27,7 +27,7 @@ const Home = () => {
         ))}
       </div>
       <Faq className={cn(containerStyle, "mt-12 md:mt-32")} />
-      <CTABanner className={cn(containerStyle, "max-w-5xl mt-32 mb-20")} />
+      <CTABanner className={cn(containerStyle, "mt-32 mb-20 max-w-5xl")} />
     </main>
   );
 };

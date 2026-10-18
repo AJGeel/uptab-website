@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
 import { externalUrls } from "@/config";
 
@@ -7,16 +7,17 @@ type StoreAttributes = {
   label: string;
 };
 
+// The user agent never changes, so there is nothing to subscribe to
+const subscribe = () => () => {};
+const getIsUsingFirefox = () => navigator.userAgent.indexOf("Firefox") !== -1;
+const getServerIsUsingFirefox = () => false;
+
 export const useStoreAttributes = (): StoreAttributes => {
-  const [isUsingFirefox, setIsUsingFirefox] = useState(false);
-
-  useEffect(() => {
-    if (!navigator) {
-      return;
-    }
-
-    setIsUsingFirefox(navigator.userAgent.indexOf("Firefox") !== -1);
-  }, []);
+  const isUsingFirefox = useSyncExternalStore(
+    subscribe,
+    getIsUsingFirefox,
+    getServerIsUsingFirefox
+  );
 
   return {
     url: isUsingFirefox ? externalUrls.firefox : externalUrls.chrome,
