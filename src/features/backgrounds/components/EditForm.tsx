@@ -6,8 +6,10 @@ import {
   useEffect,
   useRef,
   useState,
+  useSyncExternalStore,
   useTransition,
 } from "react";
+import { createPortal } from "react-dom";
 
 import { Button } from "@/components/ui/Button";
 import { useActionToast } from "@/features/backgrounds/hooks/use-action-toast";
@@ -21,6 +23,8 @@ type Field = HTMLInputElement | HTMLSelectElement;
  * or "theme:name". A save sends every field of each group that changed, so
  * rows that weren't touched are never written.
  */
+const noSubscribe = () => () => {};
+
 const groupOf = (name: string) => name.slice(0, name.lastIndexOf(":"));
 
 const isChanged = (field: Field) =>
@@ -132,10 +136,17 @@ export const EditForm = ({
   };
 
   const hasChanges = changes > 0;
+  const isClient = useSyncExternalStore(
+    noSubscribe,
+    () => true,
+    () => false
+  );
 
   return (
     <form id={id} ref={formRef} onSubmit={onSubmit}>
       {children}
+      {isClient &&
+        createPortal(
       <div className="fixed inset-x-0 bottom-6 z-40 mx-auto flex w-fit items-center gap-2 rounded-full bg-slate-900 py-1.5 pr-1.5 pl-5 text-sm text-white shadow-xl">
         <span className={hasChanges ? "" : "text-slate-400"}>
           {hasChanges
@@ -152,12 +163,16 @@ export const EditForm = ({
         </Button>
         <Button
           type="submit"
+          form={id}
           disabled={!hasChanges || isPending}
           variant="primary"
         >
           {isPending ? "Saving…" : "Save"}
         </Button>
-      </div>
+      </div>,
+          // On <body>, so an ancestor's filter or transform can't move this fixed bar
+          document.body
+        )}
     </form>
   );
 };

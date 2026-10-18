@@ -59,9 +59,9 @@ export const StatusBanner = ({
             Gallery
           </Link>{" "}
           ·{" "}
-          <Link href={CATALOGUE_PATH} className={linkClass}>
+          <a href={CATALOGUE_PATH} className={linkClass}>
             catalogue.json
-          </Link>
+          </a>
         </p>
         <RebuildButton />
       </div>

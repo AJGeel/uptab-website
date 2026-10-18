@@ -5,8 +5,7 @@ import { ReactNode } from "react";
 
 import "./globals.css";
 import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import { cn } from "@/utils/cn";
+import SiteHeader from "@/components/Header/SiteHeader";
 
 const dmSans = DM_Sans({ subsets: ["latin"] });
 
@@ -31,10 +30,13 @@ const RootLayout = ({ children }: Props) => (
     lang="en"
     className="min-h-screen bg-slate-200 bg-linear-to-b from-white via-slate-200 to-slate-200"
   >
-    <body className={cn(dmSans.className, "animate-graciousEntry")}>
-      <Header />
-      {children}
-      <Footer />
+    <body className={dmSans.className}>
+      {/* Outside graciousEntry: its blur would pin the fixed header to the page instead of the window */}
+      <SiteHeader fadeToTopOn={["/backgrounds"]} />
+      <div className="animate-graciousEntry">
+        {children}
+        <Footer />
+      </div>
     </body>
     <Analytics />
   </html>

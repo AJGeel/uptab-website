@@ -12,7 +12,16 @@ import { Link } from "./partials/Link";
 import UpdatesBanner from "./partials/UpdatesBanner";
 import { cn } from "../../utils/cn";
 
-const Header = () => {
+type HeaderProps = {
+  /**
+   * Fades from the page's top colour to transparent behind the header, for
+   * contrast over busy content. Only on wide screens, where the header is
+   * otherwise transparent.
+   */
+  fadeToTop?: boolean;
+};
+
+const Header = ({ fadeToTop = false }: HeaderProps) => {
   const { isVisible, onClickBanner } = useUpdatesBanner();
   const [isHovering, setIsHovering] = useState(false);
 
@@ -33,7 +42,14 @@ const Header = () => {
       )}
     >
       <UpdatesBanner isVisible={isVisible} onClick={onClickBanner} url={url} />
-      <div className="flex justify-between border-b bg-white/90 px-5 py-3 shadow-xs backdrop-blur-xs xl:border-transparent xl:bg-transparent xl:shadow-none xl:backdrop-blur-none">
+      <div
+        className={cn(
+          "flex justify-between border-b bg-white/90 px-5 py-3 shadow-xs backdrop-blur-xs xl:border-transparent xl:bg-transparent xl:shadow-none xl:backdrop-blur-none",
+          fadeToTop &&
+            // Sized to the border box, so the gradient doesn't repeat as a line in the bottom border
+            "xl:bg-linear-to-b xl:from-white xl:via-white/80 xl:to-transparent xl:bg-origin-border xl:pb-8"
+        )}
+      >
         <HeaderLogo rotation={y} />
         <div className="flex items-center gap-3">
           <Link href={url} label={label} iconName="plus" />

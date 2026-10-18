@@ -11,6 +11,15 @@
 
   --animate-graciousEntry: graciousEntry 1.5s ease-in-out;
 
+  /* A seamless loop over two copies of a row; the duration is set per row */
+  --animate-marquee: marquee 60s linear infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
   @keyframes graciousEntry {
     0% {
       opacity: 0;

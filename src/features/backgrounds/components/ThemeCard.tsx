@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 
 import { cardClass } from "@/components/ui/card";
 import { ProgressBar } from "@/features/backgrounds/components/ProgressBar";
@@ -8,7 +7,7 @@ import { cn } from "@/utils/cn";
 
 
 export const ThemeCard = ({ theme }: { theme: ThemeSummary }) => (
-  <Link
+  <a
     href={`/admin/themes/${theme.id}`}
     className={cn(cardClass, "group flex flex-col gap-3 duration-150 hover:shadow-md")}
   >
@@ -30,5 +29,5 @@ export const ThemeCard = ({ theme }: { theme: ThemeSummary }) => (
       <p className="text-xs text-slate-400">{theme.id}</p>
     </div>
     <ProgressBar published={theme.published} pending={theme.pending} />
-  </Link>
+  </a>
 );

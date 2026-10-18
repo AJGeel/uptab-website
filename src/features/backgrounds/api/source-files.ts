@@ -33,7 +33,7 @@ export const readMetadataJson = () => readFile(METADATA_FILE, "utf8");
  * replaces the file in one step, so a failed or interrupted write never
  * leaves it half-written.
  */
-export const writeFileAtomically = async (file: string, content: string) => {
+export const writeFileAtomically = async (file: string, content: string | Buffer) => {
   const temp = `${file}.temp`;
 
   try {
