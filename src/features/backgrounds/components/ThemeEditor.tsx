@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { cardClass } from "@/components/ui/card";
@@ -40,9 +39,9 @@ export const ThemeEditor = async ({ themeId }: { themeId: string }) => {
 
   return (
     <>
-      <Link href="/admin" className="-mb-6 text-sm text-sky-500 hover:text-black">
+      <a href="/admin" className="-mb-6 text-sm text-sky-500 hover:text-black">
         ← All themes
-      </Link>
+      </a>
 
       {/* Joins the edit form below through form=, so the upload can sit in between */}
       <div className="flex flex-col gap-3">

@@ -1,5 +1,6 @@
 "use client";
 
+import type { Route } from "next";
 import Link from "next/link";
 import { Fragment } from "react";
 
@@ -8,7 +9,7 @@ import { externalUrls } from "@/config";
 import HeaderLogo from "./Header/partials/HeaderLogo";
 
 const Footer = () => {
-  const urls = [
+  const urls: { href: Route; label: string }[] = [
     {
       href: "/changelog",
       label: "Changelog",
@@ -42,7 +43,7 @@ const Footer = () => {
           by Arthur Geel
         </a>
       </div>
-      <div className="flex items-center justify-center gap-4">
+      <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
         {urls.map((item, index) => (
           <Fragment key={item.href}>
             {index >= 1 && <div className="size-1 rounded-full bg-black/10" />}

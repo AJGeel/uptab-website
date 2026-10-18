@@ -2,6 +2,7 @@ import { PHASE_DEVELOPMENT_SERVER } from "next/constants.js";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  typedRoutes: true,
   /*
    * CORS and caching for remote backgrounds: the catalogue revalidates hourly,
    * images are content-hashed and immutable. Next requires headers() to
