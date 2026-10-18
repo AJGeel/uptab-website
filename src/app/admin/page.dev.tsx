@@ -19,7 +19,10 @@ const AdminPage = async () => {
             </p>
           </div>
 
-          <AddPhotoForm themes={themes} />
+          <AddPhotoForm
+            themes={themes}
+            existingIds={metadata.images.map(({ id }) => id)}
+          />
 
           <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {themes.map((theme) => (

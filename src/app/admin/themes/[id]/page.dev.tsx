@@ -57,7 +57,7 @@ const ThemePage = async ({ params }: { params: Promise<{ id: string }> }) => {
         </div>
       </div>
 
-      <AddPhotoForm theme={theme.id} />
+      <AddPhotoForm theme={theme.id} existingIds={metadata.images.map(({ id }) => id)} />
 
       <EditForm id={EDIT_FORM} action={saveThemeAction}>
         <section className={cardClass}>

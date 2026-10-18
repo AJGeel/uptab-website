@@ -14,9 +14,10 @@ import type {
 export const WIDTHS = [1920, 2560, 3840];
 
 /** IDs end up in URLs, file names and users' settings, so keep them simple. */
-const slug = z
-  .string()
-  .regex(/^[a-z0-9]+(-[a-z0-9]+)*$/, "Use lowercase letters, digits and dashes");
+export const SLUG_PATTERN = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+export const SLUG_HINT = "Use lowercase letters, digits and dashes";
+
+const slug = z.string().regex(SLUG_PATTERN, SLUG_HINT);
 
 /*
  * Strict objects reject unknown keys, so a typo such as "creditPendng" fails
