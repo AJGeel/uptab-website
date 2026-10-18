@@ -1,12 +1,51 @@
 import Image from "next/image";
 
-import { thumbnailUrl } from "./data";
+import { originalUrl, thumbnailUrl } from "./data";
 import { RemovePhotoButton } from "./RemovePhotoButton";
 import { Field, inputClass } from "./ui";
 import type { SourceEntry, SourceMetadata } from "../../../scripts/backgrounds";
 import { isPublished } from "../../../scripts/edits";
 
 const badgeClass = "rounded-full px-2 py-0.5 text-xs font-medium";
+const linkClass = "text-sky-500 hover:text-black";
+
+const searchEngines = (url: string) => [
+  { name: "Google Lens", href: `https://lens.google.com/uploadbyurl?url=${encodeURIComponent(url)}` },
+  { name: "TinEye", href: `https://tineye.com/search?url=${encodeURIComponent(url)}` },
+];
+
+/**
+ * Reverse image search, to find a pending photo's author and link. The
+ * search engines need a public URL; without one, download the original and
+ * drop it into Google Lens instead.
+ */
+const FindSource = ({ file, publicUrl }: { file: string; publicUrl: string | null }) => (
+  <span className="flex flex-wrap gap-x-2 text-xs text-slate-500">
+    Find source:
+    {publicUrl ? (
+      searchEngines(publicUrl).map(({ name, href }) => (
+        <a key={name} href={href} target="_blank" rel="noopener noreferrer" className={linkClass}>
+          {name}
+        </a>
+      ))
+    ) : (
+      <>
+        <a href={originalUrl(file)} className={linkClass}>
+          Download original
+        </a>
+        <span>and drop it into</span>
+        <a
+          href="https://lens.google.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={linkClass}
+        >
+          Google Lens
+        </a>
+      </>
+    )}
+  </span>
+);
 
 /**
  * One photo's fields, part of the theme page's edit form. A photo is
@@ -16,9 +55,12 @@ const badgeClass = "rounded-full px-2 py-0.5 text-xs font-medium";
 export const PhotoRow = ({
   entry,
   themes,
+  publicUrl = null,
 }: {
   entry: SourceEntry;
   themes: SourceMetadata["themes"];
+  /** Where the live site serves this photo, for reverse image search. */
+  publicUrl?: string | null;
 }) => {
   const published = isPublished(entry);
   const name = (field: string) => `photo:${entry.id}:${field}`;
@@ -84,6 +126,7 @@ export const PhotoRow = ({
               ? "Clearing the author takes it out of the catalogue."
               : "Add an author to publish it."}
           </span>
+          {!published && <FindSource file={entry.file} publicUrl={publicUrl} />}
           <span className="grow" />
           <RemovePhotoButton id={entry.id} file={entry.file} />
         </div>

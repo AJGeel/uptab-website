@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { isPublished } from "../../../../../scripts/edits";
 import { saveThemeAction } from "../../actions";
 import { AddPhotoForm } from "../../AddPhotoForm";
 import { AdminShell } from "../../AdminShell";
-import { countPending, imagesOf, loadAdmin } from "../../data";
+import { countPending, findPublicUrl, imagesOf, loadAdmin } from "../../data";
 import { EditForm } from "../../EditForm";
 import { PhotoRow } from "../../PhotoRow";
 import { cardClass, inputClass, ProgressBar } from "../../ui";
@@ -20,6 +21,14 @@ const ThemePage = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   const entries = imagesOf(metadata, theme.id);
   const pending = countPending(entries);
+  // Only pending photos still need their source found
+  const publicUrls = new Map(
+    await Promise.all(
+      entries
+        .filter((entry) => !isPublished(entry))
+        .map(async (entry) => [entry.id, await findPublicUrl(entry.file)] as const)
+    )
+  );
 
   return (
     <AdminShell>
@@ -48,7 +57,12 @@ const ThemePage = async ({ params }: { params: Promise<{ id: string }> }) => {
         <section className={cardClass}>
           {entries.length > 0 ? (
             entries.map((entry) => (
-              <PhotoRow key={entry.id} entry={entry} themes={metadata.themes} />
+              <PhotoRow
+                key={entry.id}
+                entry={entry}
+                themes={metadata.themes}
+                publicUrl={publicUrls.get(entry.id)}
+              />
             ))
           ) : (
             <p className="text-sm text-slate-500">No photos in this theme yet.</p>

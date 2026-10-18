@@ -66,3 +66,40 @@ export const countPending = (entries: SourceEntry[]) =>
 
 export const thumbnailUrl = (file: string) =>
   `/admin/photos/${file.split("/").map(encodeURIComponent).join("/")}`;
+
+/** The full-size source photo, downloaded rather than shown. */
+export const originalUrl = (file: string) => `${thumbnailUrl(file)}?original`;
+
+/*
+ * Before remote backgrounds, the live site served the source photos at
+ * /backgrounds/<theme>/<file>. Reverse image search needs a public URL, and
+ * these keep working until that deploy is replaced.
+ */
+const LIVE_BACKGROUNDS = "https://uptab.vercel.app/backgrounds/";
+const publicUrls = new Map<string, Promise<string | null>>();
+
+/** The photo's public URL on the live site, if it's still there. */
+export const findPublicUrl = (file: string) => {
+  const cached = publicUrls.get(file);
+
+  if (cached) {
+    return cached;
+  }
+
+  const url = `${LIVE_BACKGROUNDS}${file}`;
+  const check = fetch(url, { method: "HEAD", signal: AbortSignal.timeout(3000) })
+    .then((response) => (response.ok ? url : null))
+    .catch(() => null)
+    .then((found) => {
+      // Only remember hits, so a network hiccup is retried on the next load
+      if (!found) {
+        publicUrls.delete(file);
+      }
+
+      return found;
+    });
+
+  publicUrls.set(file, check);
+
+  return check;
+};
