@@ -58,8 +58,15 @@ const formatIssue = (raw: unknown, { path, message }: z.core.$ZodIssue) => {
   return `images[${index}]${name}${field}: ${message}`;
 };
 
-const fail = (problems: string[]) => {
-  throw new Error(`Invalid backgrounds.json:\n- ${problems.join("\n- ")}`);
+const invalid = (problems: string[]) =>
+  new Error(`Invalid backgrounds.json:\n- ${problems.join("\n- ")}`);
+
+const parseJson = (json: string): unknown => {
+  try {
+    return JSON.parse(json);
+  } catch (error) {
+    throw new Error(`backgrounds.json is not valid JSON: ${error}`);
+  }
 };
 
 const findProblems = (metadata: SourceMetadata, sourceFiles: string[]) => {
@@ -104,6 +111,30 @@ const findProblems = (metadata: SourceMetadata, sourceFiles: string[]) => {
   return problems;
 };
 
+/** Every problem with the metadata, checked against the files on disk. Empty when valid. */
+export const listProblems = (raw: unknown, sourceFiles: string[]) => {
+  const result = metadataSchema.safeParse(raw);
+
+  return result.success
+    ? findProblems(result.data, sourceFiles)
+    : result.error.issues.map((issue) => formatIssue(raw, issue));
+};
+
+/**
+ * Reads backgrounds.json for editing. It must have the right shape, but may
+ * be out of sync with the files on disk, so those problems can be fixed.
+ */
+export const readMetadata = (json: string): SourceMetadata => {
+  const raw = parseJson(json);
+  const result = metadataSchema.safeParse(raw);
+
+  if (!result.success) {
+    throw invalid(result.error.issues.map((issue) => formatIssue(raw, issue)));
+  }
+
+  return result.data;
+};
+
 /**
  * Parses backgrounds.json and checks it against the source files on disk.
  * Throws one error listing every problem, so they can all be fixed at once.
@@ -112,27 +143,14 @@ export const parseMetadata = (
   json: string,
   sourceFiles: string[]
 ): SourceMetadata => {
-  let raw: unknown;
-
-  try {
-    raw = JSON.parse(json);
-  } catch (error) {
-    throw new Error(`backgrounds.json is not valid JSON: ${error}`);
-  }
-
-  const result = metadataSchema.safeParse(raw);
-
-  if (!result.success) {
-    return fail(result.error.issues.map((issue) => formatIssue(raw, issue)));
-  }
-
-  const problems = findProblems(result.data, sourceFiles);
+  const metadata = readMetadata(json);
+  const problems = findProblems(metadata, sourceFiles);
 
   if (problems.length > 0) {
-    fail(problems);
+    throw invalid(problems);
   }
 
-  return result.data;
+  return metadata;
 };
 
 type Env = Record<string, string | undefined>;

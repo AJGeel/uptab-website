@@ -4,11 +4,12 @@
  * Runs as `prebuild`, or on its own with `bun run backgrounds`.
  */
 import { createHash } from "node:crypto";
-import { mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import sharp from "sharp";
 
+import { listSourceFiles, readMetadataJson, SOURCE_DIR } from "./assets";
 import {
   buildCatalogue,
   getBaseUrl,
@@ -21,19 +22,8 @@ import {
 import { header, p, pc, runCli, step } from "./ui";
 import type { BackgroundImage } from "../src/services/background/types";
 
-const ROOT = path.join(import.meta.dirname, "..");
-const SOURCE_DIR = path.join(ROOT, "assets/backgrounds");
 const OUTPUT_PATH = "backgrounds/v1";
-const OUTPUT_DIR = path.join(ROOT, "public", OUTPUT_PATH);
-const IMAGE_EXTENSIONS = /\.(jpe?g|png|webp|avif|tiff?)$/i;
-
-const listSourceFiles = async () => {
-  const entries = await readdir(SOURCE_DIR, { recursive: true });
-
-  return entries
-    .filter((entry) => IMAGE_EXTENSIONS.test(entry))
-    .map((entry) => entry.split(path.sep).join("/"));
-};
+const OUTPUT_DIR = path.join(process.cwd(), "public", OUTPUT_PATH);
 
 type BuildResult = {
   image: BackgroundImage;
@@ -121,10 +111,7 @@ const main = async () => {
   const metadata = await step(
     "Checking backgrounds.json",
     async () =>
-      parseMetadata(
-        await readFile(path.join(SOURCE_DIR, "backgrounds.json"), "utf8"),
-        await listSourceFiles()
-      ),
+      parseMetadata(await readMetadataJson(), await listSourceFiles()),
     (data) => `backgrounds.json is valid · ${data.images.length} photos listed`
   );
 

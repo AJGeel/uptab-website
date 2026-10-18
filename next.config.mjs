@@ -1,3 +1,5 @@
+import { PHASE_DEVELOPMENT_SERVER } from "next/constants.js";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   /*
@@ -35,4 +37,21 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+/*
+ * Local-only tools, such as the photo manager in src/app/admin/, use files
+ * named page.dev.tsx and route.dev.ts. Only the dev server treats those as
+ * routes, so they don't exist in production builds at all.
+ */
+const devConfig = {
+  ...nextConfig,
+  pageExtensions: ["dev.tsx", "dev.ts", "tsx", "ts", "jsx", "js"],
+  experimental: {
+    // Photo uploads go through a Server Action, which allows 1 MB by default
+    serverActions: { bodySizeLimit: "50mb" },
+  },
+};
+
+const config = (phase) =>
+  phase === PHASE_DEVELOPMENT_SERVER ? devConfig : nextConfig;
+
+export default config;
