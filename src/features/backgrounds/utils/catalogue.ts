@@ -4,9 +4,13 @@ import type {
   Catalogue,
   Theme,
 } from "@/features/backgrounds/types/catalogue";
+import { MAX_COVER_IMAGES } from "@/features/backgrounds/utils/metadata";
 
 /** Rendition widths. Larger ones can be added later without breaking v1. */
 export const WIDTHS = [1920, 2560, 3840];
+
+// Sized for the extension's theme picker: a 2×2 mosaic of ~100 px tiles, at 2× density
+export const THUMBNAIL_WIDTH = 240;
 
 /** Never upscale, and always produce at least one rendition. */
 export const pickWidths = (sourceWidth: number) => {
@@ -26,6 +30,17 @@ export const buildCatalogue = (
   version: 1,
   generatedAt: generatedAt.toISOString(),
   // Leave out empty themes, so the extension never offers one
-  themes: themes.filter(({ id }) => images.some((image) => image.theme === id)),
+  themes: themes
+    .filter(({ id }) => images.some((image) => image.theme === id))
+    .map((theme) => {
+      const themeIds = images.filter((image) => image.theme === theme.id).map(({ id }) => id);
+      // Unpublished photos aren't in the catalogue, so they can't be covers either
+      const picked = theme.coverImageIds?.filter((id) => themeIds.includes(id)) ?? [];
+
+      return {
+        ...theme,
+        coverImageIds: picked.length > 0 ? picked : themeIds.slice(0, MAX_COVER_IMAGES),
+      };
+    }),
   images,
 });

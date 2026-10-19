@@ -16,7 +16,8 @@ import {
   writeMetadata,
 } from "@/features/backgrounds/api/source-files";
 import type { ActionState } from "@/features/backgrounds/types/action-state";
-import { assertValidChange, type Change } from "@/features/backgrounds/utils/edits";
+import type { Change } from "@/features/backgrounds/types/change";
+import { assertValidChange } from "@/features/backgrounds/utils/edits";
 import { readMetadata, type SourceMetadata } from "@/features/backgrounds/utils/metadata";
 
 export const NOT_LOCAL: ActionState = {

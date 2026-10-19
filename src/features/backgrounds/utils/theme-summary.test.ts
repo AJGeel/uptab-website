@@ -42,4 +42,14 @@ describe("summarizeTheme", () => {
       thumbnails: [],
     });
   });
+
+  it("shows cover photos first, in their order", () => {
+    const covered = { ...metadata.themes[0], coverImageIds: ["e", "a"] };
+
+    expect(summarizeTheme(metadata, covered, 3).thumbnails).toEqual([
+      "/admin/photos/safari/e.jpg",
+      "/admin/photos/safari/a.jpg",
+      "/admin/photos/safari/b.jpg",
+    ]);
+  });
 });

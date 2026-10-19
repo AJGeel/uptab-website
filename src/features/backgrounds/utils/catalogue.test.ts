@@ -36,8 +36,25 @@ describe("buildCatalogue", () => {
     expect(catalogue).toEqual({
       version: 1,
       generatedAt: "1970-01-01T00:00:00.000Z",
-      themes: [{ id: "holland", name: "Holland" }],
+      themes: [{ id: "holland", name: "Holland", coverImageIds: ["koppelpoort"] }],
       images: [image],
     });
+  });
+
+  it("keeps only published cover photos, and falls back to the theme's first photos", () => {
+    const covered = [
+      {
+        id: "holland",
+        name: "Holland",
+        coverImageIds: ["unpublished", "koppelpoort"],
+      },
+      { id: "safari", name: "Safari", coverImageIds: ["unpublished"] },
+    ];
+    const safari = { id: "lion", theme: "safari" } as BackgroundImage;
+
+    expect(buildCatalogue(covered, [image, safari], new Date(0)).themes).toEqual([
+      { id: "holland", name: "Holland", coverImageIds: ["koppelpoort"] },
+      { id: "safari", name: "Safari", coverImageIds: ["lion"] },
+    ]);
   });
 });

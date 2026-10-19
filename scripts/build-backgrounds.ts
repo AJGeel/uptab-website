@@ -22,6 +22,7 @@ import {
   buildCatalogue,
   pickWidths,
   toHexColor,
+  THUMBNAIL_WIDTH,
   WIDTHS,
 } from "@/features/backgrounds/utils/catalogue";
 import { parseMetadata, type SourceEntry } from "@/features/backgrounds/utils/metadata";
@@ -64,33 +65,35 @@ const buildImage = async (
   );
   const { width, height, dominant }: SourceInfo = JSON.parse(info.data.toString());
 
-  const widths = pickWidths(width);
   const themeDir = path.join(OUTPUT_DIR, entry.theme);
   await mkdir(themeDir, { recursive: true });
 
-  const sources = await Promise.all(
-    widths.map(async (renditionWidth) => {
-      const { data: output, hit } = await cache.remember(["webp", sourceHash, renditionWidth], () =>
-        sharp(input)
-          .autoOrient()
-          .resize({ width: renditionWidth, withoutEnlargement: true })
-          .webp(ENCODING)
-          .toBuffer()
-      );
+  const writeRendition = async (renditionWidth: number) => {
+    const { data: output, hit } = await cache.remember(["webp", sourceHash, renditionWidth], () =>
+      sharp(input)
+        .autoOrient()
+        .resize({ width: renditionWidth, withoutEnlargement: true })
+        .webp(ENCODING)
+        .toBuffer()
+    );
 
-      const hash = sha256(output).slice(0, 6);
-      const fileName = `${entry.id}-${renditionWidth}-${hash}.webp`;
+    const hash = sha256(output).slice(0, 6);
+    const fileName = `${entry.id}-${renditionWidth}-${hash}.webp`;
 
-      await writeFile(path.join(themeDir, fileName), output);
+    await writeFile(path.join(themeDir, fileName), output);
 
-      return {
-        width: renditionWidth,
-        url: `${baseUrl}/${CATALOGUE_DIR}/${entry.theme}/${fileName}`,
-        bytes: output.length,
-        cached: hit,
-      };
-    })
-  );
+    return {
+      width: renditionWidth,
+      url: `${baseUrl}/${CATALOGUE_DIR}/${entry.theme}/${fileName}`,
+      bytes: output.length,
+      cached: hit,
+    };
+  };
+
+  const [thumbnail, sources] = await Promise.all([
+    writeRendition(Math.min(THUMBNAIL_WIDTH, width)),
+    Promise.all(pickWidths(width).map(writeRendition)),
+  ]);
 
   return {
     image: {
@@ -101,8 +104,9 @@ const buildImage = async (
       color: toHexColor(dominant),
       aspectRatio: Math.round((width / height) * 1000) / 1000,
       sources: sources.map(({ width, url }) => ({ width, url })),
+      thumbnail: { width: thumbnail.width, url: thumbnail.url },
     },
-    sizes: sources.map(({ width, bytes, cached }) => ({ width, bytes, cached })),
+    sizes: [thumbnail, ...sources].map(({ width, bytes, cached }) => ({ width, bytes, cached })),
   };
 };
 
@@ -112,9 +116,10 @@ const formatKb = (bytes: number) => `${Math.round(bytes / 1024)} KB`;
 const formatSizeTable = (results: BuildResult[]) => {
   const idWidth = Math.max(...results.map(({ image }) => image.id.length));
   const cell = (text: string) => text.padStart(9);
-  const head = `${"".padEnd(idWidth)}${WIDTHS.map((width) => cell(String(width))).join("")}`;
+  const columns = [THUMBNAIL_WIDTH, ...WIDTHS];
+  const head = `${"".padEnd(idWidth)}${columns.map((width) => cell(String(width))).join("")}`;
   const rows = results.map(({ image, sizes }) => {
-    const cells = WIDTHS.map((width) => {
+    const cells = columns.map((width) => {
       const size = sizes.find((candidate) => candidate.width === width);
 
       return size ? cell(formatKb(size.bytes)) : pc.dim(cell("—"));

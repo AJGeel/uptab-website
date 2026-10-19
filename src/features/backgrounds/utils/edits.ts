@@ -3,23 +3,17 @@
  * new metadata and the file changes it needs, without touching the disk, so
  * the rules can be tested and validated before anything is written.
  */
+import type { Change, FileChange } from "@/features/backgrounds/types/change";
+import { dropFromCovers } from "@/features/backgrounds/utils/covers";
 import { extensionOf } from "@/features/backgrounds/utils/image-formats";
 
 import {
+  findEntry,
+  isPublished,
   listProblems,
   type SourceEntry,
   type SourceMetadata,
 } from "./metadata";
-
-export type FileChange =
-  | { kind: "add"; to: string }
-  | { kind: "move"; from: string; to: string }
-  | { kind: "delete"; from: string };
-
-export type Change = {
-  metadata: SourceMetadata;
-  files: FileChange[];
-};
 
 export type PhotoFields = {
   id: string;
@@ -37,18 +31,6 @@ export const toSlug = (name: string) =>
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
-
-export const isPublished = (entry: SourceEntry) => entry.creditPending !== true;
-
-const findEntry = (metadata: SourceMetadata, id: string) => {
-  const entry = metadata.images.find((image) => image.id === id);
-
-  if (!entry) {
-    throw new Error(`No photo with ID "${id}".`);
-  }
-
-  return entry;
-};
 
 const replaceEntry = (
   metadata: SourceMetadata,
@@ -155,13 +137,11 @@ export const savePhoto = (
     ? `${fields.theme}/${fields.id}${extensionOf(entry.file)}`
     : entry.file;
 
+  const next = { id: fields.id, theme: fields.theme, file, ...credit(fields) };
+  const saved = replaceEntry(metadata, id, next);
+
   return {
-    metadata: replaceEntry(metadata, id, {
-      id: fields.id,
-      theme: fields.theme,
-      file,
-      ...credit(fields),
-    }),
+    metadata: isPublished(next) ? saved : { ...saved, themes: dropFromCovers(saved.themes, id) },
     files: isMoved ? [{ kind: "move", from: entry.file, to: file }] : [],
   };
 };
@@ -208,7 +188,7 @@ export const removePhoto = (metadata: SourceMetadata, id: string): Change => {
 
   return {
     metadata: {
-      ...metadata,
+      themes: dropFromCovers(metadata.themes, id),
       images: metadata.images.filter((image) => image.id !== id),
     },
     files: [{ kind: "delete", from: entry.file }],

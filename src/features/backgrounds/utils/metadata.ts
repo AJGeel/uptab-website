@@ -8,6 +8,7 @@ import { z } from "zod";
 /** IDs end up in URLs, file names and users' settings, so keep them simple. */
 export const SLUG_PATTERN = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 export const SLUG_HINT = "Use lowercase letters, digits and dashes";
+export const MAX_COVER_IMAGES = 4;
 
 const slug = z.string().regex(SLUG_PATTERN, SLUG_HINT);
 
@@ -16,7 +17,13 @@ const slug = z.string().regex(SLUG_PATTERN, SLUG_HINT);
  * instead of silently publishing an uncredited photo.
  */
 const metadataSchema = z.strictObject({
-  themes: z.array(z.strictObject({ id: slug, name: z.string().min(1) })),
+  themes: z.array(
+    z.strictObject({
+      id: slug,
+      name: z.string().min(1),
+      coverImageIds: z.array(slug).max(MAX_COVER_IMAGES).optional(),
+    }),
+  ),
   images: z.array(
     z.strictObject({
       id: slug,
@@ -31,6 +38,19 @@ const metadataSchema = z.strictObject({
 
 export type SourceMetadata = z.infer<typeof metadataSchema>;
 export type SourceEntry = SourceMetadata["images"][number];
+export type SourceTheme = SourceMetadata["themes"][number];
+
+export const isPublished = (entry: SourceEntry) => entry.creditPending !== true;
+
+export const findEntry = (metadata: SourceMetadata, id: string) => {
+  const entry = metadata.images.find((image) => image.id === id);
+
+  if (!entry) {
+    throw new Error(`No photo with ID "${id}".`);
+  }
+
+  return entry;
+};
 
 const findDuplicates = (values: string[]) => [
   ...new Set(values.filter((value, index) => values.indexOf(value) !== index)),
@@ -92,6 +112,18 @@ const findProblems = (metadata: SourceMetadata, sourceFiles: string[]) => {
       problems.push(
         `${image.id}: published images need an "author" key (use null to hide the credit)`
       );
+    }
+  }
+
+  for (const { id, coverImageIds = [] } of metadata.themes) {
+    for (const coverImageId of findDuplicates(coverImageIds)) {
+      problems.push(`${id}: cover photo "${coverImageId}" is listed more than once`);
+    }
+
+    for (const coverImageId of coverImageIds) {
+      if (!metadata.images.some((image) => image.id === coverImageId && image.theme === id)) {
+        problems.push(`${id}: cover photo "${coverImageId}" isn't in this theme`);
+      }
     }
   }
 
