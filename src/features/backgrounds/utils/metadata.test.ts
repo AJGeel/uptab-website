@@ -91,4 +91,22 @@ describe("parseMetadata", () => {
     expect(error).toContain("No entry in backgrounds.json for: holland/stray.jpg");
     expect(error).toContain("No entry in backgrounds.json for: safari/1.jpg");
   });
+
+  it("requires cover photos to be the theme's own, listed once, at most 4", () => {
+    const covered = (coverImageIds: string[]) =>
+      parseMetadata(
+        JSON.stringify({
+          themes: [{ ...themes[0], coverImageIds }, themes[1]],
+          images: [published, pending],
+        }),
+        files,
+      );
+
+    expect(() => covered(["koppelpoort"])).not.toThrow();
+    expect(() => covered(["safari-1"])).toThrow(
+      'holland: cover photo "safari-1" isn\'t in this theme',
+    );
+    expect(() => covered(["koppelpoort", "koppelpoort"])).toThrow("listed more than once");
+    expect(() => covered(["a", "b", "c", "d", "e"])).toThrow("coverImageIds");
+  });
 });

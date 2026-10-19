@@ -16,6 +16,11 @@ export type Theme = {
   id: string;
   /** Display name, e.g. "Holland". */
   name: string;
+  /**
+   * Up to 4 images that represent the theme, in order. Missing, or IDs that
+   * aren't in the catalogue: use the theme's first images.
+   */
+  coverImageIds?: string[];
 };
 
 export type BackgroundImage = {
@@ -33,4 +38,6 @@ export type BackgroundImage = {
   aspectRatio: number;
   /** Available renditions, smallest first. Never larger than the source. */
   sources: { width: number; url: string }[];
+  /** A small preview, e.g. for a theme picker. Never a background, so not in `sources`. */
+  thumbnail?: { width: number; url: string };
 };

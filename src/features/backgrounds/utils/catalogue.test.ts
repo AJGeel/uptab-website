@@ -40,4 +40,21 @@ describe("buildCatalogue", () => {
       images: [image],
     });
   });
+
+  it("keeps only published cover photos, and drops an empty cover", () => {
+    const covered = [
+      {
+        id: "holland",
+        name: "Holland",
+        coverImageIds: ["unpublished", "koppelpoort"],
+      },
+      { id: "safari", name: "Safari", coverImageIds: ["unpublished"] },
+    ];
+    const safari = { id: "lion", theme: "safari" } as BackgroundImage;
+
+    expect(buildCatalogue(covered, [image, safari], new Date(0)).themes).toEqual([
+      { id: "holland", name: "Holland", coverImageIds: ["koppelpoort"] },
+      { id: "safari", name: "Safari" },
+    ]);
+  });
 });

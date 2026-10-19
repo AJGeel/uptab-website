@@ -8,6 +8,9 @@ import type {
 /** Rendition widths. Larger ones can be added later without breaking v1. */
 export const WIDTHS = [1920, 2560, 3840];
 
+// Sized for the extension's theme picker: a 2×2 mosaic of ~100 px tiles, at 2× density
+export const THUMBNAIL_WIDTH = 240;
+
 /** Never upscale, and always produce at least one rendition. */
 export const pickWidths = (sourceWidth: number) => {
   const widths = WIDTHS.filter((width) => width <= sourceWidth);
@@ -26,6 +29,13 @@ export const buildCatalogue = (
   version: 1,
   generatedAt: generatedAt.toISOString(),
   // Leave out empty themes, so the extension never offers one
-  themes: themes.filter(({ id }) => images.some((image) => image.theme === id)),
+  themes: themes
+    .filter(({ id }) => images.some((image) => image.theme === id))
+    .map(({ coverImageIds = [], ...theme }) => {
+      // Unpublished photos aren't in the catalogue, so they can't be covers either
+      const covers = coverImageIds.filter((id) => images.some((image) => image.id === id));
+
+      return covers.length > 0 ? { ...theme, coverImageIds: covers } : theme;
+    }),
   images,
 });

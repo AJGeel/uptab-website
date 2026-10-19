@@ -9,7 +9,7 @@ import { AddPhotoForm } from "@/features/backgrounds/components/AddPhotoForm";
 import { EditForm } from "@/features/backgrounds/components/EditForm";
 import { PhotoRow } from "@/features/backgrounds/components/PhotoRow";
 import { ProgressBar } from "@/features/backgrounds/components/ProgressBar";
-import { isPublished } from "@/features/backgrounds/utils/edits";
+import { isPublished, MAX_COVER_IMAGES } from "@/features/backgrounds/utils/metadata";
 import { countPending, imagesOf } from "@/features/backgrounds/utils/theme-summary";
 
 const EDIT_FORM = "theme-edit";
@@ -27,6 +27,7 @@ export const ThemeEditor = async ({ themeId }: { themeId: string }) => {
   }
 
   const entries = imagesOf(metadata, theme.id);
+  const coverIds = theme.coverImageIds ?? [];
   const pending = countPending(entries);
   // Only pending photos still need their source found
   const publicUrls = new Map(
@@ -73,6 +74,10 @@ export const ThemeEditor = async ({ themeId }: { themeId: string }) => {
                 entry={entry}
                 themes={metadata.themes}
                 publicUrl={publicUrls.get(entry.id)}
+                coverPosition={
+                  coverIds.includes(entry.id) ? coverIds.indexOf(entry.id) + 1 : undefined
+                }
+                isCoverFull={coverIds.length >= MAX_COVER_IMAGES}
               />
             ))
           ) : (

@@ -2,8 +2,12 @@ import Image from "next/image";
 
 import { Field } from "@/components/ui/Field";
 import { Input, inputClass } from "@/components/ui/Input";
-import { isPublished } from "@/features/backgrounds/utils/edits";
-import type { SourceEntry, SourceMetadata } from "@/features/backgrounds/utils/metadata";
+import { CoverButton } from "@/features/backgrounds/components/CoverButton";
+import {
+  isPublished,
+  type SourceEntry,
+  type SourceTheme,
+} from "@/features/backgrounds/utils/metadata";
 import { originalUrl, thumbnailUrl } from "@/features/backgrounds/utils/paths";
 import { cn } from "@/utils/cn";
 
@@ -60,11 +64,16 @@ export const PhotoRow = ({
   entry,
   themes,
   publicUrl = null,
+  coverPosition,
+  isCoverFull,
 }: {
   entry: SourceEntry;
-  themes: SourceMetadata["themes"];
+  themes: SourceTheme[];
   /** Where the live site serves this photo, for reverse image search. */
   publicUrl?: string | null;
+  /** 1-based place in the theme's cover, if the photo is in it. */
+  coverPosition?: number;
+  isCoverFull: boolean;
 }) => {
   const published = isPublished(entry);
   const name = (field: string) => `photo:${entry.id}:${field}`;
@@ -129,6 +138,12 @@ export const PhotoRow = ({
           </span>
           {!published && <FindSource file={entry.file} publicUrl={publicUrl} />}
           <span className="grow" />
+          <CoverButton
+            id={entry.id}
+            position={coverPosition}
+            isFull={isCoverFull}
+            isPublished={published}
+          />
           <RemovePhotoButton id={entry.id} file={entry.file} />
         </div>
       </div>
