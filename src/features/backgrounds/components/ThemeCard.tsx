@@ -9,7 +9,7 @@ import { cn } from "@/utils/cn";
 export const ThemeCard = ({ theme }: { theme: ThemeSummary }) => (
   <a
     href={`/admin/themes/${theme.id}`}
-    className={cn(cardClass, "group flex flex-col gap-3 duration-150 hover:shadow-md")}
+    className={cn(cardClass, "group flex h-full flex-col gap-3 duration-150 hover:shadow-md")}
   >
     <div className="grid aspect-video grid-cols-2 grid-rows-2 gap-1 overflow-hidden rounded-sm bg-slate-100">
       {theme.thumbnails.map((src) => (

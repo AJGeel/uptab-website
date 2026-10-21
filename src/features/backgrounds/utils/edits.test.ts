@@ -4,6 +4,7 @@ import {
   addPhoto,
   assertValidChange,
   createTheme,
+  deleteTheme,
   type PhotoFields,
   removePhoto,
   renameTheme,
@@ -209,6 +210,30 @@ describe("removePhoto", () => {
     expect(change.metadata.images.map(({ id }) => id)).toEqual(["koppelpoort"]);
     expect(change.files).toEqual([{ kind: "delete", from: "safari/1.jpg" }]);
     expect(() => assertValidChange(metadata, files, change)).not.toThrow();
+  });
+});
+
+describe("deleteTheme", () => {
+  it("removes a theme with its photos and their files", () => {
+    const change = deleteTheme(metadata, "safari");
+
+    expect(change.metadata.themes.map(({ id }) => id)).toEqual(["holland"]);
+    expect(change.metadata.images.map(({ id }) => id)).toEqual(["koppelpoort"]);
+    expect(change.files).toEqual([{ kind: "delete", from: "safari/1.jpg" }]);
+    expect(() => assertValidChange(metadata, files, change)).not.toThrow();
+  });
+
+  it("removes an empty theme", () => {
+    const withEmpty = { ...metadata, themes: [...metadata.themes, { id: "empty", name: "Empty" }] };
+    const change = deleteTheme(withEmpty, "empty");
+
+    expect(change.metadata.themes.map(({ id }) => id)).toEqual(["holland", "safari"]);
+    expect(change.files).toEqual([]);
+    expect(() => assertValidChange(withEmpty, files, change)).not.toThrow();
+  });
+
+  it("refuses an unknown theme", () => {
+    expect(() => deleteTheme(metadata, "nope")).toThrow('No theme with ID "nope".');
   });
 });
 
