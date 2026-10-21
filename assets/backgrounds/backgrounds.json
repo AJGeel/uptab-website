@@ -9,14 +9,6 @@
       "name": "Safari"
     },
     {
-      "id": "underwater",
-      "name": "Underwater"
-    },
-    {
-      "id": "abstract",
-      "name": "Abstract"
-    },
-    {
       "id": "mountains",
       "name": "Mountains"
     },
@@ -146,13 +138,6 @@
       "link": null
     },
     {
-      "id": "holland-7",
-      "theme": "holland",
-      "file": "holland/7.jpg",
-      "author": "Lukas Boekhout",
-      "link": "https://unsplash.com/photos/yellow-train-cqyF7x7gFDI"
-    },
-    {
       "id": "tanzania",
       "theme": "safari",
       "file": "safari/tanzania.jpg",
@@ -221,111 +206,6 @@
       "file": "safari/giraffe-closeup.jpg",
       "author": "cizikas",
       "link": "https://unsplash.com/photos/close-up-photography-of-giraffe-with-tongue-out-HfVsqRXkUmc"
-    },
-    {
-      "id": "okinawa-coral-reef",
-      "theme": "underwater",
-      "file": "underwater/okinawa-coral-reef.jpg",
-      "author": "Hiroko Yoshii",
-      "link": "https://unsplash.com/photos/school-of-fish-in-body-of-water-9y7y26C-l4Y"
-    },
-    {
-      "id": "water-wave",
-      "theme": "underwater",
-      "file": "underwater/water-wave.jpg",
-      "author": "Daniel Sinoca",
-      "link": "https://unsplash.com/photos/dark-blue-water-wave-with-bubbles-AANCLsb0sU0"
-    },
-    {
-      "id": "rocks-on-sea-bed",
-      "theme": "underwater",
-      "file": "underwater/rocks-on-sea-bed.jpg",
-      "author": "Yannis Papanastasopoulos",
-      "link": "https://unsplash.com/photos/rocks-on-sea-bed-U6dnImauDAE"
-    },
-    {
-      "id": "shallow-sea-bottom",
-      "theme": "underwater",
-      "file": "underwater/shallow-sea-bottom.jpg",
-      "author": "Dylan Alcock",
-      "link": "https://unsplash.com/photos/blue-body-of-water-during-daytime-Xss4cp4exmU"
-    },
-    {
-      "id": "shallow-sea-bottom-with-one-fish",
-      "theme": "underwater",
-      "file": "underwater/shallow-sea-bottom-with-one-fish.jpg",
-      "author": "Bibi Pace",
-      "link": "https://unsplash.com/photos/white-and-black-bird-flying-over-the-sea-during-daytime-JLOcPgkXCwo"
-    },
-    {
-      "id": "white-and-black-striped-fish",
-      "theme": "underwater",
-      "file": "underwater/white-and-black-striped-fish.jpg",
-      "author": "Yang Wewe",
-      "link": "https://unsplash.com/photos/white-and-black-striped-fish-aYKy4zqEKX4"
-    },
-    {
-      "id": "island-with-coral-view",
-      "theme": "underwater",
-      "file": "underwater/island-with-coral-view.jpg",
-      "author": "Ishan @seefromthesky",
-      "link": "https://unsplash.com/photos/white-and-green-coral-reel-8qEuawM_txg"
-    },
-    {
-      "id": "school-of-grey-fish",
-      "theme": "underwater",
-      "file": "underwater/school-of-grey-fish.jpg",
-      "author": "Juanma Clemente-Alloza",
-      "link": "https://unsplash.com/photos/school-of-gray-fish-tHbSmexz5Mk"
-    },
-    {
-      "id": "black-and-yellow-fish",
-      "theme": "underwater",
-      "file": "underwater/black-and-yellow-fish.jpg",
-      "author": "Zdeněk Macháček",
-      "link": "https://unsplash.com/photos/a-fish-that-is-swimming-in-the-water-GwvfbHu16jA"
-    },
-    {
-      "id": "white-balloons-on-water",
-      "theme": "abstract",
-      "file": "abstract/white-balloons-on-water.jpg",
-      "author": "Solen Feyissa",
-      "link": "https://unsplash.com/photos/white-balloons-on-water-during-daytime-mfrDGn5juqs"
-    },
-    {
-      "id": "gray-brush-strokes",
-      "theme": "abstract",
-      "file": "abstract/gray-brush-strokes.jpg",
-      "author": "Josep Martins",
-      "link": "https://unsplash.com/photos/white-and-purple-abstract-painting-l3-erg8nPRU"
-    },
-    {
-      "id": "vibrant-gradient-background",
-      "theme": "abstract",
-      "file": "abstract/vibrant-gradient-background.jpg",
-      "author": "Milad Fakurian",
-      "link": "https://unsplash.com/photos/blue-orange-and-yellow-wallpaper-E8Ufcyxz514"
-    },
-    {
-      "id": "pastel-spheres",
-      "theme": "abstract",
-      "file": "abstract/pastel-spheres.jpg",
-      "author": "Milad Fakurian",
-      "link": "https://unsplash.com/photos/pastel-spheres-on-gradient-background-PGdW_bHDbpI"
-    },
-    {
-      "id": "beige-cylinder-podium",
-      "theme": "abstract",
-      "file": "abstract/beige-cylinder-podium.jpg",
-      "author": "Rodion Kutsaiev",
-      "link": "https://unsplash.com/photos/beige-circular-podium-with-arched-doorway-TMa_5BLvDqQ"
-    },
-    {
-      "id": "white-and-blue-wavy",
-      "theme": "abstract",
-      "file": "abstract/white-and-blue-wavy.jpg",
-      "author": "Debora Pilati",
-      "link": "https://unsplash.com/photos/wavy-blue-and-white-abstract-architecture-dOG0z4-gqp0"
     },
     {
       "id": "andrew-small-efhcuc-fjru-unsplash",
