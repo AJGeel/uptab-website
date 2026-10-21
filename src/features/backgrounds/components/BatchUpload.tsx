@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/Input";
 import { addPhotoAction } from "@/features/backgrounds/api/add-photo";
 import { idProblem, suggestId } from "@/features/backgrounds/utils/batch";
 import type { ThemeSummary } from "@/features/backgrounds/utils/theme-summary";
+import { parseUnsplashName } from "@/features/backgrounds/utils/unsplash";
 import { cn } from "@/utils/cn";
 import { plural } from "@/utils/plural";
 
@@ -61,13 +62,16 @@ export const BatchUpload = ({
 
           taken.add(id);
 
+          // An Unsplash download's name has its credit, so it beats the shared defaults
+          const unsplash = parseUnsplashName(file.name);
+
           return {
             key: crypto.randomUUID(),
             file,
             preview: URL.createObjectURL(file),
             id,
-            author: shared.author,
-            link: shared.link,
+            author: unsplash?.author ?? shared.author,
+            link: unsplash?.link ?? shared.link,
             error: null,
           };
         }),
