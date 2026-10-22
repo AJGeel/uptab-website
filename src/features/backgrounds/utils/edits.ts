@@ -91,6 +91,23 @@ export const renameTheme = (
   };
 };
 
+/** Removes a theme with all its photos and their files. */
+export const deleteTheme = (metadata: SourceMetadata, id: string): Change => {
+  if (!metadata.themes.some((theme) => theme.id === id)) {
+    throw new Error(`No theme with ID "${id}".`);
+  }
+
+  const photos = metadata.images.filter((image) => image.theme === id);
+
+  return {
+    metadata: {
+      themes: metadata.themes.filter((theme) => theme.id !== id),
+      images: metadata.images.filter((image) => image.theme !== id),
+    },
+    files: photos.map((photo) => ({ kind: "delete", from: photo.file })),
+  };
+};
+
 /**
  * Adds an uploaded photo, stored as <theme>/<id><extension>. It's published
  * straight away when it comes with an author.

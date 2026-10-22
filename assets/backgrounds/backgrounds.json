@@ -9,20 +9,19 @@
       "name": "Safari"
     },
     {
-      "id": "underwater",
-      "name": "Underwater"
-    },
-    {
-      "id": "abstract",
-      "name": "Abstract"
-    },
-    {
       "id": "mountains",
       "name": "Mountains"
     },
     {
       "id": "flower-power",
       "name": "Flower power"
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture",
+      "coverImageIds": [
+        "simone-hutsch-l8fyk9rs-ou-unsplash"
+      ]
     }
   ],
   "images": [
@@ -146,13 +145,6 @@
       "link": null
     },
     {
-      "id": "holland-7",
-      "theme": "holland",
-      "file": "holland/7.jpg",
-      "author": "Lukas Boekhout",
-      "link": "https://unsplash.com/photos/yellow-train-cqyF7x7gFDI"
-    },
-    {
       "id": "tanzania",
       "theme": "safari",
       "file": "safari/tanzania.jpg",
@@ -223,111 +215,6 @@
       "link": "https://unsplash.com/photos/close-up-photography-of-giraffe-with-tongue-out-HfVsqRXkUmc"
     },
     {
-      "id": "okinawa-coral-reef",
-      "theme": "underwater",
-      "file": "underwater/okinawa-coral-reef.jpg",
-      "author": "Hiroko Yoshii",
-      "link": "https://unsplash.com/photos/school-of-fish-in-body-of-water-9y7y26C-l4Y"
-    },
-    {
-      "id": "water-wave",
-      "theme": "underwater",
-      "file": "underwater/water-wave.jpg",
-      "author": "Daniel Sinoca",
-      "link": "https://unsplash.com/photos/dark-blue-water-wave-with-bubbles-AANCLsb0sU0"
-    },
-    {
-      "id": "rocks-on-sea-bed",
-      "theme": "underwater",
-      "file": "underwater/rocks-on-sea-bed.jpg",
-      "author": "Yannis Papanastasopoulos",
-      "link": "https://unsplash.com/photos/rocks-on-sea-bed-U6dnImauDAE"
-    },
-    {
-      "id": "shallow-sea-bottom",
-      "theme": "underwater",
-      "file": "underwater/shallow-sea-bottom.jpg",
-      "author": "Dylan Alcock",
-      "link": "https://unsplash.com/photos/blue-body-of-water-during-daytime-Xss4cp4exmU"
-    },
-    {
-      "id": "shallow-sea-bottom-with-one-fish",
-      "theme": "underwater",
-      "file": "underwater/shallow-sea-bottom-with-one-fish.jpg",
-      "author": "Bibi Pace",
-      "link": "https://unsplash.com/photos/white-and-black-bird-flying-over-the-sea-during-daytime-JLOcPgkXCwo"
-    },
-    {
-      "id": "white-and-black-striped-fish",
-      "theme": "underwater",
-      "file": "underwater/white-and-black-striped-fish.jpg",
-      "author": "Yang Wewe",
-      "link": "https://unsplash.com/photos/white-and-black-striped-fish-aYKy4zqEKX4"
-    },
-    {
-      "id": "island-with-coral-view",
-      "theme": "underwater",
-      "file": "underwater/island-with-coral-view.jpg",
-      "author": "Ishan @seefromthesky",
-      "link": "https://unsplash.com/photos/white-and-green-coral-reel-8qEuawM_txg"
-    },
-    {
-      "id": "school-of-grey-fish",
-      "theme": "underwater",
-      "file": "underwater/school-of-grey-fish.jpg",
-      "author": "Juanma Clemente-Alloza",
-      "link": "https://unsplash.com/photos/school-of-gray-fish-tHbSmexz5Mk"
-    },
-    {
-      "id": "black-and-yellow-fish",
-      "theme": "underwater",
-      "file": "underwater/black-and-yellow-fish.jpg",
-      "author": "Zdeněk Macháček",
-      "link": "https://unsplash.com/photos/a-fish-that-is-swimming-in-the-water-GwvfbHu16jA"
-    },
-    {
-      "id": "white-balloons-on-water",
-      "theme": "abstract",
-      "file": "abstract/white-balloons-on-water.jpg",
-      "author": "Solen Feyissa",
-      "link": "https://unsplash.com/photos/white-balloons-on-water-during-daytime-mfrDGn5juqs"
-    },
-    {
-      "id": "gray-brush-strokes",
-      "theme": "abstract",
-      "file": "abstract/gray-brush-strokes.jpg",
-      "author": "Josep Martins",
-      "link": "https://unsplash.com/photos/white-and-purple-abstract-painting-l3-erg8nPRU"
-    },
-    {
-      "id": "vibrant-gradient-background",
-      "theme": "abstract",
-      "file": "abstract/vibrant-gradient-background.jpg",
-      "author": "Milad Fakurian",
-      "link": "https://unsplash.com/photos/blue-orange-and-yellow-wallpaper-E8Ufcyxz514"
-    },
-    {
-      "id": "pastel-spheres",
-      "theme": "abstract",
-      "file": "abstract/pastel-spheres.jpg",
-      "author": "Milad Fakurian",
-      "link": "https://unsplash.com/photos/pastel-spheres-on-gradient-background-PGdW_bHDbpI"
-    },
-    {
-      "id": "beige-cylinder-podium",
-      "theme": "abstract",
-      "file": "abstract/beige-cylinder-podium.jpg",
-      "author": "Rodion Kutsaiev",
-      "link": "https://unsplash.com/photos/beige-circular-podium-with-arched-doorway-TMa_5BLvDqQ"
-    },
-    {
-      "id": "white-and-blue-wavy",
-      "theme": "abstract",
-      "file": "abstract/white-and-blue-wavy.jpg",
-      "author": "Debora Pilati",
-      "link": "https://unsplash.com/photos/wavy-blue-and-white-abstract-architecture-dOG0z4-gqp0"
-    },
-    {
       "id": "andrew-small-efhcuc-fjru-unsplash",
       "theme": "flower-power",
       "file": "flower-power/andrew-small-efhcuc-fjru-unsplash.jpg",
@@ -368,13 +255,6 @@
       "file": "flower-power/kwang-mathurosemontri-fy1ecb1rcd0-unsplash.jpg",
       "author": "Kwang Mathurosemontri",
       "link": "https://unsplash.com/photos/shallow-focus-photography-of-white-and-pink-petaled-flowers-fY1ECB1RCd0"
-    },
-    {
-      "id": "julien-chatelain-fs2ivwuibgw-unsplash",
-      "theme": "flower-power",
-      "file": "flower-power/julien-chatelain-fs2ivwuibgw-unsplash.jpg",
-      "author": "Julien Chatelain",
-      "link": "https://unsplash.com/photos/red-yellow-and-white-flower-petals-fS2iVWUiBgw"
     },
     {
       "id": "nature-uninterrupted-photography-v-3nq3pmwky-unsplash",
@@ -557,6 +437,265 @@
       "file": "mountains/kseniia-rastvorova-u2awijfuns4-unsplash.jpg",
       "author": "Kseniia Rastvorova",
       "link": "https://unsplash.com/photos/trees-near-mountain-U2AwijfUNS4"
+    },
+    {
+      "id": "maarten-deckers-t5nxyxcf50i-unsplash",
+      "theme": "architecture",
+      "file": "architecture/maarten-deckers-t5nxyxcf50i-unsplash.jpg",
+      "author": "Maarten Deckers",
+      "link": "https://unsplash.com/photos/T5nXYXCf50I"
+    },
+    {
+      "id": "simone-hutsch-itvvupgac0o-unsplash",
+      "theme": "architecture",
+      "file": "architecture/simone-hutsch-itvvupgac0o-unsplash.jpg",
+      "author": "Simone Hutsch",
+      "link": "https://unsplash.com/photos/ItvVUpgac0o"
+    },
+    {
+      "id": "pierre-chatel-innocenti-lk-nu-hx6ms-unsplash",
+      "theme": "architecture",
+      "file": "architecture/pierre-chatel-innocenti-lk-nu-hx6ms-unsplash.jpg",
+      "author": "Pierre Chatel Innocenti",
+      "link": "https://unsplash.com/photos/Lk-nu_hX6ms"
+    },
+    {
+      "id": "leo-manjarrez-vygi0cvz-c-unsplash",
+      "theme": "architecture",
+      "file": "architecture/leo-manjarrez-vygi0cvz-c-unsplash.jpg",
+      "author": "Leo Manjarrez",
+      "link": "https://unsplash.com/photos/-vygi0Cvz_c"
+    },
+    {
+      "id": "simone-hutsch-l8fyk9rs-ou-unsplash",
+      "theme": "architecture",
+      "file": "architecture/simone-hutsch-l8fyk9rs-ou-unsplash.jpg",
+      "author": "Simone Hutsch",
+      "link": "https://unsplash.com/photos/l8fyK9RS-OU"
+    },
+    {
+      "id": "emma-raphael-tts-i2y9bo-unsplash",
+      "theme": "architecture",
+      "file": "architecture/emma-raphael-tts-i2y9bo-unsplash.jpg",
+      "author": "Emma Raphael",
+      "link": "https://unsplash.com/photos/ttS--i2y9Bo"
+    },
+    {
+      "id": "sam-balye-t0nojypgbok-unsplash",
+      "theme": "architecture",
+      "file": "architecture/sam-balye-t0nojypgbok-unsplash.jpg",
+      "author": "Sam Balye",
+      "link": "https://unsplash.com/photos/t0nojyPGbok"
+    },
+    {
+      "id": "luke-van-zyl-koh7ivuwrlw-unsplash",
+      "theme": "architecture",
+      "file": "architecture/luke-van-zyl-koh7ivuwrlw-unsplash.jpg",
+      "author": "Luke van Zyl",
+      "link": "https://unsplash.com/photos/koH7IVuwRLw"
+    },
+    {
+      "id": "victor-evczjigokzk-unsplash",
+      "theme": "architecture",
+      "file": "architecture/victor-evczjigokzk-unsplash.jpg",
+      "author": "Victor",
+      "link": "https://unsplash.com/photos/EvczjigoKzk"
+    },
+    {
+      "id": "simone-hutsch-xk0faa4-mcq-unsplash",
+      "theme": "architecture",
+      "file": "architecture/simone-hutsch-xk0faa4-mcq-unsplash.jpg",
+      "author": "Simone Hutsch",
+      "link": "https://unsplash.com/photos/XK0faa4_mCQ"
+    },
+    {
+      "id": "amir-hosseini-3cl6impbd-8-unsplash",
+      "theme": "architecture",
+      "file": "architecture/amir-hosseini-3cl6impbd-8-unsplash.jpg",
+      "author": "Amir Hosseini",
+      "link": "https://unsplash.com/photos/3cl6impBd_8"
+    },
+    {
+      "id": "anthony-esau-n2zk9yxjmla-unsplash",
+      "theme": "architecture",
+      "file": "architecture/anthony-esau-n2zk9yxjmla-unsplash.jpg",
+      "author": "Anthony Esau",
+      "link": "https://unsplash.com/photos/N2zk9yXjmLA"
+    },
+    {
+      "id": "florian-krumm-ugcwlc0lqtq-unsplash",
+      "theme": "architecture",
+      "file": "architecture/florian-krumm-ugcwlc0lqtq-unsplash.jpg",
+      "author": "Florian Krumm",
+      "link": "https://unsplash.com/photos/ugcwlC0LQtQ"
+    },
+    {
+      "id": "iltun-huseynli-oh7gkuqiuzk-unsplash",
+      "theme": "architecture",
+      "file": "architecture/iltun-huseynli-oh7gkuqiuzk-unsplash.jpg",
+      "author": "Iltun Huseynli",
+      "link": "https://unsplash.com/photos/OH7GkUqiuZk"
+    },
+    {
+      "id": "viktor-jakovlev-h0vuplqox0c-unsplash",
+      "theme": "architecture",
+      "file": "architecture/viktor-jakovlev-h0vuplqox0c-unsplash.jpg",
+      "author": "Viktor Jakovlev",
+      "link": "https://unsplash.com/photos/H0vuplqoX0c"
+    },
+    {
+      "id": "hugo-sousa-bghgseqbaka-unsplash",
+      "theme": "architecture",
+      "file": "architecture/hugo-sousa-bghgseqbaka-unsplash.jpg",
+      "author": "Hugo Sousa",
+      "link": "https://unsplash.com/photos/BghGseQbAkA"
+    },
+    {
+      "id": "scott-webb-k-qkkbn7ds-unsplash",
+      "theme": "architecture",
+      "file": "architecture/scott-webb-k-qkkbn7ds-unsplash.jpg",
+      "author": "Scott Webb",
+      "link": "https://unsplash.com/photos/_K-QKkbn7Ds"
+    },
+    {
+      "id": "mark-boss-yodlrvtyl6o-unsplash",
+      "theme": "architecture",
+      "file": "architecture/mark-boss-yodlrvtyl6o-unsplash.jpg",
+      "author": "Mark Boss",
+      "link": "https://unsplash.com/photos/YoDlrVtyl6o"
+    },
+    {
+      "id": "frances-gunn-c9z9rlch0zo-unsplash",
+      "theme": "architecture",
+      "file": "architecture/frances-gunn-c9z9rlch0zo-unsplash.jpg",
+      "author": "Frances Gunn",
+      "link": "https://unsplash.com/photos/c9z9RlCh0Zo"
+    },
+    {
+      "id": "toa-heftiba-nrszruwqmoi-unsplash",
+      "theme": "architecture",
+      "file": "architecture/toa-heftiba-nrszruwqmoi-unsplash.jpg",
+      "author": "Toa Heftiba",
+      "link": "https://unsplash.com/photos/nrSzRUWqmoI"
+    },
+    {
+      "id": "pierre-chatel-innocenti-h9ek6qa2jou-unsplash",
+      "theme": "architecture",
+      "file": "architecture/pierre-chatel-innocenti-h9ek6qa2jou-unsplash.jpg",
+      "author": "Pierre Chatel Innocenti",
+      "link": "https://unsplash.com/photos/h9ek6QA2jOU"
+    },
+    {
+      "id": "ryunosuke-kikuno-ilfffsqmt2a-unsplash",
+      "theme": "architecture",
+      "file": "architecture/ryunosuke-kikuno-ilfffsqmt2a-unsplash.jpg",
+      "author": "Ryunosuke Kikuno",
+      "link": "https://unsplash.com/photos/ILFfFsqmt2A"
+    },
+    {
+      "id": "ryunosuke-kikuno-nptlea-bqls-unsplash",
+      "theme": "architecture",
+      "file": "architecture/ryunosuke-kikuno-nptlea-bqls-unsplash.jpg",
+      "author": "Ryunosuke Kikuno",
+      "link": "https://unsplash.com/photos/npTlea_bqls"
+    },
+    {
+      "id": "cameron-arksey-znvo4clb7k-unsplash",
+      "theme": "flower-power",
+      "file": "flower-power/cameron-arksey-znvo4clb7k-unsplash.jpg",
+      "author": "Cameron Arksey",
+      "link": "https://unsplash.com/photos/-ZNvo4cLB7k"
+    },
+    {
+      "id": "bruno-miguel-4-urto7euvs-unsplash",
+      "theme": "flower-power",
+      "file": "flower-power/bruno-miguel-4-urto7euvs-unsplash.jpg",
+      "author": "Bruno Miguel",
+      "link": "https://unsplash.com/photos/4-urto7eUVs"
+    },
+    {
+      "id": "annie-spratt-unrykqqajz8-unsplash",
+      "theme": "flower-power",
+      "file": "flower-power/annie-spratt-unrykqqajz8-unsplash.jpg",
+      "author": "Annie Spratt",
+      "link": "https://unsplash.com/photos/uNRykQqAjz8"
+    },
+    {
+      "id": "dulcineia-dias-hqoa0la91as-unsplash",
+      "theme": "flower-power",
+      "file": "flower-power/dulcineia-dias-hqoa0la91as-unsplash.jpg",
+      "author": "Dulcineia Dias",
+      "link": "https://unsplash.com/photos/HQOA0LA91As"
+    },
+    {
+      "id": "earl-wilcox-hgz1cjrhk9m-unsplash",
+      "theme": "flower-power",
+      "file": "flower-power/earl-wilcox-hgz1cjrhk9m-unsplash.jpg",
+      "author": "Earl Wilcox",
+      "link": "https://unsplash.com/photos/hGz1cJrhk9M"
+    },
+    {
+      "id": "shannon-baldwin-z33hpeepdyc-unsplash",
+      "theme": "flower-power",
+      "file": "flower-power/shannon-baldwin-z33hpeepdyc-unsplash.jpg",
+      "author": "Shannon Baldwin",
+      "link": "https://unsplash.com/photos/Z33hpeePdyc"
+    },
+    {
+      "id": "timo-vijn-yjizabtdkik-unsplash",
+      "theme": "flower-power",
+      "file": "flower-power/timo-vijn-yjizabtdkik-unsplash.jpg",
+      "author": "Timo Vijn",
+      "link": "https://unsplash.com/photos/yjiZAbTDkik"
+    },
+    {
+      "id": "tomoko-uji-up-ihpsjvsi-unsplash",
+      "theme": "flower-power",
+      "file": "flower-power/tomoko-uji-up-ihpsjvsi-unsplash.jpg",
+      "author": "Tomoko Uji",
+      "link": "https://unsplash.com/photos/up_IHPsJvSI"
+    },
+    {
+      "id": "tomoko-uji-qzosjlpxs9k-unsplash",
+      "theme": "flower-power",
+      "file": "flower-power/tomoko-uji-qzosjlpxs9k-unsplash.jpg",
+      "author": "Tomoko Uji",
+      "link": "https://unsplash.com/photos/qzoSJlPxS9k"
+    },
+    {
+      "id": "akira-hojo-vc-z-yjsfwe-unsplash",
+      "theme": "flower-power",
+      "file": "flower-power/akira-hojo-vc-z-yjsfwe-unsplash.jpg",
+      "author": "Akira Hojo",
+      "link": "https://unsplash.com/photos/VC_Z_yJsFwE"
+    },
+    {
+      "id": "micheile-henderson-komywyuj1kg-unsplash",
+      "theme": "flower-power",
+      "file": "flower-power/micheile-henderson-komywyuj1kg-unsplash.jpg",
+      "author": "Micheile Henderson",
+      "link": "https://unsplash.com/photos/kOMyWyUj1Kg"
+    },
+    {
+      "id": "esther-gorlee-ugmfjqkhfu-unsplash",
+      "theme": "flower-power",
+      "file": "flower-power/esther-gorlee-ugmfjqkhfu-unsplash.jpg",
+      "author": "Esther Gorlee",
+      "link": "https://unsplash.com/photos/-uGmFjqkHFU"
+    },
+    {
+      "id": "micheile-henderson-h0lknnrr7ci-unsplash",
+      "theme": "flower-power",
+      "file": "flower-power/micheile-henderson-h0lknnrr7ci-unsplash.jpg",
+      "author": "Micheile Henderson",
+      "link": "https://unsplash.com/photos/H0lknnRr7cI"
+    },
+    {
+      "id": "rodion-kutsaiev-tcpubu8h2c0-unsplash",
+      "theme": "flower-power",
+      "file": "flower-power/rodion-kutsaiev-tcpubu8h2c0-unsplash.jpg",
+      "author": "Rodion Kutsaiev",
+      "link": "https://unsplash.com/photos/tcPUbu8H2c0"
     }
   ]
 }

@@ -1,6 +1,7 @@
 import { loadAdmin } from "@/features/backgrounds/api/load-admin";
 import { AddPhotoForm } from "@/features/backgrounds/components/AddPhotoForm";
 import { ThemeCard } from "@/features/backgrounds/components/ThemeCard";
+import { ThemeContextMenu } from "@/features/backgrounds/components/ThemeContextMenu";
 import { summarizeTheme } from "@/features/backgrounds/utils/theme-summary";
 
 /** The admin's start page: uploading photos, and every theme at a glance. */
@@ -28,7 +29,12 @@ export const BackgroundsOverview = async () => {
 
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {themes.map((theme) => (
-          <ThemeCard key={theme.id} theme={theme} />
+          <ThemeContextMenu
+            key={theme.id}
+            theme={{ id: theme.id, name: theme.name, photoCount: theme.published + theme.pending }}
+          >
+            <ThemeCard theme={theme} />
+          </ThemeContextMenu>
         ))}
       </section>
     </>

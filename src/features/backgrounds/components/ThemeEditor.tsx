@@ -6,6 +6,7 @@ import { findPublicUrl } from "@/features/backgrounds/api/find-public-url";
 import { loadAdmin } from "@/features/backgrounds/api/load-admin";
 import { saveThemeAction } from "@/features/backgrounds/api/save-theme";
 import { AddPhotoForm } from "@/features/backgrounds/components/AddPhotoForm";
+import { DeleteThemeButton } from "@/features/backgrounds/components/DeleteThemeButton";
 import { EditForm } from "@/features/backgrounds/components/EditForm";
 import { PhotoRow } from "@/features/backgrounds/components/PhotoRow";
 import { ProgressBar } from "@/features/backgrounds/components/ProgressBar";
@@ -48,18 +49,21 @@ export const ThemeEditor = async ({ themeId }: { themeId: string }) => {
       <div className="flex flex-col gap-3">
         <input type="hidden" name="theme:id" value={theme.id} form={EDIT_FORM} />
         <div className="flex flex-wrap items-center gap-3">
-          <Input
-            name="theme:name"
-            defaultValue={theme.name}
-            required
-            aria-label="Theme name"
-            form={EDIT_FORM}
-            className="max-w-xs text-2xl! font-bold"
-          />
+          <div className="flex w-full max-w-xs flex-col gap-2">
+            <Input
+              name="theme:name"
+              defaultValue={theme.name}
+              required
+              aria-label="Theme name"
+              form={EDIT_FORM}
+              className="text-2xl! font-bold"
+            />
+            <ProgressBar published={entries.length - pending} pending={pending} />
+          </div>
           <span className="text-sm text-slate-400">ID: {theme.id} (fixed)</span>
-        </div>
-        <div className="max-w-sm">
-          <ProgressBar published={entries.length - pending} pending={pending} />
+          <div className="ml-auto">
+            <DeleteThemeButton id={theme.id} name={theme.name} photoCount={entries.length} />
+          </div>
         </div>
       </div>
 
