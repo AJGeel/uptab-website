@@ -120,7 +120,7 @@ export default defineConfig([
        * Tailwind doesn't know about.
        */
       "tailwindcss/no-custom-classname": [
-        "warn",
+        "error",
         {
           whitelist: [
             "ut-.*",
@@ -128,6 +128,7 @@ export default defineConfig([
             "p-(all|extra|eyes|mouth)",
             "burst-p",
             "is-acting",
+            "rainbow-cycle",
           ],
         },
       ],

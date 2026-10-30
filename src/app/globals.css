@@ -204,6 +204,30 @@
   @apply outline-1 outline-black/10;
 }
 
+/* Registered so the lightness can transition; it's what hover changes */
+@property --rainbow-l {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0.88;
+}
+
+/* A slow-sliding rainbow, for the admin-only button. Static under reduced motion. */
+@utility rainbow-cycle {
+  background-image: linear-gradient(in oklch 90deg, oklch(var(--rainbow-l) 0.1 25), oklch(var(--rainbow-l) 0.1 85), oklch(var(--rainbow-l) 0.1 145), oklch(var(--rainbow-l) 0.1 205), oklch(var(--rainbow-l) 0.1 265), oklch(var(--rainbow-l) 0.1 325), oklch(var(--rainbow-l) 0.1 385));
+  background-size: 300% 100%;
+  transition: --rainbow-l 200ms ease;
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: rainbow-cycle 4s linear infinite;
+  }
+}
+
+@keyframes rainbow-cycle {
+  to {
+    background-position: 300% 0;
+  }
+}
+
 /* The logo turns twice over the length of the page. Static where scroll-driven animation isn't supported. */
 @utility logo-spin {
   @supports (animation-timeline: scroll()) {

@@ -1,5 +1,6 @@
 "use client";
 
+import { SparklesIcon } from "@heroicons/react/24/solid";
 import type { Route } from "next";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -77,16 +78,36 @@ const MenuIcon = ({ open }: { open: boolean }) => (
   </svg>
 );
 
+const AdminLabel = () => (
+  <span className="inline-flex items-center gap-1.5">
+    <SparklesIcon className="size-4" aria-hidden="true" />
+    Adminland
+  </span>
+);
+
 // A plain anchor: /adminland only exists as a route in dev, so it can't be a typed Link
 const AdminLink = ({ className }: { className?: string }) => (
   <a
     href="/adminland"
     className={cn(
-      "inline-flex items-center justify-center gap-2 rounded-full bg-amber-300 font-bold text-black transition-colors duration-150 hover:bg-amber-200 active:scale-[.97]",
+      "group isolate inline-flex rainbow-cycle items-center justify-center gap-2 rounded-full font-bold hover:[--rainbow-l:0] active:scale-[.97]",
       className
     )}
   >
-    Adminland
+    <span className="relative">
+      <span className="text-black/70">
+        <AdminLabel />
+      </span>
+      <span aria-hidden className="absolute inset-0 text-black mix-blend-overlay">
+        <AdminLabel />
+      </span>
+      <span
+        aria-hidden
+        className="absolute inset-0 text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+      >
+        <AdminLabel />
+      </span>
+    </span>
   </a>
 );
 
@@ -120,7 +141,7 @@ export const SiteNav = ({ theme, logoOnly = false }: { theme: Theme; logoOnly?: 
   const open = openOn === pathname;
 
   useEffect(() => {
-    if (!open) {return;}
+    if (!open) { return; }
     const onKeyDown = (event: KeyboardEvent) => event.key === "Escape" && setOpenOn(null);
     window.addEventListener("keydown", onKeyDown);
 
@@ -159,53 +180,53 @@ export const SiteNav = ({ theme, logoOnly = false }: { theme: Theme; logoOnly?: 
       </Link>
 
       {!logoOnly && (
-      <>
-      <div className={cn("hidden items-center gap-1", t.wide, t.tray)}>
-        {IS_DEV && <AdminLink className="mr-1.5 px-4 py-2.5 text-[15px]" />}
-        {navLinks.map((link) =>
-          renderLink(
-            link,
-            cn("rounded-full px-4 py-2.5 text-[15px] font-semibold transition-colors", t.link),
-            cn("font-bold", t.active)
-          )
-        )}
-        <StoreButton tone={t.tone} browserIcon iconSize={18} className="ml-1.5 min-h-0 gap-2 py-2.5 text-[15px]" />
-      </div>
+        <>
+          <div className={cn("hidden items-center gap-1", t.wide, t.tray)}>
+            {IS_DEV && <AdminLink className="mr-1.5 px-4 py-2.5 text-[15px]" />}
+            {navLinks.map((link) =>
+              renderLink(
+                link,
+                cn("rounded-full px-4 py-2.5 text-[15px] font-semibold transition-colors", t.link),
+                cn("font-bold", t.active)
+              )
+            )}
+            <StoreButton tone={t.tone} browserIcon iconSize={18} className="ml-1.5 min-h-0 gap-2 py-2.5 text-[15px]" />
+          </div>
 
-      <button
-        type="button"
-        aria-label="Menu"
-        aria-expanded={open}
-        onClick={() => setOpenOn(open ? null : pathname)}
-        className={cn(
-          "inline-flex size-12 items-center justify-center rounded-full border transition active:scale-[.97]",
-          t.narrow,
-          t.menuButton
-        )}
-      >
-        <MenuIcon open={open} />
-      </button>
+          <button
+            type="button"
+            aria-label="Menu"
+            aria-expanded={open}
+            onClick={() => setOpenOn(open ? null : pathname)}
+            className={cn(
+              "inline-flex size-12 items-center justify-center rounded-full border transition active:scale-[.97]",
+              t.narrow,
+              t.menuButton
+            )}
+          >
+            <MenuIcon open={open} />
+          </button>
 
-      {open && (
-        <div
-          className={cn(
-            "absolute inset-x-4 top-full z-20 mt-1.5 flex flex-col gap-0.5 rounded-3xl p-2.5",
-            t.narrow,
-            t.sheet
+          {open && (
+            <div
+              className={cn(
+                "absolute inset-x-4 top-full z-20 mt-1.5 flex flex-col gap-0.5 rounded-3xl p-2.5",
+                t.narrow,
+                t.sheet
+              )}
+            >
+              {IS_DEV && <AdminLink className="mb-1.5 min-h-14 rounded-full text-[17px]" />}
+              {[{ href: "/", label: "Home" } satisfies NavLink, ...navLinks].map((link) =>
+                renderLink(
+                  link,
+                  cn("flex min-h-13 items-center rounded-2xl px-4 text-lg font-bold", t.sheetLink),
+                  t.sheetActive
+                )
+              )}
+              <StoreButton tone={t.tone} className="mt-1.5 min-h-14 w-full text-[17px]" />
+            </div>
           )}
-        >
-          {IS_DEV && <AdminLink className="mb-1.5 min-h-14 rounded-full text-[17px]" />}
-          {[{ href: "/", label: "Home" } satisfies NavLink, ...navLinks].map((link) =>
-            renderLink(
-              link,
-              cn("flex min-h-13 items-center rounded-2xl px-4 text-lg font-bold", t.sheetLink),
-              t.sheetActive
-            )
-          )}
-          <StoreButton tone={t.tone} className="mt-1.5 min-h-14 w-full text-[17px]" />
-        </div>
-      )}
-      </>
+        </>
       )}
     </nav>
   );
