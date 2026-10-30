@@ -21,7 +21,7 @@ export const BackgroundsOverview = async () => {
   return (
     <>
       <div className="flex flex-col gap-1">
-        <h1 className="text-4xl font-extrabold tracking-[-0.045em] text-sky-400">
+        <h1 className="w-fit rainbow-cycle bg-clip-text text-4xl font-extrabold tracking-[-0.045em] text-transparent">
           /adminland
         </h1>
         <p className="text-sm text-dark-muted">
