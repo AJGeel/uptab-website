@@ -26,6 +26,7 @@ import {
   WIDTHS,
 } from "@/features/backgrounds/utils/catalogue";
 import { parseMetadata, type SourceEntry } from "@/features/backgrounds/utils/metadata";
+import { extractPalette } from "@/features/backgrounds/utils/palette";
 import { CATALOGUE_DIR, CATALOGUE_PATH } from "@/features/backgrounds/utils/paths";
 import { plural } from "@/utils/plural";
 
@@ -42,15 +43,30 @@ type BuildResult = {
   sizes: { width: number; bytes: number; cached: boolean }[];
 };
 
-type SourceInfo = { width: number; height: number; dominant: { r: number; g: number; b: number } };
+type SourceInfo = {
+  width: number;
+  height: number;
+  dominant: { r: number; g: number; b: number };
+  palette: string[];
+};
+
+/** Small enough to be quick, big enough to tell what colours a photo has. */
+const PALETTE_SAMPLE_WIDTH = 64;
 
 const readSourceInfo = async (input: Buffer): Promise<SourceInfo> => {
   const source = sharp(input);
   // Dimensions after applying EXIF orientation, matching the renditions
   const { width, height } = (await source.metadata()).autoOrient;
   const { dominant } = await source.stats();
+  const sample = await source
+    .clone()
+    .autoOrient()
+    .resize({ width: PALETTE_SAMPLE_WIDTH })
+    .removeAlpha()
+    .raw()
+    .toBuffer();
 
-  return { width, height, dominant };
+  return { width, height, dominant, palette: extractPalette(sample) };
 };
 
 const buildImage = async (
@@ -60,10 +76,10 @@ const buildImage = async (
 ): Promise<BuildResult> => {
   const input = await readFile(path.join(SOURCE_DIR, entry.file));
   const sourceHash = sha256(input);
-  const info = await cache.remember(["info", sourceHash], async () =>
+  const info = await cache.remember(["info-palette", sourceHash], async () =>
     Buffer.from(JSON.stringify(await readSourceInfo(input)))
   );
-  const { width, height, dominant }: SourceInfo = JSON.parse(info.data.toString());
+  const { width, height, dominant, palette }: SourceInfo = JSON.parse(info.data.toString());
 
   const themeDir = path.join(OUTPUT_DIR, entry.theme);
   await mkdir(themeDir, { recursive: true });
@@ -102,6 +118,7 @@ const buildImage = async (
       author: entry.author ?? null,
       link: entry.link ?? null,
       color: toHexColor(dominant),
+      palette,
       aspectRatio: Math.round((width / height) * 1000) / 1000,
       sources: sources.map(({ width, url }) => ({ width, url })),
       thumbnail: { width: thumbnail.width, url: thumbnail.url },

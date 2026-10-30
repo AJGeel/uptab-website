@@ -11,42 +11,42 @@ const PARTICLES = [
     position: { left: "-0.28em", top: "-0.12em" },
     size: "0.3em",
     delay: "0s",
-    fill: "#25B1FF",
+    fill: "var(--lovely-light)",
   },
   {
     position: { left: "36%", top: "-0.4em" },
     size: "0.24em",
     delay: "0.7s",
-    fill: "#138CD0",
+    fill: "var(--lovely)",
   },
   {
     position: { left: "66%", top: "-0.26em" },
     size: "0.32em",
     delay: "1.4s",
-    fill: "#25B1FF",
+    fill: "var(--lovely-light)",
   },
   {
     position: { right: "-0.42em", top: "-0.16em" },
     size: "0.42em",
     delay: "2.1s",
-    fill: "#138CD0",
+    fill: "var(--lovely)",
   },
   {
     position: { right: "-0.58em", top: "0.36em" },
     size: "0.22em",
     delay: "2.8s",
-    fill: "#25B1FF",
+    fill: "var(--lovely-light)",
   },
   {
     position: { left: "16%", top: "0.92em" },
     size: "0.2em",
     delay: "3.5s",
-    fill: "#138CD0",
+    fill: "var(--lovely)",
   },
 ];
 
 const Lovely = () => (
-  <span className="relative inline-block whitespace-nowrap">
+  <span className="ut-accent relative inline-block whitespace-nowrap">
     <span className="ut-lovely">lovely</span>
     {PARTICLES.map(({ position, size, delay, fill }) => (
       <span
@@ -61,10 +61,10 @@ const Lovely = () => (
         }}
       >
         <svg className="ut-pt-s" viewBox="0 0 20 20">
-          <path d={SPARKLE} fill={fill} />
+          <path d={SPARKLE} style={{ fill }} />
         </svg>
         <svg className="ut-pt-h" viewBox="0 0 20 20">
-          <path d={HEART} fill={fill} />
+          <path d={HEART} style={{ fill }} />
         </svg>
       </span>
     ))}
@@ -99,7 +99,10 @@ export const Hero = ({
   const srcSet = photo.sources.map(({ url, width }) => `${new URL(url).pathname} ${width}w`).join(", ");
 
   return (
-    <header className="relative flex min-h-svh flex-col overflow-hidden bg-[#8fc3d0]">
+    <header
+      className="relative flex min-h-svh flex-col overflow-hidden bg-[#8fc3d0]"
+      style={{ ["--hero-color" as string]: photo.palette[0] ?? "#138CD0" }}
+    >
       {/* A plain img: next/image would re-encode the renditions, softening them */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img

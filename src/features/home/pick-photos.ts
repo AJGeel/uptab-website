@@ -2,7 +2,7 @@ import type { BackgroundImage } from "@/features/backgrounds/types/catalogue";
 import { hash } from "@/features/home/hash";
 
 /** How long one hero photo stays. */
-export const ROTATION_MS = 1 * 60 * 60 * 1000;
+export const ROTATION_MS = 1 * 1000;
 
 /** The hero is a wide banner, so portraits and squares crop badly. */
 const MIN_ASPECT_RATIO = 1.4;

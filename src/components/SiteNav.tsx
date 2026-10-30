@@ -1,6 +1,6 @@
 "use client";
 
-import { SparklesIcon } from "@heroicons/react/24/solid";
+import { FaceSmileIcon } from "@heroicons/react/24/solid";
 import type { Route } from "next";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -80,7 +80,7 @@ const MenuIcon = ({ open }: { open: boolean }) => (
 
 const AdminLabel = ({ label }: { label: string }) => (
   <span className="inline-flex items-center gap-1.5">
-    <SparklesIcon className="size-4" aria-hidden="true" />
+    <FaceSmileIcon className="size-4" aria-hidden="true" />
     {label}
   </span>
 );

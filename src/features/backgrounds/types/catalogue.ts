@@ -36,6 +36,8 @@ export type BackgroundImage = {
   link: string | null;
   /** Dominant colour as "#rrggbb", shown while the image loads. */
   color: string;
+  /** Up to three vivid colours of the photo as "#rrggbb", most prominent first. Empty for a monochrome photo. */
+  palette: string[];
   /** Original aspect ratio, width / height (e.g. 1.5). */
   aspectRatio: number;
   /** Available renditions, smallest first. Never larger than the source. */

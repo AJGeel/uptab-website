@@ -43,6 +43,41 @@ const LightboxPhoto = ({ image }: { image: BackgroundImage }) => {
   );
 };
 
+/** A colour dot. Hover shows its hex straight away; clicking copies it. */
+const Swatch = ({ color }: { color: string }) => {
+  const [isCopied, setIsCopied] = useState(false);
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(color);
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 1500);
+    } catch {
+      // Clipboard access can be blocked; the hex is still shown on hover
+    }
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={copy}
+      aria-label={`Copy ${color}`}
+      className="group relative size-3.5 rounded-full ring-1 ring-white/30 duration-150 hover:scale-125 active:scale-95"
+      style={{ backgroundColor: color }}
+    >
+      <span
+        aria-hidden
+        className={cn(
+          "pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 rounded-md bg-white px-1.5 py-0.5 text-xs font-medium whitespace-nowrap text-black opacity-0 duration-100 group-hover:opacity-100",
+          isCopied && "opacity-100"
+        )}
+      >
+        {isCopied ? "Copied!" : color}
+      </span>
+    </button>
+  );
+};
+
 const Details = ({
   image,
   themeName,
@@ -80,17 +115,11 @@ const Details = ({
         <span>
           {largest.width} × {height}
         </span>
-        <span className="flex items-center gap-1.5">
-          <span
-            aria-hidden
-            className="size-3 rounded-full ring-1 ring-white/30"
-            style={{ backgroundColor: image.color }}
-          />
-          {image.color}
+        <span className="flex items-center gap-1">
+          {[image.color, ...image.palette].map((color) => (
+            <Swatch key={color} color={color} />
+          ))}
         </span>
-        <a href={largest.url} {...targetBlank} className="text-sky-400 hover:text-white">
-          Full size
-        </a>
       </div>
     </div>
   );
