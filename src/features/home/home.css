@@ -5,12 +5,14 @@
 /* The hero photo's most prominent colour, nudged to a legible lightness */
 .ut-accent{--lovely:oklch(from var(--hero-color,#138CD0) clamp(.5,l,.62) clamp(.1,c,.17) h);--lovely-light:oklch(from var(--lovely) calc(l + .1) c h)}
 .ut-lovely{color:var(--lovely,#138CD0);-webkit-text-fill-color:rgba(255,255,255,.6);-webkit-text-stroke:.04em var(--lovely,#138CD0);paint-order:stroke fill;letter-spacing:-0.02em}
-.ut-pt{position:absolute;pointer-events:none;display:block}
-.ut-pt svg{position:absolute;inset:0;width:100%;height:100%;transform-origin:center;overflow:visible}
-.ut-pt-s{animation:utSpark 5s cubic-bezier(.3,1.4,.5,1) var(--d,0s) infinite both}
-.ut-pt-h{animation:utHeart 5s cubic-bezier(.2,.8,.3,1) var(--d,0s) infinite both}
-@keyframes utSpark{0%{opacity:0;transform:scale(0) rotate(-45deg)}9%{opacity:1;transform:scale(1.2) rotate(0deg)}16%{opacity:1;transform:scale(.85) rotate(25deg)}24%{opacity:1;transform:scale(1) rotate(45deg)}31%,100%{opacity:0;transform:scale(0) rotate(120deg)}}
-@keyframes utHeart{0%,26%{opacity:0;transform:translateY(0) scale(0) rotate(0deg)}34%{opacity:1;transform:translateY(-10%) scale(1.25) rotate(-6deg)}42%{opacity:1;transform:translateY(-30%) scale(.95) rotate(4deg)}72%{opacity:.9;transform:translateY(-140%) scale(1) rotate(-8deg)}86%,100%{opacity:0;transform:translateY(-200%) scale(.7) rotate(8deg)}}
+.ut-pt{position:absolute;display:block;pointer-events:none;opacity:0;animation:utPtRise var(--t) ease-out var(--d) infinite both}
+.ut-pt svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;transform-origin:center}
+.ut-pt-star{animation:utPtTwinkle 2.6s ease-in-out infinite}
+.ut-pt-heart{animation:utPtSway 2.8s ease-in-out infinite alternate}
+@keyframes utPtRise{0%{opacity:0;transform:translate(0,0)}20%{opacity:.9}70%{opacity:.5}100%{opacity:0;transform:translate(.1em,var(--r))}}
+@keyframes utPtTwinkle{0%,100%{transform:scale(.55) rotate(0)}50%{transform:scale(1) rotate(45deg)}}
+@keyframes utPtSway{from{transform:translateX(-.07em) rotate(-8deg)}to{transform:translateX(.07em) rotate(8deg)}}
+@media (prefers-reduced-motion:reduce){.ut-pt,.ut-pt svg{animation:none}}
 .ut-twinkle{transform-origin:center;transform-box:fill-box;animation:utTwinkle 2.8s ease-in-out 1.2s infinite both}
 .ut-twinkle-2{animation-delay:1.9s}
 @keyframes utTwinkle{0%,100%{transform:scale(.5) rotate(0);opacity:.35}50%{transform:scale(1) rotate(90deg);opacity:1}}
