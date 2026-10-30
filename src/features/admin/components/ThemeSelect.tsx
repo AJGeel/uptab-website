@@ -1,9 +1,9 @@
 "use client";
 
 import { Select } from "@base-ui/react/select";
-import Image from "next/image";
 import { useState } from "react";
 
+import { FadeImage } from "@/features/admin/components/ui/FadeImage";
 import type { ThemeSummary } from "@/features/admin/utils/theme-summary";
 
 import { NewThemeDialog } from "./NewThemeDialog";
@@ -16,7 +16,7 @@ const Thumbnails = ({ theme }: { theme: ThemeSummary }) => (
   <span className="flex shrink-0 gap-0.5 overflow-hidden rounded-sm bg-dark-pill">
     {theme.thumbnails.length > 0 ? (
       theme.thumbnails.map((src) => (
-        <Image
+        <FadeImage
           key={src}
           unoptimized
           src={src}

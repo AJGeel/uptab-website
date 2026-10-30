@@ -1,5 +1,4 @@
-import Image from "next/image";
-
+import { FadeImage } from "@/features/admin/components/ui/FadeImage";
 import { Field } from "@/features/admin/components/ui/Field";
 import { Input, inputClass } from "@/features/admin/components/ui/Input";
 import {
@@ -74,7 +73,7 @@ export const PhotoRow = ({
 
   return (
     <div className="grid gap-4 py-4 sm:grid-cols-[160px_1fr]">
-      <Image
+      <FadeImage
         unoptimized
         src={thumbnailUrl(entry.file)}
         width={160}

@@ -77,16 +77,16 @@ const MenuIcon = ({ open }: { open: boolean }) => (
   </svg>
 );
 
-// A plain anchor: /admin only exists as a route in dev, so it can't be a typed Link
+// A plain anchor: /adminland only exists as a route in dev, so it can't be a typed Link
 const AdminLink = ({ className }: { className?: string }) => (
   <a
-    href="/admin"
+    href="/adminland"
     className={cn(
       "inline-flex items-center justify-center gap-2 rounded-full bg-amber-300 font-bold text-black transition duration-150 hover:-translate-y-px hover:bg-amber-200 active:scale-[.97]",
       className
     )}
   >
-    Admin
+    Adminland
   </a>
 );
 

@@ -28,9 +28,9 @@ describe("summarizeTheme", () => {
       published: 3,
       pending: 2,
       thumbnails: [
-        "/admin/photos/safari/b.jpg",
-        "/admin/photos/safari/d.jpg",
-        "/admin/photos/safari/e.jpg",
+        "/adminland/photos/safari/b.jpg",
+        "/adminland/photos/safari/d.jpg",
+        "/adminland/photos/safari/e.jpg",
       ],
     });
   });

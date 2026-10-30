@@ -44,7 +44,7 @@ export const ThemeEditor = async ({ themeId }: { themeId: string }) => {
   return (
     <>
       <a
-        href="/admin"
+        href="/adminland"
         className="group -mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-dark-pill py-2 pr-4 pl-3 text-sm font-semibold text-white duration-150 hover:bg-[#222f44] active:scale-95"
       >
         <ArrowLeftIcon className="size-4 text-sky-400 duration-150 group-hover:-translate-x-0.5" />

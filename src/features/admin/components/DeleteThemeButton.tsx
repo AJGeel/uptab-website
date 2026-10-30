@@ -13,7 +13,7 @@ import { type ThemeToDelete, useDeleteTheme } from "@/features/admin/hooks/use-d
 export const DeleteThemeButton = (theme: ThemeToDelete) => {
   const router = useRouter();
   // Typed routes skip admin, which is a dev-only page
-  const { remove, isPending } = useDeleteTheme(() => router.push("/admin" as Route));
+  const { remove, isPending } = useDeleteTheme(() => router.push("/adminland" as Route));
 
   return (
     <Button

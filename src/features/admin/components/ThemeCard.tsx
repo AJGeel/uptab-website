@@ -1,20 +1,20 @@
-import Image from "next/image";
 
 import { ProgressBar } from "@/features/admin/components/ProgressBar";
 import { cardClass } from "@/features/admin/components/ui/card";
+import { FadeImage } from "@/features/admin/components/ui/FadeImage";
 import type { ThemeSummary } from "@/features/admin/utils/theme-summary";
 import { cn } from "@/utils/cn";
 
 
 export const ThemeCard = ({ theme }: { theme: ThemeSummary }) => (
   <a
-    href={`/admin/themes/${theme.id}`}
+    href={`/adminland/themes/${theme.id}`}
     draggable={false}
     className={cn(cardClass, "group flex h-full flex-col gap-3 duration-150 hover:shadow-md")}
   >
     <div className="grid aspect-video grid-cols-2 grid-rows-2 gap-1 overflow-hidden rounded-sm bg-dark-pill">
       {theme.thumbnails.map((src) => (
-        <Image
+        <FadeImage
           key={src}
           unoptimized
           draggable={false}

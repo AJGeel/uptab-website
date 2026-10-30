@@ -20,8 +20,8 @@ export const BackgroundsOverview = async () => {
   return (
     <>
       <div className="flex flex-col gap-1">
-        <h1 className="text-4xl font-extrabold tracking-[-0.045em] text-white">
-          Backgrounds<span className="text-sky-400">/admin</span>
+        <h1 className="text-4xl font-extrabold tracking-[-0.045em] text-sky-400">
+          /adminland
         </h1>
         <p className="text-sm text-dark-muted">
           Photos with an author are published; rebuild to update the catalogue

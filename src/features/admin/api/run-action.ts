@@ -21,12 +21,12 @@ import {
 import { readMetadata, type SourceMetadata } from "@/features/backgrounds/utils/metadata";
 
 export const NOT_LOCAL: ActionState = {
-  error: "The admin only works on localhost.",
+  error: "Adminland only works on localhost.",
   message: null,
 };
 
 /** Refreshes every admin page, including their status banners. */
-export const refreshAdmin = () => revalidatePath("/admin", "layout");
+export const refreshAdmin = () => revalidatePath("/adminland", "layout");
 
 type Outcome = string | { message: string; details: string | null };
 
