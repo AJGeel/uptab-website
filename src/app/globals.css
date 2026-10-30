@@ -67,6 +67,22 @@
     }
   }
 
+  --animate-timeline-draw: timeline-draw 1.4s var(--ease-out-soft) 0.4s backwards;
+  --animate-timeline-pop: timeline-pop 0.4s var(--ease-out-soft) 0.4s backwards;
+
+  @keyframes timeline-draw {
+    from {
+      scale: 0 1;
+    }
+  }
+
+  @keyframes timeline-pop {
+    from {
+      opacity: 0;
+      scale: 0;
+    }
+  }
+
   --animate-graciousEntry: graciousEntry 1.5s ease-in-out;
 
   /* A seamless loop over two copies of a row; the duration is set per row */

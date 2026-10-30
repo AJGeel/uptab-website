@@ -4,6 +4,7 @@ import { ViewTransition } from "react";
 import { externalUrls } from "@/config";
 import { getReleases } from "@/features/changelog/api/get-releases";
 import { ReleaseList } from "@/features/changelog/components/ReleaseList";
+import { ReleaseTimeline } from "@/features/changelog/components/ReleaseTimeline";
 
 const jetBrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains-mono" });
 
@@ -57,6 +58,7 @@ const Page = async () => {
               <Stat label="first release">{`v${first.version} · ${first.date}`}</Stat>
               <Stat label="targets">chrome · firefox</Stat>
             </dl>
+            <ReleaseTimeline releases={releases} />
           </div>
         </div>
 
