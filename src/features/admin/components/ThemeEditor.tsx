@@ -14,6 +14,7 @@ import { ProgressBar } from "@/features/admin/components/ProgressBar";
 import { SortableList } from "@/features/admin/components/SortableList";
 import { cardClass } from "@/features/admin/components/ui/card";
 import { Input } from "@/features/admin/components/ui/Input";
+import { UnsplashBrowse } from "@/features/admin/components/UnsplashBrowse";
 import { countPending, imagesOf } from "@/features/admin/utils/theme-summary";
 import { isPublished } from "@/features/backgrounds/utils/metadata";
 
@@ -101,6 +102,8 @@ export const ThemeEditor = async ({ themeId }: { themeId: string }) => {
           )}
         </section>
       </EditForm>
+
+      <UnsplashBrowse name={theme.name} blurb={theme.blurb} />
 
       {/* Room to scroll past the floating save bar */}
       <div className="h-12" />
