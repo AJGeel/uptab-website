@@ -24,7 +24,8 @@ const SLIDES: Slide[] = [
     kicker: "Backgrounds",
     title: "The whole tab is the view.",
     body: "Tuck the sidebar away and every new tab becomes a little trip somewhere, with a nod to the photographer who took you there.",
-    imageAlt: "UpTab new tab showing a full-screen Dolomites photo with weather and date",
+    image: "/images/tour/backgrounds.webp",
+    imageAlt: "UpTab new tab showing a full-screen snowy mountain photo with weather and date",
   },
   {
     tab: "Sidebar",
@@ -36,6 +37,7 @@ const SLIDES: Slide[] = [
         scoots off.
       </>
     ),
+    image: "/images/tour/sidebar.webp",
     imageAlt: "UpTab sidebar with weather, shortlinks and bookmarks beside a mountain photo",
   },
   {
@@ -43,6 +45,7 @@ const SLIDES: Slide[] = [
     kicker: "Collections",
     title: "Pick where you’d like to wake up.",
     body: "Windmills, giraffes, mountain peaks, petals or concrete. Tick what you love, add your own photos, and choose how often the view changes.",
+    image: "/images/tour/collections.webp",
     imageAlt: "UpTab backgrounds dialog with five photo collections",
   },
 ];
@@ -53,7 +56,7 @@ const ArrowButton = ({ direction, onClick }: { direction: "previous" | "next"; o
     aria-label={`${direction === "previous" ? "Previous" : "Next"} slide`}
     onClick={onClick}
     className={cn(
-      "inline-flex size-12 items-center justify-center rounded-full transition duration-150 hover:-translate-y-px active:scale-[.97]",
+      "inline-flex size-12 items-center justify-center rounded-full button-wipe active:scale-[.97]",
       direction === "previous" ? "border border-[#d5dee7] bg-white text-black" : "bg-black text-white"
     )}
   >
@@ -116,7 +119,7 @@ export const Tour = ({ autoplay = true }: { autoplay?: boolean }) => {
       <div className="mt-6 flex flex-wrap items-center gap-8">
         <div className="min-w-0 flex-[999_1_640px] rounded-[22px] bg-linear-to-b from-[#dde7f0] to-[#eef3f7] p-[clamp(0.625rem,1.6vw,1.375rem)] ring-1 ring-[#dce4ec] ring-inset">
           {/* Container query units, so what's drawn in a screenshot scales with it */}
-          <div className="@container relative aspect-1800/1130 w-full">
+          <div className="@container relative aspect-3248/2122 w-full">
             {SLIDES.map((item, index) => (
               <div
                 key={item.tab}
