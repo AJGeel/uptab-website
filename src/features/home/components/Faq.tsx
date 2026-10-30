@@ -43,7 +43,7 @@ export const Faq = () => (
           Questions, answered.
         </h2>
       </div>
-      <p className="max-w-90 text-[17px] leading-relaxed text-body">
+      <p className="max-w-90 text-right text-[17px] leading-relaxed text-balance text-body">
         Straight answers from the one human behind it. With feelings.
       </p>
     </div>

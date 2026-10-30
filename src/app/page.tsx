@@ -46,7 +46,7 @@ const Home = async () => {
         <SiteNav theme="light" />
         {/* The hero fills the first screen, so the marquee starts just below the fold. Shorter screens get the hero's full content. */}
         <Hero photo={hero}>
-          <StoreActions elevated className="mt-8" otherClassName="text-[#16222f]" />
+          <StoreActions elevated otherClassName="text-[#16222f]" />
         </Hero>
         <SellingPoints photoCount={images.length} />
         <main>
