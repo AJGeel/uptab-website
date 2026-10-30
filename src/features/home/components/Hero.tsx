@@ -1,9 +1,5 @@
-import Image from "next/image";
-
 import type { BackgroundImage } from "@/features/backgrounds/types/catalogue";
 import { externalUrlOpts } from "@/utils/externalUrlOpts";
-
-const HERO_MAX_WIDTH = 2560;
 
 const SPARKLE = "M10 0l2.2 7.8L20 10l-7.8 2.2L10 20l-2.2-7.8L0 10l7.8-2.2z";
 const HEART =
@@ -75,7 +71,7 @@ const Lovely = () => (
   </span>
 );
 
-const CREDIT_CLASS = "rounded-full bg-black/65 px-3.5 py-2 text-[13px] font-medium text-white backdrop-blur-md";
+const CREDIT_CLASS = "rounded-full bg-black/25 px-3 py-1.5 text-xs text-white/80 backdrop-blur-sm";
 
 /** "Photo by …", linking to the photographer's page when the catalogue has one. */
 const PhotoCredit = ({ author, link }: { author: string; link: string | null }) =>
@@ -83,7 +79,7 @@ const PhotoCredit = ({ author, link }: { author: string; link: string | null }) 
     <a
       href={link}
       {...externalUrlOpts}
-      className={`${CREDIT_CLASS} transition-colors hover:bg-white/70 hover:text-black`}
+      className={`${CREDIT_CLASS} transition-colors hover:bg-black/55 hover:text-white`}
     >
       Photo by {author}
     </a>
@@ -99,37 +95,42 @@ export const Hero = ({
   photo: BackgroundImage;
   children: React.ReactNode;
 }) => {
-  // Full-bleed, but not worth the 4K rendition
-  const source =
-    photo.sources.findLast(({ width }) => width <= HERO_MAX_WIDTH) ??
-    photo.sources[0];
+  // Every prebuilt rendition, so the browser picks the sharpest one for the screen
+  const srcSet = photo.sources.map(({ url, width }) => `${new URL(url).pathname} ${width}w`).join(", ");
 
   return (
     <header className="relative flex min-h-svh flex-col overflow-hidden bg-[#8fc3d0]">
-      <Image
-        // A local path, so next/image can optimize it without remotePatterns
-        src={new URL(source.url).pathname}
-        alt=""
-        fill
-        priority
+      {/* A plain img: next/image would re-encode the renditions, softening them */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={new URL(photo.sources.at(-1)!.url).pathname}
+        srcSet={srcSet}
         sizes="100vw"
-        className="object-cover"
+        alt=""
+        fetchPriority="high"
+        className="absolute inset-0 size-full object-cover"
       />
       <div className="ut-scrim absolute inset-0" aria-hidden="true" />
 
-      <div className="relative flex max-w-190 flex-1 flex-col px-[clamp(1rem,4vw,3.5rem)] pt-[calc(6rem+clamp(2rem,7vw,6rem))]">
-        <h1 className="text-[clamp(2.75rem,6.4vw,5rem)] leading-display font-extrabold tracking-[-0.045em] text-balance text-black">
-          Open a tab. Land somewhere <Lovely />
-        </h1>
-        <p className="mt-6 max-w-130 text-[clamp(1.125rem,1.6vw,1.3125rem)] leading-normal font-medium text-[#16222f]">
-          UpTab turns every blank new tab into a tiny holiday. Gorgeous photos,
-          the weather outside, your bookmarks within reach.
-        </p>
-        {children}
-      </div>
-
-      <div className="relative flex justify-end px-[clamp(1rem,4vw,3.5rem)] pt-12 pb-7">
-        {photo.author && <PhotoCredit author={photo.author} link={photo.link} />}
+      <div className="relative flex flex-1 flex-col px-[clamp(1rem,4vw,3.5rem)] pt-24 pb-7">
+        {/* Centred on mobile; from md up, bottom left with the credit on the right */}
+        <div className="flex flex-1 flex-col items-center justify-center text-center md:items-start md:justify-end md:text-left">
+          <div className="max-w-190">
+            <h1 className="text-[clamp(2.75rem,6.4vw,5rem)] leading-display font-extrabold tracking-[-0.045em] text-balance text-black">
+              Open a tab. Land somewhere <Lovely />
+            </h1>
+            <p className="mx-auto mt-6 max-w-130 text-[clamp(1.125rem,1.6vw,1.3125rem)] leading-normal font-medium text-[#16222f] md:mx-0">
+              UpTab turns every blank new tab into a tiny holiday. Gorgeous photos,
+              the weather outside, your bookmarks within reach.
+            </p>
+          </div>
+          <div className="mt-8 flex justify-center md:justify-start">{children}</div>
+        </div>
+        {photo.author && (
+          <div className="flex justify-center pt-6 md:absolute md:right-[clamp(1rem,4vw,3.5rem)] md:bottom-7 md:pt-0">
+            <PhotoCredit author={photo.author} link={photo.link} />
+          </div>
+        )}
       </div>
     </header>
   );

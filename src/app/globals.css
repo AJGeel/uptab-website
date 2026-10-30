@@ -200,6 +200,30 @@
   }
 }
 
+/* Hue offset of the wipe-rainbow, registered so the animation can sweep it */
+@property --rainbow-shift {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+/* A button-wipe whose pastel rainbow keeps sliding while hovered. Static under reduced motion. */
+@utility wipe-rainbow {
+  --wipe: linear-gradient(in oklch 90deg, oklch(0.88 0.1 calc(25 + var(--rainbow-shift))), oklch(0.88 0.1 calc(85 + var(--rainbow-shift))), oklch(0.88 0.1 calc(145 + var(--rainbow-shift))), oklch(0.88 0.1 calc(205 + var(--rainbow-shift))), oklch(0.88 0.1 calc(265 + var(--rainbow-shift))), oklch(0.88 0.1 calc(325 + var(--rainbow-shift))), oklch(0.88 0.1 calc(385 + var(--rainbow-shift))));
+
+  @media (prefers-reduced-motion: no-preference) {
+    &:hover {
+      animation: rainbow-shift 4s linear infinite;
+    }
+  }
+}
+
+@keyframes rainbow-shift {
+  to {
+    --rainbow-shift: 360;
+  }
+}
+
 @utility crispy-outline {
   @apply outline-1 outline-black/10;
 }

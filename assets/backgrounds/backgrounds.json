@@ -21,14 +21,14 @@
       "blurb": "Solid lines and interesting shapes. Hopefully, this tab won’t collapse."
     },
     {
+      "id": "highland-mist",
+      "name": "Misty Haze",
+      "blurb": "A perpetually moody background for your browsing."
+    },
+    {
       "id": "safari",
       "name": "Safari",
       "blurb": "Vast landscapes for endless browsing. We’re hoping you don’t get lost."
-    },
-    {
-      "id": "highland-mist",
-      "name": "Highland Mist",
-      "blurb": "A perpetually moody background for your browsing."
     }
   ],
   "images": [
@@ -59,13 +59,6 @@
       "file": "holland/green-grass-field-kinderdijk.jpg",
       "author": "Thomas Bormans",
       "link": "https://unsplash.com/photos/green-grass-field-near-body-of-water-during-sunset-kNmlCjM3apA"
-    },
-    {
-      "id": "green-grass-field-near-sea",
-      "theme": "holland",
-      "file": "holland/green-grass-field-near-sea.jpg",
-      "author": "Dana Marin",
-      "link": "https://unsplash.com/photos/green-grass-field-near-sea-during-daytime-Sa9msnED0RA"
     },
     {
       "id": "gray-windmill",
@@ -703,6 +696,349 @@
       "file": "flower-power/rodion-kutsaiev-tcpubu8h2c0-unsplash.jpg",
       "author": "Rodion Kutsaiev",
       "link": "https://unsplash.com/photos/tcPUbu8H2c0"
+    },
+    {
+      "id": "ricardo-gomez-angel-jg4pkrwaico-unsplash",
+      "theme": "highland-mist",
+      "file": "highland-mist/ricardo-gomez-angel-jg4pkrwaico-unsplash.jpg",
+      "author": "Ricardo Gomez Angel",
+      "link": "https://unsplash.com/photos/white-clouds-over-mountain-during-daytime-jg4pkrwaico"
+    },
+    {
+      "id": "dave-hoefler-od287vqyufw-unsplash",
+      "theme": "highland-mist",
+      "file": "highland-mist/dave-hoefler-od287vqyufw-unsplash.jpg",
+      "author": "Dave Hoefler",
+      "link": "https://unsplash.com/photos/evergreen-forest-shrouded-in-fog-od287vQyufw"
+    },
+    {
+      "id": "rebecca-prest-f0rqieonv3c-unsplash",
+      "theme": "highland-mist",
+      "file": "highland-mist/rebecca-prest-f0rqieonv3c-unsplash.jpg",
+      "author": "Rebecca Prest",
+      "link": "https://unsplash.com/photos/green-forest-covered-by-fog-F0rQieonv3c"
+    },
+    {
+      "id": "nathan-anderson-v1pu3wsfiee-unsplash",
+      "theme": "highland-mist",
+      "file": "highland-mist/nathan-anderson-v1pu3wsfiee-unsplash.jpg",
+      "author": "Nathan Anderson",
+      "link": "https://unsplash.com/photos/fogy-sky-v1pu3WSFieE"
+    },
+    {
+      "id": "sharad-bhat-jdircxejct0-unsplash",
+      "theme": "highland-mist",
+      "file": "highland-mist/sharad-bhat-jdircxejct0-unsplash.jpg",
+      "author": "Sharad Bhat",
+      "link": "https://unsplash.com/photos/mountain-under-cloudy-sky-JdiRcXEJcT0"
+    },
+    {
+      "id": "chris-lawton-6tfo1m8-gas-unsplash",
+      "theme": "highland-mist",
+      "file": "highland-mist/chris-lawton-6tfo1m8-gas-unsplash.jpg",
+      "author": "Chris Lawton",
+      "link": "https://unsplash.com/photos/mountain-with-trees-covered-with-fogs-at-daytime-6tfO1M8_gas"
+    },
+    {
+      "id": "ricardo-gomez-angel-dtsac-s-7fs-unsplash",
+      "theme": "highland-mist",
+      "file": "highland-mist/ricardo-gomez-angel-dtsac-s-7fs-unsplash.jpg",
+      "author": "Ricardo Gomez Angel",
+      "link": "https://unsplash.com/photos/silhouette-of-mountains-during-daytime-dTSaC-S-7fs"
+    },
+    {
+      "id": "alessio-soggetti-pdgbci-4jr8-unsplash",
+      "theme": "highland-mist",
+      "file": "highland-mist/alessio-soggetti-pdgbci-4jr8-unsplash.jpg",
+      "author": "Alessio Soggetti",
+      "link": "https://unsplash.com/photos/view-of-mountain-PdGBci-4jR8"
+    },
+    {
+      "id": "tobias-tullius-pxxtq6bp6cs-unsplash",
+      "theme": "highland-mist",
+      "file": "highland-mist/tobias-tullius-pxxtq6bp6cs-unsplash.jpg",
+      "author": "Tobias Tullius",
+      "link": "https://unsplash.com/photos/green-leafed-trees-covered-by-fog-during-daytime-PXXtq6bp6cs"
+    },
+    {
+      "id": "marek-piwnicki-priuwb0yveq-unsplash",
+      "theme": "highland-mist",
+      "file": "highland-mist/marek-piwnicki-priuwb0yveq-unsplash.jpg",
+      "author": "Marek Piwnicki",
+      "link": "https://unsplash.com/photos/greyscale-photo-of-mountain-pRiUWB0YVeQ"
+    },
+    {
+      "id": "noaa-ju-joez2saq-unsplash",
+      "theme": "highland-mist",
+      "file": "highland-mist/noaa-ju-joez2saq-unsplash.jpg",
+      "author": "NOAA",
+      "link": "https://unsplash.com/photos/black-mountains-under-white-clouds-during-daytime-jU-JOEZ2saQ"
+    },
+    {
+      "id": "eric-muhr-fs-bcmsv-ha-unsplash",
+      "theme": "highland-mist",
+      "file": "highland-mist/eric-muhr-fs-bcmsv-ha-unsplash.jpg",
+      "author": "Eric Muhr",
+      "link": "https://unsplash.com/photos/forest-covered-with-fogs-Fs-bcmsV-hA"
+    },
+    {
+      "id": "alexandre-gr-goire-w-eawnigom0-unsplash",
+      "theme": "highland-mist",
+      "file": "highland-mist/alexandre-gr-goire-w-eawnigom0-unsplash.jpg",
+      "author": "Alexandre Grégoire",
+      "link": "https://unsplash.com/photos/silhouette-of-trees-and-body-of-water-in-sunrise-background-w-EAWnIgoM0"
+    },
+    {
+      "id": "laura-lefurgey-smith-pv69pg9yeew-unsplash",
+      "theme": "highland-mist",
+      "file": "highland-mist/laura-lefurgey-smith-pv69pg9yeew-unsplash.jpg",
+      "author": "Laura Lefurgey-Smith",
+      "link": "https://unsplash.com/photos/green-pine-trees-with-clouds-at-daytime-pV69pG9YeEw"
+    },
+    {
+      "id": "sergey-pesterev-jwd3o-ht8za-unsplash",
+      "theme": "highland-mist",
+      "file": "highland-mist/sergey-pesterev-jwd3o-ht8za-unsplash.jpg",
+      "author": "Sergey Pesterev",
+      "link": "https://unsplash.com/photos/green-trees-near-lake-under-white-clouds-and-blue-sky-during-daytime-jWD3o-Ht8ZA"
+    },
+    {
+      "id": "roksolana-zasiadko-rs2wbcgn7km-unsplash",
+      "theme": "highland-mist",
+      "file": "highland-mist/roksolana-zasiadko-rs2wbcgn7km-unsplash.jpg",
+      "author": "Roksolana Zasiadko",
+      "link": "https://unsplash.com/photos/photo-of-green-forest-under-dark-sky-rS2WbCgN7KM"
+    },
+    {
+      "id": "paul-pastourmatzis-ozdkewdxxju-unsplash",
+      "theme": "highland-mist",
+      "file": "highland-mist/paul-pastourmatzis-ozdkewdxxju-unsplash.jpg",
+      "author": "Paul Pastourmatzis",
+      "link": "https://unsplash.com/photos/fog-covered-trees-OZdKEwDXXJU"
+    },
+    {
+      "id": "philipp-upr8rasxvwg-unsplash",
+      "theme": "highland-mist",
+      "file": "highland-mist/philipp-upr8rasxvwg-unsplash.jpg",
+      "author": "Philipp",
+      "link": "https://unsplash.com/photos/a-foggy-forest-filled-with-lots-of-trees-upR8raSXvwg"
+    },
+    {
+      "id": "markos-mant-ln9wvxbdqr0-unsplash",
+      "theme": "highland-mist",
+      "file": "highland-mist/markos-mant-ln9wvxbdqr0-unsplash.jpg",
+      "author": "Markos Mant",
+      "link": "https://unsplash.com/photos/a-forest-filled-with-lots-of-trees-covered-in-fog-Ln9wvXBDqr0"
+    },
+    {
+      "id": "olivier-guillard-ju7yrzqsqda-unsplash",
+      "theme": "highland-mist",
+      "file": "highland-mist/olivier-guillard-ju7yrzqsqda-unsplash.jpg",
+      "author": "Olivier Guillard",
+      "link": "https://unsplash.com/photos/ship-on-body-of-water-near-falls-JU7yrZQsqDA"
+    },
+    {
+      "id": "osama-saeed-g2g2fdydbo0-unsplash",
+      "theme": "highland-mist",
+      "file": "highland-mist/osama-saeed-g2g2fdydbo0-unsplash.jpg",
+      "author": "Osama Saeed",
+      "link": "https://unsplash.com/photos/grey-ferry-sailing-on-blue-turbulent-waters-G2G2FDYDBO0"
+    },
+    {
+      "id": "navin-hardyal-figvaqro-qi-unsplash",
+      "theme": "highland-mist",
+      "file": "highland-mist/navin-hardyal-figvaqro-qi-unsplash.jpg",
+      "author": "Navin Hardyal",
+      "link": "https://unsplash.com/photos/a-view-of-a-mountain-range-at-sunset-FIgVAQRO_QI"
+    },
+    {
+      "id": "doga-dogan-alfl1xatxqe-unsplash",
+      "theme": "highland-mist",
+      "file": "highland-mist/doga-dogan-alfl1xatxqe-unsplash.jpg",
+      "author": "Doga Dogan",
+      "link": "https://unsplash.com/photos/a-group-of-trees-that-are-in-the-grass-ALFL1XaTxqE"
+    },
+    {
+      "id": "paul-pastourmatzis-kt3wlrl-bsg-unsplash",
+      "theme": "highland-mist",
+      "file": "highland-mist/paul-pastourmatzis-kt3wlrl-bsg-unsplash.jpg",
+      "author": "Paul Pastourmatzis",
+      "link": "https://unsplash.com/photos/silhouette-of-trees-covered-by-fog-KT3WlrL_bsg"
+    },
+    {
+      "id": "vulpyr-photography-wecbjixvanw-unsplash",
+      "theme": "highland-mist",
+      "file": "highland-mist/vulpyr-photography-wecbjixvanw-unsplash.jpg",
+      "author": "Vulpyr Photography",
+      "link": "https://unsplash.com/photos/a-forest-filled-with-lots-of-trees-covered-in-fog-wECBJIxVaNw"
+    },
+    {
+      "id": "haci-u-ze-hcgi8-unsplash",
+      "theme": "safari",
+      "file": "safari/haci-u-ze-hcgi8-unsplash.jpg",
+      "author": "Haci",
+      "link": "https://unsplash.com/photos/vast-desert-landscape-with-rocky-formations-under-a-clear-sky-U-Ze-_hcGI8"
+    },
+    {
+      "id": "royce-fonseca-48brzya67po-unsplash",
+      "theme": "safari",
+      "file": "safari/royce-fonseca-48brzya67po-unsplash.jpg",
+      "author": "Royce Fonseca",
+      "link": "https://unsplash.com/photos/white-sand-dunes-with-a-distant-mountain-range-48bRZya67Po"
+    },
+    {
+      "id": "brian-wangenheim-htnt5xpenbs-unsplash",
+      "theme": "safari",
+      "file": "safari/brian-wangenheim-htnt5xpenbs-unsplash.jpg",
+      "author": "Brian Wangenheim",
+      "link": "https://unsplash.com/photos/brown-sand-field-under-blue-sky-during-daytime-hTNt5xPENBs"
+    },
+    {
+      "id": "francesca-fabian-wctrfucfb7w-unsplash",
+      "theme": "safari",
+      "file": "safari/francesca-fabian-wctrfucfb7w-unsplash.jpg",
+      "author": "Francesca Fabian",
+      "link": "https://unsplash.com/photos/vast-desert-landscape-with-sand-dunes-under-a-blue-sky-WCTrfUCFb7w"
+    },
+    {
+      "id": "hu-chen-t-7mlatf9ii-unsplash",
+      "theme": "safari",
+      "file": "safari/hu-chen-t-7mlatf9ii-unsplash.jpg",
+      "author": "Hu Chen",
+      "link": "https://unsplash.com/photos/white-suv-passing-through-herd-of-buffaloes-during-daytime-t-7Mlatf9iI"
+    },
+    {
+      "id": "tobin-rogers-kdtjnvs0wq8-unsplash",
+      "theme": "safari",
+      "file": "safari/tobin-rogers-kdtjnvs0wq8-unsplash.jpg",
+      "author": "Tobin Rogers",
+      "link": "https://unsplash.com/photos/two-brown-giraffe-on-brown-grass-field-kdTjNVs0wQ8"
+    },
+    {
+      "id": "matthias-mullie-u2-97ebhfec-unsplash",
+      "theme": "safari",
+      "file": "safari/matthias-mullie-u2-97ebhfec-unsplash.jpg",
+      "author": "Matthias Mullie",
+      "link": "https://unsplash.com/photos/herd-of-gray-rhinoceros-resting-on-ground-during-day-u2-97eBhFEc"
+    },
+    {
+      "id": "zachary-pearson-thc1uwwdmfm-unsplash",
+      "theme": "safari",
+      "file": "safari/zachary-pearson-thc1uwwdmfm-unsplash.jpg",
+      "author": "ZACHARY PEARSON",
+      "link": "https://unsplash.com/photos/water-buffalo-on-wheat-field-thC1uwWdMfM"
+    },
+    {
+      "id": "jack-young-zzagaz-akmg-unsplash",
+      "theme": "safari",
+      "file": "safari/jack-young-zzagaz-akmg-unsplash.jpg",
+      "author": "Jack Young",
+      "link": "https://unsplash.com/photos/brown-and-black-horses-on-brown-field-during-daytime-ZZagaZ-aKmg"
+    },
+    {
+      "id": "magdalena-kula-manchee-qgogz1ui56y-unsplash",
+      "theme": "safari",
+      "file": "safari/magdalena-kula-manchee-qgogz1ui56y-unsplash.jpg",
+      "author": "Magdalena Kula Manchee",
+      "link": "https://unsplash.com/photos/a-hot-air-balloon-flying-over-a-field-qGoGz1ui56Y"
+    },
+    {
+      "id": "flavio-vallone-9i2wxo1o3s0-unsplash",
+      "theme": "safari",
+      "file": "safari/flavio-vallone-9i2wxo1o3s0-unsplash.jpg",
+      "author": "Flavio Vallone",
+      "link": "https://unsplash.com/photos/an-elephant-with-tusks-in-a-field-9i2WXo1o3s0"
+    },
+    {
+      "id": "sutirta-budiman-kjobqwmunww-unsplash",
+      "theme": "safari",
+      "file": "safari/sutirta-budiman-kjobqwmunww-unsplash.jpg",
+      "author": "sutirta budiman",
+      "link": "https://unsplash.com/photos/red-and-yellow-hot-air-balloon-over-field-with-zebras-kjOBqwMUnWw"
+    },
+    {
+      "id": "wade-lambert-vfdozbzkw1w-unsplash",
+      "theme": "safari",
+      "file": "safari/wade-lambert-vfdozbzkw1w-unsplash.jpg",
+      "author": "Wade Lambert",
+      "link": "https://unsplash.com/photos/male-brown-lion-lying-on-grass-VfdOzbZkW1w"
+    },
+    {
+      "id": "ashim-d-silva-h8b1t39sm2w-unsplash",
+      "theme": "safari",
+      "file": "safari/ashim-d-silva-h8b1t39sm2w-unsplash.jpg",
+      "author": "Ashim D’Silva",
+      "link": "https://unsplash.com/photos/black-jeep-wrangler-on-dirt-road-during-daytime-h8b1T39sm2w"
+    },
+    {
+      "id": "teodora-vaklinska-zdd1wutx2py-unsplash",
+      "theme": "holland",
+      "file": "holland/teodora-vaklinska-zdd1wutx2py-unsplash.jpg",
+      "author": "Teodora Vaklinska",
+      "link": "https://unsplash.com/photos/picturesque-european-canal-with-traditional-boats-and-waterfront-architecture-zDd1wUtx2PY"
+    },
+    {
+      "id": "martijn-baudoin-spd8tpeggvs-unsplash",
+      "theme": "holland",
+      "file": "holland/martijn-baudoin-spd8tpeggvs-unsplash.jpg",
+      "author": "Martijn Baudoin",
+      "link": "https://unsplash.com/photos/bed-of-roses-SPd8tpEGgvs"
+    },
+    {
+      "id": "rupert-britton-l37n7a1ll6w-unsplash",
+      "theme": "holland",
+      "file": "holland/rupert-britton-l37n7a1ll6w-unsplash.jpg",
+      "author": "Rupert Britton",
+      "link": "https://unsplash.com/photos/red-tulip-flower-in-yellow-tulip-field-l37N7a1lL6w"
+    },
+    {
+      "id": "stephan-van-de-schootbrugge-k2s-zxaasms-unsplash",
+      "theme": "holland",
+      "file": "holland/stephan-van-de-schootbrugge-k2s-zxaasms-unsplash.jpg",
+      "author": "Stephan van de Schootbrugge",
+      "link": "https://unsplash.com/photos/purple-tulips-field-under-blue-sky-during-daytime-K2S_ZXAAsMs"
+    },
+    {
+      "id": "tayla-kohler-lei57tim5wc-unsplash",
+      "theme": "holland",
+      "file": "holland/tayla-kohler-lei57tim5wc-unsplash.jpg",
+      "author": "Tayla Kohler",
+      "link": "https://unsplash.com/photos/a-carousel-in-front-of-a-large-building-lEi57TiM5wc"
+    },
+    {
+      "id": "edwin-martens-umrrwsjzlfs-unsplash",
+      "theme": "holland",
+      "file": "holland/edwin-martens-umrrwsjzlfs-unsplash.jpg",
+      "author": "Edwin Martens",
+      "link": "https://unsplash.com/photos/a-large-building-with-a-dome-roof-uMRrwSJZlfs"
+    },
+    {
+      "id": "frans-ruiter-ktieizxobw8-unsplash",
+      "theme": "holland",
+      "file": "holland/frans-ruiter-ktieizxobw8-unsplash.jpg",
+      "author": "Frans Ruiter",
+      "link": "https://unsplash.com/photos/people-walking-on-park-near-brown-building-during-daytime-ktIeizXobW8"
+    },
+    {
+      "id": "moritz-kindler-uvdpgntng3c-unsplash",
+      "theme": "holland",
+      "file": "holland/moritz-kindler-uvdpgntng3c-unsplash.jpg",
+      "author": "Moritz Kindler",
+      "link": "https://unsplash.com/photos/city-with-high-rise-buildings-viewing-blue-sea-under-blue-and-white-skies-UVDpGnTNg3c"
+    },
+    {
+      "id": "redcharlie-ycvrjx3vwtc-unsplash",
+      "theme": "holland",
+      "file": "holland/redcharlie-ycvrjx3vwtc-unsplash.jpg",
+      "author": "redcharlie",
+      "link": "https://unsplash.com/photos/city-during-day-YcvRJX3vwtc"
+    },
+    {
+      "id": "javier-m-2hs8zbwolda-unsplash",
+      "theme": "holland",
+      "file": "holland/javier-m-2hs8zbwolda-unsplash.jpg",
+      "author": "Javier M.",
+      "link": "https://unsplash.com/photos/assorted-color-buildings-beside-body-of-water-2Hs8zbwOLDA"
     }
   ]
 }

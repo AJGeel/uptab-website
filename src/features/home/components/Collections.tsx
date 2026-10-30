@@ -104,7 +104,7 @@ export const Collections = ({
           <p className="text-[13px] font-bold tracking-[0.12em] text-sky-800 uppercase">
             Where to today?
           </p>
-          <h2 className="mt-3 text-[clamp(2.125rem,4vw,3.25rem)] leading-heading font-extrabold tracking-[-0.035em]">
+          <h2 className="mt-3 text-[clamp(2.125rem,4vw,3.25rem)] leading-heading font-extrabold tracking-[-0.035em] text-balance">
             {images.length} views. Pick your favourite corners of the world.
           </h2>
         </div>

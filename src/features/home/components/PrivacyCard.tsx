@@ -41,7 +41,7 @@ export const PrivacyCard = () => {
     <article className="ut-s2 flex flex-col gap-4.5 rounded-3xl bg-white p-7 ring-1 ring-[#e2e8ef] ring-inset">
       <div>
         <h3 className="text-[22px] font-extrabold tracking-tight">Private. Stubbornly.</h3>
-        <p className="mt-2 text-base leading-relaxed text-muted">Some switches just won’t switch. Give it a go.</p>
+        <p className="mt-2 text-base leading-relaxed text-balance text-muted">Some switches just won’t switch. Give it a go.</p>
       </div>
       <div className="relative mt-auto flex flex-col gap-1.5 pt-12">
         <div

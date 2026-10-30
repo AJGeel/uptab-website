@@ -1,12 +1,9 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
 
+import { useEasedPlayback } from "@/hooks/use-eased-playback";
 import { cn } from "@/utils/cn";
-
-/** Time constants (seconds) for the scroll speed to ease towards its target. */
-const STOP_EASING = 0.5;
-const RESUME_EASING = 1;
 
 type MarqueeProps = {
   children: ReactNode;
@@ -23,29 +20,7 @@ type MarqueeProps = {
  */
 export const Marquee = ({ children, duration = 40, className }: MarqueeProps) => {
   const trackRef = useRef<HTMLDivElement>(null);
-  const frameRef = useRef(0);
-
-  useEffect(() => () => cancelAnimationFrame(frameRef.current), []);
-
-  const easeTo = (target: number) => {
-    cancelAnimationFrame(frameRef.current);
-
-    const animation = trackRef.current?.getAnimations()[0];
-    if (!animation) return;
-
-    let last = performance.now();
-    const step = (now: number) => {
-      const easing = target === 0 ? STOP_EASING : RESUME_EASING;
-      const rate = animation.playbackRate;
-      const next = rate + (target - rate) * (1 - Math.exp(-(now - last) / 1000 / easing));
-      last = now;
-
-      const settled = Math.abs(target - next) < 0.005;
-      animation.playbackRate = settled ? target : next;
-      if (!settled) frameRef.current = requestAnimationFrame(step);
-    };
-    frameRef.current = requestAnimationFrame(step);
-  };
+  const easeTo = useEasedPlayback(trackRef);
 
   return (
     <div

@@ -78,34 +78,42 @@ const MenuIcon = ({ open }: { open: boolean }) => (
   </svg>
 );
 
-const AdminLabel = () => (
+const AdminLabel = ({ label }: { label: string }) => (
   <span className="inline-flex items-center gap-1.5">
     <SparklesIcon className="size-4" aria-hidden="true" />
-    Adminland
+    {label}
   </span>
 );
 
 // A plain anchor: /adminland only exists as a route in dev, so it can't be a typed Link
-const AdminLink = ({ className }: { className?: string }) => (
+export const AdminLink = ({
+  className,
+  href = "/adminland",
+  label = "Adminland",
+}: {
+  className?: string;
+  href?: string;
+  label?: string;
+}) => (
   <a
-    href="/adminland"
+    href={href}
     className={cn(
-      "group isolate inline-flex rainbow-cycle items-center justify-center gap-2 rounded-full font-bold hover:[--rainbow-l:0] active:scale-[.97]",
+      "group isolate inline-flex rainbow-cycle items-center justify-center gap-2 rounded-full font-bold hover:[--rainbow-l:1] active:scale-[.97]",
       className
     )}
   >
     <span className="relative">
       <span className="text-black/70">
-        <AdminLabel />
+        <AdminLabel label={label} />
       </span>
       <span aria-hidden className="absolute inset-0 text-black mix-blend-overlay">
-        <AdminLabel />
+        <AdminLabel label={label} />
       </span>
       <span
         aria-hidden
-        className="absolute inset-0 text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+        className="absolute inset-0 text-black opacity-0 transition-opacity duration-200 group-hover:opacity-100"
       >
-        <AdminLabel />
+        <AdminLabel label={label} />
       </span>
     </span>
   </a>
