@@ -11,7 +11,15 @@ type StoreButtonProps = {
   showOther?: boolean;
   /** The browser's logo before the label. */
   browserIcon?: boolean;
+  /** Size of that logo, in px. */
+  iconSize?: number;
   className?: string;
+};
+
+/** Each store's signature colours, which the button fills with on hover. Black text is readable on every stop. */
+const STORE_FILLS: Record<string, string> = {
+  Chrome: "linear-gradient(100deg, #8ab4f8, #4285f4)",
+  Firefox: "linear-gradient(100deg, #ff7139, #ff4f9a 55%, #a074ff)",
 };
 
 const TONES = {
@@ -63,7 +71,7 @@ export const OtherStoreLink = ({ browserIcon = false, className }: { browserIcon
     <a
       href={other.url}
       {...externalUrlOpts}
-      className={cn("text-sm font-semibold underline-offset-4 hover:underline", browserIcon && "inline-flex items-center gap-2", className)}
+      className={cn("link-pill text-sm font-semibold", browserIcon && "inline-flex items-center gap-2", className)}
     >
       {browserIcon && <BrowserIcon name={other.name} ready={ready} size={20} />}
       <BrowserText variants={stores.map(({ name }) => `Also on ${name}`)} current={`Also on ${other.name}`} ready={ready} />
@@ -72,21 +80,22 @@ export const OtherStoreLink = ({ browserIcon = false, className }: { browserIcon
 };
 
 /** Adds UpTab to the visitor's browser: the Firefox add-on, otherwise the Chrome Web Store. */
-export const StoreButton = ({ tone = "on-light", showOther = false, browserIcon = false, className }: StoreButtonProps) => {
-  const { url, name, label, stores, ready } = useStoreAttributes();
-
+export const StoreButton = ({ tone = "on-light", showOther = false, browserIcon = false, iconSize = 26, className }: StoreButtonProps) => {
+  const { url, name, label, stores, supported, ready } = useStoreAttributes();
+  
   const button = (
     <a
       href={url}
       {...externalUrlOpts}
+      style={{ "--wipe": STORE_FILLS[name], "--wipe-text": "#000" } as React.CSSProperties}
       className={cn(
-        "inline-flex min-h-12 items-center justify-center rounded-full px-5 font-bold whitespace-nowrap transition duration-150 hover:-translate-y-px active:scale-[.97]",
+        "group/store inline-flex min-h-12 items-center justify-center rounded-full button-wipe px-5 font-bold whitespace-nowrap active:scale-[.97]",
         TONES[tone],
         className
       )}
     >
-      {browserIcon && <BrowserIcon name={name} ready={ready} size={26} />}
-      <BrowserText variants={stores.map(({ name }) => `Add to ${name}`)} current={label} ready={ready} />
+      {browserIcon && supported && <BrowserIcon name={name} ready={ready} size={iconSize} />}
+      <BrowserText variants={[...stores.map(({ name }) => `Add to ${name}`), "Get UpTab"]} current={label} ready={ready} />
     </a>
   );
 

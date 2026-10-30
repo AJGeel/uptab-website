@@ -172,6 +172,34 @@
   background-color: rgba(19, 140, 208, 0.15);
 }
 
+/* Links turn into frosted white pills on hover instead of underlining. */
+@utility link-pill {
+  @apply -mx-2.5 rounded-full px-2.5 py-1 transition-colors duration-150 hover:bg-white/70 hover:text-black hover:backdrop-blur-md;
+}
+
+/*
+  Hover fills the button with a colour from the left, flipping the text for contrast.
+  Set --wipe (any gradient) and --wipe-text to change the colours; the button keeps its size.
+*/
+@utility button-wipe {
+  background-image: var(--wipe, linear-gradient(var(--color-sky-400), var(--color-sky-400)));
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: 0% 100%;
+  transition-property: background-size, color, scale;
+  transition-duration: 350ms, 350ms, 250ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1), cubic-bezier(0.22, 1, 0.36, 1), cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  &:hover {
+    background-size: 100% 100%;
+    color: var(--wipe-text, #000);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition-duration: 0ms;
+  }
+}
+
 @utility crispy-outline {
   @apply outline-1 outline-black/10;
 }

@@ -37,7 +37,7 @@ const Footer = ({ theme, credit }: FooterProps) => {
           <a
             href="https://github.com/ajgeel"
             {...externalUrlOpts}
-            className={cn("hover:underline", dark ? "text-white" : "text-black")}
+            className={cn("link-pill", dark ? "text-white" : "text-black")}
           >
             Arthur Geel
           </a>
@@ -49,7 +49,7 @@ const Footer = ({ theme, credit }: FooterProps) => {
           <Link
             key={href}
             href={href}
-            className="hover:underline"
+            className="link-pill"
             {...(external ? externalUrlOpts : {})}
           >
             {label}

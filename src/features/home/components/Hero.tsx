@@ -83,7 +83,7 @@ const PhotoCredit = ({ author, link }: { author: string; link: string | null }) 
     <a
       href={link}
       {...externalUrlOpts}
-      className={`${CREDIT_CLASS} underline-offset-4 transition-colors hover:bg-black/80 hover:underline`}
+      className={`${CREDIT_CLASS} transition-colors hover:bg-white/70 hover:text-black`}
     >
       Photo by {author}
     </a>

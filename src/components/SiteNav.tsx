@@ -82,7 +82,7 @@ const AdminLink = ({ className }: { className?: string }) => (
   <a
     href="/adminland"
     className={cn(
-      "inline-flex items-center justify-center gap-2 rounded-full bg-amber-300 font-bold text-black transition duration-150 hover:-translate-y-px hover:bg-amber-200 active:scale-[.97]",
+      "inline-flex items-center justify-center gap-2 rounded-full bg-amber-300 font-bold text-black transition-colors duration-150 hover:bg-amber-200 active:scale-[.97]",
       className
     )}
   >
@@ -169,7 +169,7 @@ export const SiteNav = ({ theme, logoOnly = false }: { theme: Theme; logoOnly?: 
             cn("font-bold", t.active)
           )
         )}
-        <StoreButton tone={t.tone} className="ml-1.5 min-h-0 py-2.5 text-[15px]" />
+        <StoreButton tone={t.tone} browserIcon iconSize={18} className="ml-1.5 min-h-0 gap-2 py-2.5 text-[15px]" />
       </div>
 
       <button
@@ -194,7 +194,7 @@ export const SiteNav = ({ theme, logoOnly = false }: { theme: Theme; logoOnly?: 
             t.sheet
           )}
         >
-          {IS_DEV && <AdminLink className="mb-1.5 min-h-14 rounded-2xl text-[17px]" />}
+          {IS_DEV && <AdminLink className="mb-1.5 min-h-14 rounded-full text-[17px]" />}
           {[{ href: "/", label: "Home" } satisfies NavLink, ...navLinks].map((link) =>
             renderLink(
               link,
@@ -202,7 +202,7 @@ export const SiteNav = ({ theme, logoOnly = false }: { theme: Theme; logoOnly?: 
               t.sheetActive
             )
           )}
-          <StoreButton tone={t.tone} className="mt-1.5 min-h-14 w-full rounded-2xl text-[17px]" />
+          <StoreButton tone={t.tone} className="mt-1.5 min-h-14 w-full text-[17px]" />
         </div>
       )}
       </>

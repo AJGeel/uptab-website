@@ -17,7 +17,7 @@ export const StoreActions = ({ elevated = false, otherClassName, className }: St
     <StoreButton
       tone="on-light"
       browserIcon
-      className={cn("min-h-13.5 gap-3 rounded-[14px] px-6 text-[17px]", elevated && "shadow-[0_14px_30px_-14px_rgba(2,14,44,0.6)]")}
+      className={cn("min-h-13.5 gap-3 px-6 text-[17px]", elevated && "shadow-[0_14px_30px_-14px_rgba(2,14,44,0.6)]")}
     />
     <OtherStoreLink browserIcon className={cn("text-[15px]", otherClassName)} />
   </div>

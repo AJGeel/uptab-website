@@ -46,7 +46,7 @@ export const RecentlyShipped = async () => {
                   href={`/changelog#v${version}` as Route}
                   className="group flex flex-wrap gap-x-5 gap-y-2 rounded-lg transition-colors"
                 >
-                  <span className="flex-[0_0_72px] font-extrabold text-sky-800 group-hover:underline">v{version}</span>
+                  <span className="flex-[0_0_72px] font-extrabold text-sky-800">v{version}</span>
                   <span className="flex-[1_1_260px] leading-normal group-hover:text-sky-800">
                     {headline && plainText(headline.text)}
                   </span>

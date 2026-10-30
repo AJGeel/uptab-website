@@ -76,7 +76,7 @@ const Page = async () => {
             href={`${externalUrls.github}/issues/new`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-12 items-center rounded-xl bg-white px-5 font-sans text-[15px] font-bold text-black transition duration-150 hover:-translate-y-px active:scale-[.97]"
+            className="inline-flex min-h-12 items-center rounded-full bg-white button-wipe px-5 font-sans text-[15px] font-bold text-black active:scale-[.97]"
           >
             Open an issue
           </a>

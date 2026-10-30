@@ -42,7 +42,7 @@ export const ReleaseList = ({ releases }: { releases: Release[] }) => {
             aria-pressed={enabled[kind]}
             onClick={() => setEnabled((current) => ({ ...current, [kind]: !current[kind] }))}
             className={cn(
-              "inline-flex min-h-10 items-center gap-2 rounded-[10px] px-3.5 text-sm font-bold ring-1 transition duration-150 ring-inset hover:-translate-y-px active:scale-[.97]",
+              "inline-flex min-h-10 items-center gap-2 rounded-full button-wipe px-3.5 text-sm font-bold ring-1 [--wipe-text:currentColor] [--wipe:linear-gradient(rgb(255_255_255/0.12),rgb(255_255_255/0.12))] ring-inset active:scale-[.97]",
               enabled[kind] ? [KINDS[kind].tint, KINDS[kind].text, KINDS[kind].ring] : "bg-dark-surface text-[#7f8da0] ring-[#243042]"
             )}
           >

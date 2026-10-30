@@ -7,12 +7,12 @@ const QUESTIONS: { mood: Mood; question: string; answer: string }[] = [
   {
     mood: "happy",
     question: "Does it work with my existing bookmarks?",
-    answer: "Yep. UpTab reads the bookmarks already in your browser. Nothing to import, nothing to sync, no homework.",
+    answer: "Yep. UpTab reads the bookmarks already in your browser. No imports, no syncs.",
   },
   {
     mood: "wink",
     question: "Do you store my data or browsing history?",
-    answer: "Nope. No tracking, no personal info, no peeking. Your settings live on your device and nowhere else.",
+    answer: "Nope. No tracking, no peeking. Your settings live on your device and nowhere else.",
   },
   {
     mood: "grin",
@@ -66,7 +66,7 @@ export const Faq = () => (
         <a
           href={`${externalUrls.github}/issues`}
           {...externalUrlOpts}
-          className="mt-auto inline-flex min-h-11 items-center gap-2 self-start rounded-xl bg-white px-4.5 text-[15px] font-bold text-black transition duration-150 hover:-translate-y-px active:scale-[.97]"
+          className="mt-auto inline-flex min-h-11 items-center gap-2 self-start rounded-full bg-white button-wipe px-4.5 text-[15px] font-bold text-black active:scale-[.97]"
         >
           Ask on GitHub
         </a>
