@@ -67,6 +67,22 @@
     }
   }
 
+  --animate-twinkle: twinkle 1.2s ease-in-out infinite;
+
+  @keyframes twinkle {
+    0%,
+    100% {
+      opacity: 0.55;
+      scale: 0.7;
+      rotate: 0deg;
+    }
+    50% {
+      opacity: 1;
+      scale: 1.25;
+      rotate: 25deg;
+    }
+  }
+
   --animate-timeline-draw: timeline-draw 1.4s var(--ease-out-soft) 0.4s backwards;
   --animate-timeline-pop: timeline-pop 0.4s var(--ease-out-soft) 0.4s backwards;
 

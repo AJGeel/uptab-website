@@ -70,12 +70,15 @@ export const SortableList = ({
   layout,
   withHandle = false,
   className,
+  leading,
 }: {
   items: Item[];
   onReorder: (ids: string[]) => Promise<ActionState>;
   layout: "grid" | "list";
   withHandle?: boolean;
   className?: string;
+  /** Not sortable, placed before the items, e.g. a card that adds one. */
+  leading?: ReactNode;
 }) => {
   const [isPending, startTransition] = useTransition();
   const [ids, setIds] = useOptimistic(items.map(({ id }) => id));
@@ -125,6 +128,7 @@ export const SortableList = ({
     >
       <SortableContext items={ids} strategy={layout === "grid" ? rectSortingStrategy : verticalListSortingStrategy}>
         <div onClickCapture={swallowClick} className={cn(className, isPending && "pointer-events-none")}>
+          {leading}
           {ids.map((id) => (
             <SortableItem key={id} id={id} withHandle={withHandle}>
               {items.find((item) => item.id === id)?.node}

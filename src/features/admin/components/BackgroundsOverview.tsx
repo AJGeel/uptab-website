@@ -1,6 +1,7 @@
 import { loadAdmin } from "@/features/admin/api/load-admin";
 import { reorderThemesAction } from "@/features/admin/api/reorder";
 import { AddPhotoForm } from "@/features/admin/components/AddPhotoForm";
+import { NewThemeCard } from "@/features/admin/components/NewThemeCard";
 import { SortableList } from "@/features/admin/components/SortableList";
 import { ThemeCard } from "@/features/admin/components/ThemeCard";
 import { ThemeContextMenu } from "@/features/admin/components/ThemeContextMenu";
@@ -33,6 +34,7 @@ export const BackgroundsOverview = async () => {
 
       <SortableList
         layout="grid"
+        leading={<NewThemeCard />}
         className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
         onReorder={reorderThemesAction}
         items={themes.map((theme) => ({

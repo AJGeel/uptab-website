@@ -37,13 +37,14 @@ const ToastList = () => {
 /**
  * Base UI toasts in the bottom right corner, newest nearest to it. Toasts of
  * type "loading" get a spinner. On narrow screens they're lifted, clear of a
- * floating bottom bar.
+ * floating bottom bar. Above modals (z-50), so an error raised inside a
+ * dialog can still be read.
  */
 export const Toaster = ({ children }: { children: ReactNode }) => (
   <Toast.Provider limit={4}>
     {children}
     <Toast.Portal>
-      <Toast.Viewport className="fixed right-4 bottom-4 z-50 flex w-80 flex-col-reverse gap-2 max-lg:bottom-20">
+      <Toast.Viewport className="pointer-events-auto fixed right-4 bottom-4 z-100 flex w-80 flex-col-reverse gap-2 max-lg:bottom-20">
         <ToastList />
       </Toast.Viewport>
     </Toast.Portal>

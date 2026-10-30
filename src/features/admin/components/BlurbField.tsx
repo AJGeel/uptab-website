@@ -1,9 +1,9 @@
 "use client";
 
-import { SparklesIcon } from "@heroicons/react/16/solid";
 import { useRef, useTransition } from "react";
 
 import { generateBlurbAction } from "@/features/admin/api/generate-blurb";
+import { AiLabel } from "@/features/admin/components/ui/AiLabel";
 import { Button } from "@/features/admin/components/ui/Button";
 import { Field } from "@/features/admin/components/ui/Field";
 import { Input } from "@/features/admin/components/ui/Input";
@@ -50,8 +50,7 @@ export const BlurbField = ({
           form={form}
         />
         <Button type="button" variant="dark" onClick={generate} disabled={isPending}>
-          <SparklesIcon className="size-4 text-amber-300" />
-          {isPending ? "Thinking…" : "Generate"}
+          <AiLabel isPending={isPending}>Generate</AiLabel>
         </Button>
       </span>
     </Field>

@@ -118,7 +118,7 @@ export const Hero = ({
       <div className="ut-scrim absolute inset-0" aria-hidden="true" />
 
       <div className="relative flex max-w-190 flex-1 flex-col px-[clamp(1rem,4vw,3.5rem)] pt-[calc(6rem+clamp(2rem,7vw,6rem))]">
-        <h1 className="text-[clamp(2.75rem,6.4vw,5.5rem)] leading-display font-extrabold tracking-[-0.045em] text-black">
+        <h1 className="text-[clamp(2.75rem,6.4vw,5rem)] leading-display font-extrabold tracking-[-0.045em] text-balance text-black">
           Open a tab. Land somewhere <Lovely />
         </h1>
         <p className="mt-6 max-w-130 text-[clamp(1.125rem,1.6vw,1.3125rem)] leading-normal font-medium text-[#16222f]">

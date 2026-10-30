@@ -1,19 +1,24 @@
 "use client";
 
 import { Dialog } from "@base-ui/react/dialog";
+import { useRef, useState, useTransition } from "react";
 
 import { createThemeAction } from "@/features/admin/api/create-theme";
+import { suggestThemesAction } from "@/features/admin/api/suggest-themes";
+import { AiLabel } from "@/features/admin/components/ui/AiLabel";
 import { Button, buttonClass } from "@/features/admin/components/ui/Button";
 import { Field } from "@/features/admin/components/ui/Field";
 import { Input } from "@/features/admin/components/ui/Input";
+import { useActionToast } from "@/features/admin/hooks/use-action-toast";
 import { toSlug } from "@/features/admin/utils/edits";
+import type { ThemeSuggestion } from "@/features/admin/utils/theme-suggestions";
 
 import { ActionForm } from "./ActionForm";
 
 
 /**
- * Creates a theme in a modal, opened from the theme picker. Reports the new
- * theme's ID, worked out the same way the server does, so it can be selected.
+ * Creates a theme in a modal, opened from the first card of the overview.
+ * Reports the new theme's ID, worked out the same way the server does.
  */
 export const NewThemeDialog = ({
   open,
@@ -24,10 +29,31 @@ export const NewThemeDialog = ({
   onOpenChange: (open: boolean) => void;
   onCreated: (id: string) => void;
 }) => {
-  const created = (data: FormData) => {
-    const id = String(data.get("id") ?? "").trim();
+  const nameRef = useRef<HTMLInputElement>(null);
+  const [suggestions, setSuggestions] = useState<ThemeSuggestion[]>([]);
+  const [isSuggesting, startSuggesting] = useTransition();
+  const notify = useActionToast();
 
-    onCreated(id || toSlug(String(data.get("name") ?? "")));
+  const suggest = () =>
+    startSuggesting(async () => {
+      const result = await suggestThemesAction();
+
+      if (result.error === null) {
+        setSuggestions(result.suggestions);
+      } else {
+        notify({ error: result.error, message: null });
+      }
+    });
+
+  const pick = (name: string) => {
+    if (nameRef.current) {
+      nameRef.current.value = name;
+      nameRef.current.focus();
+    }
+  };
+
+  const created = (data: FormData) => {
+    onCreated(toSlug(String(data.get("name") ?? "")));
     onOpenChange(false);
   };
 
@@ -48,15 +74,34 @@ export const NewThemeDialog = ({
           >
             <Field label="Name">
               <Input
+                ref={nameRef}
                 name="name"
                 required
                 autoFocus
                 placeholder="e.g. Mountains"
               />
             </Field>
-            <Field label="ID (optional)">
-              <Input name="id" placeholder="From the name" />
-            </Field>
+            <div className="flex flex-col gap-2">
+              <Button type="button" variant="dark" onClick={suggest} disabled={isSuggesting} className="self-start">
+                <AiLabel isPending={isSuggesting}>{suggestions.length > 0 ? "More ideas" : "Suggest themes"}</AiLabel>
+              </Button>
+              {suggestions.length > 0 && (
+                <ul className="flex max-h-56 flex-col gap-1 overflow-auto">
+                  {suggestions.map(({ name, why }) => (
+                    <li key={name}>
+                      <button
+                        type="button"
+                        onClick={() => pick(name)}
+                        className="flex w-full flex-col rounded-lg bg-[#0b121c] px-3 py-2 text-left duration-150 hover:bg-amber-300/15"
+                      >
+                        <span className="text-sm font-bold text-white">{name}</span>
+                        <span className="text-xs text-[#7f8da0]">{why}</span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
             <div className="mt-2 flex justify-end gap-2">
               <Dialog.Close type="button" className={buttonClass("ghost")}>
                 Cancel
