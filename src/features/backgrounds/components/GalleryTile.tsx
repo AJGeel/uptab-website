@@ -27,7 +27,7 @@ export const GalleryTile = ({
       onClick={onOpen}
       tabIndex={tabIndex}
       aria-label={image.author ? `View photo by ${image.author}` : "View photo"}
-      className="group relative block aspect-video w-full overflow-hidden rounded-sm text-left crispy-outline duration-300 active:scale-95"
+      className="group relative block aspect-16/10 w-full overflow-hidden rounded-sm text-left duration-300 ease-out-soft active:scale-95"
       style={{ backgroundColor: image.color }}
     >
       <Image
@@ -44,7 +44,7 @@ export const GalleryTile = ({
         }}
         onLoad={() => setIsLoaded(true)}
         className={cn(
-          "size-full object-cover duration-500 ease-out group-hover:scale-105 motion-safe:transition-[opacity,scale]",
+          "size-full object-cover duration-500 ease-out group-hover:scale-108 motion-safe:transition-[opacity,scale]",
           isLoaded ? "opacity-100" : "opacity-0"
         )}
       />

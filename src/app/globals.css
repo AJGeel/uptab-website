@@ -9,6 +9,96 @@
   --color-black: #020e2c;
   --color-danger: #d92d20;
 
+  /* Light surfaces and text (home page) */
+  --color-page: #f4f7fa;
+  --color-tint: #dceef8;
+  --color-body: #3a4858;
+  --color-muted: #4a5868;
+
+  /* Dark surfaces and text (backgrounds and changelog pages) */
+  --color-dark-surface: #111925;
+  --color-dark-pill: #1a2433;
+  --color-dark-line: #1e2939;
+  --color-dark-text: #eef3f8;
+  --color-dark-body: #b9c6d4;
+  --color-dark-muted: #a3b1c2;
+
+  /* Changelog semantic colours; "changed" uses sky-400 */
+  --color-log-added: #4cc28f;
+  --color-log-fixed: #c4b5fd;
+
+  /* Line heights for large type; everything else uses Tailwind's own scale */
+  --leading-display: 0.98;
+  --leading-heading: 1.04;
+  --leading-title: 1.1;
+  --leading-prose: 1.7;
+
+  --font-sans: var(--font-figtree), system-ui, sans-serif;
+
+  --ease-out-soft: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /*
+    The site opening: a plain fade. Opacity only, because a transform or filter
+    on the body would pin the fixed header to the page instead of the window.
+  */
+  --animate-fade-in: fade-in 0.9s ease-out backwards;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+
+  --animate-caret: caret 1.1s steps(1, end) infinite;
+  --animate-type: type-in 1.6s steps(34, end) 0.3s both;
+
+  @keyframes caret {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes type-in {
+    from {
+      max-width: 0;
+    }
+    to {
+      max-width: 34ch;
+    }
+  }
+
+  --animate-twinkle: twinkle 1.2s ease-in-out infinite;
+
+  @keyframes twinkle {
+    0%,
+    100% {
+      opacity: 0.55;
+      scale: 0.7;
+      rotate: 0deg;
+    }
+    50% {
+      opacity: 1;
+      scale: 1.25;
+      rotate: 25deg;
+    }
+  }
+
+  --animate-timeline-draw: timeline-draw 1.4s var(--ease-out-soft) 0.4s backwards;
+  --animate-timeline-pop: timeline-pop 0.4s var(--ease-out-soft) 0.4s backwards;
+
+  @keyframes timeline-draw {
+    from {
+      scale: 0 1;
+    }
+  }
+
+  @keyframes timeline-pop {
+    from {
+      opacity: 0;
+      scale: 0;
+    }
+  }
+
   --animate-graciousEntry: graciousEntry 1.5s ease-in-out;
 
   /* A seamless loop over two copies of a row; the duration is set per row */
@@ -31,6 +121,11 @@
   }
 }
 
+/* Inline, because the font's variable is only set on the changelog page, not at the root */
+@theme inline {
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+}
+
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
@@ -49,10 +144,166 @@
   }
 }
 
+/* No single words alone on the last line */
+@layer base {
+  p,
+  li,
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: pretty;
+  }
+}
+
+/* Tailwind v4 leaves buttons with the default cursor */
+@layer base {
+  a[href],
+  button:not(:disabled),
+  summary,
+  select:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [role="tab"] {
+    cursor: pointer;
+  }
+}
+
 ::selection {
   background-color: rgba(19, 140, 208, 0.15);
+}
+
+/* Links turn into frosted white pills on hover instead of underlining. */
+@utility link-pill {
+  @apply -mx-2.5 rounded-full px-2.5 py-1 transition-colors duration-150 hover:bg-white/70 hover:text-black hover:backdrop-blur-md;
+}
+
+/*
+  Hover fills the button with a colour from the left, flipping the text for contrast.
+  Set --wipe (any gradient) and --wipe-text to change the colours; the button keeps its size.
+*/
+@utility button-wipe {
+  background-image: var(--wipe, linear-gradient(var(--color-sky-400), var(--color-sky-400)));
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: 0% 100%;
+  transition-property: background-size, color, scale;
+  transition-duration: 350ms, 350ms, 250ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1), cubic-bezier(0.22, 1, 0.36, 1), cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  &:hover {
+    background-size: 100% 100%;
+    color: var(--wipe-text, #000);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition-duration: 0ms;
+  }
 }
 
 @utility crispy-outline {
   @apply outline-1 outline-black/10;
 }
+
+/* Registered so the lightness can transition; it's what hover changes */
+@property --rainbow-l {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0.88;
+}
+
+/* A slow-sliding rainbow, for the admin-only button. Static under reduced motion. */
+@utility rainbow-cycle {
+  background-image: linear-gradient(in oklch 90deg, oklch(var(--rainbow-l) 0.1 25), oklch(var(--rainbow-l) 0.1 85), oklch(var(--rainbow-l) 0.1 145), oklch(var(--rainbow-l) 0.1 205), oklch(var(--rainbow-l) 0.1 265), oklch(var(--rainbow-l) 0.1 325), oklch(var(--rainbow-l) 0.1 385));
+  background-size: 300% 100%;
+  transition: --rainbow-l 200ms ease;
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: rainbow-cycle 4s linear infinite;
+  }
+}
+
+@keyframes rainbow-cycle {
+  to {
+    background-position: 300% 0;
+  }
+}
+
+/* The logo turns twice over the length of the page. Static where scroll-driven animation isn't supported. */
+@utility logo-spin {
+  @supports (animation-timeline: scroll()) {
+    animation: logo-spin linear both;
+    animation-timeline: scroll(root);
+  }
+}
+
+@keyframes logo-spin {
+  to {
+    transform: rotate(720deg);
+  }
+}
+
+/*
+  Sections ease in as they scroll into view. Browsers without scroll-driven
+  animation simply show them.
+*/
+@utility reveal {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 30%;
+    }
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(36px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Jumping to a section (the FAQ link) glides there, below the fixed header */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Moving between pages: the old page dissolves into the new one */
+::view-transition-old(.page-fade) {
+  animation: 320ms ease both page-fade-out;
+}
+
+::view-transition-new(.page-fade) {
+  animation: 320ms ease both page-fade-in;
+}
+
+@keyframes page-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* Bursts around a face (see FaceBurst): each particle flies out along its own --x/--y while an ancestor is .is-acting */
+.burst-p{position:absolute;left:50%;top:50%;width:var(--s,12px);height:var(--s,12px);margin:calc(var(--s,12px)/-2) 0 0 calc(var(--s,12px)/-2);opacity:0}
+.is-acting .burst-p{animation:utBurst 1s cubic-bezier(.15,.8,.3,1) var(--d,0s) both}
+@keyframes utBurst{0%{opacity:0;transform:translate(0,0) scale(.2) rotate(0)}12%{opacity:1}65%{opacity:1}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.05) rotate(var(--r,0deg))}}

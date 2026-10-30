@@ -1,62 +1,65 @@
-"use client";
-
 import type { Route } from "next";
 import Link from "next/link";
-import { Fragment } from "react";
 
+import { Logo } from "@/components/Logo";
 import { externalUrls } from "@/config";
+import { cn } from "@/utils/cn";
+import { externalUrlOpts } from "@/utils/externalUrlOpts";
 
-import HeaderLogo from "./Header/partials/HeaderLogo";
+type FooterProps = {
+  theme: "light" | "dark";
+  /** Replaces the default credit line, e.g. to thank photographers. */
+  credit?: string;
+};
 
-const Footer = () => {
-  const urls: { href: Route; label: string }[] = [
-    {
-      href: "/changelog",
-      label: "Changelog",
-    },
-    {
-      href: "/backgrounds",
-      label: "Backgrounds",
-    },
-    {
-      href: externalUrls.github,
-      label: "Github",
-    },
-    {
-      href: externalUrls.chrome,
-      label: "UpTab Chrome",
-    },
-    {
-      href: externalUrls.firefox,
-      label: "UpTab Firefox",
-    },
-  ];
+const links: { href: Route; label: string; external?: boolean }[] = [
+  { href: "/changelog", label: "Changelog" },
+  { href: "/backgrounds", label: "Backgrounds" },
+  { href: externalUrls.github, label: "GitHub", external: true },
+  { href: externalUrls.chrome, label: "Chrome Web Store", external: true },
+  { href: externalUrls.firefox, label: "Firefox Add-ons", external: true },
+];
+
+const Footer = ({ theme, credit }: FooterProps) => {
+  const dark = theme === "dark";
 
   return (
-    <div className="flex flex-wrap items-center justify-center gap-6 p-16 sm:gap-12">
-      <div className="flex flex-col">
-        <HeaderLogo rotation={0} />
-        <a
-          className="ml-8 text-[11px] font-medium text-black/50 hover:text-sky-500"
-          href="linkedin.com/in/ajgeel"
-        >
-          by Arthur Geel
-        </a>
-      </div>
-      <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
-        {urls.map((item, index) => (
-          <Fragment key={item.href}>
-            {index >= 1 && <div className="size-1 rounded-full bg-black/10" />}
-            <Link
-              className="text-sm duration-150 hover:text-sky-500"
-              href={item.href}
+    <footer
+      className={cn(
+        "mx-auto flex max-w-310 flex-wrap items-center justify-between gap-6 px-[clamp(1rem,4vw,2rem)] pt-14 pb-12 text-[15px]",
+        dark ? "text-dark-muted" : "text-muted"
+      )}
+    >
+      <div className="flex items-center gap-2.5">
+        <Logo size={26} />
+        <span>
+          <strong className={dark ? "text-white" : "text-black"}>UpTab</strong> ·{" "}
+          <span className="whitespace-nowrap">
+            made by{" "}
+            <a
+              href="https://github.com/ajgeel"
+              {...externalUrlOpts}
+              className={cn("link-pill", dark ? "text-white" : "text-black")}
             >
-              {item.label}
-            </Link>
-          </Fragment>
-        ))}
+              Arthur Geel
+            </a>
+          </span>
+          {credit}
+        </span>
       </div>
-    </div>
+      <nav aria-label="Footer" className="flex flex-wrap gap-x-6 gap-y-2">
+        {links.map(({ href, label, external }) => (
+          <Link
+            key={href}
+            href={href}
+            className="link-pill"
+            {...(external ? externalUrlOpts : {})}
+          >
+            {label}
+          </Link>
+        ))}
+      </nav>
+    </footer>
   );
 };
 

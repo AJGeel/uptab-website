@@ -1,27 +1,34 @@
 {
   "themes": [
     {
-      "id": "holland",
-      "name": "Holland"
-    },
-    {
-      "id": "safari",
-      "name": "Safari"
-    },
-    {
       "id": "mountains",
-      "name": "Mountains"
+      "name": "Mountains",
+      "blurb": "A view that's impressively still, unlike your internet browsing"
+    },
+    {
+      "id": "holland",
+      "name": "Holland",
+      "blurb": "Dutch vibes for your browsing. We’re pretty sure windmills exist."
     },
     {
       "id": "flower-power",
-      "name": "Flower power"
+      "name": "Flower power",
+      "blurb": "Bring a touch of nature to your browsing – it’s surprisingly effective."
     },
     {
       "id": "architecture",
       "name": "Architecture",
-      "coverImageIds": [
-        "simone-hutsch-l8fyk9rs-ou-unsplash"
-      ]
+      "blurb": "Solid lines and interesting shapes. Hopefully, this tab won’t collapse."
+    },
+    {
+      "id": "safari",
+      "name": "Safari",
+      "blurb": "Vast landscapes for endless browsing. We’re hoping you don’t get lost."
+    },
+    {
+      "id": "highland-mist",
+      "name": "Highland Mist",
+      "blurb": "A perpetually moody background for your browsing."
     }
   ],
   "images": [
@@ -439,6 +446,13 @@
       "link": "https://unsplash.com/photos/trees-near-mountain-U2AwijfUNS4"
     },
     {
+      "id": "simone-hutsch-l8fyk9rs-ou-unsplash",
+      "theme": "architecture",
+      "file": "architecture/simone-hutsch-l8fyk9rs-ou-unsplash.jpg",
+      "author": "Simone Hutsch",
+      "link": "https://unsplash.com/photos/l8fyK9RS-OU"
+    },
+    {
       "id": "maarten-deckers-t5nxyxcf50i-unsplash",
       "theme": "architecture",
       "file": "architecture/maarten-deckers-t5nxyxcf50i-unsplash.jpg",
@@ -465,13 +479,6 @@
       "file": "architecture/leo-manjarrez-vygi0cvz-c-unsplash.jpg",
       "author": "Leo Manjarrez",
       "link": "https://unsplash.com/photos/-vygi0Cvz_c"
-    },
-    {
-      "id": "simone-hutsch-l8fyk9rs-ou-unsplash",
-      "theme": "architecture",
-      "file": "architecture/simone-hutsch-l8fyk9rs-ou-unsplash.jpg",
-      "author": "Simone Hutsch",
-      "link": "https://unsplash.com/photos/l8fyK9RS-OU"
     },
     {
       "id": "emma-raphael-tts-i2y9bo-unsplash",

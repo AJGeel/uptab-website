@@ -17,7 +17,7 @@ export const LIVE_BACKGROUNDS_URL = "https://uptab.vercel.app/backgrounds/";
 const encodePath = (file: string) => file.split("/").map(encodeURIComponent).join("/");
 
 /** The admin's preview of a source photo, e.g. "holland/koppelpoort.jpg". */
-export const thumbnailUrl = (file: string) => `/admin/photos/${encodePath(file)}`;
+export const thumbnailUrl = (file: string) => `/adminland/photos/${encodePath(file)}`;
 
 /** The full-size source photo, downloaded rather than shown. */
 export const originalUrl = (file: string) => `${thumbnailUrl(file)}?original`;

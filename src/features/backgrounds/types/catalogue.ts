@@ -7,6 +7,11 @@ export type Catalogue = {
   version: 1;
   /** ISO timestamp of the build that generated this file. */
   generatedAt: string;
+  /**
+   * Short hash of the themes and images. Unlike `generatedAt` it only changes
+   * when the content does, so it tells whether a rebuild changed anything.
+   */
+  revision: string;
   themes: Theme[];
   images: BackgroundImage[];
 };
@@ -16,11 +21,8 @@ export type Theme = {
   id: string;
   /** Display name, e.g. "Holland". */
   name: string;
-  /**
-   * Up to 4 images that represent the theme, in order. Missing, or IDs that
-   * aren't in the catalogue: use the theme's first images.
-   */
-  coverImageIds?: string[];
+  /** A short, playful description for the website. Optional; the extension ignores it. */
+  blurb?: string;
 };
 
 export type BackgroundImage = {

@@ -4,7 +4,7 @@ import { PHASE_DEVELOPMENT_SERVER } from "next/constants.js";
 const nextConfig = {
   typedRoutes: true,
   outputFileTracingExcludes: {
-    "/backgrounds": ["./assets/backgrounds/**/*", "./public/backgrounds/v1/**/*.webp"],
+    "/*": ["./assets/backgrounds/**/*", "./public/backgrounds/v1/**/*.webp"],
   },
   /*
    * CORS and caching for remote backgrounds: the catalogue revalidates hourly,
@@ -42,7 +42,7 @@ const nextConfig = {
 };
 
 /*
- * Local-only tools, such as the photo manager in src/app/admin/, use files
+ * Local-only tools, such as the photo manager in src/app/adminland/, use files
  * named page.dev.tsx and route.dev.ts. Only the dev server treats those as
  * routes, so they don't exist in production builds at all.
  */

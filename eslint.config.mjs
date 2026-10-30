@@ -110,4 +110,28 @@ export default defineConfig([
       ],
     },
   },
+  {
+    /* The files the Tailwind plugin is registered for */
+    files: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
+    rules: {
+      /*
+       * The hand-written CSS of the home page (src/features/home/home.css and
+       * the burst styles in globals.css): keyframe-driven classes that
+       * Tailwind doesn't know about.
+       */
+      "tailwindcss/no-custom-classname": [
+        "error",
+        {
+          whitelist: [
+            "ut-.*",
+            "f-(blink|eyes|hat|hmm|o)",
+            "p-(all|extra|eyes|mouth)",
+            "burst-p",
+            "is-acting",
+            "rainbow-cycle",
+          ],
+        },
+      ],
+    },
+  },
 ]);

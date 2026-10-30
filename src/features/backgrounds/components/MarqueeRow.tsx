@@ -13,7 +13,7 @@ type Item = { image: BackgroundImage; index: number };
  * A row of photos drifting sideways in an endless loop. It scrolls over two
  * copies of the row. The second is only there for the loop: clickable like
  * the first, but hidden from screen readers and skipped by Tab. Pauses when
- * its theme is hovered or focused, or when the gallery is paused. Without
+ * the row is hovered or focused, or when the gallery is paused. Without
  * motion, it's a static row.
  */
 export const MarqueeRow = ({
@@ -32,7 +32,7 @@ export const MarqueeRow = ({
     copy.map(({ image, index }, position) => (
       <div
         key={`${image.id}-${position}`}
-        className="w-60 shrink-0 sm:w-72"
+        className="w-[clamp(220px,24vw,340px)] shrink-0"
         aria-hidden={hidden || undefined}
       >
         <GalleryTile
@@ -48,7 +48,7 @@ export const MarqueeRow = ({
       <div
         className={cn(
           "flex w-max gap-3 pr-3 motion-safe:animate-marquee",
-          "group-focus-within/theme:[animation-play-state:paused] group-hover/theme:[animation-play-state:paused] group-data-paused/gallery:[animation-play-state:paused]",
+          "group-data-paused/gallery:[animation-play-state:paused] focus-within:[animation-play-state:paused] hover:[animation-play-state:paused]",
         )}
         // Inline, because the animate-marquee shorthand would reset a direction class
         style={{

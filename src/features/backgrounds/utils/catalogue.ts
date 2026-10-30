@@ -1,10 +1,11 @@
 /** Assembling the public catalogue from encoded photos, see types/catalogue.ts. */
+import { createHash } from "node:crypto";
+
 import type {
   BackgroundImage,
   Catalogue,
   Theme,
 } from "@/features/backgrounds/types/catalogue";
-import { MAX_COVER_IMAGES } from "@/features/backgrounds/utils/metadata";
 
 /** Rendition widths. Larger ones can be added later without breaking v1. */
 export const WIDTHS = [1920, 2560, 3840];
@@ -26,21 +27,17 @@ export const buildCatalogue = (
   themes: Theme[],
   images: BackgroundImage[],
   generatedAt = new Date()
-): Catalogue => ({
-  version: 1,
-  generatedAt: generatedAt.toISOString(),
-  // Leave out empty themes, so the extension never offers one
-  themes: themes
-    .filter(({ id }) => images.some((image) => image.theme === id))
-    .map((theme) => {
-      const themeIds = images.filter((image) => image.theme === theme.id).map(({ id }) => id);
-      // Unpublished photos aren't in the catalogue, so they can't be covers either
-      const picked = theme.coverImageIds?.filter((id) => themeIds.includes(id)) ?? [];
+): Catalogue => {
+  const content = {
+    // Leave out empty themes, so the extension never offers one
+    themes: themes.filter(({ id }) => images.some((image) => image.theme === id)),
+    images,
+  };
 
-      return {
-        ...theme,
-        coverImageIds: picked.length > 0 ? picked : themeIds.slice(0, MAX_COVER_IMAGES),
-      };
-    }),
-  images,
-});
+  return {
+    version: 1,
+    generatedAt: generatedAt.toISOString(),
+    revision: createHash("sha256").update(JSON.stringify(content)).digest("hex").slice(0, 12),
+    ...content,
+  };
+};
