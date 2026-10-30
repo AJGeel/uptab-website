@@ -1,9 +1,5 @@
-import Image from "next/image";
-
 import type { BackgroundImage } from "@/features/backgrounds/types/catalogue";
 import { externalUrlOpts } from "@/utils/externalUrlOpts";
-
-const HERO_MAX_WIDTH = 2560;
 
 const SPARKLE = "M10 0l2.2 7.8L20 10l-7.8 2.2L10 20l-2.2-7.8L0 10l7.8-2.2z";
 const HEART =
@@ -99,21 +95,20 @@ export const Hero = ({
   photo: BackgroundImage;
   children: React.ReactNode;
 }) => {
-  // Full-bleed, but not worth the 4K rendition
-  const source =
-    photo.sources.findLast(({ width }) => width <= HERO_MAX_WIDTH) ??
-    photo.sources[0];
+  // Every prebuilt rendition, so the browser picks the sharpest one for the screen
+  const srcSet = photo.sources.map(({ url, width }) => `${new URL(url).pathname} ${width}w`).join(", ");
 
   return (
     <header className="relative flex min-h-svh flex-col overflow-hidden bg-[#8fc3d0]">
-      <Image
-        // A local path, so next/image can optimize it without remotePatterns
-        src={new URL(source.url).pathname}
-        alt=""
-        fill
-        priority
+      {/* A plain img: next/image would re-encode the renditions, softening them */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={new URL(photo.sources.at(-1)!.url).pathname}
+        srcSet={srcSet}
         sizes="100vw"
-        className="object-cover"
+        alt=""
+        fetchPriority="high"
+        className="absolute inset-0 size-full object-cover"
       />
       <div className="ut-scrim absolute inset-0" aria-hidden="true" />
 
