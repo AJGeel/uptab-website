@@ -148,8 +148,8 @@ export const Tour = ({ autoplay = true }: { autoplay?: boolean }) => {
 
         <div className="flex flex-[1_1_280px] flex-col gap-3.5">
           <p className="text-[13px] font-bold tracking-[0.12em] text-muted uppercase">{active.kicker}</p>
-          <h3 className="text-3xl leading-title font-extrabold tracking-tight">{active.title}</h3>
-          <p className="text-[17px] leading-relaxed text-body">{active.body}</p>
+          <h3 className="text-3xl leading-title font-extrabold tracking-tight text-balance">{active.title}</h3>
+          <p className="text-[17px] leading-relaxed text-balance text-body">{active.body}</p>
           <p className="text-sm font-semibold text-muted">
             {slide + 1} / {SLIDES.length}
           </p>

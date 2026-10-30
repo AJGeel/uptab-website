@@ -46,7 +46,7 @@ const Page = async () => {
               href={`${externalUrls.github}/issues/new`}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-2 inline-flex min-h-12 items-center self-start rounded-full bg-white button-wipe px-5 font-bold text-black active:scale-[.97]"
+              className="mt-2 inline-flex min-h-12 items-center self-start rounded-full bg-white button-wipe wipe-rainbow px-5 font-bold text-black active:scale-[.97]"
             >
               Suggest a collection
             </a>

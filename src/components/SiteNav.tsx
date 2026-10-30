@@ -98,7 +98,7 @@ export const AdminLink = ({
   <a
     href={href}
     className={cn(
-      "group isolate inline-flex rainbow-cycle items-center justify-center gap-2 rounded-full font-bold hover:[--rainbow-l:0] active:scale-[.97]",
+      "group isolate inline-flex rainbow-cycle items-center justify-center gap-2 rounded-full font-bold hover:[--rainbow-l:1] active:scale-[.97]",
       className
     )}
   >
@@ -111,7 +111,7 @@ export const AdminLink = ({
       </span>
       <span
         aria-hidden
-        className="absolute inset-0 text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+        className="absolute inset-0 text-black opacity-0 transition-opacity duration-200 group-hover:opacity-100"
       >
         <AdminLabel label={label} />
       </span>
