@@ -4,7 +4,7 @@ import { PHASE_DEVELOPMENT_SERVER } from "next/constants.js";
 const nextConfig = {
   typedRoutes: true,
   outputFileTracingExcludes: {
-    "/backgrounds": ["./assets/backgrounds/**/*", "./public/backgrounds/v1/**/*.webp"],
+    "/*": ["./assets/backgrounds/**/*", "./public/backgrounds/v1/**/*.webp"],
   },
   /*
    * CORS and caching for remote backgrounds: the catalogue revalidates hourly,
