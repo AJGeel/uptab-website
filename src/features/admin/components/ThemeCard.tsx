@@ -1,3 +1,4 @@
+import { ExclamationTriangleIcon } from "@heroicons/react/16/solid";
 
 import { ProgressBar } from "@/features/admin/components/ProgressBar";
 import { cardClass } from "@/features/admin/components/ui/card";
@@ -30,6 +31,14 @@ export const ThemeCard = ({ theme }: { theme: ThemeSummary }) => (
       <h3 className="font-bold duration-150 group-hover:text-sky-400">{theme.name}</h3>
       <p className="text-xs text-[#7f8da0]">{theme.id}</p>
     </div>
+    {theme.blurb ? (
+      <p className="line-clamp-2 text-sm text-dark-body">{theme.blurb}</p>
+    ) : (
+      <p className="flex items-start gap-1.5 text-sm text-amber-300">
+        <ExclamationTriangleIcon aria-hidden="true" className="mt-0.5 size-4 shrink-0" />
+        No blurb yet. The website shows a joke instead.
+      </p>
+    )}
     <ProgressBar published={theme.published} pending={theme.pending} />
   </a>
 );

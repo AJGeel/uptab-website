@@ -2,23 +2,28 @@
   "themes": [
     {
       "id": "mountains",
-      "name": "Mountains"
+      "name": "Mountains",
+      "blurb": "A view that's impressively still, unlike your internet browsing"
     },
     {
       "id": "holland",
-      "name": "Holland"
+      "name": "Holland",
+      "blurb": "Dutch vibes for your browsing. We’re pretty sure windmills exist."
     },
     {
       "id": "flower-power",
-      "name": "Flower power"
+      "name": "Flower power",
+      "blurb": "Bring a touch of nature to your browsing – it’s surprisingly effective."
     },
     {
       "id": "architecture",
-      "name": "Architecture"
+      "name": "Architecture",
+      "blurb": "Solid lines and interesting shapes. Hopefully, this tab won’t collapse."
     },
     {
       "id": "safari",
-      "name": "Safari"
+      "name": "Safari",
+      "blurb": "Vast landscapes for endless browsing. We’re hoping you don’t get lost."
     }
   ],
   "images": [

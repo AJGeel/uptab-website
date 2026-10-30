@@ -6,6 +6,7 @@ import { isLocalRequest } from "@/features/admin/api/is-local-request";
 import { loadAdmin } from "@/features/admin/api/load-admin";
 import { Toaster } from "@/features/admin/components/ui/Toaster";
 
+import { RebuildGuard } from "./RebuildGuard";
 import { StatusBanner } from "./StatusBanner";
 
 /**
@@ -25,6 +26,7 @@ export const AdminShell = async ({ children }: { children: ReactNode }) => {
     <Toaster>
       <div className="min-h-screen bg-black text-dark-text antialiased">
         <SiteNav theme="dark" logoOnly />
+        <RebuildGuard isStale={catalogue.state === "stale"} />
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 py-24 md:px-6">
           <StatusBanner problems={problems} catalogue={catalogue} />
           {children}

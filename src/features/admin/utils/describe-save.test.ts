@@ -20,7 +20,7 @@ const save = (
 
 describe("describeSave", () => {
   it("counts changes, including a theme rename", () => {
-    expect(save(["a"], {}, { id: "safari", name: "Safari" })).toEqual({
+    expect(save(["a"], {}, { id: "safari", name: "Safari", blurb: "" })).toEqual({
       message: "Saved 2 changes",
       details: null,
     });

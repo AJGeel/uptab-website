@@ -34,10 +34,11 @@ describe("readEdits", () => {
     });
   });
 
-  it("reads a theme rename", () => {
-    expect(readEdits(form({ "theme:id": "holland", "theme:name": "Holland!" })).theme).toEqual({
+  it("reads a theme's name and blurb", () => {
+    expect(readEdits(form({ "theme:id": "holland", "theme:name": "Holland!", "theme:blurb": "Flat." })).theme).toEqual({
       id: "holland",
       name: "Holland!",
+      blurb: "Flat.",
     });
   });
 

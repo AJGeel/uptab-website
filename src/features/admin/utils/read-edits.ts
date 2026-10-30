@@ -29,7 +29,7 @@ export const readEdits = (form: FormData): ThemeEdits => {
     }));
 
   return {
-    theme: theme ? { id: theme.id ?? "", name: theme.name ?? "" } : undefined,
+    theme: theme ? { id: theme.id ?? "", name: theme.name ?? "", blurb: theme.blurb ?? "" } : undefined,
     photos,
   };
 };

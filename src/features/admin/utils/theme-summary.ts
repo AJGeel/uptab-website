@@ -15,6 +15,7 @@ export const countPending = (entries: SourceEntry[]) =>
 export type ThemeSummary = {
   id: string;
   name: string;
+  blurb?: string;
   published: number;
   pending: number;
   /** Up to `count` thumbnails: published ones first, in order. */
@@ -34,6 +35,7 @@ export const summarizeTheme = (
   return {
     id: theme.id,
     name: theme.name,
+    blurb: theme.blurb,
     published: entries.length - pending,
     pending,
     thumbnails: ranked.slice(0, count).map((entry) => thumbnailUrl(entry.file)),

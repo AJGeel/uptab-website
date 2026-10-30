@@ -7,7 +7,7 @@ import {
   deleteTheme,
   type PhotoFields,
   removePhoto,
-  renameTheme,
+  editTheme,
   saveEdits,
   savePhoto,
   toSlug,
@@ -159,7 +159,7 @@ describe("savePhoto", () => {
 describe("saveEdits", () => {
   it("applies a theme rename and several photos as one save, naming transitions", () => {
     const saved = saveEdits(metadata, {
-      theme: { id: "holland", name: "The Netherlands" },
+      theme: { id: "holland", name: "The Netherlands", blurb: "" },
       photos: [
         { originalId: "koppelpoort", fields: fieldsOf("koppelpoort", { author: "" }) },
         {
@@ -260,15 +260,25 @@ describe("createTheme", () => {
   });
 });
 
-describe("renameTheme", () => {
-  it("changes the name, not the ID", () => {
-    const change = renameTheme(metadata, "holland", "The Netherlands");
+describe("editTheme", () => {
+  const edit = (id: string, name: string, blurb = "") => editTheme(metadata, { id, name, blurb });
 
-    expect(change.metadata.themes[0]).toEqual({ id: "holland", name: "The Netherlands" });
+  it("changes the name, not the ID", () => {
+    expect(edit("holland", "The Netherlands").metadata.themes[0]).toEqual({
+      id: "holland",
+      name: "The Netherlands",
+    });
+  });
+
+  it("sets a trimmed blurb, and removes it when emptied", () => {
+    const withBlurb = edit("holland", "Holland", "  Tulips and canals.  ").metadata;
+
+    expect(withBlurb.themes[0].blurb).toBe("Tulips and canals.");
+    expect(editTheme(withBlurb, { id: "holland", name: "Holland", blurb: "" }).metadata.themes[0]).not.toHaveProperty("blurb");
   });
 
   it("rejects an unknown theme", () => {
-    expect(() => renameTheme(metadata, "mars", "Mars")).toThrow('No theme with ID "mars"');
+    expect(() => edit("mars", "Mars")).toThrow('No theme with ID "mars"');
   });
 });
 

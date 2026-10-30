@@ -1,5 +1,8 @@
 "use client";
 
+import { Dialog } from "@base-ui/react/dialog";
+import type { Route } from "next";
+import { useRouter } from "next/navigation";
 import {
   type FormEvent,
   type ReactNode,
@@ -11,9 +14,10 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 
-import { Button } from "@/features/admin/components/ui/Button";
+import { Button, buttonClass } from "@/features/admin/components/ui/Button";
 import { useActionToast } from "@/features/admin/hooks/use-action-toast";
 import type { ActionState } from "@/features/admin/types/action-state";
+import { leavingLink } from "@/features/admin/utils/leaving-link";
 
 
 type Field = HTMLInputElement | HTMLSelectElement;
@@ -47,7 +51,18 @@ const readChanges = (form: HTMLFormElement) => {
     }
   }
 
-  return { data, count: groups.size };
+  return { data, count: groups.size, groups: [...groups] };
+};
+
+/** "theme details and 2 photos", for the dialog that asks what to do with unsaved changes. */
+const summarize = (groups: string[]) => {
+  const photos = groups.filter((group) => group.startsWith("photo:")).length;
+  const parts = [
+    groups.includes("theme") && "the theme's details",
+    photos > 0 && `${photos} ${photos === 1 ? "photo" : "photos"}`,
+  ].filter(Boolean);
+
+  return parts.join(" and ");
 };
 
 /**
@@ -65,12 +80,21 @@ export const EditForm = ({
   action: (form: FormData) => Promise<ActionState>;
   children: ReactNode;
 }) => {
+  const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
   const [changes, setChanges] = useState(0);
+  const [summary, setSummary] = useState("");
+  // Where the visitor was going when we stopped them, while the dialog asks
+  const [leavingTo, setLeavingTo] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
   const notify = useActionToast();
 
-  const recount = () => setChanges(formRef.current ? readChanges(formRef.current).count : 0);
+  const recount = () => {
+    const read = formRef.current ? readChanges(formRef.current) : null;
+
+    setChanges(read?.count ?? 0);
+    setSummary(read ? summarize(read.groups) : "");
+  };
 
   /*
    * Watch the whole page, because fields joined with `form={id}` live
@@ -107,18 +131,65 @@ export const EditForm = ({
     };
   }, []);
 
-  // Warn before leaving the page with unsaved changes
+  /*
+   * Following a link with unsaved changes asks first, in our own dialog.
+   * Closing the tab or reloading can't be intercepted that way, so the
+   * browser's own warning stays for those.
+   */
   useEffect(() => {
     if (changes === 0) {
       return undefined;
     }
 
     const warn = (event: BeforeUnloadEvent) => event.preventDefault();
+    const ask = (event: MouseEvent) => {
+      const href = leavingLink(event);
+
+      if (href) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        setLeavingTo(href);
+      }
+    };
 
     window.addEventListener("beforeunload", warn);
+    // On window, which captures before the document, so this asks before any other guard does
+    window.addEventListener("click", ask, { capture: true });
 
-    return () => window.removeEventListener("beforeunload", warn);
+    return () => {
+      window.removeEventListener("beforeunload", warn);
+      window.removeEventListener("click", ask, { capture: true });
+    };
   }, [changes]);
+
+  // A client-side navigation: a full page load right after the save's refresh makes the browser hide the page mid view transition
+  const leave = (href: string) => router.push(href as Route);
+
+  const saveAndLeave = () => {
+    if (!formRef.current || !leavingTo) {
+      return;
+    }
+
+    const href = leavingTo;
+    const { data } = readChanges(formRef.current);
+
+    startTransition(async () => {
+      const result = await action(data);
+
+      notify(result);
+
+      if (result.error) {
+        setLeavingTo(null);
+      } else {
+        leave(href);
+      }
+    });
+  };
+
+  const discardAndLeave = () => {
+    formRef.current?.reset();
+    leave(leavingTo ?? "");
+  };
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -145,6 +216,30 @@ export const EditForm = ({
   return (
     <form id={id} ref={formRef} onSubmit={onSubmit}>
       {children}
+      <Dialog.Root open={leavingTo !== null} onOpenChange={(open) => !open && !isPending && setLeavingTo(null)}>
+        <Dialog.Portal>
+          <Dialog.Backdrop className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0" />
+          <Dialog.Popup className="fixed top-1/2 left-1/2 z-50 w-[calc(100%-2rem)] max-w-md -translate-1/2 rounded-2xl bg-[#1b2638] p-6 text-dark-text shadow-2xl ring-1 ring-[#33465f] duration-150 ring-inset data-ending-style:scale-95 data-ending-style:opacity-0 data-starting-style:scale-95 data-starting-style:opacity-0">
+            <Dialog.Title className="text-lg font-bold">
+              You have {changes} unsaved {changes === 1 ? "change" : "changes"}
+            </Dialog.Title>
+            <Dialog.Description className="mt-1 text-sm text-[#7f8da0]">
+              {summary ? `You edited ${summary}. ` : ""}Save them before you go, or discard them?
+            </Dialog.Description>
+            <div className="mt-5 flex flex-wrap justify-end gap-2">
+              <Dialog.Close type="button" disabled={isPending} className={buttonClass("ghost")}>
+                Keep editing
+              </Dialog.Close>
+              <Button type="button" variant="danger" onClick={discardAndLeave} disabled={isPending}>
+                Discard
+              </Button>
+              <Button type="button" variant="primary" onClick={saveAndLeave} disabled={isPending}>
+                {isPending ? "Saving…" : "Save"}
+              </Button>
+            </div>
+          </Dialog.Popup>
+        </Dialog.Portal>
+      </Dialog.Root>
       {isClient &&
         createPortal(
       <div className="fixed inset-x-0 bottom-6 z-40 mx-auto flex w-fit items-center gap-2 rounded-full bg-[#222f44] py-1.5 pr-1.5 pl-5 text-sm text-white shadow-xl ring-1 ring-[#2a374a] ring-inset">

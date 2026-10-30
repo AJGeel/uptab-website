@@ -69,11 +69,10 @@ export const createTheme = (
   files: [],
 });
 
-/** Changes a theme's display name. Its ID stays the same. */
-export const renameTheme = (
+/** Changes a theme's display name and blurb. Its ID stays the same. An empty blurb removes it. */
+export const editTheme = (
   metadata: SourceMetadata,
-  id: string,
-  name: string
+  { id, name, blurb }: { id: string; name: string; blurb: string }
 ): Change => {
   if (!metadata.themes.some((theme) => theme.id === id)) {
     throw new Error(`No theme with ID "${id}".`);
@@ -82,9 +81,20 @@ export const renameTheme = (
   return {
     metadata: {
       ...metadata,
-      themes: metadata.themes.map((theme) =>
-        theme.id === id ? { ...theme, name: name.trim() } : theme
-      ),
+      themes: metadata.themes.map((theme) => {
+        if (theme.id !== id) {
+          return theme;
+        }
+
+        const next = { ...theme, name: name.trim(), blurb: blurb.trim() };
+
+        // The schema has no empty blurbs
+        if (!next.blurb) {
+          delete (next as { blurb?: string }).blurb;
+        }
+
+        return next;
+      }),
     },
     files: [],
   };
@@ -163,7 +173,7 @@ export const savePhoto = (
 };
 
 export type ThemeEdits = {
-  theme?: { id: string; name: string };
+  theme?: { id: string; name: string; blurb: string };
   photos: { originalId: string; fields: PhotoFields }[];
 };
 
@@ -176,7 +186,7 @@ export type SavedEdits = Change & {
 /** Applies everything changed on a theme's page as one save. */
 export const saveEdits = (metadata: SourceMetadata, edits: ThemeEdits): SavedEdits => {
   let change: Change = edits.theme
-    ? renameTheme(metadata, edits.theme.id, edits.theme.name)
+    ? editTheme(metadata, edits.theme)
     : { metadata, files: [] };
 
   for (const { originalId, fields } of edits.photos) {

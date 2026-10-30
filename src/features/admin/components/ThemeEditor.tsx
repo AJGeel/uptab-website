@@ -6,6 +6,7 @@ import { loadAdmin } from "@/features/admin/api/load-admin";
 import { reorderPhotosAction } from "@/features/admin/api/reorder";
 import { saveThemeAction } from "@/features/admin/api/save-theme";
 import { AddPhotoForm } from "@/features/admin/components/AddPhotoForm";
+import { BlurbField } from "@/features/admin/components/BlurbField";
 import { DeleteThemeButton } from "@/features/admin/components/DeleteThemeButton";
 import { EditForm } from "@/features/admin/components/EditForm";
 import { PhotoRow } from "@/features/admin/components/PhotoRow";
@@ -71,6 +72,7 @@ export const ThemeEditor = async ({ themeId }: { themeId: string }) => {
             <DeleteThemeButton id={theme.id} name={theme.name} photoCount={entries.length} />
           </div>
         </div>
+        <BlurbField defaultValue={theme.blurb ?? ""} form={EDIT_FORM} />
       </div>
 
       <AddPhotoForm theme={theme.id} existingIds={metadata.images.map(({ id }) => id)} />
