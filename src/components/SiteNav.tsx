@@ -60,6 +60,9 @@ const THEMES = {
   },
 } as const;
 
+/** Local-only tools exist in dev, so only there does the nav link to them. */
+const IS_DEV = process.env.NODE_ENV === "development";
+
 /** Long enough for a burst (1s in globals.css) to finish. */
 const BURST_MS = 1200;
 
@@ -74,7 +77,21 @@ const MenuIcon = ({ open }: { open: boolean }) => (
   </svg>
 );
 
-export const SiteNav = ({ theme }: { theme: Theme }) => {
+// A plain anchor: /admin only exists as a route in dev, so it can't be a typed Link
+const AdminLink = ({ className }: { className?: string }) => (
+  <a
+    href="/admin"
+    className={cn(
+      "inline-flex items-center justify-center gap-2 rounded-full bg-amber-300 font-bold text-black transition duration-150 hover:-translate-y-px hover:bg-amber-200 active:scale-[.97]",
+      className
+    )}
+  >
+    Admin
+  </a>
+);
+
+/** `logoOnly` drops the links and buttons, e.g. for the admin. */
+export const SiteNav = ({ theme, logoOnly = false }: { theme: Theme; logoOnly?: boolean }) => {
   const t = THEMES[theme];
   const navLinks = theme === "light" ? homeLinks : links;
   const pathname = usePathname();
@@ -141,7 +158,10 @@ export const SiteNav = ({ theme }: { theme: Theme }) => {
         UpTab
       </Link>
 
+      {!logoOnly && (
+      <>
       <div className={cn("hidden items-center gap-1", t.wide, t.tray)}>
+        {IS_DEV && <AdminLink className="mr-1.5 px-4 py-2.5 text-[15px]" />}
         {navLinks.map((link) =>
           renderLink(
             link,
@@ -174,6 +194,7 @@ export const SiteNav = ({ theme }: { theme: Theme }) => {
             t.sheet
           )}
         >
+          {IS_DEV && <AdminLink className="mb-1.5 min-h-14 rounded-2xl text-[17px]" />}
           {[{ href: "/", label: "Home" } satisfies NavLink, ...navLinks].map((link) =>
             renderLink(
               link,
@@ -183,6 +204,8 @@ export const SiteNav = ({ theme }: { theme: Theme }) => {
           )}
           <StoreButton tone={t.tone} className="mt-1.5 min-h-14 w-full rounded-2xl text-[17px]" />
         </div>
+      )}
+      </>
       )}
     </nav>
   );

@@ -36,25 +36,18 @@ describe("buildCatalogue", () => {
     expect(catalogue).toEqual({
       version: 1,
       generatedAt: "1970-01-01T00:00:00.000Z",
-      themes: [{ id: "holland", name: "Holland", coverImageIds: ["koppelpoort"] }],
+      revision: expect.stringMatching(/^[0-9a-f]{12}$/),
+      themes: [{ id: "holland", name: "Holland" }],
       images: [image],
     });
   });
 
-  it("keeps only published cover photos, and falls back to the theme's first photos", () => {
-    const covered = [
-      {
-        id: "holland",
-        name: "Holland",
-        coverImageIds: ["unpublished", "koppelpoort"],
-      },
-      { id: "safari", name: "Safari", coverImageIds: ["unpublished"] },
-    ];
-    const safari = { id: "lion", theme: "safari" } as BackgroundImage;
+  it("changes the revision with the content, not with the build time", () => {
+    const first = buildCatalogue(themes, [image], new Date(0));
+    const later = buildCatalogue(themes, [image], new Date(1000));
+    const edited = buildCatalogue(themes, [{ ...image, author: "Jane" }], new Date(0));
 
-    expect(buildCatalogue(covered, [image, safari], new Date(0)).themes).toEqual([
-      { id: "holland", name: "Holland", coverImageIds: ["koppelpoort"] },
-      { id: "safari", name: "Safari", coverImageIds: ["lion"] },
-    ]);
+    expect(later.revision).toBe(first.revision);
+    expect(edited.revision).not.toBe(first.revision);
   });
 });

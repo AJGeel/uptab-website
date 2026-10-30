@@ -1,4 +1,4 @@
-import { servePhoto } from "@/features/backgrounds/api/serve-photo";
+import { servePhoto } from "@/features/admin/api/serve-photo";
 
 export const GET = async (
   request: Request,

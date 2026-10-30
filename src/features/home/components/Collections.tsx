@@ -129,11 +129,7 @@ export const Collections = ({
       <div className="mt-10 grid grid-cols-[repeat(auto-fit,minmax(min(100%,210px),1fr))] gap-4">
         {shownThemes.map((theme) => {
           const photos = images.filter((image) => image.theme === theme.id);
-          // The theme's chosen covers lead, then the rest
-          const covers = (theme.coverImageIds ?? []).flatMap((id) =>
-            photos.filter((photo) => photo.id === id),
-          );
-          const shown = [...new Set([...covers, ...photos])].slice(0, 3);
+          const shown = photos.slice(0, 3);
 
           return (
             <Link

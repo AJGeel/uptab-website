@@ -1,16 +1,12 @@
 {
   "themes": [
     {
-      "id": "holland",
-      "name": "Holland"
-    },
-    {
-      "id": "safari",
-      "name": "Safari"
-    },
-    {
       "id": "mountains",
       "name": "Mountains"
+    },
+    {
+      "id": "holland",
+      "name": "Holland"
     },
     {
       "id": "flower-power",
@@ -18,10 +14,11 @@
     },
     {
       "id": "architecture",
-      "name": "Architecture",
-      "coverImageIds": [
-        "simone-hutsch-l8fyk9rs-ou-unsplash"
-      ]
+      "name": "Architecture"
+    },
+    {
+      "id": "safari",
+      "name": "Safari"
     }
   ],
   "images": [
@@ -439,6 +436,13 @@
       "link": "https://unsplash.com/photos/trees-near-mountain-U2AwijfUNS4"
     },
     {
+      "id": "simone-hutsch-l8fyk9rs-ou-unsplash",
+      "theme": "architecture",
+      "file": "architecture/simone-hutsch-l8fyk9rs-ou-unsplash.jpg",
+      "author": "Simone Hutsch",
+      "link": "https://unsplash.com/photos/l8fyK9RS-OU"
+    },
+    {
       "id": "maarten-deckers-t5nxyxcf50i-unsplash",
       "theme": "architecture",
       "file": "architecture/maarten-deckers-t5nxyxcf50i-unsplash.jpg",
@@ -465,13 +469,6 @@
       "file": "architecture/leo-manjarrez-vygi0cvz-c-unsplash.jpg",
       "author": "Leo Manjarrez",
       "link": "https://unsplash.com/photos/-vygi0Cvz_c"
-    },
-    {
-      "id": "simone-hutsch-l8fyk9rs-ou-unsplash",
-      "theme": "architecture",
-      "file": "architecture/simone-hutsch-l8fyk9rs-ou-unsplash.jpg",
-      "author": "Simone Hutsch",
-      "link": "https://unsplash.com/photos/l8fyK9RS-OU"
     },
     {
       "id": "emma-raphael-tts-i2y9bo-unsplash",

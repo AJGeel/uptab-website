@@ -1,5 +1,5 @@
-import { AdminShell } from "@/features/backgrounds/components/AdminShell";
-import { BackgroundsOverview } from "@/features/backgrounds/components/BackgroundsOverview";
+import { AdminShell } from "@/features/admin/components/AdminShell";
+import { BackgroundsOverview } from "@/features/admin/components/BackgroundsOverview";
 
 const AdminPage = () => (
   <AdminShell>
