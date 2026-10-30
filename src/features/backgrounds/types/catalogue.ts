@@ -16,6 +16,8 @@ export type Theme = {
   id: string;
   /** Display name, e.g. "Holland". */
   name: string;
+  /** A short, playful description for the website. Optional; the extension ignores it. */
+  blurb?: string;
   /**
    * Up to 4 images that represent the theme, in order. Missing, or IDs that
    * aren't in the catalogue: use the theme's first images.

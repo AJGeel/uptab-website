@@ -22,9 +22,11 @@ export const AdminShell = async ({ children }: { children: ReactNode }) => {
 
   return (
     <Toaster>
-      <div className="mx-auto my-24 flex w-full max-w-6xl flex-col gap-10 px-4 md:px-6">
-        <StatusBanner problems={problems} catalogue={catalogue} />
-        {children}
+      <div className="min-h-screen bg-slate-200 bg-linear-to-b from-white via-slate-200 to-slate-200">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 py-24 md:px-6">
+          <StatusBanner problems={problems} catalogue={catalogue} />
+          {children}
+        </div>
       </div>
     </Toaster>
   );

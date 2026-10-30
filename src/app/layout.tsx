@@ -1,18 +1,23 @@
 import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { Figtree } from "next/font/google";
 import { ReactNode } from "react";
 
 import "./globals.css";
-import Footer from "@/components/Footer";
-import SiteHeader from "@/components/Header/SiteHeader";
+import { getBaseUrl } from "@/features/backgrounds/utils/base-url";
 
-const dmSans = DM_Sans({ subsets: ["latin"] });
+const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree" });
+
+const title = "UpTab — Browser Extension";
+const description =
+  "Enhance your browsing experience with UpTab - A customizable new tab extension.";
 
 export const metadata: Metadata = {
-  title: "UpTab — Browser Extension",
-  description:
-    "Enhance your browsing experience with UpTab - A customizable new tab extension.",
+  metadataBase: new URL(getBaseUrl()),
+  title,
+  description,
+  openGraph: { title, description, siteName: "UpTab", type: "website" },
+  twitter: { card: "summary_large_image", title, description },
   authors: [{ name: "Arthur Geel", url: "https://github.com/ajgeel" }],
   keywords: ["browser extension", "new tab", "customizable"],
   referrer: "origin",
@@ -28,16 +33,12 @@ type Props = {
 const RootLayout = ({ children }: Props) => (
   <html
     lang="en"
-    className="min-h-screen bg-slate-200 bg-linear-to-b from-white via-slate-200 to-slate-200"
+    // Dark, so overscrolling past either end of a page shows the brand colour
+    className={`${figtree.variable} bg-black`}
+    // Next only glides to a #section when the page asks for smooth scrolling here
+    data-scroll-behavior="smooth"
   >
-    <body className={dmSans.className}>
-      {/* Outside graciousEntry: its blur would pin the fixed header to the page instead of the window */}
-      <SiteHeader fadeToTopOn={["/backgrounds"]} />
-      <div className="animate-graciousEntry">
-        {children}
-        <Footer />
-      </div>
-    </body>
+    <body className="min-h-screen bg-page font-sans motion-safe:animate-fade-in">{children}</body>
     <Analytics />
   </html>
 );

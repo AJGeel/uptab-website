@@ -21,6 +21,7 @@ const metadataSchema = z.strictObject({
     z.strictObject({
       id: slug,
       name: z.string().min(1),
+      blurb: z.string().min(1).optional(),
       coverImageIds: z.array(slug).max(MAX_COVER_IMAGES).optional(),
     }),
   ),

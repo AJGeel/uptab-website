@@ -18,14 +18,15 @@ export const Gallery = ({ catalogue: { themes, images } }: { catalogue: Catalogu
   return (
     // Clipped sideways, so the drifting rows can never widen the page
     <div
-      className="group/gallery flex flex-col gap-16 overflow-x-clip"
+      className="group/gallery flex flex-col gap-[clamp(2.5rem,5vw,4rem)] overflow-x-clip"
       data-paused={open ? "" : undefined}
     >
-      {themes.map((theme) => (
+      {themes.map((theme, index) => (
         <ThemeGallery
           key={theme.id}
           theme={theme}
           images={imagesOf(theme.id)}
+          reverse={index % 2 === 1}
           onOpen={(index) => setOpen({ themeId: theme.id, index })}
         />
       ))}
