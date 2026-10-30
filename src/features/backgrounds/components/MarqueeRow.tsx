@@ -1,6 +1,10 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
 import { GalleryTile } from "@/features/backgrounds/components/GalleryTile";
 import type { BackgroundImage } from "@/features/backgrounds/types/catalogue";
-import { cn } from "@/utils/cn";
+import { useEasedPlayback } from "@/hooks/use-eased-playback";
 
 /** Enough tiles per copy to be wider than even an ultrawide screen, so the loop never shows a gap. */
 const MIN_TILES = 14;
@@ -12,19 +16,29 @@ type Item = { image: BackgroundImage; index: number };
 /**
  * A row of photos drifting sideways in an endless loop. It scrolls over two
  * copies of the row. The second is only there for the loop: clickable like
- * the first, but hidden from screen readers and skipped by Tab. Pauses when
- * the row is hovered or focused, or when the gallery is paused. Without
- * motion, it's a static row.
+ * the first, but hidden from screen readers and skipped by Tab. Glides to a
+ * stop when the row is hovered or focused, or when `paused`, and eases back
+ * up to speed afterwards. Without motion, it's a static row.
  */
 export const MarqueeRow = ({
   items,
   reverse = false,
+  paused = false,
   onOpen,
 }: {
   items: Item[];
   reverse?: boolean;
+  paused?: boolean;
   onOpen: (index: number) => void;
 }) => {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const easeTo = useEasedPlayback(trackRef);
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const stopped = paused || hovered || focused;
+
+  useEffect(() => easeTo(stopped ? 0 : 1), [stopped, easeTo]);
+
   const repeats = Math.ceil(MIN_TILES / items.length);
   const copy = Array.from({ length: repeats }, () => items).flat();
 
@@ -44,12 +58,16 @@ export const MarqueeRow = ({
     ));
 
   return (
-    <div className="overflow-hidden">
+    <div
+      className="overflow-hidden"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onFocus={() => setFocused(true)}
+      onBlur={() => setFocused(false)}
+    >
       <div
-        className={cn(
-          "flex w-max gap-3 pr-3 motion-safe:animate-marquee",
-          "group-data-paused/gallery:[animation-play-state:paused] focus-within:[animation-play-state:paused] hover:[animation-play-state:paused]",
-        )}
+        ref={trackRef}
+        className="flex w-max gap-3 pr-3 motion-safe:animate-marquee"
         // Inline, because the animate-marquee shorthand would reset a direction class
         style={{
           animationDuration: `${copy.length * SECONDS_PER_TILE}s`,
