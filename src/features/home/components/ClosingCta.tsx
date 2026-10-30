@@ -16,7 +16,12 @@ export const ClosingCta = ({ photo }: { photo: BackgroundImage }) => (
       />
       <div className="relative m-[clamp(1rem,4vw,3.5rem)] max-w-140 rounded-[26px] bg-white/85 p-[clamp(1.5rem,3.4vw,2.75rem)] shadow-[0_30px_60px_-30px_rgba(2,14,44,0.6)] ring-1 ring-white/70 backdrop-blur-xl backdrop-saturate-150 ring-inset">
         <h2 className="text-[clamp(2.125rem,4.2vw,3.375rem)] leading-heading font-extrabold tracking-[-0.04em]">
-          Convinced? Your next tab has a <span className="text-sky-500">view.</span>
+          Convinced? Your next tab <span
+            className="ut-accent text-(--lovely)"
+            style={{ ["--hero-color" as string]: photo.palette[0] ?? "#25B1FF" }}
+          >
+            has a view
+          </span>.
         </h2>
         <p className="mt-3.5 text-lg font-medium text-[#2a3848]">
           Installing takes about ten seconds. The views last a lot longer.
