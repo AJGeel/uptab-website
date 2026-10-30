@@ -33,14 +33,17 @@ const Footer = ({ theme, credit }: FooterProps) => {
       <div className="flex items-center gap-2.5">
         <Logo size={26} />
         <span>
-          <strong className={dark ? "text-white" : "text-black"}>UpTab</strong> · made by{" "}
-          <a
-            href="https://github.com/ajgeel"
-            {...externalUrlOpts}
-            className={cn("link-pill", dark ? "text-white" : "text-black")}
-          >
-            Arthur Geel
-          </a>
+          <strong className={dark ? "text-white" : "text-black"}>UpTab</strong> ·{" "}
+          <span className="whitespace-nowrap">
+            made by{" "}
+            <a
+              href="https://github.com/ajgeel"
+              {...externalUrlOpts}
+              className={cn("link-pill", dark ? "text-white" : "text-black")}
+            >
+              Arthur Geel
+            </a>
+          </span>
           {credit}
         </span>
       </div>
