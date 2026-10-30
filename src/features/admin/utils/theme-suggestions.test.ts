@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { buildSuggestionsPrompt, parseSuggestions, pickAngles } from "./theme-suggestions";
+import { buildSuggestionsPrompt, parseSuggestions, pickAngles, unsplashSearchUrl } from "./theme-suggestions";
 
 describe("buildSuggestionsPrompt", () => {
   it("lists the existing themes with their blurbs, and asks for room at the top", () => {
@@ -25,7 +25,7 @@ describe("pickAngles", () => {
 describe("parseSuggestions", () => {
   const answer = JSON.stringify({
     themes: [
-      { name: " Misty lakes ", why: " Calm water. " },
+      { name: " Misty lakes ", why: " Calm water. ", search: " foggy lake " },
       { name: "holland", why: "Already there." },
       { name: "Misty Lakes", why: "A repeat." },
       { name: " ", why: "Empty." },
@@ -33,10 +33,24 @@ describe("parseSuggestions", () => {
   });
 
   it("drops existing themes, repeats and empty names, and trims the rest", () => {
-    expect(parseSuggestions(answer, ["Holland"])).toEqual([{ name: "Misty lakes", why: "Calm water." }]);
+    expect(parseSuggestions(answer, ["Holland"])).toEqual([{ name: "Misty lakes", why: "Calm water.", search: "foggy lake" }]);
+  });
+
+  it("searches by name when the model gives no search terms", () => {
+    const json = JSON.stringify({ themes: [{ name: "Neon rain", why: "Wet." }] });
+
+    expect(parseSuggestions(json, [])).toEqual([{ name: "Neon rain", why: "Wet.", search: "Neon rain" }]);
   });
 
   it("rejects an answer in the wrong shape", () => {
     expect(() => parseSuggestions('{"themes":"nope"}', [])).toThrow("expected shape");
+  });
+});
+
+describe("unsplashSearchUrl", () => {
+  it("links to a landscape Unsplash search with a dashed, escaped query", () => {
+    expect(unsplashSearchUrl(" Foggy Lake & Pier ")).toBe(
+      "https://unsplash.com/s/photos/foggy-lake-%26-pier?orientation=landscape"
+    );
   });
 });

@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export type ThemeSuggestion = { name: string; why: string };
+export type ThemeSuggestion = { name: string; why: string; search: string };
 
 /** Random starting points, so each press of the button goes somewhere different. */
 const ANGLES = [
@@ -24,6 +24,9 @@ const ANGLES = [
   "surreal and dreamlike scenes",
 ];
 
+export const unsplashSearchUrl = (search: string) =>
+  `https://unsplash.com/s/photos/${encodeURIComponent(search.trim().toLowerCase()).replace(/%20/g, "-")}?orientation=landscape`;
+
 export const pickAngles = (count = 3) =>
   [...ANGLES].sort(() => Math.random() - 0.5).slice(0, count);
 
@@ -38,12 +41,12 @@ export const buildSuggestionsPrompt = (themes: { name: string; blurb?: string }[
     `For inspiration, lean on some of these this time: ${angles.join(", ")}.`,
     "One hard rule: every theme must be photographable with plenty of clear, low-detail space in the top part of the frame (sky, fog, water, a plain wall, a gradient, a dark void), so the widgets stay readable.",
     "Avoid themes that are mostly busy, high-detail texture from edge to edge, such as dense crowds, foliage close-ups or patterns.",
-    'Give each a name of one to three words, and a "why" of one short, punchy sentence about what makes it fun and where the empty space is.',
-    'Answer as JSON like {"themes":[{"name":"...","why":"..."}]}.',
+    'Give each a name of one to three words, a "why" of one short, punchy sentence about what makes it fun and where the empty space is, and a "search" of one to three plain words someone would type into Unsplash to find photos of it (no invented words).',
+    'Answer as JSON like {"themes":[{"name":"...","why":"...","search":"..."}]}.',
   ].join("\n");
 
 const responseSchema = z.object({
-  themes: z.array(z.object({ name: z.string(), why: z.string() })),
+  themes: z.array(z.object({ name: z.string(), why: z.string(), search: z.string().optional() })),
 });
 
 /** The model's suggestions, without any that duplicate an existing theme or each other. */
@@ -55,7 +58,7 @@ export const parseSuggestions = (json: string, existingNames: string[]): ThemeSu
     throw new Error("The model's answer wasn't in the expected shape.");
   }
 
-  return parsed.data.themes.flatMap(({ name, why }) => {
+  return parsed.data.themes.flatMap(({ name, why, search }) => {
     const key = name.trim().toLowerCase();
 
     if (!key || seen.has(key)) {
@@ -64,6 +67,6 @@ export const parseSuggestions = (json: string, existingNames: string[]): ThemeSu
 
     seen.add(key);
 
-    return [{ name: name.trim(), why: why.trim() }];
+    return [{ name: name.trim(), why: why.trim(), search: search?.trim() || name.trim() }];
   });
 };

@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit",
-    "test": "vitest"
+    "test": "vitest",
+    "tabs-extension": "/Applications/Floorp.app/Contents/MacOS/floorp -new-tab 'about:debugging#/runtime/this-firefox' && open -R tools/unsplash-tabs/manifest.json"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

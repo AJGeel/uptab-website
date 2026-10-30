@@ -1,6 +1,7 @@
 "use client";
 
 import { Dialog } from "@base-ui/react/dialog";
+import { ArrowTopRightOnSquareIcon } from "@heroicons/react/16/solid";
 import { useRef, useState, useTransition } from "react";
 
 import { createThemeAction } from "@/features/admin/api/create-theme";
@@ -11,7 +12,7 @@ import { Field } from "@/features/admin/components/ui/Field";
 import { Input } from "@/features/admin/components/ui/Input";
 import { useActionToast } from "@/features/admin/hooks/use-action-toast";
 import { toSlug } from "@/features/admin/utils/edits";
-import type { ThemeSuggestion } from "@/features/admin/utils/theme-suggestions";
+import { type ThemeSuggestion, unsplashSearchUrl } from "@/features/admin/utils/theme-suggestions";
 
 import { ActionForm } from "./ActionForm";
 
@@ -87,16 +88,26 @@ export const NewThemeDialog = ({
               </Button>
               {suggestions.length > 0 && (
                 <ul className="flex max-h-56 flex-col gap-1 overflow-auto">
-                  {suggestions.map(({ name, why }) => (
-                    <li key={name}>
+                  {suggestions.map(({ name, why, search }) => (
+                    <li key={name} className="flex items-stretch gap-1">
                       <button
                         type="button"
                         onClick={() => pick(name)}
-                        className="flex w-full flex-col rounded-lg bg-[#0b121c] px-3 py-2 text-left duration-150 hover:bg-amber-300/15"
+                        className="flex min-w-0 flex-1 flex-col rounded-lg bg-[#0b121c] px-3 py-2 text-left duration-150 hover:bg-amber-300/15"
                       >
                         <span className="text-sm font-bold text-white">{name}</span>
                         <span className="text-xs text-[#7f8da0]">{why}</span>
                       </button>
+                      <a
+                        href={unsplashSearchUrl(search)}
+                        target="_blank"
+                        rel="noreferrer"
+                        title={`Search Unsplash for "${search}"`}
+                        aria-label={`Search Unsplash for ${search}`}
+                        className="flex w-9 shrink-0 items-center justify-center rounded-lg bg-[#0b121c] text-[#7f8da0] duration-150 hover:bg-amber-300/15 hover:text-amber-300"
+                      >
+                        <ArrowTopRightOnSquareIcon className="size-4" />
+                      </a>
                     </li>
                   ))}
                 </ul>

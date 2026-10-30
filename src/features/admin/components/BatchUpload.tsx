@@ -16,6 +16,7 @@ import { plural } from "@/utils/plural";
 
 import { PhotoDrop } from "./PhotoDrop";
 import { ThemeSelect } from "./ThemeSelect";
+import { UnsplashPaste } from "./UnsplashPaste";
 
 type Staged = {
   key: string;
@@ -51,7 +52,7 @@ export const BatchUpload = ({
   const problems = staged.map(({ id }) => idProblem(id, existing, batchIds));
   const invalid = problems.filter(Boolean).length;
 
-  const addFiles = (files: File[]) =>
+  const addFiles = (files: File[], credit?: { author: string; link: string }) =>
     setStaged((current) => {
       const taken = new Set([...existingIds, ...current.map(({ id }) => id)]);
 
@@ -62,8 +63,8 @@ export const BatchUpload = ({
 
           taken.add(id);
 
-          // An Unsplash download's name has its credit, so it beats the shared defaults
-          const unsplash = parseUnsplashName(file.name);
+          // A fetched photo's own credit is exact; a download's name has a best guess. Both beat the shared defaults
+          const unsplash = credit ?? parseUnsplashName(file.name);
 
           return {
             key: crypto.randomUUID(),
@@ -200,7 +201,10 @@ export const BatchUpload = ({
           staged.length > 0 && "items-end"
         )}
       >
-        <PhotoDrop onAdd={addFiles} compact={staged.length > 0} />
+        <div className="flex flex-col gap-3">
+          <PhotoDrop onAdd={addFiles} compact={staged.length > 0} />
+          <UnsplashPaste onAdd={addFiles} />
+        </div>
         {!theme && (
           // Not a <label>: clicking one would also click the picker's button
           <div className="flex flex-col gap-1 text-xs font-medium text-[#7f8da0]">

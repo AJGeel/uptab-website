@@ -24,6 +24,11 @@
       "id": "safari",
       "name": "Safari",
       "blurb": "Vast landscapes for endless browsing. We’re hoping you don’t get lost."
+    },
+    {
+      "id": "highland-mist",
+      "name": "Highland Mist",
+      "blurb": "A perpetually moody background for your browsing."
     }
   ],
   "images": [

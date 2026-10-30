@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "UpTab admin: Unsplash tabs",
+  "version": "1.0",
+  "description": "Lets the UpTab admin on localhost list and close your open Unsplash photo tabs.",
+  "browser_specific_settings": { "gecko": { "id": "unsplash-tabs@uptab.local" } },
+  "host_permissions": ["*://unsplash.com/photos/*", "*://www.unsplash.com/photos/*"],
+  "background": { "scripts": ["background.js"] },
+  "content_scripts": [{ "matches": ["http://localhost/*"], "js": ["content.js"], "run_at": "document_start" }]
+}
