@@ -89,8 +89,6 @@ export const Tour = ({ autoplay = true }: { autoplay?: boolean }) => {
     return () => clearTimeout(timer);
   }, [autoplay, slide, run]);
 
-  const active = SLIDES[slide];
-
   return (
     <section id="tour" className="mx-auto max-w-310 reveal px-[clamp(1rem,4vw,2rem)] pt-[clamp(4.5rem,9vw,8rem)]">
       <div className="flex flex-wrap items-end justify-between gap-6">
@@ -147,9 +145,19 @@ export const Tour = ({ autoplay = true }: { autoplay?: boolean }) => {
         </div>
 
         <div className="flex flex-[1_1_280px] flex-col gap-3.5">
-          <p className="text-[13px] font-bold tracking-[0.12em] text-muted uppercase">{active.kicker}</p>
-          <h3 className="text-3xl leading-title font-extrabold tracking-tight text-balance">{active.title}</h3>
-          <p className="text-[17px] leading-relaxed text-balance text-body">{active.body}</p>
+          {/* Every slide's text shares one grid cell, so the tallest sets the height and switching never shifts the page */}
+          <div className="grid">
+            {SLIDES.map((item, index) => (
+              <div
+                key={item.tab}
+                className={cn("col-start-1 row-start-1 flex flex-col gap-3.5", index !== slide && "invisible")}
+              >
+                <p className="text-[13px] font-bold tracking-[0.12em] text-muted uppercase">{item.kicker}</p>
+                <h3 className="text-3xl leading-title font-extrabold tracking-tight text-balance">{item.title}</h3>
+                <p className="text-[17px] leading-relaxed text-balance text-body">{item.body}</p>
+              </div>
+            ))}
+          </div>
           <p className="text-sm font-semibold text-muted">
             {slide + 1} / {SLIDES.length}
           </p>
