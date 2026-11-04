@@ -21,7 +21,7 @@ import "@/features/home/home.css";
 /** The themes whose first photo stands in for the extension in the keyboard demo. */
 const KEYBOARD_DEMO_THEMES = ["mountains", "holland", "safari"];
 
-/** Rebuilt hourly, so the hero photo rotates every couple of hours, the demo weather follows the season and "Recently shipped" the changelog. */
+/** Rebuilt hourly, so the hero photos change with every rebuild, the demo weather follows the season and "Recently shipped" the changelog. */
 export const revalidate = 3600;
 
 const Home = async () => {
