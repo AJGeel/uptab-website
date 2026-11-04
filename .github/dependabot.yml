@@ -1,0 +1,12 @@
+version: 2
+updates:
+  - package-ecosystem: bun
+    directory: /
+    schedule:
+      interval: weekly
+    # A fresh release waits 14 days before it's proposed.
+    cooldown:
+      default-days: 14
+    groups:
+      dependencies:
+        patterns: ["*"]
