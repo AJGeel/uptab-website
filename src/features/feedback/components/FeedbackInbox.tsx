@@ -1,7 +1,7 @@
 "use client";
 
 import { Select } from "@base-ui/react/select";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import { CheckIcon, ChevronDownIcon, ClipboardDocumentIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
@@ -11,6 +11,7 @@ import { SkyGradient } from "@/features/feedback/components/RatingFace";
 import { useReadIds } from "@/features/feedback/hooks/use-read-ids";
 import { CATEGORY_COLORS } from "@/features/feedback/utils/category-colors";
 import { DATE_RANGES, type DateRange } from "@/features/feedback/utils/date-range";
+import { buildFeedbackExport } from "@/features/feedback/utils/format-for-ai";
 import { CATEGORIES, CATEGORY_LABELS, type Category, type Feedback } from "@/features/feedback/utils/schema";
 import { cn } from "@/utils/cn";
 import "@/features/feedback/feedback.css";
@@ -31,6 +32,7 @@ export const FeedbackInbox = ({ entries, range }: { entries: Feedback[]; range: 
   const [category, setCategory] = useState<Filter>("all");
   const [unreadOnly, setUnreadOnly] = useState(true);
   const [now] = useState(() => Date.now());
+  const [copied, setCopied] = useState(false);
 
   const rangeLabel = DATE_RANGES[range];
   const unreadTotal = entries.filter((entry) => !isRead(entry.id)).length;
@@ -48,6 +50,18 @@ export const FeedbackInbox = ({ entries, range }: { entries: Feedback[]; range: 
       on: CATEGORY_COLORS[id].selected,
     })),
   ];
+
+  const copyForAi = async () => {
+    const view = [
+      rangeLabel,
+      category === "all" ? "all categories" : CATEGORY_LABELS[category],
+      unreadOnly ? "unread only" : "read and unread",
+    ].join(", ");
+
+    await navigator.clipboard.writeText(buildFeedbackExport(shown, view));
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
     <div className="flex flex-col gap-5">
@@ -125,6 +139,19 @@ export const FeedbackInbox = ({ entries, range }: { entries: Feedback[]; range: 
           className={cn(pill, unreadOnly ? ["bg-sky-400", active] : idle)}
         >
           Unread
+        </button>
+        <button
+          type="button"
+          disabled={shown.length === 0}
+          onClick={copyForAi}
+          className={cn(pill, idle, "disabled:opacity-50")}
+        >
+          {copied ? (
+            <CheckIcon className="size-4.5" strokeWidth={2.5} aria-hidden="true" />
+          ) : (
+            <ClipboardDocumentIcon className="size-4.5" aria-hidden="true" />
+          )}
+          <span aria-live="polite">{copied ? "Copied" : "Analysis"}</span>
         </button>
       </div>
 
