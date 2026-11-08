@@ -19,13 +19,13 @@ type Theme = "light" | "dark";
 type NavLink = { href: Route; label: string; external?: boolean };
 
 const links: NavLink[] = [
+  { href: "/feedback", label: "Feedback" },
   { href: "/backgrounds", label: "Backgrounds" },
   { href: "/changelog", label: "Changelog" },
-  { href: "/feedback", label: "Feedback" },
 ];
 
 // The home page has the FAQ on it
-const homeLinks: NavLink[] = [...links.slice(0, 2), { href: "/#faq", label: "FAQ" }, ...links.slice(2)];
+const homeLinks: NavLink[] = [{ href: "/#faq", label: "FAQ" }, ...links];
 
 // The pill links need more room on the light home page
 const THEMES = {
