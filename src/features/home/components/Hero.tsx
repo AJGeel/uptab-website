@@ -1,4 +1,5 @@
 import type { BackgroundImage } from "@/features/backgrounds/types/catalogue";
+import { HeroPhoto } from "@/features/home/components/HeroPhoto";
 import { externalUrlOpts } from "@/utils/externalUrlOpts";
 
 const SHAPES = {
@@ -97,19 +98,10 @@ export const Hero = ({
 
   return (
     <header
-      className="relative flex min-h-svh flex-col overflow-hidden bg-[#8fc3d0]"
-      style={{ ["--hero-color" as string]: photo.palette[0] ?? "#138CD0" }}
+      className="relative flex min-h-svh flex-col overflow-hidden"
+      style={{ backgroundColor: photo.color, ["--hero-color" as string]: photo.palette[0] ?? "#138CD0" }}
     >
-      {/* A plain img: next/image would re-encode the renditions, softening them */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={new URL(photo.sources.at(-1)!.url).pathname}
-        srcSet={srcSet}
-        sizes="100vw"
-        alt=""
-        fetchPriority="high"
-        className="absolute inset-0 size-full object-cover"
-      />
+      <HeroPhoto src={new URL(photo.sources.at(-1)!.url).pathname} srcSet={srcSet} />
       <div className="ut-scrim absolute inset-0" aria-hidden="true" />
 
       <div className="relative flex flex-1 flex-col px-[clamp(1rem,4vw,3.5rem)] pt-24 pb-7">
