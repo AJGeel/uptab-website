@@ -1,0 +1,37 @@
+/* Rating faces */
+.fb-face{color:#a3b1c2;transition:opacity .2s ease}
+.fb-tile{fill:#1a2433}
+.fb-rate[data-on] .fb-face{color:#fff;animation:fbPop .45s cubic-bezier(.3,1.6,.5,1)}
+.fb-rate[data-on] .fb-tile{fill:url(#fb-sky)}
+.fb-rate:not([data-on]):hover .fb-face{animation:fbWiggle .6s ease-in-out}
+.fb-rates[data-any] .fb-rate:not([data-on]) .fb-face{opacity:.55}
+.fb-rate:has(input:focus-visible) .fb-face{border-radius:14px;outline:3px solid #25b1ff;outline-offset:3px}
+@keyframes fbPop{0%{transform:scale(.85)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
+@keyframes fbWiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-9deg) scale(1.06)}50%{transform:rotate(7deg) scale(1.06)}75%{transform:rotate(-3deg)}}
+
+/* Fields */
+.fb-field{background:#0a111c;color:#eef3f8;box-shadow:inset 0 0 0 1px #2a374a;transition:box-shadow .2s ease,background-color .2s ease}
+.fb-field:hover{box-shadow:inset 0 0 0 1px #3c5070}
+.fb-field:focus{outline:none;background:#0c1522;box-shadow:inset 0 0 0 1.5px #25b1ff,0 0 0 4px rgba(37,177,255,.25)}
+.fb-field[aria-invalid="true"]{box-shadow:inset 0 0 0 1.5px #ff8597,0 0 0 4px rgba(255,133,151,.18)}
+.fb-field::placeholder{color:#7f8da0}
+
+/* Buttons */
+.fb-send:focus-visible,.fb-ghost:focus-visible{outline:3px solid #25b1ff;outline-offset:3px}
+.fb-spin{transform-origin:center;animation:fbSpin .8s linear infinite}
+@keyframes fbSpin{to{transform:rotate(360deg)}}
+.fb-shake{animation:fbShake .45s ease}
+@keyframes fbShake{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(2px)}}
+
+/* Thank you */
+.fb-in{animation:fbIn .5s cubic-bezier(.2,.9,.3,1.15) both}
+@keyframes fbIn{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+.fb-hat{transform-box:fill-box;transform-origin:0% 100%;animation:fbHat 2.4s ease-in-out infinite}
+@keyframes fbHat{0%,100%{transform:rotate(0)}50%{transform:rotate(-10deg)}}
+.fb-conf{animation:fbConf 2.6s ease-in-out infinite}
+@keyframes fbConf{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(-6px);opacity:1}}
+.fb-hop{animation:fbHop 1.8s cubic-bezier(.3,1.6,.5,1) infinite}
+@keyframes fbHop{0%,55%,100%{transform:translateY(0)}25%{transform:translateY(-6px)}}
+
+/* The end states stay; the motion goes */
+@media (prefers-reduced-motion:reduce){.fb-face,.fb-field,.fb-rate *{transition:none!important;animation:none!important}.fb-shake,.fb-in,.fb-hat,.fb-conf,.fb-hop,.fb-spin{animation:none!important}}

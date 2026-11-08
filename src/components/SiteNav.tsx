@@ -10,7 +10,6 @@ import { BURST_MOODS, FaceBurst } from "@/components/FaceBurst";
 import { Logo } from "@/components/Logo";
 import type { Mood } from "@/components/MoodFace";
 import { StoreButton } from "@/components/StoreButton";
-import { externalUrls } from "@/config";
 import { useScrollY } from "@/hooks/useScrollY";
 import { cn } from "@/utils/cn";
 import { externalUrlOpts } from "@/utils/externalUrlOpts";
@@ -22,7 +21,7 @@ type NavLink = { href: Route; label: string; external?: boolean };
 const links: NavLink[] = [
   { href: "/backgrounds", label: "Backgrounds" },
   { href: "/changelog", label: "Changelog" },
-  { href: externalUrls.github, label: "GitHub", external: true },
+  { href: "/feedback", label: "Feedback" },
 ];
 
 // The home page has the FAQ on it

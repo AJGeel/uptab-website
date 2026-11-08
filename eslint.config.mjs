@@ -124,6 +124,7 @@ export default defineConfig([
         {
           whitelist: [
             "ut-.*",
+            "fb-.*",
             "f-(blink|eyes|hat|hmm|o)",
             "p-(all|extra|eyes|mouth)",
             "burst-p",
