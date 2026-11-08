@@ -11,6 +11,7 @@ const entry = (message: string, overrides: Partial<Feedback> = {}): Feedback => 
   message,
   email: null,
   version: null,
+  browser: null,
   user_agent: null,
   ...overrides,
 });

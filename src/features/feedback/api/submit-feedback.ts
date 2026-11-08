@@ -11,8 +11,10 @@ export type SubmitPayload = {
   rating: number | null;
   message: string;
   email: string;
-  /** The extension's version, from the ?v= its "Got feedback?" link adds. */
-  version: string | null;
+  /** The extension's version, prefilled from the ?v= its "Got feedback?" link adds. */
+  version: string;
+  /** What the visitor says they browse with, prefilled from their user agent. */
+  browser: string;
   website: string;
   elapsedMs: number;
 };
@@ -36,7 +38,8 @@ export const submitFeedback = async (payload: SubmitPayload): Promise<{ ok: bool
     rating: payload.rating ?? undefined,
     message: payload.message,
     email: payload.email || undefined,
-    version: payload.version ?? undefined,
+    version: payload.version?.trim().replace(/^v/i, "") || undefined,
+    browser: payload.browser || undefined,
     user_agent: requestHeaders.get("user-agent")?.slice(0, 300),
   });
 

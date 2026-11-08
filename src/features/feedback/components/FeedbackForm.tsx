@@ -5,26 +5,17 @@ import { z } from "zod";
 
 import { submitFeedback } from "@/features/feedback/api/submit-feedback";
 import { CategoryPill } from "@/features/feedback/components/CategoryPill";
+import { hint, inputBase, legend } from "@/features/feedback/components/field-styles";
 import { FieldError } from "@/features/feedback/components/FieldError";
-import { RatingFace, SkyGradient } from "@/features/feedback/components/RatingFace";
+import { SkyGradient } from "@/features/feedback/components/RatingFace";
+import { RatingField } from "@/features/feedback/components/RatingField";
 import { ThankYou } from "@/features/feedback/components/ThankYou";
-import { CATEGORIES, MESSAGE_MAX, RATING_LABELS } from "@/features/feedback/utils/schema";
+import { useDetectedSetup } from "@/features/feedback/hooks/use-detected-setup";
+import { CATEGORIES, MESSAGE_MAX } from "@/features/feedback/utils/schema";
 import "@/features/feedback/feedback.css";
 
 type Category = (typeof CATEGORIES)[number];
 
-const RATING_HINTS = [
-  "Pick a face. Honesty welcome, no hard feelings.",
-  "Oof. Tell me what broke your heart.",
-  "Meh is fair. What would make it better?",
-  "Okay is a start. What would make it great?",
-  "Nice! What’s missing for a perfect score?",
-  "Aww, stop it. (Don’t stop it.)",
-];
-
-const legend = "p-0 text-base font-bold text-white";
-const hint = "text-sm text-dark-muted";
-const inputBase = "fb-field block w-full px-4.5 text-base text-dark-text";
 
 export const FeedbackForm = () => {
   const [phase, setPhase] = useState<"form" | "sending" | "thanks">("form");
@@ -43,6 +34,7 @@ export const FeedbackForm = () => {
   const emailField = useRef<HTMLInputElement>(null);
   const honeypot = useRef<HTMLInputElement>(null);
 
+  const { version, browser } = useDetectedSetup();
   const trimmedEmail = email.trim();
   const emailValid = trimmedEmail === "" || z.email().safeParse(trimmedEmail).success;
   const categoryError = touched && !category;
@@ -72,7 +64,11 @@ export const FeedbackForm = () => {
 
     if (!category || message.trim() === "" || !emailValid) {
       setShaking(true);
-      const first = !category ? firstCategory : message.trim() === "" ? messageField : emailField;
+      const first = !category
+        ? firstCategory
+        : message.trim() === ""
+          ? messageField
+          : emailField;
 
       first.current?.focus();
 
@@ -91,7 +87,8 @@ export const FeedbackForm = () => {
         rating: rating || null,
         message,
         email: trimmedEmail,
-        version: new URLSearchParams(window.location.search).get("v"),
+        version,
+        browser,
         website: honeypot.current?.value ?? "",
         elapsedMs: Date.now() - openedAt,
       }));
@@ -172,41 +169,7 @@ export const FeedbackForm = () => {
         {messageError && <FieldError id="fb-msg-err">Don’t leave me hanging. Even one sentence helps.</FieldError>}
       </div>
 
-      <fieldset className="flex flex-col">
-        <legend className={`${legend} mb-1`}>
-          How’s UpTab treating you? <span className="font-medium text-dark-muted">(optional)</span>
-        </legend>
-        <p className={`${hint} mb-4`}>{RATING_HINTS[rating]}</p>
-        <div data-any={rating > 0 || undefined} className="fb-rates grid max-w-110 grid-cols-5 gap-2">
-          {RATING_LABELS.map((label, index) => {
-            const value = index + 1;
-            const on = rating === value;
-
-            return (
-              <label
-                key={label}
-                data-on={on || undefined}
-                className="fb-rate flex min-w-0 cursor-pointer flex-col items-center gap-2"
-              >
-                <input
-                  type="radio"
-                  name="rating"
-                  value={value}
-                  checked={on}
-                  // Radios can't be unchecked by clicking, so a second click on the picked face clears it
-                  onChange={() => setRating(value)}
-                  onClick={() => on && setRating(0)}
-                  className="sr-only"
-                />
-                <RatingFace rating={value} />
-                <span className={`text-[13px] whitespace-nowrap ${on ? "font-extrabold text-white" : "font-semibold text-dark-muted"}`}>
-                  {label}
-                </span>
-              </label>
-            );
-          })}
-        </div>
-      </fieldset>
+      <RatingField rating={rating} onChange={setRating} />
 
       <div className="flex flex-col gap-2.5">
         <label htmlFor="fb-email" className={legend}>
