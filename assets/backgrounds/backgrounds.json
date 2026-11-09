@@ -79,7 +79,7 @@
       "theme": "holland",
       "file": "holland/halve-zolenlijn.jpg",
       "author": "Max Hoogenbosch",
-      "link": null
+      "link": "https://unsplash.com/photos/kjt1uv0l_1I"
     },
     {
       "id": "aerial-castle-view",
@@ -114,14 +114,14 @@
       "theme": "holland",
       "file": "holland/dom-tower-utrecht.jpg",
       "author": "Max Hoogenbosch",
-      "link": null
+      "link": "https://unsplash.com/photos/N33mksKmvns"
     },
     {
       "id": "overdamspad-houten",
       "theme": "holland",
       "file": "holland/overdamspad-houten.jpg",
       "author": "Max Hoogenbosch",
-      "link": null
+      "link": "https://unsplash.com/photos/uobfJER9tvk"
     },
     {
       "id": "koppelpoort",
@@ -1039,6 +1039,20 @@
       "file": "holland/javier-m-2hs8zbwolda-unsplash.jpg",
       "author": "Javier M.",
       "link": "https://unsplash.com/photos/assorted-color-buildings-beside-body-of-water-2Hs8zbwOLDA"
+    },
+    {
+      "id": "stadhuisbrug-utrecht",
+      "theme": "holland",
+      "file": "holland/stadhuisbrug-utrecht.jpg",
+      "author": "Max Hoogenbosch",
+      "link": "https://unsplash.com/photos/bxTm2BwaRjg"
+    },
+    {
+      "id": "cunera-church-rhenen",
+      "theme": "holland",
+      "file": "holland/cunera-church-rhenen.jpg",
+      "author": "Max Hoogenbosch",
+      "link": "https://unsplash.com/photos/SvNO8xpe8eM"
     }
   ]
 }
