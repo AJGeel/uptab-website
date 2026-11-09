@@ -14,9 +14,9 @@ it("shows what the visitor filled in", () => {
 it("says so when they are empty, and guesses the browser from the user agent", () => {
   const { version, browser } = describeSetup({ version: null, browser: null, user_agent: FIREFOX });
 
-  expect(version).toEqual({ text: "Version unknown", missing: true });
+  expect(version).toEqual({ text: "No version", missing: true });
   expect(browser.missing).toBe(true);
-  expect(browser.text).toBe("Probably Firefox 144 on macOS (guessed)");
+  expect(browser.text).toBe("Firefox 144 on macOS (guessed)");
 });
 
 it("makes no guess when there is no user agent either", () => {
