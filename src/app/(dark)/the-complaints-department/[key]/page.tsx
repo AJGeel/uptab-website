@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 
 import { listFeedback } from "@/features/feedback/api/db";
 import { FeedbackInbox } from "@/features/feedback/components/FeedbackInbox";
-import { dateRangeSince, parseDateRange } from "@/features/feedback/utils/date-range";
 import { isAdminKey } from "@/features/feedback/utils/admin-auth";
+import { dateRangeSince, parseDateRange } from "@/features/feedback/utils/date-range";
 
 export const metadata: Metadata = { title: "The Complaints Department", robots: { index: false, follow: false } };
 

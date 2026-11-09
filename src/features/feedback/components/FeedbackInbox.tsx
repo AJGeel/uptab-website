@@ -36,8 +36,10 @@ export const FeedbackInbox = ({ entries, range }: { entries: Feedback[]; range: 
 
   const rangeLabel = DATE_RANGES[range];
   const unreadTotal = entries.filter((entry) => !isRead(entry.id)).length;
-  // The counts on the pills describe what each pill would show
-  // Read-state is only known in the browser, so show nothing rather than flash cards that are about to be filtered out
+  /*
+   * The counts on the pills describe what each pill would show
+   * Read-state is only known in the browser, so show nothing rather than flash cards that are about to be filtered out
+   */
   const candidates = ready ? entries.filter((entry) => !(unreadOnly && isRead(entry.id))) : [];
   const inboxZero = ready && unreadOnly && entries.length > 0 && candidates.length === 0;
   const shown = category === "all" ? candidates : candidates.filter((entry) => entry.category === category);
