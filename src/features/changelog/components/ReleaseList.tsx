@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { externalUrls } from "@/config";
 import { InlineText } from "@/features/changelog/components/InlineText";
@@ -27,6 +27,26 @@ const countOf = (release: Release, kind: ChangeKind) => release.items.filter((it
  */
 export const ReleaseList = ({ releases }: { releases: Release[] }) => {
   const [enabled, setEnabled] = useState<Record<ChangeKind, boolean>>({ added: true, changed: true, fixed: true });
+  const [linkedId, setLinkedId] = useState<string | null>(null);
+
+  // The linked card is highlighted until you click elsewhere; :target can't do that, as it follows the URL hash
+  useEffect(() => {
+    const syncWithHash = () => setLinkedId(window.location.hash.slice(1) || null);
+    const clearOnOutsideClick = (event: PointerEvent) => {
+      if (event.target instanceof Element && event.target.closest(`[id="${window.location.hash.slice(1)}"]`)) {return;}
+      setLinkedId(null);
+    };
+
+    syncWithHash();
+    window.addEventListener("hashchange", syncWithHash);
+    document.addEventListener("pointerdown", clearOnOutsideClick);
+
+    return () => {
+      window.removeEventListener("hashchange", syncWithHash);
+      document.removeEventListener("pointerdown", clearOnOutsideClick);
+    };
+  }, []);
+
   const shown = releases.slice(0, SHOWN);
   const older = releases.slice(SHOWN);
   const totals = (kind: ChangeKind) => shown.reduce((sum, release) => sum + countOf(release, kind), 0);
@@ -62,11 +82,16 @@ export const ReleaseList = ({ releases }: { releases: Release[] }) => {
           return (
             // Scrolls to just below the fixed header when linked to, e.g. from the home page
             <li key={release.version} id={`v${release.version}`} className="scroll-mt-28">
-              <article className="overflow-hidden rounded-2xl bg-[#0e151f] ring-1 ring-dark-line transition-shadow duration-300 ring-inset hover:ring-[#33465f] [li:target_&]:ring-sky-400/70">
+              {/* The ring is an overlay, so the header and row backgrounds can't paint over it */}
+              <article
+                data-linked={linkedId === `v${release.version}`}
+                className="relative overflow-hidden rounded-2xl bg-[#0e151f] shadow-[0_0_40px_rgb(56_189_248/0)] transition-shadow duration-300 after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:ring-1 after:ring-dark-line after:transition-shadow after:duration-300 after:ring-inset hover:after:ring-[#33465f] data-[linked=true]:shadow-[0_0_40px_rgb(56_189_248/0.22)] data-[linked=true]:after:ring-sky-400/70"
+              >
                 <header className="flex flex-wrap items-center gap-x-3.5 gap-y-2 border-b border-dark-pill bg-dark-surface px-5 py-4">
                   <h2 className="text-lg font-bold">
                     <span className="text-[#7f8da0]">## </span>
-                    <a href={`#v${release.version}`} className="text-white hover:text-sky-400">
+                    {/* The hash stays in the URL after deselecting, so a repeat click fires no hashchange */}
+                    <a href={`#v${release.version}`} onClick={() => setLinkedId(`v${release.version}`)} className="text-white hover:text-sky-400">
                       [{release.version}]
                     </a>
                   </h2>
