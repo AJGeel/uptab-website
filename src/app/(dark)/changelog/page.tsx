@@ -17,6 +17,9 @@ const Stat = ({ label, children, className }: { label: string; children: string;
   </div>
 );
 
+/** Rebuilt daily, so new releases in the changelog show up without a deploy. */
+export const revalidate = 86400;
+
 const Page = async () => {
   const releases = await getReleases();
 
