@@ -1,9 +1,12 @@
+import Link from "next/link";
+import type { ReactNode } from "react";
+
 import { type Mood } from "@/components/MoodFace";
 import { externalUrls } from "@/config";
 import { WiggleFace } from "@/features/home/components/WiggleFace";
 import { externalUrlOpts } from "@/utils/externalUrlOpts";
 
-const QUESTIONS: { mood: Mood; question: string; answer: string }[] = [
+const QUESTIONS: { mood: Mood; question: string; answer: ReactNode }[] = [
   {
     mood: "happy",
     question: "Does it work with my existing bookmarks?",
@@ -12,12 +15,20 @@ const QUESTIONS: { mood: Mood; question: string; answer: string }[] = [
   {
     mood: "wink",
     question: "Do you store my data or browsing history?",
-    answer: "Nope. No tracking, no peeking. Your settings live on your device and nowhere else.",
+    answer: "Nope. No tracking. Your settings live on your device and nowhere else.",
   },
   {
     mood: "grin",
     question: "Is it really free?",
-    answer: "Yup, it's free. And your data is never for sale.",
+    answer: (
+      <>
+        Yup, it&apos;s free. And your data is never for sale. Read the{" "}
+        <Link href="/privacy" className="font-semibold text-sky-800 underline-offset-2 hover:underline">
+          privacy page
+        </Link>
+        {" "}for more info.
+      </>
+    ),
   },
   {
     mood: "whoa",
@@ -27,7 +38,15 @@ const QUESTIONS: { mood: Mood; question: string; answer: string }[] = [
   {
     mood: "hmm",
     question: "I found a bug. What now?",
-    answer: "Whoops! While you open an issue on GitHub, I’ll grab the fly swatter.",
+    answer: (
+      <>
+        Whoops! While you{" "}
+        <Link href="/feedback" className="font-semibold text-sky-800 underline-offset-2 hover:underline">
+          send me some feedback
+        </Link>
+        , I’ll grab the fly swatter.
+      </>
+    ),
   },
 ];
 
