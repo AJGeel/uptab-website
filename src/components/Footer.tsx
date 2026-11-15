@@ -16,6 +16,8 @@ const links: { href: Route; label: string; external?: boolean }[] = [
   { href: "/changelog", label: "Changelog" },
   { href: "/backgrounds", label: "Backgrounds" },
   { href: "/feedback", label: "Feedback" },
+  { href: "/privacy", label: "Privacy" },
+  { href: "/terms", label: "Terms" },
   { href: externalUrls.github, label: "GitHub", external: true },
   { href: externalUrls.chrome, label: "Chrome Web Store", external: true },
   { href: externalUrls.firefox, label: "Firefox Add-ons", external: true },

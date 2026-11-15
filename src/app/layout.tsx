@@ -1,4 +1,3 @@
-import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
 import { ReactNode } from "react";
@@ -39,7 +38,6 @@ const RootLayout = ({ children }: Props) => (
     data-scroll-behavior="smooth"
   >
     <body className="min-h-screen bg-page font-sans motion-safe:animate-fade-in">{children}</body>
-    <Analytics />
   </html>
 );
 
