@@ -5,7 +5,7 @@ import type { Feedback, FeedbackInput } from "@/features/feedback/utils/schema";
  * RLS limits to inserting. Reading uses the secret key, which bypasses RLS, so
  * those calls must only ever happen on the server.
  */
-const request = async (keyName: "SUPABASE_PUBLISHABLE_KEY" | "SUPABASE_SECRET_KEY", path: string, init: RequestInit = {}) => {
+export const request = async (keyName: "SUPABASE_PUBLISHABLE_KEY" | "SUPABASE_SECRET_KEY", path: string, init: RequestInit = {}) => {
   const { SUPABASE_URL } = process.env;
   const key = process.env[keyName];
 

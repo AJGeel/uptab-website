@@ -1,0 +1,19 @@
+name: Insomnia
+
+# Pokes the site every hour. The endpoint decides whether a write is due,
+# so rows land roughly every 24 hours (±12) and the free Supabase project stays awake.
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  poke:
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl --fail --silent --show-error -H "Authorization: Bearer $CRON_SECRET" "$SITE_URL/api/cron/insomnia"
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          SITE_URL: ${{ secrets.SITE_URL }}
