@@ -15,7 +15,7 @@ const Page = () => (
     eyebrow="Terms"
     title="The short version."
     lead="UpTab is free, open-source software. Use it, tweak it, share it. Here’s what to know."
-    updated="15 November 2026"
+    updated="19 November 2026"
   >
     <LegalSection title="It’s free software">
       <p>
@@ -39,6 +39,16 @@ const Page = () => (
       <p>
         What each one sees is in the <Link href="/privacy" className="font-semibold text-sky-800 underline-offset-2 hover:underline">privacy page</Link>.
       </p>
+    </LegalSection>
+
+    <LegalSection title="Calendar">
+      <ul>
+        <li>Calendar events are optional and provided “as is”. UpTab only reads your calendar.</li>
+        <li>Your secret calendar address works like a password. Keep it private, and reset it if it’s ever shared.</li>
+        <li>
+          UpTab isn’t affiliated with, endorsed by or sponsored by Google or Microsoft. Their terms apply to their services.
+        </li>
+      </ul>
     </LegalSection>
 
     <LegalSection title="Photos and icons">

@@ -31,8 +31,12 @@ const outgoing: { title: string; text: ReactNode }[] = [
     text: "Only when you press Enter on a query with no bookmark match, the query goes to your search engine (DuckDuckGo by default).",
   },
   {
+    title: "Calendar",
+    text: "Optional. Google or Microsoft gets the request for your calendar feed, straight from your browser. Nothing goes to UpTab. Clicking a location sends its text to Google Maps, only then.",
+  },
+  {
     title: "Error reports",
-    text: "Opt-in only. GlitchTip gets the error message, stack trace, extension version and browser. No page addresses, locations, bookmarks or searches.",
+    text: "Opt-in only. GlitchTip gets the error message, stack trace, extension version and browser. No page addresses, locations, bookmarks, searches, calendar addresses or events.",
   },
 ];
 
@@ -42,6 +46,7 @@ const permissions: [string, string][] = [
   ["favicon (Chrome only)", "website icons"],
   ["history (optional)", "sorting by “Recently” or “Most visited”"],
   ["location (optional)", "“Use my location”"],
+  ["calendar.google.com, outlook.live.com or outlook.office365.com (optional)", "reading your calendar. Asked only when you connect, for that one site."],
 ];
 
 const policies: [string, string][] = [
@@ -51,6 +56,7 @@ const policies: [string, string][] = [
   ["GlitchTip", "https://glitchtip.com"],
   ["Unsplash", "https://unsplash.com/license"],
   ["Google", "https://policies.google.com/privacy"],
+  ["Microsoft", "https://privacy.microsoft.com/privacystatement"],
   ["Mozilla", "https://www.mozilla.org/privacy/"],
 ];
 
@@ -59,12 +65,16 @@ const Page = () => (
     eyebrow="Privacy"
     title="Your tabs are your business."
     lead="UpTab has no accounts, no analytics and no ads. It doesn’t sell or share data. Most of it stays on your device. The few things that leave it are listed here."
-    updated="15 November 2026"
+    updated="19 November 2026"
   >
     <LegalSection title="What stays on your device">
       <ul>
         <li>Settings, shortlinks, saved places, custom icons and uploaded photos. Photos are resized and never uploaded.</li>
         <li>Your bookmarks. They’re read to show them and changed only when you do that. The list is never sent anywhere.</li>
+        <li>
+          Calendar, if you connect one. Your secret calendar address stays on this device only (it doesn’t sync). Today and the next two days
+          (title, times, location, meeting link and, for Google, whether you accepted) are kept for up to 24 hours so they show offline.
+        </li>
         <li>
           With browser sync on, only your background themes and the day’s photo pick sync, through your browser’s own service.
         </li>
@@ -88,6 +98,10 @@ const Page = () => (
     <LegalSection title="You’re in control">
       <ul>
         <li>Error reporting, location and history are off until you turn them on. Revoke them in UpTab’s Privacy settings or the browser’s extension settings.</li>
+        <li>
+          Calendar is off until you connect it. It’s read-only: UpTab never creates, changes or answers events. “Disconnect” in Settings
+          deletes the address and cached events. Resetting the secret address in Google Calendar or Outlook also cuts off access.
+        </li>
         <li>
           History is only used for sorting. It’s read on your device and never stored, sent or shared.
         </li>
