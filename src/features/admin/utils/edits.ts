@@ -21,6 +21,8 @@ export type PhotoFields = {
   link: string;
   /** "light" or "dark", "" to follow the sampled tone. Left out, it stays as it is. */
   toneOverride?: string;
+  /** "ok" to ignore the sampled poor fit, "" to heed it. Left out, it stays as it is. */
+  poorFitIgnored?: string;
 };
 
 /** Turns a file name into an ID, e.g. "Kunsthal Kade.JPG" → "kunsthal-kade". */
@@ -58,6 +60,9 @@ const credit = ({ author, link }: { author: string; link: string }) => {
 
 const toneOverride = (value?: string): Pick<SourceEntry, "toneOverride"> =>
   value === "light" || value === "dark" ? { toneOverride: value } : {};
+
+const poorFitIgnored = (value?: string): Pick<SourceEntry, "poorFitIgnored"> =>
+  value === "ok" ? { poorFitIgnored: true } : {};
 
 /**
  * Adds a theme. It stays out of the catalogue until it has a published
@@ -174,6 +179,7 @@ export const savePhoto = (
     file,
     ...credit(fields),
     ...toneOverride(fields.toneOverride ?? entry.toneOverride),
+    ...poorFitIgnored(fields.poorFitIgnored ?? (entry.poorFitIgnored ? "ok" : "")),
   };
   const saved = replaceEntry(metadata, id, next);
 

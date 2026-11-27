@@ -39,6 +39,6 @@ export const ThemeCard = ({ theme }: { theme: ThemeSummary }) => (
         No blurb yet. The website shows a joke instead.
       </p>
     )}
-    <ProgressBar published={theme.published} pending={theme.pending} />
+    <ProgressBar published={theme.published} pending={theme.pending} poorFit={theme.poorFit} />
   </a>
 );

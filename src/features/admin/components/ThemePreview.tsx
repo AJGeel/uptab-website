@@ -43,14 +43,16 @@ type Photo = {
   file: string;
   tone: Tone;
   poorFit: boolean;
+  /** The saved manual call that it isn't a poor fit after all. */
+  fitIgnored?: boolean;
   /** The saved manual call. */
   override?: Tone;
 };
 
 const absolute = (file: string) => new URL(previewUrl(file), window.location.origin).href;
 
-const selectFor = (id: string) =>
-  document.querySelector<HTMLSelectElement>(`select[name="photo:${id}:toneOverride"]`);
+const selectFor = (id: string, field = "toneOverride") =>
+  document.querySelector<HTMLSelectElement>(`select[name="photo:${id}:${field}"]`);
 
 const isTyping = (target: EventTarget | null) =>
   target instanceof HTMLElement && ["INPUT", "SELECT", "TEXTAREA"].includes(target.tagName);
@@ -64,6 +66,7 @@ const isTyping = (target: EventTarget | null) =>
 export const ThemePreview = ({ photos }: { photos: Photo[] }) => {
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<Record<string, string>>({});
+  const [fits, setFits] = useState<Record<string, string | undefined>>({});
   const frame = useRef<HTMLIFrameElement>(null);
   const section = useRef<HTMLElement>(null);
   const box = useRef<HTMLDivElement>(null);
@@ -74,6 +77,8 @@ export const ThemePreview = ({ photos }: { photos: Photo[] }) => {
   const photo = photos[Math.min(index, photos.length - 1)];
   const chosen = selected[photo.id] ?? photo.override;
   const selection = selected[photo.id] ?? photo.override ?? "";
+  const isIgnored = (fits[photo.id] ?? (photo.fitIgnored ? "ok" : "")) === "ok";
+  const isPoorFit = photo.poorFit && !isIgnored;
   const tone = chosen === "light" || chosen === "dark" ? chosen : photo.tone;
 
   /** Sets the row's Tone select, so it's an edit that Save keeps and Discard undoes. */
@@ -94,8 +99,10 @@ export const ThemePreview = ({ photos }: { photos: Photo[] }) => {
 
   // The tone selects live in the edit form, which resets them on Discard without a change event
   useEffect(() => {
-    const read = () =>
+    const read = () => {
       setSelected(Object.fromEntries(photos.map(({ id }) => [id, selectFor(id)?.value ?? ""])));
+      setFits(Object.fromEntries(photos.map(({ id }) => [id, selectFor(id, "poorFitIgnored")?.value])));
+    };
     const readAfterReset = () => setTimeout(read);
 
     read();
@@ -238,7 +245,7 @@ export const ThemePreview = ({ photos }: { photos: Photo[] }) => {
             </button>
           ))}
         </div>
-        {photo.poorFit && (
+        {isPoorFit && (
           <span className="rounded-full bg-rose-400/15 px-2 py-0.5 text-xs font-medium text-rose-300">
             Poor fit: text won&apos;t read well
           </span>

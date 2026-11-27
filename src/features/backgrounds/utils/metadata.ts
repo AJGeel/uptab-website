@@ -33,6 +33,8 @@ const metadataSchema = z.strictObject({
       creditPending: z.boolean().optional(),
       /** A manual call that wins over the tone sampled from the photo. */
       toneOverride: z.enum(["light", "dark"]).optional(),
+      /** A manual call that the photo isn't a poor fit, whatever the sampling flags. Only the admin reads it. */
+      poorFitIgnored: z.literal(true).optional(),
     })
   ),
 });

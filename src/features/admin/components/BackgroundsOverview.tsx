@@ -5,7 +5,10 @@ import { NewThemeCard } from "@/features/admin/components/NewThemeCard";
 import { SortableList } from "@/features/admin/components/SortableList";
 import { ThemeCard } from "@/features/admin/components/ThemeCard";
 import { ThemeContextMenu } from "@/features/admin/components/ThemeContextMenu";
-import { summarizeTheme } from "@/features/admin/utils/theme-summary";
+import { isPoorFit } from "@/features/admin/utils/poor-fit";
+import { imagesOf, summarizeTheme } from "@/features/admin/utils/theme-summary";
+import { sampleToneOfFile } from "@/features/backgrounds/api/sample-tone";
+import { isPublished } from "@/features/backgrounds/utils/metadata";
 
 /** The admin's start page: uploading photos, and every theme at a glance. */
 export const BackgroundsOverview = async () => {
@@ -16,7 +19,15 @@ export const BackgroundsOverview = async () => {
     return null;
   }
 
-  const themes = metadata.themes.map((theme) => summarizeTheme(metadata, theme));
+  const themes = await Promise.all(
+    metadata.themes.map(async (theme) => {
+      const published = imagesOf(metadata, theme.id).filter(isPublished);
+      const measured = await Promise.all(published.map(({ file }) => sampleToneOfFile(file)));
+      const poorFit = published.filter((entry, index) => isPoorFit(entry, measured[index])).length;
+
+      return { ...summarizeTheme(metadata, theme), poorFit };
+    })
+  );
 
   return (
     <>

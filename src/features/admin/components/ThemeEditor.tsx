@@ -16,6 +16,7 @@ import { ThemePreview } from "@/features/admin/components/ThemePreview";
 import { cardClass } from "@/features/admin/components/ui/card";
 import { Input } from "@/features/admin/components/ui/Input";
 import { UnsplashBrowse } from "@/features/admin/components/UnsplashBrowse";
+import { isPoorFit } from "@/features/admin/utils/poor-fit";
 import { countPending, imagesOf } from "@/features/admin/utils/theme-summary";
 import { sampleToneOfFile } from "@/features/backgrounds/api/sample-tone";
 import { isPublished } from "@/features/backgrounds/utils/metadata";
@@ -73,7 +74,11 @@ export const ThemeEditor = async ({ themeId }: { themeId: string }) => {
               form={EDIT_FORM}
               className="text-2xl! font-bold"
             />
-            <ProgressBar published={entries.length - pending} pending={pending} />
+            <ProgressBar
+              published={entries.length - pending}
+              pending={pending}
+              poorFit={entries.filter((entry) => isPublished(entry) && isPoorFit(entry, measured.get(entry.id)!)).length}
+            />
           </div>
           <span className="text-sm text-[#7f8da0]">ID: {theme.id} (fixed)</span>
           <div className="ml-auto">
@@ -92,6 +97,7 @@ export const ThemeEditor = async ({ themeId }: { themeId: string }) => {
             file: entry.file,
             ...measured.get(entry.id)!,
             override: entry.toneOverride,
+            fitIgnored: entry.poorFitIgnored,
           }))}
         />
       )}

@@ -26,6 +26,8 @@ export const readEdits = (form: FormData): ThemeEdits => {
         author: fields.author ?? "",
         link: fields.link ?? "",
         toneOverride: fields.toneOverride ?? "",
+        // Only rows that are flagged have the field; for the others it stays as it is
+        poorFitIgnored: fields.poorFitIgnored,
       } satisfies PhotoFields,
     }));
 

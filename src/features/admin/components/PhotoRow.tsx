@@ -141,13 +141,20 @@ export const PhotoRow = ({
               Pending
             </span>
           )}
-          {measured.poorFit && (
-            <span
-              title="Neither text colour reads well in the top-left corner"
-              className={cn(badgeClass, "bg-rose-400/15 text-rose-300")}
+          {(measured.poorFit || entry.poorFitIgnored) && (
+            <select
+              name={name("poorFitIgnored")}
+              aria-label="Poor fit"
+              title="Neither text colour reads well in the top-left corner. Change it if the sampling got it wrong."
+              defaultValue={entry.poorFitIgnored ? "ok" : ""}
+              className={cn(
+                badgeClass,
+                "field-sizing-content cursor-pointer bg-rose-400/15 text-rose-300 has-[option[value='ok']:checked]:bg-transparent has-[option[value='ok']:checked]:text-[#7f8da0] [&>option]:bg-[#0b121c] [&>option]:text-dark-text"
+              )}
             >
-              Poor fit
-            </span>
+              <option value="">Poor fit</option>
+              <option value="ok">Not a poor fit</option>
+            </select>
           )}
         </div>
         <RemovePhotoButton id={entry.id} file={entry.file} />

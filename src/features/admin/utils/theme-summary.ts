@@ -18,6 +18,8 @@ export type ThemeSummary = {
   blurb?: string;
   published: number;
   pending: number;
+  /** Published photos where neither text colour reads well. Only the overview measures it. */
+  poorFit?: number;
   /** Up to `count` thumbnails: published ones first, in order. */
   thumbnails: string[];
 };
