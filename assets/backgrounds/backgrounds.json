@@ -173,13 +173,6 @@
       "link": "https://unsplash.com/photos/giraffe-behind-acacia-tree-in-landscape-kfxEUCTUeyg"
     },
     {
-      "id": "zebra-masari-mara",
-      "theme": "safari",
-      "file": "safari/zebra-masari-mara.jpg",
-      "author": "Ron Dauphin",
-      "link": "https://unsplash.com/photos/zebra-in-wild-k-8-eX4Y3no"
-    },
-    {
       "id": "leopard-kruger",
       "theme": "safari",
       "file": "safari/leopard-kruger.jpg",
@@ -208,13 +201,6 @@
       "link": "https://unsplash.com/photos/photo-of-mountain-with-brown-soil-in-vicinity-UNOMwllEXfg"
     },
     {
-      "id": "giraffe-closeup",
-      "theme": "safari",
-      "file": "safari/giraffe-closeup.jpg",
-      "author": "cizikas",
-      "link": "https://unsplash.com/photos/close-up-photography-of-giraffe-with-tongue-out-HfVsqRXkUmc"
-    },
-    {
       "id": "andrew-small-efhcuc-fjru-unsplash",
       "theme": "flower-power",
       "file": "flower-power/andrew-small-efhcuc-fjru-unsplash.jpg",
@@ -229,13 +215,6 @@
       "link": "https://unsplash.com/photos/white-cherry-blossom-in-close-up-photography-yRXuXvy4sQ4"
     },
     {
-      "id": "olia-gozha-9a-pegrsbzc-unsplash",
-      "theme": "flower-power",
-      "file": "flower-power/olia-gozha-9a-pegrsbzc-unsplash.jpg",
-      "author": "Olia Gozha",
-      "link": "https://unsplash.com/photos/photo-of-pink-petaled-flowers-9A_peGrSbZc"
-    },
-    {
       "id": "tomoko-uji-kxvn1ogptte-unsplash",
       "theme": "flower-power",
       "file": "flower-power/tomoko-uji-kxvn1ogptte-unsplash.jpg",
@@ -248,27 +227,6 @@
       "file": "flower-power/sergey-shmidt-koy6flccy5s-unsplash.jpg",
       "author": "Sergey Schmidt",
       "link": "https://unsplash.com/photos/orange-petaled-flowers-koy6FlCCy5s"
-    },
-    {
-      "id": "kwang-mathurosemontri-fy1ecb1rcd0-unsplash",
-      "theme": "flower-power",
-      "file": "flower-power/kwang-mathurosemontri-fy1ecb1rcd0-unsplash.jpg",
-      "author": "Kwang Mathurosemontri",
-      "link": "https://unsplash.com/photos/shallow-focus-photography-of-white-and-pink-petaled-flowers-fY1ECB1RCd0"
-    },
-    {
-      "id": "nature-uninterrupted-photography-v-3nq3pmwky-unsplash",
-      "theme": "flower-power",
-      "file": "flower-power/nature-uninterrupted-photography-v-3nq3pmwky-unsplash.jpg",
-      "author": "Nature Interrupted",
-      "link": "https://unsplash.com/photos/red-pink-and-yellow-flowering-plants-v-3NQ3pmWkY"
-    },
-    {
-      "id": "micheile-henderson-t1ihz0a1n-k-unsplash",
-      "theme": "flower-power",
-      "file": "flower-power/micheile-henderson-t1ihz0a1n-k-unsplash.jpg",
-      "author": "Micheile Henderson",
-      "link": "https://unsplash.com/photos/a-group-of-pink-and-white-flowers-against-a-blue-sky-t1IHZ0a1n_k"
     },
     {
       "id": "david-brooke-martin-0dlky4ipoc8-unsplash",
@@ -327,13 +285,6 @@
       "link": "https://unsplash.com/photos/layered-blue-mountain-ranges-fade-into-the-sky--_OuVFhN5BU"
     },
     {
-      "id": "radomir-moysia-0242bbkiftc-unsplash",
-      "theme": "mountains",
-      "file": "mountains/radomir-moysia-0242bbkiftc-unsplash.jpg",
-      "author": "Radomir Moysia",
-      "link": "https://unsplash.com/photos/snow-capped-mountains-emerge-from-misty-clouds-at-dawn-0242bBKifTc"
-    },
-    {
       "id": "boris-baldinger-euffy6cwjsu-unsplash",
       "theme": "mountains",
       "file": "mountains/boris-baldinger-euffy6cwjsu-unsplash.jpg",
@@ -360,13 +311,6 @@
       "file": "mountains/michael-dxqb5d1njmy-unsplash.jpg",
       "author": "Michael",
       "link": "https://unsplash.com/photos/skellig-michael-island-in-ireland-DXQB5D1njMY"
-    },
-    {
-      "id": "mark-basarab-z8ct-q3ocqm-unsplash",
-      "theme": "mountains",
-      "file": "mountains/mark-basarab-z8ct-q3ocqm-unsplash.jpg",
-      "author": "Mark Basarab",
-      "link": "https://unsplash.com/photos/gray-concrete-road-between-trees-near-mountain-z8ct_Q3oCqM"
     },
     {
       "id": "ivana-cajina-hdd-nq-amnq-unsplash",
@@ -481,25 +425,11 @@
       "link": "https://unsplash.com/photos/ttS--i2y9Bo"
     },
     {
-      "id": "sam-balye-t0nojypgbok-unsplash",
-      "theme": "architecture",
-      "file": "architecture/sam-balye-t0nojypgbok-unsplash.jpg",
-      "author": "Sam Balye",
-      "link": "https://unsplash.com/photos/t0nojyPGbok"
-    },
-    {
       "id": "luke-van-zyl-koh7ivuwrlw-unsplash",
       "theme": "architecture",
       "file": "architecture/luke-van-zyl-koh7ivuwrlw-unsplash.jpg",
       "author": "Luke van Zyl",
       "link": "https://unsplash.com/photos/koH7IVuwRLw"
-    },
-    {
-      "id": "victor-evczjigokzk-unsplash",
-      "theme": "architecture",
-      "file": "architecture/victor-evczjigokzk-unsplash.jpg",
-      "author": "Victor",
-      "link": "https://unsplash.com/photos/EvczjigoKzk"
     },
     {
       "id": "simone-hutsch-xk0faa4-mcq-unsplash",
@@ -516,32 +446,11 @@
       "link": "https://unsplash.com/photos/3cl6impBd_8"
     },
     {
-      "id": "anthony-esau-n2zk9yxjmla-unsplash",
-      "theme": "architecture",
-      "file": "architecture/anthony-esau-n2zk9yxjmla-unsplash.jpg",
-      "author": "Anthony Esau",
-      "link": "https://unsplash.com/photos/N2zk9yXjmLA"
-    },
-    {
-      "id": "florian-krumm-ugcwlc0lqtq-unsplash",
-      "theme": "architecture",
-      "file": "architecture/florian-krumm-ugcwlc0lqtq-unsplash.jpg",
-      "author": "Florian Krumm",
-      "link": "https://unsplash.com/photos/ugcwlC0LQtQ"
-    },
-    {
       "id": "iltun-huseynli-oh7gkuqiuzk-unsplash",
       "theme": "architecture",
       "file": "architecture/iltun-huseynli-oh7gkuqiuzk-unsplash.jpg",
       "author": "Iltun Huseynli",
       "link": "https://unsplash.com/photos/OH7GkUqiuZk"
-    },
-    {
-      "id": "viktor-jakovlev-h0vuplqox0c-unsplash",
-      "theme": "architecture",
-      "file": "architecture/viktor-jakovlev-h0vuplqox0c-unsplash.jpg",
-      "author": "Viktor Jakovlev",
-      "link": "https://unsplash.com/photos/H0vuplqoX0c"
     },
     {
       "id": "hugo-sousa-bghgseqbaka-unsplash",
@@ -563,13 +472,6 @@
       "file": "architecture/mark-boss-yodlrvtyl6o-unsplash.jpg",
       "author": "Mark Boss",
       "link": "https://unsplash.com/photos/YoDlrVtyl6o"
-    },
-    {
-      "id": "frances-gunn-c9z9rlch0zo-unsplash",
-      "theme": "architecture",
-      "file": "architecture/frances-gunn-c9z9rlch0zo-unsplash.jpg",
-      "author": "Frances Gunn",
-      "link": "https://unsplash.com/photos/c9z9RlCh0Zo"
     },
     {
       "id": "toa-heftiba-nrszruwqmoi-unsplash",
@@ -733,13 +635,6 @@
       "link": "https://unsplash.com/photos/mountain-under-cloudy-sky-JdiRcXEJcT0"
     },
     {
-      "id": "chris-lawton-6tfo1m8-gas-unsplash",
-      "theme": "highland-mist",
-      "file": "highland-mist/chris-lawton-6tfo1m8-gas-unsplash.jpg",
-      "author": "Chris Lawton",
-      "link": "https://unsplash.com/photos/mountain-with-trees-covered-with-fogs-at-daytime-6tfO1M8_gas"
-    },
-    {
       "id": "ricardo-gomez-angel-dtsac-s-7fs-unsplash",
       "theme": "highland-mist",
       "file": "highland-mist/ricardo-gomez-angel-dtsac-s-7fs-unsplash.jpg",
@@ -807,7 +702,8 @@
       "theme": "highland-mist",
       "file": "highland-mist/roksolana-zasiadko-rs2wbcgn7km-unsplash.jpg",
       "author": "Roksolana Zasiadko",
-      "link": "https://unsplash.com/photos/photo-of-green-forest-under-dark-sky-rS2WbCgN7KM"
+      "link": "https://unsplash.com/photos/photo-of-green-forest-under-dark-sky-rS2WbCgN7KM",
+      "poorFitIgnored": true
     },
     {
       "id": "paul-pastourmatzis-ozdkewdxxju-unsplash",
@@ -836,13 +732,6 @@
       "file": "highland-mist/olivier-guillard-ju7yrzqsqda-unsplash.jpg",
       "author": "Olivier Guillard",
       "link": "https://unsplash.com/photos/ship-on-body-of-water-near-falls-JU7yrZQsqDA"
-    },
-    {
-      "id": "osama-saeed-g2g2fdydbo0-unsplash",
-      "theme": "highland-mist",
-      "file": "highland-mist/osama-saeed-g2g2fdydbo0-unsplash.jpg",
-      "author": "Osama Saeed",
-      "link": "https://unsplash.com/photos/grey-ferry-sailing-on-blue-turbulent-waters-G2G2FDYDBO0"
     },
     {
       "id": "navin-hardyal-figvaqro-qi-unsplash",
@@ -922,13 +811,6 @@
       "link": "https://unsplash.com/photos/herd-of-gray-rhinoceros-resting-on-ground-during-day-u2-97eBhFEc"
     },
     {
-      "id": "zachary-pearson-thc1uwwdmfm-unsplash",
-      "theme": "safari",
-      "file": "safari/zachary-pearson-thc1uwwdmfm-unsplash.jpg",
-      "author": "ZACHARY PEARSON",
-      "link": "https://unsplash.com/photos/water-buffalo-on-wheat-field-thC1uwWdMfM"
-    },
-    {
       "id": "jack-young-zzagaz-akmg-unsplash",
       "theme": "safari",
       "file": "safari/jack-young-zzagaz-akmg-unsplash.jpg",
@@ -936,25 +818,11 @@
       "link": "https://unsplash.com/photos/brown-and-black-horses-on-brown-field-during-daytime-ZZagaZ-aKmg"
     },
     {
-      "id": "magdalena-kula-manchee-qgogz1ui56y-unsplash",
-      "theme": "safari",
-      "file": "safari/magdalena-kula-manchee-qgogz1ui56y-unsplash.jpg",
-      "author": "Magdalena Kula Manchee",
-      "link": "https://unsplash.com/photos/a-hot-air-balloon-flying-over-a-field-qGoGz1ui56Y"
-    },
-    {
       "id": "flavio-vallone-9i2wxo1o3s0-unsplash",
       "theme": "safari",
       "file": "safari/flavio-vallone-9i2wxo1o3s0-unsplash.jpg",
       "author": "Flavio Vallone",
       "link": "https://unsplash.com/photos/an-elephant-with-tusks-in-a-field-9i2WXo1o3s0"
-    },
-    {
-      "id": "sutirta-budiman-kjobqwmunww-unsplash",
-      "theme": "safari",
-      "file": "safari/sutirta-budiman-kjobqwmunww-unsplash.jpg",
-      "author": "sutirta budiman",
-      "link": "https://unsplash.com/photos/red-and-yellow-hot-air-balloon-over-field-with-zebras-kjOBqwMUnWw"
     },
     {
       "id": "wade-lambert-vfdozbzkw1w-unsplash",
@@ -999,13 +867,6 @@
       "link": "https://unsplash.com/photos/purple-tulips-field-under-blue-sky-during-daytime-K2S_ZXAAsMs"
     },
     {
-      "id": "tayla-kohler-lei57tim5wc-unsplash",
-      "theme": "holland",
-      "file": "holland/tayla-kohler-lei57tim5wc-unsplash.jpg",
-      "author": "Tayla Kohler",
-      "link": "https://unsplash.com/photos/a-carousel-in-front-of-a-large-building-lEi57TiM5wc"
-    },
-    {
       "id": "edwin-martens-umrrwsjzlfs-unsplash",
       "theme": "holland",
       "file": "holland/edwin-martens-umrrwsjzlfs-unsplash.jpg",
@@ -1038,14 +899,8 @@
       "theme": "holland",
       "file": "holland/javier-m-2hs8zbwolda-unsplash.jpg",
       "author": "Javier M.",
-      "link": "https://unsplash.com/photos/assorted-color-buildings-beside-body-of-water-2Hs8zbwOLDA"
-    },
-    {
-      "id": "stadhuisbrug-utrecht",
-      "theme": "holland",
-      "file": "holland/stadhuisbrug-utrecht.jpg",
-      "author": "Max Hoogenbosch",
-      "link": "https://unsplash.com/photos/bxTm2BwaRjg"
+      "link": "https://unsplash.com/photos/assorted-color-buildings-beside-body-of-water-2Hs8zbwOLDA",
+      "poorFitIgnored": true
     },
     {
       "id": "cunera-church-rhenen",
