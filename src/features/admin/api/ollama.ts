@@ -1,5 +1,5 @@
 const HOST = process.env.OLLAMA_HOST ?? "http://localhost:11434";
-const MODEL = process.env.OLLAMA_MODEL ?? "gemma3:4b";
+const MODEL = process.env.OLLAMA_MODEL ?? "qwen3:8b";
 
 /**
  * Asks the local Ollama model, returning its reply text or an error to show.
@@ -20,6 +20,8 @@ export const askOllama = async (
           model: MODEL,
           prompt,
           stream: false,
+          // Reasoning models such as qwen3 would think first: 5x slower, for a one-line reply
+          think: false,
           ...(format ? { format } : {}),
           ...(temperature === undefined ? {} : { options: { temperature } }),
         }),
