@@ -25,6 +25,7 @@ export const readEdits = (form: FormData): ThemeEdits => {
         theme: fields.theme ?? "",
         author: fields.author ?? "",
         link: fields.link ?? "",
+        toneOverride: fields.toneOverride ?? "",
       } satisfies PhotoFields,
     }));
 

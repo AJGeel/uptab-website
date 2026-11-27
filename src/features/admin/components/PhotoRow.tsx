@@ -1,16 +1,24 @@
-import { FadeImage } from "@/features/admin/components/ui/FadeImage";
-import { Field } from "@/features/admin/components/ui/Field";
 import { Input, inputClass } from "@/features/admin/components/ui/Input";
+import { rowId } from "@/features/admin/utils/row-id";
 import {
   isPublished,
   type SourceEntry,
   type SourceTheme,
 } from "@/features/backgrounds/utils/metadata";
-import { originalUrl, thumbnailUrl } from "@/features/backgrounds/utils/paths";
+import { originalUrl } from "@/features/backgrounds/utils/paths";
+import type { Tone } from "@/features/backgrounds/utils/tone";
 import { cn } from "@/utils/cn";
 
+import { PreviewThumbnail } from "./PreviewThumbnail";
 import { RemovePhotoButton } from "./RemovePhotoButton";
 
+
+/** One grid for the header and every row, so the columns line up like a table. */
+export const photoColumns =
+  "grid min-w-240 grid-cols-[5rem_minmax(0,1.3fr)_minmax(0,0.8fr)_minmax(0,1fr)_minmax(0,1.1fr)_11rem_9rem_5.5rem] items-center gap-3";
+
+/** The text colour a photo of that tone takes. */
+const textOf = (tone: Tone) => (tone === "dark" ? "white text" : "dark text");
 
 const badgeClass = "rounded-full px-2 py-0.5 text-xs font-medium";
 const linkClass = "text-sky-400 hover:text-white";
@@ -62,9 +70,12 @@ export const PhotoRow = ({
   entry,
   themes,
   publicUrl = null,
+  measured,
 }: {
   entry: SourceEntry;
   themes: SourceTheme[];
+  /** What sampling found in the top-left of the photo. */
+  measured: { tone: Tone; poorFit: boolean };
   /** Where the live site serves this photo, for reverse image search. */
   publicUrl?: string | null;
 }) => {
@@ -72,68 +83,80 @@ export const PhotoRow = ({
   const name = (field: string) => `photo:${entry.id}:${field}`;
 
   return (
-    <div className="grid gap-4 py-4 sm:grid-cols-[160px_1fr]">
-      <FadeImage
-        unoptimized
-        src={thumbnailUrl(entry.file)}
-        width={160}
-        height={90}
-        alt={entry.id}
-        className="aspect-video w-40 rounded-xs bg-dark-pill object-cover"
-      />
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <Field label="ID">
-          <Input
-            name={name("id")}
-            defaultValue={entry.id}
-            readOnly={published}
-            title={published ? "Published IDs are fixed" : undefined}
-          />
-        </Field>
-        <Field label="Theme">
+    <div id={rowId(entry.id)} className="py-1.5">
+      <div className={photoColumns}>
+        <PreviewThumbnail id={entry.id} file={entry.file} />
+        <Input
+          name={name("id")}
+          aria-label="ID"
+          defaultValue={entry.id}
+          readOnly={published}
+          title={published ? "Published IDs are fixed" : undefined}
+        />
+        {published ? (
+          <Input name={name("theme")} aria-label="Theme" value={entry.theme} readOnly />
+        ) : (
+          <select name={name("theme")} aria-label="Theme" defaultValue={entry.theme} className={inputClass}>
+            {themes.map(({ id, name: themeName }) => (
+              <option key={id} value={id}>
+                {themeName}
+              </option>
+            ))}
+          </select>
+        )}
+        <Input
+          name={name("author")}
+          aria-label="Author"
+          defaultValue={entry.author ?? ""}
+          placeholder="Required to publish"
+        />
+        <Input
+          name={name("link")}
+          aria-label="Link"
+          type="url"
+          defaultValue={entry.link ?? ""}
+          placeholder="https://"
+        />
+        <select
+          name={name("toneOverride")}
+          aria-label="Tone"
+          defaultValue={entry.toneOverride ?? ""}
+          // Muted while it follows the sampled tone, so manual calls stand out
+          className={cn(inputClass, "has-[option[value='']:checked]:text-[#7f8da0] [&>option]:text-dark-text")}
+        >
+          <option value="">Sampled ({textOf(measured.tone)})</option>
+          <option value="light">Light ({textOf("light")})</option>
+          <option value="dark">Dark ({textOf("dark")})</option>
+        </select>
+        <div className="flex flex-wrap gap-1">
           {published ? (
-            <Input name={name("theme")} value={entry.theme} readOnly />
+            <span
+              title="Clearing the author takes it out of the catalogue."
+              className={cn(badgeClass, "bg-sky-400/15 text-sky-400")}
+            >
+              Published
+            </span>
           ) : (
-            <select name={name("theme")} defaultValue={entry.theme} className={inputClass}>
-              {themes.map(({ id, name: themeName }) => (
-                <option key={id} value={id}>
-                  {themeName}
-                </option>
-              ))}
-            </select>
+            <span title="Add an author to publish it." className={cn(badgeClass, "bg-amber-400/15 text-amber-300")}>
+              Pending
+            </span>
           )}
-        </Field>
-        <Field label="Author">
-          <Input
-            name={name("author")}
-            defaultValue={entry.author ?? ""}
-            placeholder="Required to publish"
-          />
-        </Field>
-        <Field label="Link">
-          <Input
-            name={name("link")}
-            type="url"
-            defaultValue={entry.link ?? ""}
-            placeholder="https://"
-          />
-        </Field>
-        <div className="flex flex-wrap items-center gap-3 sm:col-span-2 lg:col-span-4">
-          {published ? (
-            <span className={cn(badgeClass, "bg-sky-400/15 text-sky-400")}>Published</span>
-          ) : (
-            <span className={cn(badgeClass, "bg-amber-400/15 text-amber-300")}>Pending</span>
+          {measured.poorFit && (
+            <span
+              title="Neither text colour reads well in the top-left corner"
+              className={cn(badgeClass, "bg-rose-400/15 text-rose-300")}
+            >
+              Poor fit
+            </span>
           )}
-          <span className="text-xs text-[#7f8da0]">
-            {published
-              ? "Clearing the author takes it out of the catalogue."
-              : "Add an author to publish it."}
-          </span>
-          {!published && <FindSource file={entry.file} publicUrl={publicUrl} />}
-          <span className="grow" />
-          <RemovePhotoButton id={entry.id} file={entry.file} />
         </div>
+        <RemovePhotoButton id={entry.id} file={entry.file} />
       </div>
+      {!published && (
+        <div className="mt-1.5 pl-23">
+          <FindSource file={entry.file} publicUrl={publicUrl} />
+        </div>
+      )}
     </div>
   );
 };

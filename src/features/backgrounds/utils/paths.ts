@@ -19,5 +19,8 @@ const encodePath = (file: string) => file.split("/").map(encodeURIComponent).joi
 /** The admin's preview of a source photo, e.g. "holland/koppelpoort.jpg". */
 export const thumbnailUrl = (file: string) => `/adminland/photos/${encodePath(file)}`;
 
+/** A full-screen rendition, as the extension shows it. */
+export const previewUrl = (file: string) => `${thumbnailUrl(file)}?preview`;
+
 /** The full-size source photo, downloaded rather than shown. */
 export const originalUrl = (file: string) => `${thumbnailUrl(file)}?original`;

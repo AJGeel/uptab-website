@@ -11,7 +11,8 @@ const notFound = () => new Response("Not found", { status: 404 });
 /**
  * Serves a source photo from assets/backgrounds/, which isn't public: a small
  * preview, resized because the originals are several MB each, or with
- * `?original` the file itself as a download, e.g. for a reverse image search.
+ * `?preview` a full-screen one, or with `?original` the file itself as a
+ * download, e.g. for a reverse image search.
  */
 export const servePhoto = async (request: Request, segments: string[]) => {
   if (!(await isLocalRequest())) {
@@ -30,14 +31,20 @@ export const servePhoto = async (request: Request, segments: string[]) => {
       });
     }
 
+    // Full-screen size, for the extension preview in an iframe
+    const width = new URL(request.url).searchParams.has("preview") ? 1920 : 480;
     const thumbnail = await sharp(file)
       .autoOrient()
-      .resize({ width: 480 })
-      .webp({ quality: 70 })
+      .resize({ width })
+      .webp({ quality: width === 480 ? 70 : 80 })
       .toBuffer();
 
     return new Response(new Uint8Array(thumbnail), {
-      headers: { "Content-Type": "image/webp", "Cache-Control": "no-store" },
+      headers: {
+        "Content-Type": "image/webp",
+        // The previewer cycles through photos quickly, and reuses what it preloaded
+        "Cache-Control": width === 480 ? "no-store" : "private, max-age=300",
+      },
     });
   } catch {
     return notFound();

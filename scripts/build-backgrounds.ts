@@ -9,6 +9,7 @@ import path from "node:path";
 import sharp from "sharp";
 
 import { createRenditionCache, sha256 } from "@/features/backgrounds/api/rendition-cache";
+import { sampleTone } from "@/features/backgrounds/api/sample-tone";
 import {
   CATALOGUE_FILE,
   listSourceFiles,
@@ -28,6 +29,7 @@ import {
 import { parseMetadata, type SourceEntry } from "@/features/backgrounds/utils/metadata";
 import { extractPalette } from "@/features/backgrounds/utils/palette";
 import { CATALOGUE_DIR, CATALOGUE_PATH } from "@/features/backgrounds/utils/paths";
+import type { Tone } from "@/features/backgrounds/utils/tone";
 import { plural } from "@/utils/plural";
 
 import { header, p, pc, runCli, step } from "./cli";
@@ -48,6 +50,7 @@ type SourceInfo = {
   height: number;
   dominant: { r: number; g: number; b: number };
   palette: string[];
+  tone: Tone;
 };
 
 /** Small enough to be quick, big enough to tell what colours a photo has. */
@@ -66,7 +69,9 @@ const readSourceInfo = async (input: Buffer): Promise<SourceInfo> => {
     .raw()
     .toBuffer();
 
-  return { width, height, dominant, palette: extractPalette(sample) };
+  const { tone } = await sampleTone(input);
+
+  return { width, height, dominant, palette: extractPalette(sample), tone };
 };
 
 const buildImage = async (
@@ -76,10 +81,10 @@ const buildImage = async (
 ): Promise<BuildResult> => {
   const input = await readFile(path.join(SOURCE_DIR, entry.file));
   const sourceHash = sha256(input);
-  const info = await cache.remember(["info-palette", sourceHash], async () =>
+  const info = await cache.remember(["info-tone-cover", sourceHash], async () =>
     Buffer.from(JSON.stringify(await readSourceInfo(input)))
   );
-  const { width, height, dominant, palette }: SourceInfo = JSON.parse(info.data.toString());
+  const { width, height, dominant, palette, tone }: SourceInfo = JSON.parse(info.data.toString());
 
   const themeDir = path.join(OUTPUT_DIR, entry.theme);
   await mkdir(themeDir, { recursive: true });
@@ -119,6 +124,7 @@ const buildImage = async (
       link: entry.link ?? null,
       color: toHexColor(dominant),
       palette,
+      tone: entry.toneOverride ?? tone,
       aspectRatio: Math.round((width / height) * 1000) / 1000,
       sources: sources.map(({ width, url }) => ({ width, url })),
       thumbnail: { width: thumbnail.width, url: thumbnail.url },

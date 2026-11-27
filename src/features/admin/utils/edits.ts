@@ -19,6 +19,8 @@ export type PhotoFields = {
   theme: string;
   author: string;
   link: string;
+  /** "light" or "dark", "" to follow the sampled tone. Left out, it stays as it is. */
+  toneOverride?: string;
 };
 
 /** Turns a file name into an ID, e.g. "Kunsthal Kade.JPG" → "kunsthal-kade". */
@@ -53,6 +55,9 @@ const credit = ({ author, link }: { author: string; link: string }) => {
     ...(trimmedAuthor ? {} : { creditPending: true as const }),
   };
 };
+
+const toneOverride = (value?: string): Pick<SourceEntry, "toneOverride"> =>
+  value === "light" || value === "dark" ? { toneOverride: value } : {};
 
 /**
  * Adds a theme. It stays out of the catalogue until it has a published
@@ -163,7 +168,13 @@ export const savePhoto = (
     ? `${fields.theme}/${fields.id}${extensionOf(entry.file)}`
     : entry.file;
 
-  const next = { id: fields.id, theme: fields.theme, file, ...credit(fields) };
+  const next: SourceEntry = {
+    id: fields.id,
+    theme: fields.theme,
+    file,
+    ...credit(fields),
+    ...toneOverride(fields.toneOverride ?? entry.toneOverride),
+  };
   const saved = replaceEntry(metadata, id, next);
 
   return {

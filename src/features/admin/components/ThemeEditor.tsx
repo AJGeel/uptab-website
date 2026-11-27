@@ -9,14 +9,17 @@ import { AddPhotoForm } from "@/features/admin/components/AddPhotoForm";
 import { BlurbField } from "@/features/admin/components/BlurbField";
 import { DeleteThemeButton } from "@/features/admin/components/DeleteThemeButton";
 import { EditForm } from "@/features/admin/components/EditForm";
-import { PhotoRow } from "@/features/admin/components/PhotoRow";
+import { PhotoRow, photoColumns } from "@/features/admin/components/PhotoRow";
 import { ProgressBar } from "@/features/admin/components/ProgressBar";
 import { SortableList } from "@/features/admin/components/SortableList";
+import { ThemePreview } from "@/features/admin/components/ThemePreview";
 import { cardClass } from "@/features/admin/components/ui/card";
 import { Input } from "@/features/admin/components/ui/Input";
 import { UnsplashBrowse } from "@/features/admin/components/UnsplashBrowse";
 import { countPending, imagesOf } from "@/features/admin/utils/theme-summary";
+import { sampleToneOfFile } from "@/features/backgrounds/api/sample-tone";
 import { isPublished } from "@/features/backgrounds/utils/metadata";
+import { cn } from "@/utils/cn";
 
 const EDIT_FORM = "theme-edit";
 
@@ -41,6 +44,10 @@ export const ThemeEditor = async ({ themeId }: { themeId: string }) => {
         .filter((entry) => !isPublished(entry))
         .map(async (entry) => [entry.id, await findPublicUrl(entry.file)] as const)
     )
+  );
+
+  const measured = new Map(
+    await Promise.all(entries.map(async (entry) => [entry.id, await sampleToneOfFile(entry.file)] as const))
   );
 
   return (
@@ -78,9 +85,26 @@ export const ThemeEditor = async ({ themeId }: { themeId: string }) => {
 
       <AddPhotoForm theme={theme.id} existingIds={metadata.images.map(({ id }) => id)} />
 
+      {entries.length > 0 && (
+        <ThemePreview
+          photos={entries.map((entry) => ({
+            id: entry.id,
+            file: entry.file,
+            ...measured.get(entry.id)!,
+            override: entry.toneOverride,
+          }))}
+        />
+      )}
+
       <EditForm id={EDIT_FORM} action={saveThemeAction}>
-        <section className={cardClass}>
+        <section className={cn(cardClass, "overflow-x-auto")}>
           {entries.length > 0 ? (
+            <>
+            <div className={cn(photoColumns, "pb-2 pl-7 text-xs font-medium text-[#7f8da0]")}>
+              {["", "ID", "Theme", "Author", "Link", "Tone", "Status", ""].map((label, index) => (
+                <span key={index}>{label}</span>
+              ))}
+            </div>
             <SortableList
               layout="list"
               withHandle
@@ -93,10 +117,12 @@ export const ThemeEditor = async ({ themeId }: { themeId: string }) => {
                     entry={entry}
                     themes={metadata.themes}
                     publicUrl={publicUrls.get(entry.id)}
+                    measured={measured.get(entry.id)!}
                   />
                 ),
               }))}
             />
+            </>
           ) : (
             <p className="text-sm text-[#7f8da0]">No photos in this theme yet.</p>
           )}

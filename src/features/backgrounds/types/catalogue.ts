@@ -38,6 +38,11 @@ export type BackgroundImage = {
   color: string;
   /** Up to three vivid colours of the photo as "#rrggbb", most prominent first. Empty for a monochrome photo. */
   palette: string[];
+  /**
+   * Whether the top-left of the photo is "light" (it takes dark text) or "dark"
+   * (it takes white text). Extensions that don't know it treat photos as light.
+   */
+  tone: "light" | "dark";
   /** Original aspect ratio, width / height (e.g. 1.5). */
   aspectRatio: number;
   /** Available renditions, smallest first. Never larger than the source. */

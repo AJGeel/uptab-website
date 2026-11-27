@@ -28,7 +28,7 @@ describe("readEdits", () => {
       photos: [
         {
           originalId: "safari-1",
-          fields: { id: "lion", theme: "safari", author: "Jane", link: "" },
+          fields: { id: "lion", theme: "safari", author: "Jane", link: "", toneOverride: "" },
         },
       ],
     });

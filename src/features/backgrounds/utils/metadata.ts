@@ -31,6 +31,8 @@ const metadataSchema = z.strictObject({
       author: z.string().min(1).nullable().optional(),
       link: z.url({ protocol: /^https?$/ }).nullable().optional(),
       creditPending: z.boolean().optional(),
+      /** A manual call that wins over the tone sampled from the photo. */
+      toneOverride: z.enum(["light", "dark"]).optional(),
     })
   ),
 });
