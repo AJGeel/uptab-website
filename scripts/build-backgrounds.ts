@@ -81,7 +81,7 @@ const buildImage = async (
 ): Promise<BuildResult> => {
   const input = await readFile(path.join(SOURCE_DIR, entry.file));
   const sourceHash = sha256(input);
-  const info = await cache.remember(["info-tone-cover", sourceHash], async () =>
+  const info = await cache.remember(["info-tone-strip", sourceHash], async () =>
     Buffer.from(JSON.stringify(await readSourceInfo(input)))
   );
   const { width, height, dominant, palette, tone }: SourceInfo = JSON.parse(info.data.toString());
