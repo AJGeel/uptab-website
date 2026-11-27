@@ -57,7 +57,7 @@ const Page = () => (
         <li>Photos you upload stay yours.</li>
         <li>
           The weather icons are <ExternalLink href="https://github.com/basmilius/weather-icons">Meteocons</ExternalLink> by Bas Milius, MIT
-          licensed. {/* TODO: confirm the final icon set before publishing */}
+          licensed.
         </li>
       </ul>
     </LegalSection>
