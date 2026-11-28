@@ -3,7 +3,7 @@
     {
       "id": "mountains",
       "name": "Mountains",
-      "blurb": "A view that's impressively still, unlike your internet browsing"
+      "blurb": "A view that’s impressively still, unlike your internet browsing."
     },
     {
       "id": "holland",
@@ -33,12 +33,12 @@
     {
       "id": "islands",
       "name": "Islands",
-      "blurb": "Distant horizons and unspoken stories, served with a side of calm indifference."
+      "blurb": "Distant horizons with a side of calm indifference."
     },
     {
       "id": "vast-nothingness",
       "name": "Vast Nothingness",
-      "blurb": "A short break in orbit"
+      "blurb": "A short break in orbit. Your responsibilities won’t find you there."
     }
   ],
   "images": [
