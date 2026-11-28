@@ -34,6 +34,11 @@
       "id": "islands",
       "name": "Islands",
       "blurb": "Distant horizons and unspoken stories, served with a side of calm indifference."
+    },
+    {
+      "id": "vast-nothingness",
+      "name": "Vast Nothingness",
+      "blurb": "A short break in orbit"
     }
   ],
   "images": [
@@ -1025,6 +1030,153 @@
       "file": "islands/ken-suarez-lcxs0tuixhk-unsplash.jpg",
       "author": "Ken Suarez",
       "link": "https://unsplash.com/photos/birds-eye-view-of-island-lcXS0Tuixhk"
+    },
+    {
+      "id": "jongsun-lee-f-pszo-jee8-unsplash",
+      "theme": "vast-nothingness",
+      "file": "vast-nothingness/jongsun-lee-f-pszo-jee8-unsplash.jpg",
+      "author": "Jongsun Lee",
+      "link": "https://unsplash.com/photos/total-solar-eclipse-diamond-ring-F-pSZO_jeE8"
+    },
+    {
+      "id": "ethan-teng-wu9jvog0r2m-unsplash",
+      "theme": "vast-nothingness",
+      "file": "vast-nothingness/ethan-teng-wu9jvog0r2m-unsplash.jpg",
+      "author": "Ethan Teng",
+      "link": "https://unsplash.com/photos/andromeda-galaxy-among-scattered-stars-wu9jvog0r2M"
+    },
+    {
+      "id": "ameer-basheer-gv6tabjubtk-unsplash",
+      "theme": "vast-nothingness",
+      "file": "vast-nothingness/ameer-basheer-gv6tabjubtk-unsplash.jpg",
+      "author": "Ameer Basheer",
+      "link": "https://unsplash.com/photos/starry-sky-through-slot-canyon-walls-gV6taBJuBTk"
+    },
+    {
+      "id": "guillermo-ferla-llexhyl-cxq-unsplash",
+      "theme": "vast-nothingness",
+      "file": "vast-nothingness/guillermo-ferla-llexhyl-cxq-unsplash.jpg",
+      "author": "Guillermo Ferla",
+      "link": "https://unsplash.com/photos/triangulum-galaxy-with-blue-star-clusters-lLExhYl-cXQ"
+    },
+    {
+      "id": "yifu-wu-rqqs0wsuaao-unsplash",
+      "theme": "vast-nothingness",
+      "file": "vast-nothingness/yifu-wu-rqqs0wsuaao-unsplash.jpg",
+      "author": "Yifu Wu",
+      "link": "https://unsplash.com/photos/a-view-of-the-night-sky-from-an-airplane-RQQS0wSuAAo"
+    },
+    {
+      "id": "gabriele-garanzelli-pzo-citnjdi-unsplash",
+      "theme": "vast-nothingness",
+      "file": "vast-nothingness/gabriele-garanzelli-pzo-citnjdi-unsplash.jpg",
+      "author": "Gabriele Garanzelli",
+      "link": "https://unsplash.com/photos/timelapse-photography-of-stars-PzO_CitnJdI"
+    },
+    {
+      "id": "harsh-k-gbqbfuamiik-unsplash",
+      "theme": "vast-nothingness",
+      "file": "vast-nothingness/harsh-k-gbqbfuamiik-unsplash.jpg",
+      "author": "Harsh K",
+      "link": "https://unsplash.com/photos/a-close-up-of-a-red-moon-in-the-sky-GbqbFuAmiIk"
+    },
+    {
+      "id": "nicolas-thomas-wklqqfntlsi-unsplash",
+      "theme": "vast-nothingness",
+      "file": "vast-nothingness/nicolas-thomas-wklqqfntlsi-unsplash.jpg",
+      "author": "Nicolas Thomas",
+      "link": "https://unsplash.com/photos/moon-wKlqqfNTLsI"
+    },
+    {
+      "id": "vimal-s-gbg3jygs-ug-unsplash",
+      "theme": "vast-nothingness",
+      "file": "vast-nothingness/vimal-s-gbg3jygs-ug-unsplash.jpg",
+      "author": "Vimal S",
+      "link": "https://unsplash.com/photos/a-planet-with-clouds-and-water-GBg3jyGS-Ug"
+    },
+    {
+      "id": "greg-rakozy-ompaz-dn-9i-unsplash",
+      "theme": "vast-nothingness",
+      "file": "vast-nothingness/greg-rakozy-ompaz-dn-9i-unsplash.jpg",
+      "author": "Greg Rakozy",
+      "link": "https://unsplash.com/photos/silhouette-photography-of-person-oMpAz-DN-9I"
+    },
+    {
+      "id": "guillermo-ferla-qflm-2aij-m-unsplash",
+      "theme": "vast-nothingness",
+      "file": "vast-nothingness/guillermo-ferla-qflm-2aij-m-unsplash.jpg",
+      "author": "Guillermo Ferla",
+      "link": "https://unsplash.com/photos/solar-system-surrounded-by-stars-QfLm-2AiJ_M"
+    },
+    {
+      "id": "javier-miranda-jn2eallyzfy-unsplash",
+      "theme": "vast-nothingness",
+      "file": "vast-nothingness/javier-miranda-jn2eallyzfy-unsplash.jpg",
+      "author": "Javier Miranda",
+      "link": "https://unsplash.com/photos/a-view-of-the-earth-from-space-Jn2EaLLYZfY"
+    },
+    {
+      "id": "nasa-erjngxc9mqa-unsplash",
+      "theme": "vast-nothingness",
+      "file": "vast-nothingness/nasa-erjngxc9mqa-unsplash.jpg",
+      "author": "NASA",
+      "link": "https://unsplash.com/photos/view-of-earth-from-space-with-clouds-ErjNGXc9mqA"
+    },
+    {
+      "id": "aperture-vintage-z6epcdmcouu-unsplash",
+      "theme": "vast-nothingness",
+      "file": "vast-nothingness/aperture-vintage-z6epcdmcouu-unsplash.jpg",
+      "author": "Aperture Vintage",
+      "link": "https://unsplash.com/photos/starry-sky-Z6EpCdMcoUU"
+    },
+    {
+      "id": "nasa-q1p7bh3shj8-unsplash",
+      "theme": "vast-nothingness",
+      "file": "vast-nothingness/nasa-q1p7bh3shj8-unsplash.jpg",
+      "author": "NASA",
+      "link": "https://unsplash.com/photos/photo-of-outer-space-Q1p7bh3SHj8"
+    },
+    {
+      "id": "nasa-yzygonrube8-unsplash",
+      "theme": "vast-nothingness",
+      "file": "vast-nothingness/nasa-yzygonrube8-unsplash.jpg",
+      "author": "NASA",
+      "link": "https://unsplash.com/photos/view-of-earth-and-satellite-yZygONrUBe8"
+    },
+    {
+      "id": "nasa-gkpylupuoiy-unsplash",
+      "theme": "vast-nothingness",
+      "file": "vast-nothingness/nasa-gkpylupuoiy-unsplash.jpg",
+      "author": "NASA",
+      "link": "https://unsplash.com/photos/crescent-earth-seen-from-space-against-blackness-GkpYlUpUOIY"
+    },
+    {
+      "id": "nasa-cphnknrwxps-unsplash",
+      "theme": "vast-nothingness",
+      "file": "vast-nothingness/nasa-cphnknrwxps-unsplash.jpg",
+      "author": "NASA",
+      "link": "https://unsplash.com/photos/space-shuttle-view-outside-the-earth-CpHNKNRwXps"
+    },
+    {
+      "id": "nasa-w9szl-hvnug-unsplash",
+      "theme": "vast-nothingness",
+      "file": "vast-nothingness/nasa-w9szl-hvnug-unsplash.jpg",
+      "author": "NASA",
+      "link": "https://unsplash.com/photos/earth-rising-over-the-moons-surface-w9sZL_hvNug"
+    },
+    {
+      "id": "joseph-corl-wcv8ceposag-unsplash",
+      "theme": "vast-nothingness",
+      "file": "vast-nothingness/joseph-corl-wcv8ceposag-unsplash.jpg",
+      "author": "Joseph Corl",
+      "link": "https://unsplash.com/photos/a-partially-eclipsed-moon-shines-in-the-night-wcv8cepOsAg"
+    },
+    {
+      "id": "sheng-hu-0h18vkgrs2q-unsplash",
+      "theme": "vast-nothingness",
+      "file": "vast-nothingness/sheng-hu-0h18vkgrs2q-unsplash.jpg",
+      "author": "Sheng Hu",
+      "link": "https://unsplash.com/photos/a-close-up-of-a-planet-with-a-black-background-0H18vkgrs2Q"
     }
   ]
 }
